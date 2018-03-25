@@ -23,3 +23,5 @@ Route::get('/index','MyController@viewIndex');
 Route::view('/test','welcome');
 //
 Route::get('/register','MyController@viewRegister');
+//
+Route::view('a','layouts.common.navigation');
