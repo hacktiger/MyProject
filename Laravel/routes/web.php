@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 //Test out css
 Route::view('css','practice');
@@ -25,3 +25,4 @@ Route::view('/test','welcome');
 Route::get('/register','MyController@viewRegister');
 //
 Route::view('a','layouts.common.navigation');
+

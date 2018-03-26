@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Nguyen Thai Lam</title>
+	<title>GameStop | The Best Game Platform</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
@@ -13,7 +13,27 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
+<style type="text/css">
+	.header{
+	background-color: white;
+	height: 120px;
+}
+
+</style>
+<header class="header">
+	
+
+</header>
+<nav class="sticky-top">
+	@include('layouts.common.navigation');
+</nav>
+
 <body>
-TEMPLATE
+INDEX PAGE
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+HAHAHHA
 </body>
 </html>
