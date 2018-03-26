@@ -18,11 +18,13 @@ Route::get('/', function () {
 Route::view('css','practice');
 
 // Pass to the controller
-Route::get('/index','MyController@viewIndex');
+//Route::get('/index','MyController@viewIndex');
 //Shortcut view
 Route::view('/test','welcome');
 //
-Route::get('/register','MyController@viewRegister');
+//Route::get('/register','MyController@viewRegister');
 //
 Route::view('a','layouts.common.navigation');
+
+Route::resource('games','GamesController');
 
