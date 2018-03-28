@@ -11,16 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+/** 
+ **
+ **	Finished routes
+ **
+**/
+
+Route::get('/', function(){
+	return redirect('/games');
 });
+
+/**
+  *  edit here
+  *
+**/
+
+
+
 //Test out css
 Route::view('css','practice');
 
 // Pass to the controller
 //Route::get('/index','MyController@viewIndex');
 //Shortcut view
-Route::view('/test','welcome');
+
 //
 //Route::get('/register','MyController@viewRegister');
 //
@@ -28,3 +42,8 @@ Route::view('a','layouts.common.navigation');
 
 Route::resource('games','GamesController');
 
+Route::get('/register',function(){
+	return view('layouts.register');
+});
+
+?>

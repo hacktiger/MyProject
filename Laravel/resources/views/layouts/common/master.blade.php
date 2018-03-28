@@ -34,7 +34,9 @@
 </head>
 <body>
 	<header class="header">
-
+		<div class="float-right ">
+			<a href="layouts.register.blade.php">Register</a>
+		</div>
 
 	</header>
 	<!-- navigation bar -->
@@ -84,10 +86,13 @@
 	  	</form>
 	</nav>
 
+	<section>
+
 	@yield('content')
 
+	</section>
 
-	<footer class="footer bg-dark">
+	<footer class="footer bg-dark fixed-bottom">
 
 	</footer>
 </body>

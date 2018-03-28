@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class games extends Model
 {
     //Table Name
-    protected $table = 'gameSpecs';
+    protected $table = 'games';
     //Primary
     //public $primaryKey = '';
-    
 }
 

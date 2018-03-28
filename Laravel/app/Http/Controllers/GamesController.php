@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\games;
 
 class GamesController extends Controller
 {
@@ -13,7 +14,13 @@ class GamesController extends Controller
      */
     public function index()
     {
-        return view('index');
+        //the laravel way
+        //$gamesInfo =  games::orderBy('title','ASC')->take(#)->get();
+        //Take = Limit
+        $gamesInfo =  games::orderBy('created_at','ASC')->get();
+
+
+        return view('index')->with('game',$gamesInfo);
     }
 
     /**
@@ -46,6 +53,8 @@ class GamesController extends Controller
     public function show($id)
     {
         //
+        $gamesInfo = games::find($id);
+        return view('layouts.show')->with('game', $gamesInfo);
     }
 
     /**
