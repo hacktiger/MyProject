@@ -26,7 +26,8 @@ Route::get('/', function(){
   *
 **/
 
-
+//Home page
+// Route::view('/','home');
 
 //Test out css
 Route::view('css','practice');

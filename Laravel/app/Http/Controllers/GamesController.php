@@ -31,6 +31,7 @@ class GamesController extends Controller
     public function create()
     {
         //
+        return view('games.create');
     }
 
     /**
@@ -54,7 +55,7 @@ class GamesController extends Controller
     {
         //
         $gamesInfo = games::find($id);
-        return view('layouts.show')->with('game', $gamesInfo);
+        return view('games.show')->with('game', $gamesInfo);
     }
 
     /**
