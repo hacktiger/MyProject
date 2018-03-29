@@ -29,6 +29,11 @@ Route::get('/', function(){
 //Home page
 // Route::view('/','home');
 
+
+Route::get('/games/create',function(){
+	return view('layouts.register');
+});
+
 //Test out css
 Route::view('css','practice');
 

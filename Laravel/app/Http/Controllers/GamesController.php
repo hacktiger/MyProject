@@ -43,6 +43,23 @@ class GamesController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'title'=>'required',
+            'description'=>'required',
+            //'link' => 'required',
+            //'image'=>'required'
+        ]);
+
+        //Create ganes
+        $game = new games;
+        $game->title = $request->input('title');
+        $game->description = $request->input('description');
+        //$game->link = $request->input('link');
+        //$game->image = $request->input('image');
+
+        $game->save();
+
+        return redirect('/games')->with('success','Game Created');
     }
 
     /**
