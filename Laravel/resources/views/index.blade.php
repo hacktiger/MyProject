@@ -26,6 +26,9 @@
 
 
 	INDEX PAGE
+	<br>
+	<a href="games/create">Add games here</a>
+
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

@@ -46,16 +46,16 @@ class GamesController extends Controller
         $this->validate($request, [
             'title'=>'required',
             'description'=>'required',
-            //'link' => 'required',
-            //'image'=>'required'
+            'link' => 'required',
+            'image'=>'required'
         ]);
 
         //Create ganes
         $game = new games;
         $game->title = $request->input('title');
         $game->description = $request->input('description');
-        //$game->link = $request->input('link');
-        //$game->image = $request->input('image');
+        $game->link = $request->input('link');
+        $game->image = $request->input('image');
 
         $game->save();
 

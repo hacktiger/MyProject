@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{config('app.name', 'GameStop')}} | The Best Game Platform'</title>
+	<title>{{config('app.name', 'GameStop')}} | The Best Game Platform</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
@@ -16,7 +16,7 @@
 	@yield('style')
 
 	<style type="text/css">
-		.header{
+		.cus-header{
 			background-color: white;
 			height: 120px;
 		}
@@ -33,17 +33,13 @@
 
 </head>
 <body>
-	<header class="header">
-		<div class="float-right ">
-			<a href="layouts.register.blade.php">Register</a>
-		</div>
-
-	</header>
+	<!-- header -->
+	@include('layouts.common.header')
 	<!-- navigation bar -->
 
 	@include('layouts.common.navbar')
 
-	<section >	
+	<section class="container-fluid">	
 	@include('inc.messages')
 	@yield('content')
 	</section>

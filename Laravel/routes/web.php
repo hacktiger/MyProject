@@ -18,6 +18,10 @@
 **/
 
 Route::get('/', function(){
+	return redirect('/home');
+});
+
+Route::get('/backHome',function(){
 	return redirect('/games');
 });
 
@@ -51,5 +55,9 @@ Route::resource('games','GamesController');
 Route::get('/register',function(){
 	return view('layouts.register');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 ?>
