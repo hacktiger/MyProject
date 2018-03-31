@@ -4,11 +4,9 @@
 
 @endsection
 
-
 @section('content')
-	
-	<h2>{{$game->title}}</h2>
-	<div>
-		{{$game->description}}
-	</div>
+
+<h3>{{$game->title}}</h3>
+<p>{{$game->description}}</p>
 @endsection
+

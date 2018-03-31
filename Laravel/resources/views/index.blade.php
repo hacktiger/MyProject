@@ -14,15 +14,18 @@
 
 
 @section('content')
-	@if(count($game)>0)
+	
 		@foreach($game as $gamesInfo)
 			<div class="well">
-				<h3><a  href="/games/{{$gamesInfo->id}}">{{$gamesInfo->title}}</a></h3>
+				<h3><a  href="/games/{{$gamesInfo->title}}">{{$gamesInfo->title}}</a></h3>
 			</div>
 		@endforeach
-	@else
-		<p> not found </p>
-	@endif
+		
+		
+		<div class="row">
+			{{$game->links()}};
+		</div>
+		
 
 
 	INDEX PAGE

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
 
@@ -19,10 +20,11 @@ class GamesController extends Controller
         //the laravel way
         //$gamesInfo =  games::orderBy('title','ASC')->take(#)->get();
         //Take = Limit
-        $gamesInfo =  games::orderBy('created_at','ASC')->get();
 
+        // Need to change so that each click leads to a personal page
+        $game =  games::orderBy('created_at','ASC')->paginate(8);
 
-        return view('index')->with('game',$gamesInfo);
+        return view('index',compact('game'));
     }
 
     /**
@@ -67,14 +69,14 @@ class GamesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string $title
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($title)
     {
         //
-        $gamesInfo = games::find($id);
-        return view('games.show')->with('game', $gamesInfo);
+        $game = games::find($title);
+        return view('games.show')->with('game',$game);
     }
 
     /**
@@ -83,7 +85,7 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($title)
     {
         //
     }
@@ -95,7 +97,7 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $title)
     {
         //
     }
@@ -106,7 +108,7 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($title)
     {
         //
     }

@@ -39,8 +39,13 @@
 
 	@include('layouts.common.navbar')
 
-	<section class="container-fluid">	
+	<!-- Messages -->
+	<section>	
 	@include('inc.messages')
+	</section>
+
+	<!-- content yields here -->
+	<section>
 	@yield('content')
 	</section>
 	<footer class="footer bg-dark">

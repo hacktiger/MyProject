@@ -10,5 +10,7 @@ class games extends Model
     protected $table = 'games';
     //Primary
     //public $primaryKey = '';
+    protected $keyType = 'string';
+    public $primaryKey = 'title';
 }
 
