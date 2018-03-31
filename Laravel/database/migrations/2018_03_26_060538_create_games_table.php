@@ -11,13 +11,17 @@ class CreateGamesTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('games', function (Blueprint $table) {
-            $table->increments('id');
             $table->string('title');
+            $table->primary('title');
             $table->text('description');
-
+            $table->string('link');
+            $table->string('image');
+            $table->string('upload_by');
             $table->timestamps();
         });
     }

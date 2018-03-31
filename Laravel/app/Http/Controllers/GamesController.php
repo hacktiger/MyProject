@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\games;
+use App\User;
 
 class GamesController extends Controller
 {
@@ -56,7 +58,7 @@ class GamesController extends Controller
         $game->description = $request->input('description');
         $game->link = $request->input('link');
         $game->image = $request->input('image');
-
+        $game->upload_by = $request->input('upload');
         $game->save();
 
         return redirect('/games')->with('success','Game Created');

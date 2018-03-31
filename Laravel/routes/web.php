@@ -25,6 +25,9 @@ Route::get('/backHome',function(){
 	return redirect('/games');
 });
 
+Route::get('/profile',function(){
+	return view('inc.profile');
+})->name('profile');
 /**
   *  edit here
   *

@@ -2,13 +2,14 @@
 
 @section('style')
 
+
+
+@section('style')
+
 @endsection
 
-
 @section('content')
+	<p>Profile page</p>
+	<h3>{{Auth::user()->name}}</h3>
 	
-	<h2>{{$game->title}}</h2>
-	<div>
-		{{$game->description}}
-	</div>
 @endsection

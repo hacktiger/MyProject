@@ -30,6 +30,12 @@
             {{Form::text('image','',['class'=>'form-control','placeholder'=>'Give your game representing picture', 'spellcheck'=>'false'])}}
         </div>
 
+
+        <div class=" d-none form-group">
+            <label> Upload </label>
+            <input class="form-control" d-none" name="upload" value="<?php echo $id=Auth::user()->id ?>">
+        </div>
+
     	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
 	{!! Form::close() !!}
 

@@ -43,7 +43,7 @@
 	@include('inc.messages')
 	@yield('content')
 	</section>
-	<footer class="footer bg-dark fixed-bottom">
+	<footer class="footer bg-dark">
 
 	</footer>
 </body>
