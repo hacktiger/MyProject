@@ -45,7 +45,7 @@
 	</section>
 
 	<!-- content yields here -->
-	<section>
+	<section class="container" >
 	@yield('content')
 	</section>
 	<footer class="footer bg-dark">

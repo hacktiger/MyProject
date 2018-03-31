@@ -7,6 +7,8 @@
 @section('content')
 
 <h3>{{$game->title}}</h3>
-<p>{{$game->description}}</p>
+<div class="container" style="overflow-wrap:break-word;">
+{{$game->description}}
+</div>
 @endsection
 

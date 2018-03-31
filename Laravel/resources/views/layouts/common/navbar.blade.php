@@ -26,6 +26,10 @@
 				        <a class="dropdown-item" href="#">Link 3</a>
 			      	</div>
 	   			</li>
+	   			<li>
+
+	   				<a href="games/create">upload</a>
+	   			</li>
 				<li>
 					<form class="form-inline" action="">
 	    				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="Search">
