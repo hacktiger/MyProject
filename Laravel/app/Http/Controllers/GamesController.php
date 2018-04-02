@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
+use App\game_tag;
 
 class GamesController extends Controller
 {
@@ -51,18 +52,64 @@ class GamesController extends Controller
             'title'=>'required',
             'description'=>'required',
             'link' => 'required',
-            'image'=>'required'
+            'image'=>'image|nullable|max:1999'
         ]);
+        //Handle File Upload
+        if($request->hasFile('image')){
+            //with extension
+            $fileNameWithExt = $request->file('image')->getClientOriginalName();
+            //get just file name
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get ext
+            $extension = $request->file('image')->getClientOriginalExtension();
+            //file name to store 
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //Upload
+            $path = $request->file('image')->storeAs('public/cover_images', $fileNameToStore);
 
-        //Create ganes
+
+        }  else {
+            $fileNameToStore = 'khongCoImage.jpg';
+        }
+
+        //Create games info
         $game = new games;
         $game->title = $request->input('title');
         $game->description = $request->input('description');
         $game->link = $request->input('link');
-        $game->image = $request->input('image');
+        $game->image = $fileNameToStore;
         $game->upload_by = $request->input('upload');
         $game->save();
 
+        //Storing game tags
+        $game_tag = new game_tag;
+        $game_tag->title = $request->input('title');
+        $FPS = $request->input('FPS');
+        if($FPS!== null){
+            $game_tag->FPS = '1';
+        }     
+        $Adventure = $request->input('Adventure');
+        if($Adventure!== null){
+            $game_tag->Adventure = '1';
+        }
+        $RPG = $request->input('RPG');
+        if($RPG!== null){
+            $game_tag->RPG = '1';
+        }
+        $Action = $request->input('Action');
+        if($Action!== null){
+            $game_tag->Action = '1';
+        }
+        $Puzzle = $request->input('Puzzle');
+        if($Puzzle!== null){
+            $game_tag->Puzzle = '1';
+        }
+        $Strategy = $request->input('Strategy');
+        if($Strategy!== null){
+            $game_tag->Strategy = '1';
+        }
+        $game_tag->save();
+        
         return redirect('/games')->with('success','Game Created');
     }
 

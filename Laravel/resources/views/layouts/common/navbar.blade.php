@@ -28,16 +28,16 @@
 	   			</li>
 	   			<li>
 
-	   				<a href="games/create">upload</a>
+	   			<li class="nav-item dropdown">
+	      			<a class="nav-link" href="games/create">Upload Game</a>
 	   			</li>
-				<li>
-					<form class="form-inline" action="">
-	    				<input class="form-control mr-sm-2" type="text" placeholder="Search" name="Search">
-	    				s<button class="btn btn-success" type="submit">Search</button>
-	    			</form>
-				</li>
 	    	</ul>
 	  	</div> 
+
+	  	<form class="form-inline float-right" action="">
+	    	<input class="form-control mr-sm-2" type="text" placeholder="Search" name="Search">
+	    	<button class="btn btn-success" type="submit">Search</button>
+	    </form>
 
 	  	
 	</nav>

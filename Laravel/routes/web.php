@@ -25,6 +25,10 @@ Route::get('/backHome',function(){
 	return redirect('/games');
 });
 
+Route::get('/games/games/create',function(){
+	return redirect('/games/create');
+});
+
 Route::get('/profile',function(){
 	return view('inc.profile');
 })->name('profile');
@@ -37,9 +41,6 @@ Route::get('/profile',function(){
 // Route::view('/','home');
 
 
-Route::get('/games/create',function(){
-	return view('layouts.register');
-});
 
 //Test out css
 Route::view('css','practice');

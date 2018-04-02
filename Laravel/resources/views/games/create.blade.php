@@ -9,8 +9,11 @@
 @endsection
 
 @section('content')
-	<h1>create games</h1>
-	{!! Form::open(['action'=>'GamesController@store', 'method'=>'POST']) !!}
+	<h1>Share your games now !!</h1>
+            <!-- Additional macros -->
+
+	{!! Form::open(['action'=>'GamesController@store', 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
+
     	<div class="form-group">
     		{{Form::label('title',"Title")}}
     		{{Form::text('title','',['class'=>'form-control','placeholder'=>'Title', 'spellcheck'=>'false'])}}
@@ -26,18 +29,27 @@
         </div>
         <!-- link to images -->
         <div class="form-group">
-            {{Form::label('image',"Game Image")}}
-            {{Form::text('image','',['class'=>'form-control','placeholder'=>'Give your game representing picture', 'spellcheck'=>'false'])}}
+            {{Form::label('image',"Upload your image here")}}
+            {{Form::file('image')}}
+        </div>
+
+        {{ Form::checkbox('FPS', 'FPS') }} First Person Shooter<br>
+        {{ Form::checkbox('Adventure', 'Adventure') }}  Adventure<br>
+        {{ Form::checkbox('RPG', 'RPG') }}              RPG<br>
+        {{ Form::checkbox('Action', 'Action') }}        Action<br>
+        {{ Form::checkbox('Puzzle', 'Puzzle') }}        Puzzle<br>
+        {{ Form::checkbox('Strategy', 'Strategy') }}    Strategy<br><br>
+
+        <!-- get user id -->
+        <div class=" d-none form-group">       
+            <input class="form-control" d-none" name="upload" value=" <?php echo $id=Auth::user()->id ?>">
         </div>
 
 
-        <div class=" d-none form-group">
-            <label> Upload </label>
-            <input class="form-control" d-none" name="upload" value="<?php echo $id=Auth::user()->id ?>">
-        </div>
 
     	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+        <br><br>
+
 	{!! Form::close() !!}
 
-	<p>hey</p>
 @endsection

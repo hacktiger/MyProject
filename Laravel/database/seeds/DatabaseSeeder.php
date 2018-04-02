@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('games')->insert([
         	'title' => str_random(10),
-        	'description' => str_random(300),
+        	'description' => str_random(3300),
         	'link' => str_random(10),
         	'image' => str_random(10),
         	'upload_by' => rand(1,50),

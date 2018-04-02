@@ -23,7 +23,7 @@
 		
 		
 		<div class="row">
-			{{$game->links()}};
+			{{$game->links()}}
 		</div>
 		
 
