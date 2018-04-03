@@ -12,6 +12,16 @@ game page
 <!-- nav bar content -->
 main
 user (my profile)
+<!-- drop down nav -->
+    profile
+    owned game list (my game)
+    (setting)
+    
 game list
+<!-- drop down nav -->
+    all games
+    genres
+    rating
+    
 dev list
 search
