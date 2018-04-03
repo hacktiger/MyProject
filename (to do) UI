@@ -5,7 +5,13 @@ main page
 user page
 
 dev page +admin page
-
+game list
+dev list
 game page
 
-//click logo to redirect to main page
+<!-- nav bar content -->
+main
+user (my profile)
+game list
+dev list
+search
