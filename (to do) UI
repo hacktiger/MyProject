@@ -6,29 +6,14 @@
 
 
 registration /login page
-
+search page
 main page
-
 user page
-
-dev page +admin page
+dev page
+admin page
 game list
 dev list
 game page
 
-<!-- nav bar content -->
-main
-user (my profile)
-<!-- drop down nav -->
-    profile
-    owned game list (my game)
-    (setting)
-    
-game list
-<!-- drop down nav -->
-    all games
-    genres
-    rating
-    
-dev list
-search
+<Done>
+navbar
