@@ -5,18 +5,12 @@
 //name
 //email
 //pass
-
-admin
-// all permission
-
+dev + admin 
+//Actions : up + pull +edit(self) +sales (+give_away)
 user
-//view + buy +rate (+redeem_code)
+//Actions : view + buy +rate (+redeem_code)
 
-
-dev
-//up + pull +edit +sales (+give_away)
-
-
+@other tables : 
 game
 //genre + rating 
 //title
@@ -24,10 +18,9 @@ game
 //award
 //creators
 //year
-
-tag
-//title
-//tags
+// tag
 
 sales_log
 //list + buyer +seller +time +sales_code (+redeem_code)
+
+@to be continued
