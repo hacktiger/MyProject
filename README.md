@@ -1,6 +1,26 @@
-# MyProject
+4 tables
 
-// First laravel project practice using gitHub to transfer files between computers
-// Project : Make a game download website ( similar to online stores )
-// php artisan --version 5.4
-// 
+@all:
+//id
+//name
+//email
+//pass
+dev + admin 
+//Actions : up + pull +edit(self) +sales (+give_away)
+user
+//Actions : view + buy +rate (+redeem_code)
+
+@other tables : 
+game
+//genre + rating 
+//title
+//# voters
+//award
+//creators
+//year
+// tag
+
+sales_log
+//list + buyer +seller +time +sales_code (+redeem_code)
+
+@to be continued
