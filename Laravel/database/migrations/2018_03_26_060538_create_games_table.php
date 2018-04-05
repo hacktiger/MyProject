@@ -14,14 +14,23 @@ class CreateGamesTable extends Migration
 
     public function up()
     {
-        Schema::enableForeignKeyConstraints();
+
         Schema::create('games', function (Blueprint $table) {
-            $table->string('title');
-            $table->primary('title');
+            $table->string('title'); $table->primary('title');
             $table->text('description');
             $table->string('link');
             $table->string('image');
             $table->string('upload_by');
+            $table->integer('price');
+            $table->interger('sales');
+            $table->integer('upvote')->default(0);
+            $table->integer('downvote')->default(0);
+            $table->boolean('FPS')->default(0);
+            $table->boolean('Adventure')->default(0);
+            $table->boolean('RPG')->default(0);
+            $table->boolean('Action')->default(0);
+            $table->boolean('Puzzle')->default(0);
+            $table->boolean('Strategy')->default(0);
             $table->timestamps();
         });
     }

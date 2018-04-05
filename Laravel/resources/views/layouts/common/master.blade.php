@@ -45,12 +45,10 @@
 	</section>
 
 	<!-- content yields here -->
-	<section class="container" >
+	<section class="container-fluid" >
 	@yield('content')
 	</section>
-	<footer class="footer bg-dark">
-
-	</footer>
+	
 </body>
 
 </html>

@@ -1,11 +1,6 @@
 @extends('layouts.common.master')
 
 @section('style')
-
-
-
-@section('style')
-
 @endsection
 
 @section('content')

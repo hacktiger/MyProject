@@ -32,6 +32,12 @@ Route::get('/games/games/create',function(){
 Route::get('/profile',function(){
 	return view('inc.profile');
 })->name('profile');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
 /**
   *  edit here
   *
@@ -42,17 +48,16 @@ Route::get('/profile',function(){
 
 
 
-//Test out css
-Route::view('css','practice');
+Route::get('/games/Adventure','TagController@showAdventure');
 
 // Pass to the controller
 //Route::get('/index','MyController@viewIndex');
 //Shortcut view
 
-//
+
 //Route::get('/register','MyController@viewRegister');
-//
-Route::view('a','layouts.common.navigation');
+
+
 
 Route::resource('games','GamesController');
 
@@ -60,8 +65,16 @@ Route::get('/register',function(){
 	return view('layouts.register');
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('dev')->group(function(){
+
+	Route::get('/login','Auth\DevLoginController@showLoginForm')->name('dev.login');
+
+	Route::post('/login','Auth\DevLoginController@Login')->name('dev.login.submit');
+
+	Route::get('/','DevController@index')->name('dev.dashboard');
+});
+
 
 ?>

@@ -10,11 +10,14 @@
 	 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 	   		<ul class="navbar-nav">
 	     		<li class="nav-item dropdown">
-	      			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Dropdown 1</a>
+	      			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Genre</a>
 			      	<div class="dropdown-menu">
-				        <a class="dropdown-item" href="#">Link 1</a>
-				        <a class="dropdown-item" href="#">Link 2</a>
-				        <a class="dropdown-item" href="#">Link 3</a>
+				        <a class="dropdown-item" href="#">FPS</a>
+				        <a class="dropdown-item" href="#">Adventure</a>
+				        <a class="dropdown-item" href="#">RPG</a>
+				        <a class="dropdown-item" href="#">Action</a>
+				        <a class="dropdown-item" href="#">Puzzle</a>
+				        <a class="dropdown-item" href="#">Strategy</a>
 			      	</div>
 	   			</li>
 
@@ -23,7 +26,6 @@
 			      	<div class="dropdown-menu">
 				        <a class="dropdown-item" href="#">Link 1</a>
 				        <a class="dropdown-item" href="#">Link 2</a>
-				        <a class="dropdown-item" href="#">Link 3</a>
 			      	</div>
 	   			</li>
 	   			<li>

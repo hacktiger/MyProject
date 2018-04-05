@@ -14,7 +14,8 @@
 
 
 @section('content')
-	
+		INDEX PAGE
+		<!-- prints out every game -->
 		@foreach($game as $gamesInfo)
 			<div class="well">
 				<h3><a  href="/games/{{$gamesInfo->title}}">{{$gamesInfo->title}}</a></h3>
@@ -27,14 +28,8 @@
 		</div>
 		
 
-
-	INDEX PAGE
-	<br>
-	<a href="games/create">Add games here</a>
-
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	HAHAHHA
 @endsection

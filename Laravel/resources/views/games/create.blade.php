@@ -33,6 +33,16 @@
             {{Form::file('image')}}
         </div>
 
+        <div class="form-group">
+            {{Form::label('price',"Price")}}
+            {{Form::text('price','',['class'=>'form-control','placeholder'=>'Give the price', 'spellcheck'=>'false'])}}
+        </div>
+
+        <div class="form-group">
+            {{Form::label('sales',"Sales")}}
+            {{Form::text('sales','',['class'=>'form-control','placeholder'=>'Give the price', 'spellcheck'=>'false'])}}
+        </div>
+
         {{ Form::checkbox('FPS', 'FPS') }} First Person Shooter<br>
         {{ Form::checkbox('Adventure', 'Adventure') }}  Adventure<br>
         {{ Form::checkbox('RPG', 'RPG') }}              RPG<br>

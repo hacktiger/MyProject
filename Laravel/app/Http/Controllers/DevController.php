@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\games;
 
-class HomeController extends Controller
+
+class DevController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:dev');
     }
 
     /**
@@ -25,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('dev');
     }
 
 }

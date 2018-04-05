@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    	for($i = 0;$i<150;$i++){
+    	for($i = 0;$i<50;$i++){
     		// $this->call(UsersTableSeeder::class);
         DB::table('users')->insert([
     		'name' => str_random(10),
