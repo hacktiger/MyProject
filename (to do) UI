@@ -8,12 +8,10 @@
 registration /login page
 search page
 main page
-user page
-dev page
-admin page
 game list
 dev list
 game page
 
 <Done>
 navbar
+user page + dev page +admin page = User Page
