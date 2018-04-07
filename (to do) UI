@@ -7,7 +7,6 @@
 
 registration /login page
 search page
-main page
 game list
 dev list
 game page
@@ -15,3 +14,4 @@ game page
 <Done>
 navbar
 user page + dev page +admin page = User Page
+main page
