@@ -19,6 +19,7 @@ game
 //creators
 //year
 // tag
+//price
 
 sales_log
 //list + buyer +seller +time +sales_code (+redeem_code)
