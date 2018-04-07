@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
+use App\Tags;
+use App\games_tags;
+use Session;
 
 
 
 class GamesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +45,8 @@ class GamesController extends Controller
     public function create()
     {
         //
-        return view('games.create');
+        $tags = Tags::all();
+        return view('games.create')->withTags($tags);
     }
 
     /**
@@ -49,6 +57,7 @@ class GamesController extends Controller
      */
     public function store(Request $request)
     {
+       
         //
         $this->validate($request, [
             'title'=>'required',
@@ -79,42 +88,27 @@ class GamesController extends Controller
         //Create games info
         $game = new games;
         $game->title = $request->input('title');
+        
         $game->description = $request->input('description');
         $game->link = $request->input('link');
         $game->image = $fileNameToStore;
-        $game->upload_by = $request->input('upload');
+        $game->upload_by = auth()->user()->id;
         $game->price = $request->input('price');
         $game->sales = $request->input('sales');
         $game->save();
-
-        //Storing game tags
-        $FPS = $request->input('FPS');
-        if($FPS!== null){
-            $game->FPS = '1';
-        }     
-        $Adventure = $request->input('Adventure');
-        if($Adventure!== null){
-            $game->Adventure = '1';
-        }
-        $RPG = $request->input('RPG');
-        if($RPG!== null){
-            $game->RPG = '1';
-        }
-        $Action = $request->input('Action');
-        if($Action!== null){
-            $game->Action = '1';
-        }
-        $Puzzle = $request->input('Puzzle');
-        if($Puzzle!== null){
-            $game->Puzzle = '1';
-        }
-        $Strategy = $request->input('Strategy');
-        if($Strategy!== null){
-            $game->Strategy = '1';
-        }
-        $game->save();
+        // Adding the tags
+        $game->title=$request->input('title');
+        $game_tag_id = $request->input('tags');
+        for($i = 0; $i<count($game_tag_id); $i++){
+            DB::table('games_tags')->insert(
+                ['games_title' => $game->title, 
+                 'tags_id' => $game_tag_id[$i]]
+            );
+        };
         
-        return redirect('/games')->with('success','Game Created');
+
+        
+        return redirect('/games',['game'=>$game])->with('success','Game Created');;
     }
 
     /**
@@ -124,33 +118,15 @@ class GamesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($title)
-    {
-        //
+    {       
+        
+        //$game = DB::table('games')->where('title',$title)->get();
         $game = games::find($title);
+        
         // get the tags
-        $tags = array();
+        
 
-        if($game->Adventure == '1'){
-            $tags[1] = 'Adventure';
-        }
-        if($game->FPS == '1'){
-            $tags[2] = 'FPS';
-        }
-        if($game->RPG == '1'){
-            $tags[3] = 'RPG';
-        }
-        if($game->Action == '1'){
-            $tags[4] = 'Action';
-        }
-        if($game->Puzzle == '1'){
-            $tags[5] = 'Puzzle';
-        }
-        if($game->Strategy == '1'){
-            $tags[6] = 'Strategy';
-        }
-
-        return view('games.show',['game'=>$game,'tags'=>$tags]);
-        //->with('game',$game)
+        return view('games.show',['game'=>$game]);
     }
 
     /**
@@ -163,7 +139,15 @@ class GamesController extends Controller
     {
         //
         $game = games::find($title);
-        return view('games.edit',['game'=>$game]);
+        $tags = Tags::all();
+
+        //Check for correct user
+        // may want to change !== to !=
+        if(auth()->user()->id != $game->upload_by){
+            return redirect('/games')->with('error', 'Unauthorized Page');
+        }
+        
+        return view('games.edit',['game'=>$game, 'tags'=>$tags]);
     }
 
     /**
@@ -209,41 +193,19 @@ class GamesController extends Controller
             $game->image = $fileNameToStore;
         };
 
-        $game->upload_by = $request->input('upload');
         $game->price = $request->input('price');
         $game->sales = $request->input('sales');
-
-        
-
         $game->save();
 
         //Storing game tags
-        $FPS = $request->input('FPS');
-        if($FPS!== null){
-            $game->FPS = '1';
-        }     
-        $Adventure = $request->input('Adventure');
-        if($Adventure!== null){
-            $game->Adventure = '1';
-        }
-        $RPG = $request->input('RPG');
-        if($RPG!== null){
-            $game->RPG = '1';
-        }
-        $Action = $request->input('Action');
-        if($Action!== null){
-            $game->Action = '1';
-        }
-        $Puzzle = $request->input('Puzzle');
-        if($Puzzle!== null){
-            $game->Puzzle = '1';
-        }
-        $Strategy = $request->input('Strategy');
-        if($Strategy!== null){
-            $game->Strategy = '1';
-        }
-        $game->save();
-        
+        $game->title=$request->input('title');
+        $game_tag_id = $request->input('tags');
+        for($i = 0; $i<count($game_tag_id); $i++){
+            DB::table('games_tags')->insert(
+                ['games_title' => $game->title, 
+                 'tags_id' => $game_tag_id[$i]]
+            );
+        }; 
         return redirect('/games')->with('success','Game Updated');
 
     }
@@ -257,5 +219,14 @@ class GamesController extends Controller
     public function destroy($title)
     {
         //
+        $game = games::find($title);
+
+        //Check for correct user
+        if(auth()->user()->id != $game->upload_by){
+            return redirect('/games')->with('error', 'Unauthorized Page');
+        }
+
+        $game->delete();
+        return redirect('/games')->with('success','Game Deleted');
     }
 }

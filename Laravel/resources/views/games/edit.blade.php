@@ -2,8 +2,7 @@
 
 @section('style')
 
-
-@section('style')
+{!! Html::style('css/select2.min.css') !!}
 
 @endsection
 
@@ -21,6 +20,17 @@
     		{{Form::label('description',"Description")}}
     		{{Form::text('description',$game->description,['class'=>'form-control','placeholder'=>'Give a brief description of the game', 'spellcheck'=>'false'])}}
     	</div>
+        <!-- tags -->
+        <div class="form-group">
+            {{Form::label('tag_id', 'Tags: ') }} <br>
+            <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+                @foreach($tags as $tag)
+                    <option value='{{$tag->id}}'>{{$tag->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        
+        
         <!-- link to download -->
         <div class="form-group">
             {{Form::label('link',"Download Link")}}
@@ -42,13 +52,6 @@
             {{Form::text('sales',$game->sales,['class'=>'form-control','placeholder'=>'Give the price', 'spellcheck'=>'false'])}}
         </div>
 
-        {{ Form::checkbox('FPS', 'FPS' , $game->FPS) }} First Person Shooter<br>
-        {{ Form::checkbox('Adventure', 'Adventure', $game->Adventure) }}  Adventure<br>
-        {{ Form::checkbox('RPG', 'RPG', $game->RGP) }}              RPG<br>
-        {{ Form::checkbox('Action', 'Action', $game->Action) }}        Action<br>
-        {{ Form::checkbox('Puzzle', 'Puzzle', $game->Puzzle) }}        Puzzle<br>
-        {{ Form::checkbox('Strategy', 'Strategy', $game->Strategy) }}    Strategy<br><br>
-
         <!-- get user id -->
         <div class=" d-none form-group">       
             <input class="form-control" d-none" name="upload" value=" <?php echo $id=Auth::user()->id ?>">
@@ -60,4 +63,12 @@
         <br><br>
 
 	{!! Form::close() !!}
+@endsection
+
+@section('scripts')
+    {!! Html::script('js/select2.min.js') !!}
+
+    <script type="text/javascript">
+        $('.select2-multi').select2();
+    </script>
 @endsection

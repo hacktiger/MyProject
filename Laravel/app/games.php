@@ -12,5 +12,13 @@ class games extends Model
     //public $primaryKey = '';
     protected $keyType = 'string';
     public $primaryKey = 'title';
+   
+    public function tags(){
+    	return $this->belongsToMany('App\Tags');
+    }
+
+    public function user(){
+    	return $this->belongsTo('App\User');
+    }
 }
 

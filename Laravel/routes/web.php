@@ -33,9 +33,7 @@ Route::get('/profile',function(){
 	return view('inc.profile');
 })->name('profile');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 
 /**
@@ -60,12 +58,15 @@ Route::get('/games/Adventure','TagController@showAdventure');
 
 
 Route::resource('games','GamesController');
+Route::resource('tags','TagController');
 
 Route::get('/register',function(){
 	return view('layouts.register');
 });
 
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('dev')->group(function(){
 
