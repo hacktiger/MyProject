@@ -74,8 +74,9 @@ body {
 }
 </style>
 </head>
-<body>
 
+<body>
+<!-- sidebar -->
 <div class="sidenav">
   <a href="#">Home</a>
   <button class="dropdown-btn">User 
@@ -90,15 +91,36 @@ body {
   </button>
   <div class="dropdown-container">
     <a href="#">All Games</a>
-    <a href="#">By Genres</a>
+	<button class= "dropdown-btn">Genres
+		<i class="fa fa-caret-down"></i>
+	</button>
+	<div class="dropdown-container">
+		<a href="#">FPS</a>
+		<a href="#">Adventure</a>
+		<a href="#">Action</a>
+		<a href="#">Strategy</a>
+		<a href="#">Puzzle</a>
+	</div>
     <a href="#">By Rating</a>
   </div>
   <a href="#">Developers</a>
   <a href="#">Search</a>
 </div>
+
+
+
+
+
+
 <div class="main">
 <p>Text in pages</p>
 </div>
+
+
+
+
+
+
 <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");
