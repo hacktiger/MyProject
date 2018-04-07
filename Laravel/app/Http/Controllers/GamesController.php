@@ -229,4 +229,10 @@ class GamesController extends Controller
         $game->delete();
         return redirect('/games')->with('success','Game Deleted');
     }
+
+    public function report($title)
+    {
+        echo 'success';
+    }
+    
 }

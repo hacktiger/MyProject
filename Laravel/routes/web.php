@@ -41,12 +41,7 @@ Route::get('/profile',function(){
   *
 **/
 
-//Home page
-// Route::view('/','home');
 
-
-
-Route::get('/games/Adventure','TagController@showAdventure');
 
 // Pass to the controller
 //Route::get('/index','MyController@viewIndex');
@@ -68,14 +63,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('dev')->group(function(){
-
-	Route::get('/login','Auth\DevLoginController@showLoginForm')->name('dev.login');
-
-	Route::post('/login','Auth\DevLoginController@Login')->name('dev.login.submit');
-
-	Route::get('/','DevController@index')->name('dev.dashboard');
-});
-
-
+//Route::get('/games/{game}/report','GamesController@report')->name('games.report');
 ?>
