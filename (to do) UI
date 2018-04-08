@@ -7,7 +7,6 @@
 
 registration /login page ( khong can lam dau =))) )
 search page
-game list
 dev list
 game page ( dung cai md-col-8 chia ra thanh 2/3 la game chinh con 1/3 con lai tay phai t dinh lam cai bang tin hay gi do )
 
@@ -15,3 +14,4 @@ game page ( dung cai md-col-8 chia ra thanh 2/3 la game chinh con 1/3 con lai ta
 navbar
 user page + dev page +admin page = User Page
 main page
+game list
