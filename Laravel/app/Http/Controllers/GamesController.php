@@ -9,6 +9,7 @@ use App\games;
 use App\User;
 use App\Tags;
 use App\games_tags;
+use App\rating;
 use Session;
 
 
@@ -123,10 +124,17 @@ class GamesController extends Controller
         //$game = DB::table('games')->where('title',$title)->get();
         $game = games::find($title);
         
+        $rate_by = auth()->user()->id;
         // get the tags
-        
 
-        return view('games.show',['game'=>$game]);
+        $rating = DB::table('rating')->select('rating')->where([
+            ['game_title',$title],
+            ['user_id', $rate_by]])->first();
+
+        $favorite = DB::table('favorites')->select('id')->where([
+            ['game_title',$title],
+            ['user_id', $rate_by]])->first();
+        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite]);
     }
 
     /**
@@ -229,10 +237,4 @@ class GamesController extends Controller
         $game->delete();
         return redirect('/games')->with('success','Game Deleted');
     }
-
-    public function report($title)
-    {
-        echo 'success';
-    }
-    
 }

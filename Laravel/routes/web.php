@@ -35,33 +35,29 @@ Route::get('/profile',function(){
 
 
 
-
 /**
   *  edit here
   *
 **/
 
 
-
-// Pass to the controller
-//Route::get('/index','MyController@viewIndex');
-//Shortcut view
-
-
-//Route::get('/register','MyController@viewRegister');
-
-
-
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 
-Route::get('/register',function(){
-	return view('layouts.register');
-});
+//
+//Route::get('/register',function(){
+//	return view('layouts.register');
+//});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/games/{game}/report','GamesController@report')->name('games.report');
+
+Route::post('/games/{game}/report','MyController@report');
+
+Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
+
+Route::post('/games/{game}/favorite','MyController@favorite')->name('games.rating');
+
 ?>

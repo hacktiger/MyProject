@@ -52,16 +52,6 @@
             {{Form::label('sales',"Sales")}}
             {{Form::text('sales','',['class'=>'form-control','placeholder'=>'Give the price', 'spellcheck'=>'false'])}}
         </div>
-        
-       
-        <!-- get user id add funct here-->
-        <div class=" d-none form-group">       
-            <input class="form-control" d-none" name="upload" value=" <?php echo $id=Auth::user()->id ?>">
-        </div>
-    
-
-        
-
 
     	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
         <br><br>
