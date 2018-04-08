@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<style>
+			*{
+			box-sizing: border-box;
+			}
+			
+			/* create two equal columns that floats next to each other */
+			.column {
+				float: left;
+				width: 50%;
+				padding: 10px;
+			}
+			
+			/* clear floats after the columns */
+			.row:after{
+				content: "";
+				display: table;
+				clear: both;
+			}
+			
+			/* Responsive layout */
+			@media screen and (max-width: 600px){
+				.column{
+					width: 100%;
+				}
+			}
+			
+			table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			}
+			th, td {
+			padding: 15px;
+			}
+		</style>
+		<title>User Page</title>
+	</head>
+	
+	<body>
+		<!--User Info-->
+		<div id ="Profile">
+		<h1> User Name </h1>
+		
+		<div class ="row">
+			<div class="column">
+				<strong>ID: </strong>
+				<br>
+				<strong>Name: </strong>
+			</div>
+			<div class="column">
+				<strong>Email: </strong>
+				<br>
+				<!-- Admin || Dev ||User-->
+				privilage
+			</div>
+		</div>
+		<br>
+		<br>
+		</div>
+		<!-- Game List -->
+		<div id="OwnedGames">
+		<h2>Owned Games List
+		<table style="width:100%">
+			<tr>
+				<!-- Thumbnail =Cover*25%-->
+				<th>Cover</th>
+				<!-- Title + Link to game's page-->
+				<th>Game Title</th> 
+				
+				<th>Tags</th>
+			</tr>
+			<tr>
+				<td>Placeholder</td>
+				<td>Placeholder</td> 
+				<td>Placeholder</td>
+			</tr>
+			</tr>
+		</table>
+		</div>
+		
+</html>

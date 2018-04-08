@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/bootstrap.min.js"></script>
+  
+  <title>Search</title>
+</head>
+<body>
+  
+<div class="container">
+  <h2>Search</h2>
+  <form action="/action_page.php">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search" name="search">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i>Submit</i></button>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
+<div class="container">
+	<h2>Advanced Search</h2>
+	<div class="row">
+		<div class="col-md-6">
+			Game Title contains
+			<form action="/action_page.php">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search" name="search">
+				</div>
+			</form>
+			
+			<div class="input-group-btn">
+				<button class="btn btn-default" type="submit"><i>Submit</i></button>
+			</div>
+		</div>
+		
+		<div class="col-md-6">
+			<div class="container">
+				<h4>Tags</h4>
+				<form>
+					<label class="checkbox-inline">
+						<input type="checkbox" value="">Action</label>
+					<label class="checkbox-inline">
+						<input type="checkbox" value="">Adventure
+					</label>
+					<label class="checkbox-inline">
+						<input type="checkbox" value="">FPS
+					</label>
+					<label class="checkbox-inline">
+						<input type="checkbox" value="">Strategy</label>
+					<label class="checkbox-inline">
+						<input type="checkbox" value="">Strategy</label>
+				</form>
+				<h4>Minimum Score</h4>
+				<div class="slidecontainer">
+					<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+					<p>Value: <span id="demo"></span></p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var slider = document.getElementById("myRange");
+	var output = document.getElementById("demo");
+	output.innerHTML = slider.value;
+	slider.oninput = function() {
+	output.innerHTML = this.value;
+	}
+</script>
+</body>
+</html>
