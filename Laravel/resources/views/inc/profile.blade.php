@@ -52,9 +52,8 @@ ul {
 				echo "<div class='row'>";
 					//game cover
 					echo "<div class='col-md-3'>";
-						$image= $row["image"];
-						echo "<a href='/games/$image'><img src='$image'></a>";
-					echo "</div>";
+						echo "game cover";
+						echo "</div>";
 					
 					//game title
 					echo "<div class='col-md-3'>";
@@ -64,15 +63,8 @@ ul {
 					
 					//price
 					echo "<div class='col-md-3'>";
-						$price =$row["price"];
-						echo "<a href='games/$price'>$price</a>";
+						echo "game price";
 					echo "</div>";
-					
-					//link
-					echo "<div class='col-md-3'>";
-						echo"Link to gamePage";
-					echo "</div>";
-						
 				echo "</div>";
             }
         } else {
