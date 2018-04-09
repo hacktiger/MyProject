@@ -59,12 +59,7 @@
 	color: white;
 }
 
-/* Individual bars */
-.bar-5 {width: 50%; height: 18px; background-color: #4CAF50;}
-.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
-.bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
-.bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
-.bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+
 
 .cus-button {
 	background-color: Transparent;
@@ -74,6 +69,13 @@
 	overflow: hidden;
 	outline:none;
 }
+
+/* Individual bars */
+.bar-5 {width: 50%; height: 18px; background-color: #4CAF50;}
+.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
+.bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
+.bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
+.bar-1 {width: 15%; height: 18px; background-color: #f44336;}
 </style>
 
 @endsection
@@ -95,11 +97,11 @@
 			<div class="col-md-8 col-smd-4">
 				<h1>{{$game->title}}</h1>
 			</div>
-			<!-- favorite -->
+			<!-- Favorite -->
 			<div class="col-md-4 col-sm-4" style="margin-top:1%;"> 
-				{!! Form::open(['action'=> ['MyController@favorite', $game->title], 'method'=>'POST']) !!}
-					{{Form::text('favorite','',['class'=>'form-control','placeholder'=>'favorite', 'value'=> '0' , 'class'=>'d-none'])}}		
-					<button data-toggle="tooltip" data-placement="bottom" title="Set as Favorite !" id="favorive" class="fa fa-star cus-button" type="submit"></button>
+				{!! Form::open(['action'=> ['MyController@favorite', $game->title], 'method'=>'POST', 'id'=>'favorite-form']) !!}
+					<input type="text" class="d-none" name="favorite" value="0">	
+					<button id="favorite" data-toggle="tooltip" data-placement="bottom" title="Set as Favorite !" class="fa fa-star cus-button"></button>
 				{!! Form::close() !!}
 			</div>
 		</div>
@@ -125,16 +127,16 @@
 				<!-- EDIT FUNCTION -->
 				@if(!Auth::guest())
 				<!-- Remember to add && so only devs can do it -->
-				@if(Auth::user()->id == $game->upload_by && Auth::user()->authority !== 'casual')
-				<a class="btn btn-block btn-primary" href="/games/{{$game->title}}/edit">&ensp;Edit&ensp;</a>
+					@if(Auth::user()->id == $game->upload_by && Auth::user()->authority !== 'casual')
+					<a class="btn btn-block btn-primary" href="/games/{{$game->title}}/edit">&ensp;Edit&ensp;</a>
 			</div>
 			<div class="col-sm-4 col-md-4">
-				<!-- DELETE FUNCTION -->
-				{!! Form::open(['action'=> ['GamesController@destroy', $game->title], 'method'=>'POST']) !!}
-				{{Form::hidden('_method', 'DELETE')}}
-				{{Form::submit('Delete', ['class'=>' btn btn-block btn-danger'])}}
-				{!! Form::close() !!}
-				@endif
+					<!-- DELETE FUNCTION -->
+					{!! Form::open(['action'=> ['GamesController@destroy', $game->title], 'method'=>'POST']) !!}
+					{{Form::hidden('_method', 'DELETE')}}
+					{{Form::submit('Delete', ['class'=>' btn btn-block btn-danger'])}}
+					{!! Form::close() !!}
+					@endif
 				@endif
 			</div>
 			<!-- modal report -->
@@ -142,7 +144,6 @@
 				<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#myModal">
 					Report
 				</button>
-
 				<!--the actual modal-->
 				<div class="modal fade" id="myModal">
 					<div class="modal-dialog modal-md">
@@ -157,7 +158,6 @@
 								<!-- FORM -->
 								
 								{!! Form::open(['action'=> ['MyController@report', $game->title], 'method'=>'POST']) !!}
-
 								<div class="form-check">
 									<label class="form-check-label">
 										<input class="form-check-input" type="checkbox" name="report_1" value="Impropriate"> Impropriate contents
@@ -183,13 +183,11 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
-
 		<!-- user rating -->
 		<div class="cus-box-sizing">
-			<span class="heading">User Rating</span>
+			<span class="heading">Your Rating</span>
 			{!! Form::open(['action'=> ['MyController@rating', $game->title], 'method'=>'POST', 'id'=>'target']) !!}
 			{{Form::text('rating','',['class'=>'form-control','placeholder'=>'Give the rating', 'value'=> '0' , 'class'=>'d-none'])}}
 			<button id="1-star" class="fa fa-star cus-button" type="submit"></button>
@@ -198,7 +196,11 @@
 			<button id="4-star" class="fa fa-star cus-button" type="submit"></button>
 			<button id="5-star" class="fa fa-star cus-button" type="submit"></button>
 			{!! Form::close() !!}
-			<p># votes based on # of users</p>
+			<?php  $sumStar = $star[0] + $star[1] + $star[2] + $star[3] + $star[4]; 
+				$avg = ($star[0] + $star[1]*2 + $star[2]*3 + $star[3]*4 + $star[4]*5)/$sumStar;   
+				echo "<p>Average rating : <b>$avg</b> </p>"
+			?>
+			<p>ps: the bars length have no meaning,  but the numbers do, which is something right ? </p>
 			<hr style="border:3px solid #f1f1f1">
 
 			<div class="cus-row">
@@ -211,7 +213,7 @@
 					</div>
 				</div>
 				<div class="side right">
-					<div>52</div>
+					<div>{{$star[4]}}</div>
 				</div>
 				<div class="side">
 					<div>4 star</div>
@@ -222,7 +224,7 @@
 					</div>
 				</div>
 				<div class="side right">
-					<div>63</div>
+					<div>{{$star[3]}}</div>
 				</div>
 				<div class="side">
 					<div>3 star</div>
@@ -233,7 +235,7 @@
 					</div>
 				</div>
 				<div class="side right">
-					<div>15</div>
+					<div>{{$star[2]}}</div>
 				</div>
 				<div class="side">
 					<div>2 star</div>
@@ -244,7 +246,7 @@
 					</div>
 				</div>
 				<div class="side right">
-					<div>6</div>
+					<div>{{$star[1]}}</div>
 				</div>
 				<div class="side">
 					<div>1 star</div>
@@ -255,7 +257,7 @@
 					</div>
 				</div>
 				<div class="side right">
-					<div>20</div>
+					<div>{{$star[0]}}</div>
 				</div>
 			</div>
 		</div>
@@ -265,23 +267,27 @@
 	<section class="col-md-4 col-sm-4">
 	</section>
 </div>
+
 @endsection
 
 @section('scripts')
 
-
 <script type="text/javascript"> 
-	$(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip(); 
-	}); 
-
 	<?php
-	try {
-		$phpVar = $rating->rating;
-		echo "var rate = '{$phpVar}';";
-	} catch (Exception $e) {
-	}
+		try {
+			$phpVar = $rating->rating;
+			echo "var rate = '{$phpVar}';";	
+		} catch (Exception $e) {}
+
+		try {
+			$fav = $favorite->favorite;
+			echo "var favo = '{$fav}';";			
+		} catch (Exception $e) {}
+
+		
+
 	?>
+	
 	if(rate == '1'){
 		$("#1-star").addClass("checked");
 	}	
@@ -309,6 +315,7 @@
 		$("#5-star").addClass("checked");
 	}
 
+	
 	$("#1-star").click(function(){
 		$("input:text").val("1");
 	});            
@@ -325,24 +332,23 @@
 		$("input:text").val("5");
 
 	});
-	// JQuery for the favorite	
-	<?php
-	try {
-		$fav = $favorite->id;
-		echo "var favo = '{$fav}';";
-	} catch (Exception $e) {
 
-	}
-	?>
+	// Favorite function
 
-	$("#favorite").click(function(){
-		$("input:text").val("1");
-	});
-	// Still needs fixing
-	if(favo !== 'null'){
-		$("#favorite").addClass("checked");
+	if(favo == '1'){
+		$("#favorite").addClass("checked");	
+		$("#favorite").click(function(){
+			$("input:text").val("0");
+		});
+	} else {
+		$("#favorite").click(function(){
+			$("input:text").val("1");
+		});
 	}
+
 </script>
+
+
 @endsection
 
 

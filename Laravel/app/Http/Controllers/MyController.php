@@ -80,17 +80,17 @@ class MyController extends Controller
     public function favorite(Request $request, $title){
         $favorite = $request->input('favorite');
         $user_id = auth()->user()->id;
-
-
-        $check_2 = DB::table('favorites')->insert([
-            'user_id' => $user_id,
-            'game_title' => $title,
+        
+        $check_2 = DB::table('favorites')->where([
+                ['game_title',$title],
+                ['user_id', $user_id]
         ]);
         
         if(!$check_2){
             DB::table('favorites')->insert([
                 'user_id' => $user_id,
                 'game_title' => $title,
+                'favorite' => $favorite,
             ]);
         } else {
             DB::table('favorites')->where([
@@ -100,6 +100,7 @@ class MyController extends Controller
             DB::table('favorites')->insert([
                 'user_id' => $user_id,
                 'game_title' => $title,
+                'favorite' => $favorite,
             ]);
         }
 

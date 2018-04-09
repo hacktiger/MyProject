@@ -19,7 +19,7 @@ class CreateRatingTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('rating')->nullable();
 
-
+            // is this even neccessary ????
             $table->foreign('game_title')->references('title')->on('games')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });

@@ -119,22 +119,56 @@ class GamesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($title)
-    {       
-        
-        //$game = DB::table('games')->where('title',$title)->get();
+    {           
+        //get game in games database
         $game = games::find($title);
-        
+        // get current user id
         $rate_by = auth()->user()->id;
-        // get the tags
+        // get the rating
 
         $rating = DB::table('rating')->select('rating')->where([
             ['game_title',$title],
-            ['user_id', $rate_by]])->first();
-
-        $favorite = DB::table('favorites')->select('id')->where([
+            ['user_id', $rate_by]
+        ])->first();
+        //get favorite
+        $favorite = DB::table('favorites')->select('favorite')->where([
             ['game_title',$title],
-            ['user_id', $rate_by]])->first();
-        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite]);
+            ['user_id', $rate_by]
+        ])->first();
+        //get number of stars ( using db )
+        $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',1],['game_title',$title]])->groupBy('game_title')->first();
+        $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',2],['game_title',$title]])->groupBy('game_title')->first();
+        $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',3],['game_title',$title]])->groupBy('game_title')->first();
+        $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',4],['game_title',$title]])->groupBy('game_title')->first();
+        $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',5],['game_title',$title]])->groupBy('game_title')->first();
+        // set default values
+        $pre_star = array(
+            'star_1' => 0,
+            'star_2' => 0,
+            'star_3' => 0,
+            'star_4' => 0,
+            'star_5' => 0,
+        );
+        // check if not null => assigned value found
+        if($star_1 !== null){
+            $pre_star['star_1'] = $star_1->number;
+        }   
+        if($star_2 !== null){
+            $pre_star['star_2'] = $star_2->number;
+        }
+        if($star_3 !== null){
+            $pre_star['star_3'] = $star_3->number;
+        }
+        if($star_4 !== null){
+            $pre_star['star_4'] = $star_4->number;
+        }
+        if($star_5 !== null){
+            $pre_star['star_5'] = $star_5->number;
+        }
+        // put all in array => more compact
+        $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
+
+        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star]);
     }
 
     /**
