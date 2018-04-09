@@ -13,5 +13,6 @@ misleading vl
  + cover image t de la image thoi co roi
  + Ờ để t thêm total download 
  + trending game list : working on it xong nhanh thoi
+ + trang profile luc dau t lam sida lam de sua nua =)))
 /
 
