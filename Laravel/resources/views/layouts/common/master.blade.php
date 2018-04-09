@@ -34,11 +34,11 @@
 </head>
 <body>
 	<!-- header -->
-	@include('layouts.common.header')
 	<!-- navigation bar -->
-
-	@include('layouts.common.navbar')
-
+	@include('layouts.common.sidebar')
+	
+	<!--Page content-->
+	<div class="main">
 	<!-- Messages -->
 	<section>	
 	@include('inc.messages')
@@ -48,6 +48,7 @@
 	<section class="container-fluid" >
 	@yield('content')
 	</section>
+	</div>
 	
 </body>
 
