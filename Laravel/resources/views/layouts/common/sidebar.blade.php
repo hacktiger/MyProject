@@ -79,32 +79,46 @@ body {
 <!-- sidebar -->
 <div class="sidenav">
   <a class="nav-link" href="/games">Home</a>
+  
+  
   <button class="dropdown-btn">User 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a class="nav-link" href="/inc/profile">Profile</a>
-    <a href="#">Owned Games</a>
+    <a class="nav-link" href="{{ route('profile')}}#Profile"> Profile</a>
+	
+	<a class="nav-link" href="{{ route('profile')}}#OwnedGames">Owned Games</a>
   </div>
+  
+  
   <button class="dropdown-btn">Game Database 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="#">All Games</a>
+    <a class="nav-link" href="#">All Games</a>
+	
 	<button class= "dropdown-btn">Genres
 		<i class="fa fa-caret-down"></i>
 	</button>
+	
 	<div class="dropdown-container">
-		<a href="#">FPS</a>
-		<a href="#">Adventure</a>
-		<a href="#">Action</a>
-		<a href="#">Strategy</a>
-		<a href="#">Puzzle</a>
+		<a class="nav-link" href="#">FPS</a>
+		<a class="nav-link" href="#">Adventure</a>
+		<a class="nav-link" href="#">Action</a>
+		<a class="nav-link" href="#">Strategy</a>
+		<a class="nav-link" href="#">Puzzle</a>
 	</div>
-    <a href="#">By Rating</a>
+	
+    <a class="nav-link" href="#">By Rating</a>
   </div>
-  <a href="#">Developers</a>
-  <a href="#">Search</a>
+  
+  
+  <a class="nav-link" href="#">Developers</a>
+  
+  
+  <a class="nav-link" href="#">Search</a>
+  
+  
   <a class="nav-link" href="games/create">Upload Game</a>
   
   <!--Logout link-->

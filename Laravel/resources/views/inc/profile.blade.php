@@ -13,14 +13,22 @@ ul {
 
 @section('content')
 
-<div class="row">
-    <div class="col-md-8 col-sm-8">
-    	<p>Profile page</p>
-    	<h3>{{Auth::user()->name}}</h3>
+<h1>Profile page</h1>
+<br>
+<div class="row" id="Profile">
+    <div class="col-md-6">
+    	<h4>Username: {{Auth::user()->name}}</h4>
+    	<h4>Email: {{Auth::user()->email}}</h4>
+    </div>	
+	<div class="col-md-6">
+		<h4>ID: {{Auth::user()->id}}</h4>
+		<!--Auth_level-->
+		<h4>Rank: {{Auth::user()-> auth_level}}</h4>
+	</div>
+</div>
+</br>
 
-    	<h3>{{Auth::user()->email}}</h3>
-    	
-
+<div id="OwnedGames"><h1>Owned Games List</h1>
         <ul class="">
         <?php 
         $servername = "localhost";
@@ -41,9 +49,31 @@ ul {
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-            	$title = $row["title"];
-                echo "<h3>title: </h3>"; 
-                echo "<li><a href='/games/$title'>$title</a></li> <br>";
+				echo "<div class='row'>";
+					//game cover
+					echo "<div class='col-md-3'>";
+						$image= $row["image"];
+						echo "<a href='/games/$image'><img src='$image'></a>";
+					echo "</div>";
+					
+					//game title
+					echo "<div class='col-md-3'>";
+						$title = $row["title"];
+						echo "<li><a href='/games/$title'>$title</a></li> <br>";
+					echo "</div>";
+					
+					//price
+					echo "<div class='col-md-3'>";
+						$price =$row["price"];
+						echo "<a href='games/$price'>$price</a>";
+					echo "</div>";
+					
+					//link
+					echo "<div class='col-md-3'>";
+						echo"Link to gamePage";
+					echo "</div>";
+						
+				echo "</div>";
             }
         } else {
             echo "0 results";
@@ -54,8 +84,7 @@ ul {
 
         ?>
         </ul>
-    </div>
-
+</div>
     <div>
     </div>
 </div>
