@@ -119,8 +119,13 @@ body {
   <a class="nav-link" href="#">Search</a>
   
   
-  <a class="nav-link" href="games/create">Upload Game</a>
-  
+
+  <?php 
+  if (Auth::user()-> auth_level!=='casual'){
+	  echo "<a class='nav-link' href='games/create'>Upload Game</a>";
+  }
+  ?>
+    
   <!--Logout link-->
   <div style="position: absolute; bottom: 5px">
   <h1>{{ Auth::user()->name }} <span class="caret"></span></h1>
