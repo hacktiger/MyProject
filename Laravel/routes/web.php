@@ -53,11 +53,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/search', 'HomeController@search')->name('search');
 
 Route::post('/games/{game}/report','MyController@report');
 
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
 
 Route::post('/games/{game}/favorite','MyController@favorite')->name('games.rating');
+
 
 ?>

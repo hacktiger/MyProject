@@ -116,7 +116,7 @@ body {
   <a class="nav-link" href="#">Developers</a>
   
   
-  <a class="nav-link" href="#">Search</a>
+  <a class="nav-link" href="/search">Search</a>
   
   
 

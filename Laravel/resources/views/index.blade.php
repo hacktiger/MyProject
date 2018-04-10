@@ -9,6 +9,10 @@
 	a:hover{
 		color: red;
 	}
+	.carousel-caption {
+    top: 0;
+    bottom: auto;
+}
 </style>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -19,19 +23,6 @@
 @endsection
 
 @section('content')
-		INDEX PAGE
-		<!-- prints out every game -->
-		@foreach($game as $gamesInfo)
-			<div class="well">
-				<h3><a  href="/games/{{$gamesInfo->title}}">{{$gamesInfo->title}}</a></h3>
-			</div>
-		@endforeach
-		
-		
-		<div class="row">
-			{{$game->links()}}
-		</div>
-		<br>
 		<h1><center>Ongoing Sales</center></h1>
 <div class="container">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -43,11 +34,11 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner">
+	<div class="carousel-inner" role="listbox" style=" width:100%; height: 400px !important;">
       <div class="item active">
         <img src="https://i.imgur.com/qQIbhnJ.png" style="width:100%;">
-		  <div class="carousel-caption d-none d-md-block">
-				<h3><font color=black> Developer Sale: Square Enix</font></h3>
+		  <div class="carousel-caption">
+				<h2><font color=black> Developer Sale: Square Enix</font></h3>
 			</div>
       </div>
 
@@ -71,5 +62,19 @@
     </a>
   </div>
 </div>
+<br>
+		<!-- prints out every game -->
+		@foreach($game as $gamesInfo)
+			<div class="well">
+				<h3><a  href="/games/{{$gamesInfo->title}}">{{$gamesInfo->title}}</a></h3>
+			</div>
+		@endforeach
+		
+		
+		<div class="row">
+			{{$game->links()}}
+		</div>
+		<br>
+
 
 @endsection
