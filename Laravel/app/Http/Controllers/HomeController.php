@@ -40,4 +40,13 @@ class HomeController extends Controller
 		return view('search');
 	}
 	
+	public function gameBase()
+	{
+		return view('allGames');
+	}
+	
+	public function devBase()
+	{
+		return view('devList');
+	}
 }

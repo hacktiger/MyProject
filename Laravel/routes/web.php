@@ -55,6 +55,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search', 'HomeController@search')->name('search');
 
+Route::get('/allGames','HomeController@gameBase')->name('allGames');
+
+Route::get('/devList','HomeController@devBase')->name('devList');
 Route::post('/games/{game}/report','MyController@report');
 
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');

@@ -95,25 +95,25 @@ body {
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a class="nav-link" href="#">All Games</a>
+    <a class="nav-link" href="/allGames">All Games</a>
 	
 	<button class= "dropdown-btn">Genres
 		<i class="fa fa-caret-down"></i>
 	</button>
 	
 	<div class="dropdown-container">
-		<a class="nav-link" href="#">FPS</a>
-		<a class="nav-link" href="#">Adventure</a>
-		<a class="nav-link" href="#">Action</a>
-		<a class="nav-link" href="#">Strategy</a>
-		<a class="nav-link" href="#">Puzzle</a>
+		<a class="nav-link" href="/allGames#Action">Action</a>
+		<a class="nav-link" href="/allGames#Adventure">Adventure</a>
+		<a class="nav-link" href="/allGames#FPS">FPS</a>
+		<a class="nav-link" href="/allGames#Strategy">Strategy</a>
+		<a class="nav-link" href="/allGames#Puzzle">Puzzle</a>
 	</div>
 	
     <a class="nav-link" href="#">By Rating</a>
   </div>
   
   
-  <a class="nav-link" href="#">Developers</a>
+  <a class="nav-link" href="/devList">Developers</a>
   
   
   <a class="nav-link" href="/search">Search</a>
