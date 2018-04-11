@@ -109,8 +109,8 @@
 		<hr>
 		<!-- tags -->
 		<div class="tags"> 
-			@foreach($game->tags as $tag)
-			<span class="label label-default"><a href="/games/{{$tags->name}}">{{ $tag->name}}</a></span>
+			@foreach($game_tags as $tag)
+			<span class="label label-default"><a href="/allGames/{{$tag}}">{{ $tag}}</a></span>
 			@endforeach
 		</div>
 		<!-- Description -->

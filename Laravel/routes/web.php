@@ -70,6 +70,8 @@ Route::get('/byRating','GameOrder@byRating')->name('oder.rating');
 
 Route::get('/allGames','MyController@allGames');
 
+Route::get('/search','SearchController@normalSeach');
+
 
 
 ?>

@@ -111,6 +111,14 @@ class MyController extends Controller
     public function allGames(){
         $game =  games::orderBy('created_at','DESC')->paginate(12);
 
-        return view('allGames',compact('game'));
+        // need to get individual title
+        $avg_rating = DB::table('rating')->where('game_title',$title)->groupBy('game_title')
+                ->avg('rating');
+
+        if($avg_rating == null){
+            $avg_rating = 0;
+        }
+
+        return view('allGames',['game'=>$game, 'avg_rating'=>$avg_rating]);
     }
 }

@@ -43,7 +43,7 @@
 		<tr>
 			<td>Thumbnail</td>
 			<td>{{$games->title}}</td>
-			<td>Rating ongoing</td>
+			<td>{{$avg_rating}}</td>
 			<td>{{$games->upload_by}}</td>
 		</tr>
 		@endforeach

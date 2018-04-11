@@ -20,5 +20,5 @@ class SearchController extends Controller
 		DB::table ('games')->select([
 		'title' => $nameQuery,
 		]);
-		return redirect('/games/'$nameQuery);
+		return view('search', ['nameQuery' => $nameQuery]);
 	}

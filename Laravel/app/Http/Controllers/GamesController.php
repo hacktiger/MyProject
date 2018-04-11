@@ -125,6 +125,12 @@ class GamesController extends Controller
     {           
         //get game in games database
         $game = games::find($title);
+        //get tags
+        /**  the statement 
+        SELECT games_tags.games_title, tags.name FROM games_tags LEFT JOIN tags ON games_tags.tags_id = tags.id WHERE games_tags.games_title = 'Black Squad 3' ORDER BY `games_tags`.`games_title` 
+        **/
+
+        
         // get current user id
         $rate_by = auth()->user()->id;
         // get the rating
@@ -171,7 +177,17 @@ class GamesController extends Controller
         // put all in array => more compact
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
 
-        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star]);
+
+        //test
+        $tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name'])->where('games_tags.games_title', 'Black Squad 3')->orderBy('games_tags.games_title','asc')->get();
+        $game_tags = array();
+        if(count($tags)>0){
+            for($i=0; $i<count($tags); $i++){
+                $game_tags[$i] = $tags[$i]->name;
+            }
+        }
+        
+        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags]);
     }
 
     /**
