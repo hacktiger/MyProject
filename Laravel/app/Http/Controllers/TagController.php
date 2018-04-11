@@ -17,7 +17,7 @@ class TagController extends Controller
     {
         //
         $tag = Tags::all();
-        return view('tags.index')->withTags($tags);
+        return view('tags.index',['tag' => $tag]);
     }
 
     /**
@@ -28,6 +28,7 @@ class TagController extends Controller
     public function create()
     {
         //
+        return view('tags.create');
     }
 
     /**
@@ -43,12 +44,11 @@ class TagController extends Controller
             'name'=>'required|max:255'
         ]);
         $tag = new Tags;
-        $tag->name =  $request->name;
+        $tag->name =  $request->input('name');
         $tag->save();
 
-        Session::flash('success', ' New Tag was created');
 
-        return redirect()->route('tags.index');
+        return redirect()->route('tags.index')->with('success','Tag Created');
 
     }
 

@@ -10,7 +10,7 @@ use App\User;
 use App\Tags;
 use App\games_tags;
 use App\rating;
-use Session;
+
 
 
 
@@ -18,7 +18,7 @@ class GamesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -66,6 +66,8 @@ class GamesController extends Controller
             'link' => 'required',
             'image'=>'image|nullable|max:1999',
             'price'=>'required',
+            'upload_by' => 'required',
+            'release' => 'required'
 
         ]);
         //Handle File Upload
@@ -87,29 +89,30 @@ class GamesController extends Controller
         }
 
         //Create games info
-        $game = new games;
-        $game->title = $request->input('title');
-        
-        $game->description = $request->input('description');
-        $game->link = $request->input('link');
-        $game->image = $fileNameToStore;
-        $game->upload_by = auth()->user()->id;
-        $game->price = $request->input('price');
-        $game->sales = $request->input('sales');
-        $game->save();
+        $games = new games;
+        $games->title = $request->input('title');
+        $games->description = $request->input('description');
+        $games->link = $request->input('link');
+        $games->image = $fileNameToStore;
+        $games->upload_by = $request->input('upload_by');
+        $games->release = $request->input('release');
+        $games->price = $request->input('price');
+        $games->sales = $request->input('sales');
+        $games->save();
         // Adding the tags
-        $game->title=$request->input('title');
+        $games->title=$request->input('title');
         $game_tag_id = $request->input('tags');
+      
         for($i = 0; $i<count($game_tag_id); $i++){
             DB::table('games_tags')->insert(
-                ['games_title' => $game->title, 
+                ['games_title' => $games->title, 
                  'tags_id' => $game_tag_id[$i]]
             );
         };
-        
 
-        
-        return redirect('/games',['game'=>$game])->with('success','Game Created');;
+        $game =  games::orderBy('created_at','DESC')->paginate(8);
+            
+        return view('index',compact('game'));
     }
 
     /**

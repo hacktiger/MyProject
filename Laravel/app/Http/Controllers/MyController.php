@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\games;
 
 class MyController extends Controller
 {
-	public function __construct()
+    public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth');
     }
 
     public function report(Request $request){
@@ -105,5 +106,11 @@ class MyController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function allGames(){
+        $game =  games::orderBy('created_at','DESC')->paginate(12);
+
+        return view('allGames',compact('game'));
     }
 }

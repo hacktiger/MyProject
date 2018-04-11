@@ -28,7 +28,7 @@
 	</thead>
 	</table>
 </div>
-<div class="container" id="Action">
+<div class="container">
 	<h3>Action Games</h3>
 	<table class="table border">
 	<tbody>
@@ -38,66 +38,20 @@
 			<td>Rating</td>
 			<td>Developer</td>
 		</tr>
-	</tbody>
-	</table>
-</div>
 
-<div class="container" id="Adventure">
-	<h3>Adventure Games</h3>
-	<table class="table border">
-	<tbody>
+		@foreach($game as $games)
 		<tr>
 			<td>Thumbnail</td>
-			<td>Title</td>
-			<td>Rating</td>
-			<td>Developer</td>
-
+			<td>{{$games->title}}</td>
+			<td>Rating ongoing</td>
+			<td>{{$games->upload_by}}</td>
 		</tr>
+		@endforeach
+
 	</tbody>
 	</table>
 </div>
 
-<div class="container" id="FPS">
-	<h3>FPS Games</h3>
-	<table class="table border">
-	<tbody>
-	
-		<tr>
-			<td>Thumbnail</td>
-			<td>Title</td>
-			<td>Rating</td>
-			<td>Developer</td>
-		</tr>
-	</tbody>
-	</table>
-</div>
 
-<div class="container" id="Strategy">
-	<h3>Strategy Games</h3>
-	<table class="table border">
-	<tbody>
-		<tr>
-			<td>Thumbnail</td>
-			<td>Title</td>
-			<td>Rating</td>
-			<td>Developer</td>
-		</tr>
-	</tbody>
-	</table>
-</div>
-
-<div class="container" id="Puzzle">
-	<h3>Puzzle Games</h3>
-	<table class="table border">
-	<tbody>
-		<tr>
-			<td>Thumbnail</td>
-			<td>Title</td>
-			<td>Rating</td>
-			<td>Developer</td>
-		</tr>
-	</tbody>
-	</table>
-</div>
 
 @endsection

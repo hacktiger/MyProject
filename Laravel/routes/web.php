@@ -33,6 +33,13 @@ Route::get('/profile',function(){
 	return view('inc.profile');
 })->name('profile');
 
+Route::get('/games/tags/create',function(){
+	return redirect('/tags/create');
+});
+
+Route::get('/tags/games/create',function(){
+	return redirect('/games/create');
+});
 
 
 /**
@@ -53,16 +60,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/search', 'HomeController@search')->name('search');
-
-Route::get('/allGames','HomeController@gameBase')->name('allGames');
-
-Route::get('/devList','HomeController@devBase')->name('devList');
 Route::post('/games/{game}/report','MyController@report');
 
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
 
 Route::post('/games/{game}/favorite','MyController@favorite')->name('games.rating');
+
+Route::get('/byRating','GameOrder@byRating')->name('oder.rating');
+
+Route::get('/allGames','MyController@allGames');
+
 
 
 ?>

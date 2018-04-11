@@ -20,24 +20,18 @@ class CreateGamesTable extends Migration
             $table->primary('title');
 
             $table->text('description');
-            $table->date('realease');
+            $table->integer('release');
 
             $table->string('link');
             $table->string('image');
-            $table->integer('upload_by')->unsigned();  
-                      
+            $table->string('upload_by');
+                  
             $table->integer('price')->default(0);
             $table->integer('sales')->default(0);
             $table->integer('upvote')->default(0);
             $table->integer('downvote')->default(0);
             
-            $table->timestamps();
-
-           
-        });
-
-        Schema::table('games',function(Blueprint $table){
-             $table->foreign('upload_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();          
         });
     }
 

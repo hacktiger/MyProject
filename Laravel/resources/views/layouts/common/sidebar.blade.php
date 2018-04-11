@@ -123,6 +123,8 @@ body {
   <?php 
   if (Auth::user()-> auth_level!=='casual'){
 	  echo "<a class='nav-link' href='games/create'>Upload Game</a>";
+
+    echo "<a class='nav-link' href='tags/create'>Add Tags</a>";
   }
   ?>
     

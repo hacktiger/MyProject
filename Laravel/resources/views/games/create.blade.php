@@ -12,15 +12,26 @@
             <!-- Additional macros -->
 
 	{!! Form::open(['action'=>'GamesController@store', 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
-
+        <!-- TITLE -->
     	<div class="form-group">
     		{{Form::label('title',"Title")}}
     		{{Form::text('title','',['class'=>'form-control','placeholder'=>'Title', 'spellcheck'=>'false'])}}
     	</div>
+        <!-- DES -->
     	<div class="form-group">
     		{{Form::label('description',"Description")}}
     		{{Form::text('description','',['class'=>'form-control','placeholder'=>'Give a brief description of the game', 'spellcheck'=>'false'])}}
     	</div>
+
+        <div class="form-group">
+            {{Form::label('upload_by',"Developer Name")}}
+            {{Form::text('upload_by','',['class'=>'form-control','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
+        </div>
+
+        <div class="form-group">
+            {{Form::label('release',"Release Year")}}
+            {{Form::text('release','',['class'=>'form-control','placeholder'=>'Give the realease year', 'spellcheck'=>'false'])}}
+        </div>
 
         <div class="form-group">
             {{Form::label('tag_id', 'Tags: ') }} <br>

@@ -110,7 +110,7 @@
 		<!-- tags -->
 		<div class="tags"> 
 			@foreach($game->tags as $tag)
-			<span class="label label-default">{{ $tag->name}}</span>
+			<span class="label label-default"><a href="/games/{{$tags->name}}">{{ $tag->name}}</a></span>
 			@endforeach
 		</div>
 		<!-- Description -->
@@ -196,8 +196,12 @@
 			<button id="4-star" class="fa fa-star cus-button" type="submit"></button>
 			<button id="5-star" class="fa fa-star cus-button" type="submit"></button>
 			{!! Form::close() !!}
-			<?php  $sumStar = $star[0] + $star[1] + $star[2] + $star[3] + $star[4]; 
-				$avg = ($star[0] + $star[1]*2 + $star[2]*3 + $star[3]*4 + $star[4]*5)/$sumStar;   
+			<?php  $sumStar = $star[0] + $star[1] + $star[2] + $star[3] + $star[4];
+			if($sumStar !== 0){
+				$avg = ($star[0] + $star[1]*2 + $star[2]*3 + $star[3]*4 + $star[4]*5)/$sumStar; 
+			} else {
+				$avg = 0;
+			}		  
 				echo "<p>Average rating : <b>$avg</b> </p>"
 			?>
 			<p>ps: the bars length have no meaning,  but the numbers do, which is something right ? </p>
