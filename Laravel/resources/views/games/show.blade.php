@@ -85,8 +85,8 @@
 <div class="row">
 	<!-- main content of game -->
 	<section class="col-md-8 col-sm-8">
-		<div style="height: 500px; width: inherit;">
-			<img style="width: 100%; height: 100%; object-fit: contain" src="/storage/cover_images/{{$game->image}}">
+		<div style="height: 417.6px ; width: 742.4px">
+			<img  style="height: 100%; width: 100%; object-fit: contain;" alt="{{$game->title}}" src="/storage/cover_images/{{$game->image}}">
 		</div> 
 
 		<hr>
@@ -119,7 +119,7 @@
 		</p>
 		<hr>
 		<!-- uploady user name -->
-		<h4 class="" style="padding:20px">Uploaded by : {{Auth::user()->name}}</h4>
+		<h4 class="" style="padding:20px">Uploaded by : {{$game->upload_by}}</h4>
 
 		<!-- upvote - downvote + report -->
 		<div class="row">
@@ -127,8 +127,8 @@
 				<!-- EDIT FUNCTION -->
 				@if(!Auth::guest())
 				<!-- Remember to add && so only devs can do it -->
-					@if(Auth::user()->id == $game->upload_by && Auth::user()->authority !== 'casual')
-					<a class="btn btn-block btn-primary" href="/games/{{$game->title}}/edit">&ensp;Edit&ensp;</a>
+					@if(Auth::user()->authority !== 'casual')
+					<a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="/games/{{$game->title}}/edit">&ensp;Edit&ensp;</a>
 			</div>
 			<div class="col-sm-4 col-md-4">
 					<!-- DELETE FUNCTION -->
@@ -349,7 +349,6 @@
 			$("input:text").val("1");
 		});
 	}
-
 </script>
 
 

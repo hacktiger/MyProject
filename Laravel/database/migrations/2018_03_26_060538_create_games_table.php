@@ -18,18 +18,14 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->string('title');
             $table->primary('title');
-
+            $table->integer('average_rating')->default(0);
             $table->text('description');
             $table->integer('release');
-
             $table->string('link');
             $table->string('image');
             $table->string('upload_by');
-                  
             $table->integer('price')->default(0);
             $table->integer('sales')->default(0);
-            $table->integer('upvote')->default(0);
-            $table->integer('downvote')->default(0);
             
             $table->timestamps();          
         });

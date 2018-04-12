@@ -82,8 +82,6 @@ class GamesController extends Controller
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
             //Upload
             $path = $request->file('image')->storeAs('public/cover_images', $fileNameToStore);
-
-
         }  else {
             $fileNameToStore = 'khongCoImage.jpg';
         }
@@ -102,7 +100,7 @@ class GamesController extends Controller
         // Adding the tags
         $games->title=$request->input('title');
         $game_tag_id = $request->input('tags');
-      
+        if($game_tag_id)
         for($i = 0; $i<count($game_tag_id); $i++){
             DB::table('games_tags')->insert(
                 ['games_title' => $games->title, 
@@ -110,7 +108,7 @@ class GamesController extends Controller
             );
         };
 
-        $game =  games::orderBy('created_at','DESC')->paginate(8);
+        $game =  games::orderBy('created_at','DESC')->paginate(12);
             
         return view('index',compact('game'));
     }
@@ -125,14 +123,16 @@ class GamesController extends Controller
     {           
         //get game in games database
         $game = games::find($title);
-        //get tags
-        /**  the statement 
-        SELECT games_tags.games_title, tags.name FROM games_tags LEFT JOIN tags ON games_tags.tags_id = tags.id WHERE games_tags.games_title = 'Black Squad 3' ORDER BY `games_tags`.`games_title` 
-        **/
-
-        
         // get current user id
         $rate_by = auth()->user()->id;
+        //get tags
+        $tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name'])->where('games_tags.games_title', 'Black Squad 3')->orderBy('games_tags.games_title','asc')->get();
+        $game_tags = array();
+        if(count($tags)>0){
+            for($i=0; $i<count($tags); $i++){
+                $game_tags[$i] = $tags[$i]->name;
+            }
+        }
         // get the rating
 
         $rating = DB::table('rating')->select('rating')->where([
@@ -175,17 +175,8 @@ class GamesController extends Controller
             $pre_star['star_5'] = $star_5->number;
         }
         // put all in array => more compact
+        
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
-
-
-        //test
-        $tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name'])->where('games_tags.games_title', 'Black Squad 3')->orderBy('games_tags.games_title','asc')->get();
-        $game_tags = array();
-        if(count($tags)>0){
-            for($i=0; $i<count($tags); $i++){
-                $game_tags[$i] = $tags[$i]->name;
-            }
-        }
         
         return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags]);
     }
