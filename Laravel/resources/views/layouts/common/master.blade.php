@@ -38,13 +38,13 @@
 	@include('layouts.common.sidebar')
 	
 	<!--Page content-->
-	<div class="main">
 	<!-- Messages -->
 	<section>	
 	@include('inc.messages')
 	</section>
 
-	<!-- content yields here -->
+	<!-- content yields here -->	
+	<div class="main">
 	<section class="container-fluid" >
 	@yield('content')
 	</section>

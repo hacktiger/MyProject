@@ -1,11 +1,6 @@
 @extends('layouts.common.master')
 @section('style')
   <title>Search</title>
-  <style>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./css/bootstrap.min.css">
-  </style>
 @endsection
 
 @section('scripts')
@@ -26,6 +21,9 @@
   </form>
 </div>
 <br>
+
+
+
 <div class="container">
 	<h2>Advanced Search</h2>
 	<div class="row">

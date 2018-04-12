@@ -204,6 +204,7 @@
 			}		  
 				echo "<p>Average rating : <b>$avg</b> </p>"
 			?>
+			@if($sumStar !==0){
 			<p>ps: the bars length have no meaning,  but the numbers do, which is something right ? </p>
 			<hr style="border:3px solid #f1f1f1">
 
@@ -265,6 +266,7 @@
 				</div>
 			</div>
 		</div>
+		@endIf
 	</section>
 	
 	<!-- A column on the right for game news or something-->

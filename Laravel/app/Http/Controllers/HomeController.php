@@ -49,4 +49,9 @@ class HomeController extends Controller
 	{
 		return view('devList');
 	}
+	
+	public function toCart()
+	{
+		return view('cart');
+	}
 }
