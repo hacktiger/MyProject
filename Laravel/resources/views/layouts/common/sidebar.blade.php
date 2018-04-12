@@ -127,6 +127,8 @@ body {
     echo "<a class='nav-link' href='tags/create'>Add Tags</a>";
   }
   ?>
+  
+  <a class='nav-link' href='/cart'>Cart</a>
     
   <!--Logout link-->
   <div style="position: absolute; bottom: 5px">

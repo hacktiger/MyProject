@@ -11,14 +11,16 @@ class SearchController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth')->(['index','show']);
+		$this->middleware('auth')
 	}
 	
+	
+	//search by title
 	public function normalSearch(Request $request)
 	{
 		$nameQuery =$request-> input('text');
 		DB::table ('games')->select([
 		'title' => $nameQuery,
 		]);
-		return view('search', ['nameQuery' => $nameQuery]);
+		return view('/games', ['nameQuery' => $nameQuery]);
 	}
