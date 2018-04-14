@@ -17,7 +17,7 @@
 <br><br>
 <div class='wrapper' style='text-align:center'><div class="col-sm-2 col-md-2">
 	<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#myModal" style='position:absolute'>
-	Pay
+	Purchase
 	</button>
 </div></div>
 

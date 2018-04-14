@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 11, 2018 lúc 07:00 AM
--- Phiên bản máy phục vụ: 10.1.30-MariaDB
--- Phiên bản PHP: 7.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 14, 2018 at 09:50 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `gamestop`
+-- Database: `gamestop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -40,7 +40,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `favorites`
+-- Table structure for table `favorites`
 --
 
 CREATE TABLE `favorites` (
@@ -49,10 +49,17 @@ CREATE TABLE `favorites` (
   `favorite` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`user_id`, `game_title`, `favorite`) VALUES
+(52, 'dg', 0);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `games`
+-- Table structure for table `games`
 --
 
 CREATE TABLE `games` (
@@ -71,19 +78,20 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `games`
+-- Dumping data for table `games`
 --
 
 INSERT INTO `games` (`title`, `description`, `release`, `link`, `image`, `upload_by`, `price`, `sales`, `upvote`, `downvote`, `created_at`, `updated_at`) VALUES
 ('12', '123', 1998, 'n', 'khongCoImage.jpg', '123', 213, 123, 0, 0, '2018-04-11 04:40:42', '2018-04-11 04:40:42'),
 ('Black Squad', 'a shooting game', 2012, 'none', 'khongCoImage.jpg', 'thai lam', 1, 123, 0, 0, '2018-04-11 04:53:29', '2018-04-11 04:53:29'),
 ('Black Squad 2', 'a shooting game', 2012, 'none', 'khongCoImage.jpg', 'thai lam', 1, 123, 0, 0, '2018-04-11 04:53:58', '2018-04-11 04:53:58'),
-('Black Squad 3', 'a shooting game', 2012, 'none', 'khongCoImage.jpg', 'thai lam', 1, 123, 0, 0, '2018-04-11 04:54:35', '2018-04-11 04:54:35');
+('Black Squad 3', 'a shooting game', 2012, 'none', 'khongCoImage.jpg', 'thai lam', 1, 123, 0, 0, '2018-04-11 04:54:35', '2018-04-11 04:54:35'),
+('dg', 'asd', 2010, '123', '1_1523577821.png', 'asd', 1, 1, 0, 0, '2018-04-13 00:03:41', '2018-04-13 00:03:41');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `games_tags`
+-- Table structure for table `games_tags`
 --
 
 CREATE TABLE `games_tags` (
@@ -93,7 +101,7 @@ CREATE TABLE `games_tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `games_tags`
+-- Dumping data for table `games_tags`
 --
 
 INSERT INTO `games_tags` (`id`, `games_title`, `tags_id`) VALUES
@@ -102,12 +110,13 @@ INSERT INTO `games_tags` (`id`, `games_title`, `tags_id`) VALUES
 (4, 'Black Squad 2', 1),
 (5, 'Black Squad 2', 3),
 (6, 'Black Squad 3', 1),
-(7, 'Black Squad 3', 3);
+(7, 'Black Squad 3', 3),
+(8, 'dg', 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -117,7 +126,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -135,7 +144,27 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_resets`
+-- Table structure for table `owned_games`
+--
+
+CREATE TABLE `owned_games` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `game_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `bought_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `owned_games`
+--
+
+INSERT INTO `owned_games` (`id`, `game_title`, `user_id`, `bought_at`) VALUES
+(1, 'Black Squad', 52, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -147,7 +176,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `rating`
+-- Table structure for table `rating`
 --
 
 CREATE TABLE `rating` (
@@ -157,10 +186,19 @@ CREATE TABLE `rating` (
   `rating` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`id`, `game_title`, `user_id`, `rating`) VALUES
+(4, 'Black Squad 3', 1, 2),
+(16, 'Black Squad 3', 52, 5),
+(18, 'dg', 52, 4);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `report`
+-- Table structure for table `report`
 --
 
 CREATE TABLE `report` (
@@ -175,7 +213,7 @@ CREATE TABLE `report` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sales_log`
+-- Table structure for table `sales_log`
 --
 
 CREATE TABLE `sales_log` (
@@ -189,7 +227,7 @@ CREATE TABLE `sales_log` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -200,18 +238,18 @@ CREATE TABLE `tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tags`
+-- Dumping data for table `tags`
 --
 
 INSERT INTO `tags` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'FPS', '2018-04-11 04:45:16', '2018-04-11 04:45:16'),
-(2, 'FPS', '2018-04-11 04:45:46', '2018-04-11 04:45:46'),
-(3, 'Action', '2018-04-11 04:47:33', '2018-04-11 04:47:33');
+(3, 'Action', '2018-04-11 04:47:33', '2018-04-11 04:47:33'),
+(4, 'casual', '2018-04-11 10:33:32', '2018-04-11 10:33:32');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -219,7 +257,7 @@ CREATE TABLE `users` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `auth_level` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'casual',
+  `auth_level` enum('admin','developer','casual') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'casual',
   `rank` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'noob',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -227,7 +265,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `auth_level`, `rank`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -281,14 +319,15 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `auth_level`, `rank`, `r
 (48, 'M1yXm0ex0T', 'ixUVWYnUrB@gmail.com', '$2y$10$mD8TE3/WRY./VCFGPc9yE.zdBybe3aFAbJg4xVYEd8AL30HhYeIwu', 'casual', 'noob', NULL, NULL, NULL),
 (49, 'benDVbXbSE', 'Vvbb5DxgNK@gmail.com', '$2y$10$UXTLgXXNg3sNIR6daW9Qi.Jj3/ZZDOwZVq01F5tM8WBr2cLm10u4i', 'casual', 'noob', NULL, NULL, NULL),
 (50, 'hO0yXIWoOb', 'keG755FT06@gmail.com', '$2y$10$z5VrNlNbIGexgWy/e0jgPu4IkicttcF9kI0oeuG.SZg6uKXRbKPJG', 'casual', 'noob', NULL, NULL, NULL),
-(51, 'jGQKbpWumS', '1e4HsiAVhY@gmail.com', '$2y$10$96IK0bSUi1swUJMjvhDlC.Tm2p/A5jK4NLZUvsTj6nhDDXew3PK2G', 'casual', 'noob', NULL, NULL, NULL);
+(51, 'jGQKbpWumS', '1e4HsiAVhY@gmail.com', '$2y$10$96IK0bSUi1swUJMjvhDlC.Tm2p/A5jK4NLZUvsTj6nhDDXew3PK2G', 'casual', 'noob', NULL, NULL, NULL),
+(52, 'hieu21-2', 'gobanme.pierro@gmail.com', '$2y$10$Ioc8kWTTlxpKsU/oc74gHeL42C2mMNldwFUmC0XiEh/J5tBJpAOUC', 'admin', 'noob', 'Rdv4E6Y7hRJqchRhXP9oQZQ6cWBjN5IOFXT9mB1egYKLJlYz75s6wXIT4EJH', '2018-04-12 09:32:23', '2018-04-12 09:32:23');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
@@ -296,13 +335,13 @@ ALTER TABLE `comments`
   ADD KEY `comments_user_id_foreign` (`user_id`);
 
 --
--- Chỉ mục cho bảng `games`
+-- Indexes for table `games`
 --
 ALTER TABLE `games`
   ADD PRIMARY KEY (`title`);
 
 --
--- Chỉ mục cho bảng `games_tags`
+-- Indexes for table `games_tags`
 --
 ALTER TABLE `games_tags`
   ADD PRIMARY KEY (`id`),
@@ -310,19 +349,27 @@ ALTER TABLE `games_tags`
   ADD KEY `games_tags_tags_id_foreign` (`tags_id`);
 
 --
--- Chỉ mục cho bảng `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `password_resets`
+-- Indexes for table `owned_games`
+--
+ALTER TABLE `owned_games`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `owned_games_game_title_foreign` (`game_title`),
+  ADD KEY `owned_games_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Chỉ mục cho bảng `rating`
+-- Indexes for table `rating`
 --
 ALTER TABLE `rating`
   ADD PRIMARY KEY (`id`),
@@ -330,13 +377,13 @@ ALTER TABLE `rating`
   ADD KEY `rating_user_id_foreign` (`user_id`);
 
 --
--- Chỉ mục cho bảng `report`
+-- Indexes for table `report`
 --
 ALTER TABLE `report`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `sales_log`
+-- Indexes for table `sales_log`
 --
 ALTER TABLE `sales_log`
   ADD PRIMARY KEY (`id`),
@@ -344,97 +391,110 @@ ALTER TABLE `sales_log`
   ADD KEY `sales_log_user_id_foreign` (`user_id`);
 
 --
--- Chỉ mục cho bảng `tags`
+-- Indexes for table `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `games_tags`
+-- AUTO_INCREMENT for table `games_tags`
 --
 ALTER TABLE `games_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `rating`
+-- AUTO_INCREMENT for table `owned_games`
 --
-ALTER TABLE `rating`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `owned_games`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `report`
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `sales_log`
+-- AUTO_INCREMENT for table `sales_log`
 --
 ALTER TABLE `sales_log`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `tags`
+-- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `comments`
+-- Constraints for table `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_game_title_foreign` FOREIGN KEY (`game_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `games_tags`
+-- Constraints for table `games_tags`
 --
 ALTER TABLE `games_tags`
   ADD CONSTRAINT `games_tags_games_title_foreign` FOREIGN KEY (`games_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `games_tags_tags_id_foreign` FOREIGN KEY (`tags_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `rating`
+-- Constraints for table `owned_games`
+--
+ALTER TABLE `owned_games`
+  ADD CONSTRAINT `owned_games_game_title_foreign` FOREIGN KEY (`game_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `owned_games_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rating`
 --
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_game_title_foreign` FOREIGN KEY (`game_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rating_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Các ràng buộc cho bảng `sales_log`
+-- Constraints for table `sales_log`
 --
 ALTER TABLE `sales_log`
   ADD CONSTRAINT `sales_log_game_title_foreign` FOREIGN KEY (`game_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,

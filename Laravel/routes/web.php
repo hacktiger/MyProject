@@ -50,7 +50,7 @@ Route::get('/tags/games/create',function(){
 
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
-
+Route::resource('cart','CartController');
 //
 //Route::get('/register',function(){
 //	return view('layouts.register');

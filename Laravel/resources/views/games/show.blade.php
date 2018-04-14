@@ -3,7 +3,7 @@
 @section('style')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+<style type="text/css">
 .cus-box-sizing {
 	box-sizing: border-box;
 	font-family: Arial;
@@ -70,12 +70,6 @@
 	outline:none;
 }
 
-/* Individual bars */
-.bar-5 {width: 50%; height: 18px; background-color: #4CAF50;}
-.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
-.bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
-.bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
-.bar-1 {width: 15%; height: 18px; background-color: #f44336;}
 </style>
 
 @endsection
@@ -118,9 +112,12 @@
 			{{$game->description}}
 		</p>
 		<hr>
-		<!-- uploady user name -->
+		<!-- uploader user name -->
 		<h4 class="" style="padding:20px">Uploaded by : {{$game->upload_by}}</h4>
+		<h4 class="" style="padding:20px">Price : {{$game->price}}</h4>
 
+		
+		
 		<!-- upvote - downvote + report -->
 		<div class="row">
 			<div class="col-sm-4 col-md-4">
@@ -139,6 +136,7 @@
 					@endif
 				@endif
 			</div>
+
 			<!-- modal report -->
 			<div class="col-sm-4 col-md-4">
 				<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#myModal">
@@ -185,6 +183,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- user rating -->
 		<div class="cus-box-sizing">
 			<span class="heading">Your Rating</span>
@@ -204,19 +203,19 @@
 			}		  
 				echo "<p>Average rating : <b>$avg</b> </p>"
 			?>
-			@if($sumStar !==0){
+			@if($sumStar !==0)
 			<p>ps: the bars length have no meaning,  but the numbers do, which is something right ? </p>
 			<hr style="border:3px solid #f1f1f1">
-
 			<div class="cus-row">
 				<div class="side">
 					<div>5 star</div>
 				</div>
 				<div class="middle">
-					<div class="bar-container">
+					<div class="bar-container" style="width: <?50?>%; height: 18px; background-color: #4CAF50">
 						<div class="bar-5"></div>
 					</div>
 				</div>
+				
 				<div class="side right">
 					<div>{{$star[4]}}</div>
 				</div>
@@ -224,7 +223,7 @@
 					<div>4 star</div>
 				</div>
 				<div class="middle">
-					<div class="bar-container">
+					<div class="bar-container" style="width: 100%; height: 18px; background-color: #2196F3">
 						<div class="bar-4"></div>
 					</div>
 				</div>
@@ -235,7 +234,7 @@
 					<div>3 star</div>
 				</div>
 				<div class="middle">
-					<div class="bar-container">
+					<div class="bar-container" style="width: 10%; height: 18px; background-color: #00bcd4">
 						<div class="bar-3"></div>
 					</div>
 				</div>
@@ -246,7 +245,7 @@
 					<div>2 star</div>
 				</div>
 				<div class="middle">
-					<div class="bar-container">
+					<div class="bar-container" style="width: 4%; height: 18px; background-color: #ff9800">
 						<div class="bar-2"></div>
 					</div>
 				</div>
@@ -257,7 +256,7 @@
 					<div>1 star</div>
 				</div>
 				<div class="middle">
-					<div class="bar-container">
+					<div class="bar-container" style="width: 15%; height: 18px; background-color: #f44336;">
 						<div class="bar-1"></div>
 					</div>
 				</div>

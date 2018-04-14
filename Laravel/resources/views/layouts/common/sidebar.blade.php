@@ -81,14 +81,7 @@ body {
   <a class="nav-link" href="/games">Home</a>
   
   
-  <button class="dropdown-btn">User 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a class="nav-link" href="{{ route('profile')}}#Profile"> Profile</a>
-	
-	<a class="nav-link" href="{{ route('profile')}}#OwnedGames">Owned Games</a>
-  </div>
+  <a class="nav-link" href="{{ route('profile')}}">User</a>
   
   
   <button class="dropdown-btn">Game Database 
