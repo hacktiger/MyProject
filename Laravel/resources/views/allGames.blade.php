@@ -42,7 +42,7 @@
 
 		@foreach($game as $games)
 		<tr>
-			<td><img style="width: 25%; height: 25%; object-fit: contain" src="/storage/cover_images/{{$games->image}}"></td>
+			<td><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
 			<td><a  href="/games/{{$games->title}}">{{$games->title}}</a></td>
 			<td>{{$games->average_rating}}</td>
 			<td>{{$games->upload_by}}</td>

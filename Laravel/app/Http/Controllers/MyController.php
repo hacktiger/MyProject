@@ -126,4 +126,14 @@ class MyController extends Controller
 
         return view('allGames',['game'=>$game, 'rating'=>$rating]);
     }
+
+    public function topGames(){
+
+        return view('games.topGames');
+    }
+
+    public function devList(){
+
+        return view('devList');
+    }
 }

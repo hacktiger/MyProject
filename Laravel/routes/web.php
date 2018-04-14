@@ -40,7 +40,9 @@ Route::get('/games/tags/create',function(){
 Route::get('/tags/games/create',function(){
 	return redirect('/games/create');
 });
-
+// Cleaning up links 
+Route::get('/top-games','MyController@topGames')->name('top_games');
+Route::get('/developers-list','MyController@devList')->name('dev_list');
 
 /**
   *  edit here
@@ -52,27 +54,22 @@ Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('cart','CartController');
 //
-//Route::get('/register',function(){
-//	return view('layouts.register');
-//});
-
+// Addtional function in show
+Route::post('/games/{game}/report','MyController@report');
+Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
+Route::post('/games/{game}/favorite','MyController@favorite')->name('games.rating');
+//
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/games/{game}/report','MyController@report');
-
-Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
-
-Route::post('/games/{game}/favorite','MyController@favorite')->name('games.rating');
-
-Route::get('/byRating','GameOrder@byRating')->name('oder.rating');
-
-Route::get('/allGames','MyController@allGames');
+Route::get('/all-games','GerneController@allGames')->name('all_games');
 
 Route::get('/search','HomeController@search');
 
 Route::get('/cart','HomeController@toCart');
 
+// need to turn into CRUD
+Route::get('/profile/edit','ProfileController@edit')->name('profile.edit');
 
 ?>

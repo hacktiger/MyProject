@@ -71,16 +71,23 @@ document.getElementById("defaultOpen").click();
 @endsection
 
 @section('content')
-<button class="tablink" onclick="openPage('Profile', this, 'black')"id="defaultOpen"><p>Profile</p></button>
-<button class="tablink" onclick="openPage('OwnedGames', this, 'white')" ><p style="color:black">Owned Games</p></button>
-<div id='Profile'class="tabcontent">
+<div class="row">
+<button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')"id="defaultOpen"><p>Profile</p></button>
+<button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'white')" ><p style="color:black">Owned Games</p></button>
+</div>
+
+<div id='Profile' class="tabcontent">
 <br>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
+        <h2>Avatar here</h2>
+        <a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="{{route('profile.edit')}}">&ensp;Edit&ensp;</a>
+    </div>
+    <div class="col-md-4">
     	<h4>Username: {{Auth::user()->name}}</h4>
     	<h4>Email: {{Auth::user()->email}}</h4>
     </div>	
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<h4>ID: {{Auth::user()->id}}</h4>
 		<!--Auth_level-->
 		<h4>Rank: {{Auth::user()-> auth_level}}</h4>

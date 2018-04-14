@@ -88,7 +88,7 @@ body {
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a class="nav-link" href="/allGames">All Games</a>
+    <a class="nav-link" href="{{ route('all_games')}}">All Games</a>
 	
 	<button class= "dropdown-btn">Genres
 		<i class="fa fa-caret-down"></i>
@@ -102,11 +102,11 @@ body {
 		<a class="nav-link" href="/allGames#Puzzle">Puzzle</a>
 	</div>
 	
-    <a class="nav-link" href="#">By Rating</a>
+    <a class="nav-link" href="{{route('top_games')}}">Top Games</a>
   </div>
   
   
-  <a class="nav-link" href="/devList">Developers</a>
+  <a class="nav-link" href="{{route('dev_list')}}">Developers</a>
   
   
   <a class="nav-link" href="/search">Search</a>

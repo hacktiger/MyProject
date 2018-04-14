@@ -1,7 +1,7 @@
 @extends('layouts.common.master')
 <title>Game Stop | {{  $game->title}}</title>
-@section('style')
 
+@section('style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 .cus-box-sizing {
@@ -59,8 +59,6 @@
 	color: white;
 }
 
-
-
 .cus-button {
 	background-color: Transparent;
 	background-repeat:no-repeat;
@@ -71,7 +69,6 @@
 }
 
 </style>
-
 @endsection
 
 @section('content')
@@ -103,10 +100,12 @@
 		<hr>
 		<!-- tags -->
 		<div class="tags"> 
+			<span>Game Tags : </span>
 			@foreach($game_tags as $tag)
 			<span class="label label-default"><a href="/allGames/{{$tag}}">{{ $tag}}</a></span>
 			@endforeach
 		</div>
+		<hr>
 		<!-- Description -->
 		<p style="overflow-wrap:break-word;">
 			{{$game->description}}
@@ -124,7 +123,7 @@
 				<!-- EDIT FUNCTION -->
 				@if(!Auth::guest())
 				<!-- Remember to add && so only devs can do it -->
-					@if(Auth::user()->authority !== 'casual')
+					@if(Auth::user()->authority !== 'casual' && Auth::user()->name == $game->upload_by)
 					<a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="/games/{{$game->title}}/edit">&ensp;Edit&ensp;</a>
 			</div>
 			<div class="col-sm-4 col-md-4">
@@ -264,8 +263,8 @@
 					<div>{{$star[0]}}</div>
 				</div>
 			</div>
-		</div>
-		@endIf
+			@endif
+		</div>	
 	</section>
 	
 	<!-- A column on the right for game news or something-->
@@ -276,7 +275,6 @@
 @endsection
 
 @section('scripts')
-
 <script type="text/javascript"> 
 	<?php
 		try {
