@@ -8,9 +8,6 @@
   </style>
 @endsection
 
-@section('scripts')
-  <script src="./js/bootstrap.min.js"></script>
-@endsection
 
 @section('content')
 

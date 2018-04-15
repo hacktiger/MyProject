@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\games;
 use App\User;
 
-class GerneController extends Controller
+class GenreController extends Controller
 {
     //
 

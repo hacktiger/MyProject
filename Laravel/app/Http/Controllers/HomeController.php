@@ -37,7 +37,7 @@ class HomeController extends Controller
 	public function search()
 	{
 		
-		return view('search');
+		return view('search.search');
 	}
 	
 	public function gameBase()

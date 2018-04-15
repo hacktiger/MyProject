@@ -71,16 +71,16 @@ document.getElementById("defaultOpen").click();
 <button class="tablink" onclick="openPage('Advanced', this, 'white')" ><p style="color:black">Advanced Search</p></button>
 
 <div id="Search" class="tabcontent">
-  <form action="">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Enter Game's Name" name="search">
-      <div class="input-group-btn">
-        <button class="btn btn-default" type="submit"><i>Submit</i></button>
-      </div>
-    </div>
-  </form>
-</div>
+	{!! Form::open() !!}
+    {!! Form::text('search', null,
+                           array('required',
+                                'class'=>'form-control',
+                                'placeholder'=>"Game's Title Contains...")) !!}
+     {!! Form::submit('Search',
+                                array('class'=>'btn btn-default')) !!}
+ {!! Form::close() !!}
 
+</div>
 <div id="Advanced" class="tabcontent">
   <div class="container">
 	<div class="row">
@@ -131,13 +131,6 @@ document.getElementById("defaultOpen").click();
 	</div>
 </div>
 </div>
-
-
-
-<div class="container">
-  
-<br>
-
 
 
 

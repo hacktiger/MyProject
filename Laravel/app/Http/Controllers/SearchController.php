@@ -9,18 +9,22 @@ use App\rating;
 
 class SearchController extends Controller
 {
-	public function __construct()
-	{
-		$this->middleware('auth')
-	}
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 	
 	
 	//search by title
 	public function normalSearch(Request $request)
 	{
-		$nameQuery =$request-> input('text');
-		DB::table ('games')->select([
-		'title' => $nameQuery,
-		]);
-		return view('/games', ['nameQuery' => $nameQuery]);
+		$nameQuery = Request::input('search');
+		$results = DB::select('SELECT * FROM games WHERE title= %"$nameQuery"%')->paginate(3);
+		return view('search.search', compact('results','nameQuery'));
 	}
+	//advance search
+	public function advanceSearch(Request $request)
+	{
+
+	}
+}

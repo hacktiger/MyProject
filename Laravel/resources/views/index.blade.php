@@ -64,6 +64,8 @@ a:hover{
     </div>
   </div>
   <br>
+
+  
   <!-- prints out every game -->
   @foreach($game as $gamesInfo)
   <div class="well">
@@ -71,11 +73,6 @@ a:hover{
   </div>
   @endforeach
   
-  
-  <div class="row">
-   {{$game->links()}}
- </div>
- <br>
 
 
  @endsection

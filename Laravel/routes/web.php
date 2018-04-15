@@ -53,6 +53,7 @@ Route::get('/developers-list','MyController@devList')->name('dev_list');
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('cart','CartController');
+Route::resource('search','SearchController');
 //
 // Addtional function in show
 Route::post('/games/{game}/report','MyController@report');
@@ -63,7 +64,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/all-games','GerneController@allGames')->name('all_games');
+Route::get('/all-games','GenreController@allGames')->name('all_games');
 
 Route::get('/search','HomeController@search');
 
