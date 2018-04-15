@@ -12,5 +12,6 @@
 
 / NEW  ok ok
 + để xem được cover danh lenh php artisan storage:link
++ truoc moi lan sua gi nho pull da nhe k bi sida day =))
 
 
