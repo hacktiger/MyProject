@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
 
@@ -11,9 +12,19 @@ class GenreController extends Controller
     //
 
     public function allGames(){
-    	$game =  games::orderBy('created_at','DESC')->paginate(8);
+        $game =  games::orderBy('created_at','DESC')->paginate(12);
+        foreach ($game as $games) {
+        	$rating = DB::table('rating')->where('game_title', $games->title)->groupBy('game_title')->avg('rating');
+        	if($rating == null){
+        		$rating_2 = 0;
+        	} else {
+        		$rating_2 = $rating;
+        	}
 
-
-    	return view('allGames',['game'=>$game]);
+        	DB::table('games')->where('title', $games->title)->update([
+               'avg_rating'=> $rating_2,
+           	]);	
+        }             
+        return view('allGames',['game'=>$game]);
     }
 }

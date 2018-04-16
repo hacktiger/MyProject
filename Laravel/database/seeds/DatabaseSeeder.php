@@ -13,10 +13,8 @@ class DatabaseSeeder extends Seeder
     {
     	for($i = 0;$i<50;$i++){
         // $this->call(UsersTableSeeder::class);
-            DB::table('users')->insert([
-        		'name' => str_random(10),
-                'email' => str_random(10).'@gmail.com',
-                'password' => bcrypt('secret'),	
+            DB::table('games')->insert([
+        		
 
             ]);     
     	}       

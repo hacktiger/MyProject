@@ -80,13 +80,13 @@ body {
 <div class="sidenav">
   <a class="nav-link" href="/games">Home</a>
 
-  <a class="nav-link" href="/profile/{{Auth::user()->id}}">User</a>
+  <a class="nav-link" href="/profile/{{Auth::user()->id}}">{{Auth::user()->name}}</a>
   
   <button class="dropdown-btn">Game Database 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a class="nav-link" href="{{ route('all_games')}}">All Games</a>
+    <a class="nav-link" href="/all-games">All Games</a>
 	
 	<button class= "dropdown-btn">Genres
 		<i class="fa fa-caret-down"></i>
@@ -123,8 +123,7 @@ body {
     
   <!--Logout link-->
   <div style="position: absolute; bottom: 5px">
-  <h1>{{ Auth::user()->name }} <span class="caret"></span></h1>
-	<a class="dropdown-item" href="{{ route('logout') }}"
+	<a class="nav-link" href="{{ route('logout') }}"
 					onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}

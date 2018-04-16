@@ -1,11 +1,11 @@
 @extends('layouts.common.master')
 @section('style')
-  <title>Game Database</title>
-  <style>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./css/bootstrap.min.css">
-  </style>
+<style type="text/css">
+.hover-row:hover{
+	background-color: #f2f2f2;
+	cursor: pointer;
+}
+</style>
 @endsection
 
 
@@ -36,12 +36,12 @@
 			<td>Developer</td>
 			
 		</tr>
-
+		<h2></h2>
 		@foreach($game as $games)
-		<tr>
+		<tr  class="clickable-row hover-row" data-href="/games/{{$games->title}}">
 			<td><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
-			<td><a  href="/games/{{$games->title}}">{{$games->title}}</a></td>
-			<td>{{$games->average_rating}}</td>
+			<td>{{$games->title}}</td>
+			<td>{{$games->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
 			<td>{{$games->upload_by}}</td>
 		</tr>
 		@endforeach
@@ -52,6 +52,15 @@
 	</table>
 </div>
 
+@endsection
 
+@section('scripts')
+<script type="text/javascript">
+	$(document).ready(function(){
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+	});
 
+</script>
 @endsection

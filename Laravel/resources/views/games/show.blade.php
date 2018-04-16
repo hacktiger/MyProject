@@ -263,8 +263,9 @@
 					<div>{{$star[0]}}</div>
 				</div>
 			</div>
-			@endif
-		</div>	
+			
+		</div>
+		@endif	
 	</section>
 	
 	<!-- A column on the right for game news or something-->
@@ -276,6 +277,7 @@
 
 @section('scripts')
 <script type="text/javascript"> 
+	
 	<?php
 		try {
 			$phpVar = $rating->rating;

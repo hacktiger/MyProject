@@ -109,27 +109,15 @@ class MyController extends Controller
         return redirect()->back();
     }
 
-    public function allGames(){
-        $game =  games::orderBy('created_at','DESC')->paginate(12);
-
-        $rating = array();
-
-        foreach ($game as $games) {
-
-            $avg_rating = DB::table('rating')->where('game_title', $games->title)->groupBy('game_title')->avg('rating');
-            if($avg_rating == null){
-            $avg_rating = 0;
-            }
-            array_push($rating, $avg_rating);
-        
-        }
-
-        return view('allGames',['game'=>$game, 'rating'=>$rating]);
-    }
+    
 
     public function topGames(){
+        $game =  games::orderBy('avg_rating','DESC')->skip(3)->take(7)->get();
+        $top_1 = games::orderBy('avg_rating','DESC')->take(1)->get();
+        $top_2 = games::orderBy('avg_rating','DESC')->skip(1)->take(1)->get();
+        $top_3 = games::orderBy('avg_rating','DESC')->skip(2)->take(1)->get();
 
-        return view('games.topGames');
+        return view('games.topGames',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
     }
 
     public function devList(){
