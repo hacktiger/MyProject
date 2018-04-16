@@ -11,46 +11,37 @@
 	max-width: 800px; /* Max width */
 	padding: 20px;
 }
-
-
 .heading {
 	font-size: 25px;
 	margin-right: 25px;
 }
-
 .fa {
 	font-size: 25px;
 }
-
 .checked {
 	color: orange;
 }
-
 /* Three column layout */
 .side {
 	float: left;
 	width: 15%;
 	margin-top:10px;
 }
-
 .middle {
 	margin-top:10px;
 	float: left;
 	width: 70%;
 }
-
 /* Place text to the right */
 .right {
 	text-align: right;
 }
-
 /* Clear floats after the columns */
 .cus-row:after {
 	content: "";
 	display: table;
 	clear: both;
 }
-
 /* The bar container */
 .bar-container {
 	width: 100%;
@@ -58,7 +49,6 @@
 	text-align: center;
 	color: white;
 }
-
 .cus-button {
 	background-color: Transparent;
 	background-repeat:no-repeat;
@@ -72,6 +62,18 @@
 @endsection
 
 @section('content')
+<!-- FB ROOT For comments -->
+<div id="fb-root"></div>
+<script>
+
+(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 
 <div class="row">
 	<!-- main content of game -->
@@ -196,7 +198,8 @@
 			{!! Form::close() !!}
 			<?php  $sumStar = $star[0] + $star[1] + $star[2] + $star[3] + $star[4];
 			if($sumStar !== 0){
-				$avg = ($star[0] + $star[1]*2 + $star[2]*3 + $star[3]*4 + $star[4]*5)/$sumStar; 
+				$pre_avg = ($star[0] + $star[1]*2 + $star[2]*3 + $star[3]*4 + $star[4]*5)/$sumStar; 
+				$avg = round($pre_avg, 1, PHP_ROUND_HALF_UP);  
 			} else {
 				$avg = 0;
 			}		  
@@ -266,6 +269,7 @@
 			
 		</div>
 		@endif	
+		<div class="fb-comments" data-href="https://gamestop.test/games/{{$game->title}}" data-width="700" data-numposts="5"></div>
 	</section>
 	
 	<!-- A column on the right for game news or something-->
