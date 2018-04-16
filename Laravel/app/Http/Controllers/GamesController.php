@@ -134,7 +134,6 @@ class GamesController extends Controller
             }
         }
         // get the rating
-
         $rating = DB::table('rating')->select('rating')->where([
             ['game_title',$title],
             ['user_id', $rate_by]

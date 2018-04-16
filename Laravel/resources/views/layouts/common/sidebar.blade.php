@@ -79,10 +79,8 @@ body {
 <!-- sidebar -->
 <div class="sidenav">
   <a class="nav-link" href="/games">Home</a>
-  
-  
-  <a class="nav-link" href="{{ route('profile')}}">User</a>
-  
+
+  <a class="nav-link" href="/profile/{{Auth::user()->id}}">User</a>
   
   <button class="dropdown-btn">Game Database 
     <i class="fa fa-caret-down"></i>

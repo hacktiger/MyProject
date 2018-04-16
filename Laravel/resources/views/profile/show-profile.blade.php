@@ -81,7 +81,7 @@ document.getElementById("defaultOpen").click();
 <div class="row">
     <div class="col-md-4">
         <h2>Avatar here</h2>
-        <a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="{{route('profile.edit')}}">&ensp;Edit&ensp;</a>
+        <a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="/profile/{{Auth::user()->id}}/edit">&ensp;Edit&ensp;</a>
     </div>
     <div class="col-md-4">
     	<h4>Username: {{Auth::user()->name}}</h4>

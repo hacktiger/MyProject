@@ -29,10 +29,6 @@ Route::get('/games/games/create',function(){
 	return redirect('/games/create');
 });
 
-Route::get('/profile',function(){
-	return view('inc.profile');
-})->name('profile');
-
 Route::get('/games/tags/create',function(){
 	return redirect('/tags/create');
 });
@@ -54,6 +50,7 @@ Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('cart','CartController');
 Route::resource('search','SearchController');
+Route::resource('profile','ProfileController');
 //
 // Addtional function in show
 Route::post('/games/{game}/report','MyController@report');
@@ -70,7 +67,5 @@ Route::get('/search','HomeController@search');
 
 Route::get('/cart','HomeController@toCart');
 
-// need to turn into CRUD
-Route::get('/profile/edit','ProfileController@edit')->name('profile.edit');
 
 ?>
