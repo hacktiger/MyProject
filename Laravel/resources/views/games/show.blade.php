@@ -110,7 +110,7 @@
 		<hr>
 		<!-- Description -->
 		<p style="overflow-wrap:break-word;">
-			{{$game->description}}
+			{!!$game->description!!}
 		</p>
 		<hr>
 		<!-- uploader user name -->
@@ -122,19 +122,20 @@
 		<!-- upvote - downvote + report -->
 		<div class="row">
 			<div class="col-sm-4 col-md-4">
+
 				<!-- EDIT FUNCTION -->
-				@if(!Auth::guest())
+				@if(Auth::user()->authority == 'admin' || Auth::user()->name == $game->upload_by)
 				<!-- Remember to add && so only devs can do it -->
-					@if(Auth::user()->authority !== 'casual' && Auth::user()->name == $game->upload_by)
 					<a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="/games/{{$game->title}}/edit">&ensp;Edit&ensp;</a>
 			</div>
 			<div class="col-sm-4 col-md-4">
+				
 					<!-- DELETE FUNCTION -->
 					{!! Form::open(['action'=> ['GamesController@destroy', $game->title], 'method'=>'POST']) !!}
 					{{Form::hidden('_method', 'DELETE')}}
 					{{Form::submit('Delete', ['class'=>' btn btn-block btn-danger'])}}
 					{!! Form::close() !!}
-					@endif
+				
 				@endif
 			</div>
 

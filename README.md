@@ -10,8 +10,6 @@
 + đổi thành enum để track permission cho dễ thôi
 + máy t vẫn ko hiện game cover
 
-/ NEW  ok ok
-+ để xem được cover danh lenh php artisan storage:link
-+ truoc moi lan sua gi nho pull da nhe k bi sida day =))
-
+/ NEW 
++ GameController@edit:  games-> upload_by không phải là user_id
 

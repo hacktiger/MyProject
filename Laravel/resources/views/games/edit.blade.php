@@ -18,7 +18,7 @@
     	</div>
     	<div class="form-group">
     		{{Form::label('description',"Description")}}
-    		{{Form::text('description',$game->description,['class'=>'form-control','placeholder'=>'Give a brief description of the game', 'spellcheck'=>'false'])}}
+    		{{Form::textarea('description',$game->description,['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'Give a brief description of the game', 'spellcheck'=>'false'])}}
     	</div>
         <!-- tags -->
         <div class="form-group">

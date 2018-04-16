@@ -87,7 +87,7 @@ a:hover{
       @foreach($game as $games)
       <tr  class="clickable-row hover-row" data-href="/games/{{$games->title}}">
         <td><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
-        <td>{{$games->title}}</td>
+        <td><a href="/games/{{$games->title}}">{{$games->title}}</a></td>
         <td>{{$games->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
         <td>{{$games->upload_by}}</td>
       </tr>

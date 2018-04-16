@@ -20,9 +20,8 @@
         <!-- DES -->
     	<div class="form-group">
     		{{Form::label('description',"Description")}}
-    		{{Form::text('description','',['class'=>'form-control','placeholder'=>'Give a brief description of the game', 'spellcheck'=>'false'])}}
-    	</div>
-
+    		{{Form::textarea('description','',['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'Describe the Game', 'spellcheck'=>'false'])}}
+    	</div> 
         <div class="form-group">
             {{Form::label('upload_by',"Developer Name")}}
             {{Form::text('upload_by','',['class'=>'form-control','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}

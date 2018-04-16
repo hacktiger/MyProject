@@ -194,7 +194,7 @@ class GamesController extends Controller
 
         //Check for correct user
         // may want to change !== to !=
-        if(auth()->user()->id != $game->upload_by){
+        if(auth()->user()->name != $game->upload_by){
             return redirect('/games')->with('error', 'Unauthorized Page');
         }
         
