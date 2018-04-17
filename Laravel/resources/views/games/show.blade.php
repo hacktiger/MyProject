@@ -124,9 +124,9 @@
 			<div class="col-sm-4 col-md-4">
 
 				<!-- EDIT FUNCTION -->
-				@if(Auth::user()->authority == 'admin' || Auth::user()->name == $game->upload_by)
+				@if(Auth::user()->auth_level == 'admin' || Auth::user()->name == $game->upload_by)
 				<!-- Remember to add && so only devs can do it -->
-					<a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="/games/{{$game->title}}/edit">&ensp;Edit&ensp;</a>
+					<a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="/games/{{$game->slug}}/edit">&ensp;Edit&ensp;</a>
 			</div>
 			<div class="col-sm-4 col-md-4">
 				

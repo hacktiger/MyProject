@@ -2,8 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Model;
+
 
 class games extends Model
 {
@@ -18,9 +20,6 @@ class games extends Model
         'title',
     ];
    
-    public function tags(){
-    	return $this->belongsToMany('App\Tags');
-    }
 
     use Sluggable;
 
@@ -36,6 +35,16 @@ class games extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
 

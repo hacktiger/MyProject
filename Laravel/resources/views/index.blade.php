@@ -81,7 +81,7 @@ a:hover{
           <!-- Body -->
           <div class="card-body">
             <h4 class="card-title"><a href="/games/{{$games->slug}}">{{$games->title}}</a></h4>
-            <h5>Price : {{$games->price}}$</h5>
+            <h5>Price : <b>{{$games->price}}$</b></h5>
             <p class="card-text">something about this game that takes really long sentences</p>
           </div>
           <!-- Footer -->

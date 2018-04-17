@@ -16,10 +16,8 @@ use App\rating;
 
 class GamesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +30,7 @@ class GamesController extends Controller
         //Take = Limit
 
         // Need to change so that each click leads to a personal page
-        $game =  games::orderBy('created_at','DESC')->paginate(8);
+        $game =  games::orderBy('created_at','DESC')->paginate(9);
 
 
         return view('index',compact('game'));
@@ -47,6 +45,7 @@ class GamesController extends Controller
     {
         //
         $tags = Tags::all();
+
         return view('games.create')->withTags($tags);
     }
 
@@ -64,7 +63,7 @@ class GamesController extends Controller
             'title'=>'required',
             'description'=>'required',
             'link' => 'required',
-            'image'=>'image|nullable|max:1999',
+            'image'=>'image|nullable|max:5999',
             'price'=>'required',
             'upload_by' => 'required',
             'release' => 'required'
@@ -124,7 +123,7 @@ class GamesController extends Controller
     {           
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
-        // get current user id
+        // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
         $tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name'])->where('games_tags.games_title', 'Black Squad 3')->orderBy('games_tags.games_title','asc')->get();
@@ -181,7 +180,6 @@ class GamesController extends Controller
             $pre_star['star_5'] = $star_5->number;
         }
         // put all in array => more compact
-        
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
         
         return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags]);
@@ -193,18 +191,12 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($title)
+    public function edit($slug)
     {
-        //
-        $game = games::find($title);
+        //get game in games database
+        $game = DB::table('games')->where('slug',$slug)->first();
         $tags = Tags::all();
 
-        //Check for correct user
-        // may want to change !== to !=
-        if(auth()->user()->name != $game->upload_by){
-            return redirect('/games')->with('error', 'Unauthorized Page');
-        }
-        
         return view('games.edit',['game'=>$game, 'tags'=>$tags]);
     }
 
@@ -222,7 +214,7 @@ class GamesController extends Controller
             'title'=>'required',
             'description'=>'required',
             'link' => 'required',
-            'image'=>'image|nullable|max:1999',
+            'image'=>'image|nullable|max:5999',
             'price'=>'required',
 
         ]);
@@ -243,20 +235,18 @@ class GamesController extends Controller
 
         //Create games info
         $game = games::find($title);
+        var_dump($game);
         $game->title = $request->input('title');
         $game->description = $request->input('description');
         $game->link = $request->input('link');
-
         if($request->hasFile('image')){
-            $game->image = $fileNameToStore;
-        };
-
+            $game->image = $fileNameToStore;          
+        }
         $game->price = $request->input('price');
         $game->sales = $request->input('sales');
         $game->save();
 
         //Storing game tags
-        $game->title=$request->input('title');
         $game_tag_id = $request->input('tags');
         for($i = 0; $i<count($game_tag_id); $i++){
             DB::table('games_tags')->insert(
@@ -278,12 +268,6 @@ class GamesController extends Controller
     {
         //
         $game = games::find($title);
-
-        //Check for correct user
-        if(auth()->user()->id != $game->upload_by){
-            return redirect('/games')->with('error', 'Unauthorized Page');
-        }
-
         $game->delete();
         return redirect('/games')->with('success','Game Deleted');
     }
