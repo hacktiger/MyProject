@@ -38,7 +38,7 @@
 	
 	<!--Page content-->
 	<!-- Messages -->
-	<section>	
+	<section style="margin-left : 200px">	
 	@include('inc.messages')
 	</section>
 

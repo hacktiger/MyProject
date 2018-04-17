@@ -114,8 +114,8 @@
 		</p>
 		<hr>
 		<!-- uploader user name -->
-		<h4 class="" style="padding:20px">Uploaded by : {{$game->upload_by}}</h4>
-		<h4 class="" style="padding:20px">Price : {{$game->price}}</h4>
+		<h4 class="" style="padding:20px">Publisher : {{$game->upload_by}}</h4>
+		<h4 class="" style="padding:20px">Price : {{$game->price}}$</h4>
 
 		
 		
@@ -267,7 +267,6 @@
 					<div>{{$star[0]}}</div>
 				</div>
 			</div>
-			
 		</div>
 		@endif	
 		<div class="fb-comments" data-href="https://gamestop.test/games/{{$game->title}}" data-width="700" data-numposts="5"></div>
@@ -290,7 +289,7 @@
 		} catch (Exception $e) {}
 
 		try {
-			$fav = $favorite->favorite;
+			$fav = $favorite;
 			echo "var favo = '{$fav}';";			
 		} catch (Exception $e) {}
 

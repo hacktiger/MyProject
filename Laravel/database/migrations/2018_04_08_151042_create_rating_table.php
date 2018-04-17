@@ -14,13 +14,13 @@ class CreateRatingTable extends Migration
     public function up()
     {
         Schema::create('rating', function (Blueprint $table) {
-            $table->increments('id');
             $table->string('game_title');
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('rating')->nullable();
+        });
 
-            // is this even neccessary ????
-            $table->foreign('game_title')->references('title')->on('games')->onUpdate('cascade')->onDelete('cascade');
+        Schema::table('rating', function(Blueprint $table){
+            $table->foreign('game_title')->references('title')->on('games')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }

@@ -44,6 +44,8 @@ Route::get('/developers-list','MyController@devList')->name('dev_list');
   *  edit here
   *
 **/
+// game.show with SLUG URL
+Route::get('games/{slug}','GamesController@show')->name('games.show');
 
 
 Route::resource('games','GamesController');

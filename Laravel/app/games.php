@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class games extends Model
 {
@@ -12,13 +13,29 @@ class games extends Model
     //public $primaryKey = '';
     protected $keyType = 'string';
     public $primaryKey = 'title';
+
+    protected $fillable = [
+        'title',
+    ];
    
     public function tags(){
     	return $this->belongsToMany('App\Tags');
     }
 
-    public function user(){
-    	return $this->belongsTo('App\User');
+    use Sluggable;
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
 

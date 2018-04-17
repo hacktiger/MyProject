@@ -19,10 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->default('none');
-            $table->integer('wallet')->unsigned()->default(0);
-            // turn this into an enum type
-            $table->string('auth_level')->default('casual');
-            $table->string('rank')->default('noob'); 
+            $table->float('wallet',6,2)->unsigned()->default(0);
+            $table->enum('auth_level',['admin', 'developer', 'casual'])->default('casual');
             $table->rememberToken();
             $table->timestamps();
         });

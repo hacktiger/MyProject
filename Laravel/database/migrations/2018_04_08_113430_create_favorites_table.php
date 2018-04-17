@@ -16,8 +16,11 @@ class CreateFavoritesTable extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->string('game_title');
-            $table->boolean('favorite')->nullable();
+        });
 
+        Schema::table('favorites', function(Blueprint $table){
+            $table->foreign('game_title')->references('title')->on('games')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

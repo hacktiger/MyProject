@@ -92,7 +92,6 @@ class MyController extends Controller
             DB::table('favorites')->insert([
                 'user_id' => $user_id,
                 'game_title' => $title,
-                'favorite' => $favorite,
             ]);
         } else {
             DB::table('favorites')->where([
@@ -102,7 +101,6 @@ class MyController extends Controller
             DB::table('favorites')->insert([
                 'user_id' => $user_id,
                 'game_title' => $title,
-                'favorite' => $favorite,
             ]);
         }
 

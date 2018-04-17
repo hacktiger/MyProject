@@ -87,8 +87,9 @@ class GamesController extends Controller
         }
 
         //Create games info
-        $games = new games;
-        $games->title = $request->input('title');
+        $games = new games([
+            'title' => $request->input('title'),
+        ]);
         $games->description = $request->input('description');
         $games->link = $request->input('link');
         $games->image = $fileNameToStore;
@@ -119,10 +120,10 @@ class GamesController extends Controller
      * @param  string $title
      * @return \Illuminate\Http\Response
      */
-    public function show($title)
+    public function show($slug)
     {           
         //get game in games database
-        $game = games::find($title);
+        $game = DB::table('games')->where('slug',$slug)->first();
         // get current user id
         $rate_by = auth()->user()->id;
         //get tags
@@ -135,20 +136,26 @@ class GamesController extends Controller
         }
         // get the rating
         $rating = DB::table('rating')->select('rating')->where([
-            ['game_title',$title],
+            ['game_title',$game->title],
             ['user_id', $rate_by]
         ])->first();
         //get favorite
-        $favorite = DB::table('favorites')->select('favorite')->where([
-            ['game_title',$title],
+        $check_favorite = DB::table('favorites')->where([
+            ['game_title',$game->title],
             ['user_id', $rate_by]
         ])->first();
+        $favorite = 0 ;
+        if($check_favorite){
+            $favorite = 1;
+        } else {
+            $favorite = 0;
+        }
         //get number of stars ( using db )
-        $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',1],['game_title',$title]])->groupBy('game_title')->first();
-        $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',2],['game_title',$title]])->groupBy('game_title')->first();
-        $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',3],['game_title',$title]])->groupBy('game_title')->first();
-        $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',4],['game_title',$title]])->groupBy('game_title')->first();
-        $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',5],['game_title',$title]])->groupBy('game_title')->first();
+        $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',1],['game_title',$game->title]])->groupBy('game_title')->first();
+        $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',2],['game_title',$game->title]])->groupBy('game_title')->first();
+        $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',3],['game_title',$game->title]])->groupBy('game_title')->first();
+        $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',4],['game_title',$game->title]])->groupBy('game_title')->first();
+        $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',5],['game_title',$game->title]])->groupBy('game_title')->first();
         // set default values
         $pre_star = array(
             'star_1' => 0,

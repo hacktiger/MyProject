@@ -73,14 +73,14 @@ a:hover{
       <div class="col-lg-4 col-md-6 mb-4" style="margin-top:30px;">
         <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd">
           <!-- IMG -->
-          <a href="/games/{{$games->title}}">
+          <a href="/games/{{$games->slug}}">
             <div style="">
               <img style="border-top-left-radius: 10px; border-top-right-radius: 10px; border: 1px solid #ddd; max-height: 140px" src="/storage/cover_images/{{$games->image}}" class="card-img-top" alt="{{$games->title}}">
             </div>
           </a>
           <!-- Body -->
           <div class="card-body">
-            <h4 class="card-title"><a href="/games/{{$games->title}}">{{$games->title}}</a></h4>
+            <h4 class="card-title"><a href="/games/{{$games->slug}}">{{$games->title}}</a></h4>
             <h5>Price : {{$games->price}}$</h5>
             <p class="card-text">something about this game that takes really long sentences</p>
           </div>
