@@ -22,7 +22,6 @@ class games extends Model
    
 
     use Sluggable;
-
     /**
      * Return the sluggable configuration array for this model.
      *

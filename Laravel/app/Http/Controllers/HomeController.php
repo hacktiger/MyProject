@@ -34,11 +34,6 @@ class HomeController extends Controller
         return Redirect::back()->with('success','Game Reported !');
     }
 	
-	public function search()
-	{
-		
-		return view('search.search');
-	}
 	
 	public function gameBase()
 	{

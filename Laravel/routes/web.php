@@ -16,7 +16,8 @@
  **	Finished routes
  **
 **/
-
+use App\games;
+use Illuminate\Support\Facades\Input;
 Route::get('/', function(){
 	return redirect('/home');
 });
@@ -56,7 +57,6 @@ Route::get('games/{slug}/edit','GamesController@edit')->name('games.edit');
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('cart','CartController');
-Route::resource('search','SearchController');
 Route::resource('profile','ProfileController');
 //
 // Addtional function in show
@@ -70,7 +70,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/all-games','GenreController@allGames')->name('all_games');
 
-Route::get('/search','HomeController@search');
+
+Route::any('/search',function(){
+    $q = Input::get ( 'q' );
+    $gameTitle = games::where('title','LIKE','%'.$q.'%')->get();
+    if(count($gameTitle) > 0)
+        return view('search')->withDetails($gameTitle)->withQuery ( $q );
+    else return view ('search')->withMessage('No Details found. Try to search again !');
+});
 
 Route::get('/cart','HomeController@toCart');
 

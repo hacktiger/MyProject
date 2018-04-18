@@ -107,17 +107,29 @@ body {
   <a class="nav-link" href="{{route('dev_list')}}">Developers</a>
   
   
-  <a class="nav-link" href="/search">Search</a>
-  
-  
+  <button class="dropdown-btn">Search 
+    <i class="fa fa-caret-down"></i>
+  </button>
 
- 
-	<a class='nav-link' href="{{route('games.create')}}">Upload Game</a>
+  <div class="dropdown-container">
+    <form action="/search" method="POST" role="search">
+        {{ csrf_field() }}
+        <div class="input-group">
+            <input type="text" class="form-control" name="q"
+                placeholder="Search by Title"> <span class="input-group-btn">
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </form>
+</div>
+
+@if (Auth::user()-> auth_level !=='casual')
+  <a class='nav-link' href="{{route('games.create')}}">Upload Game</a>
 
   <a class='nav-link' href='tags/create'>Add Tags</a>
-  
-  <a class='nav-link' href='/cart'>Cart</a>
-    
+@endif    
   <!--Logout link-->
   <div style="position: absolute; bottom: 5px">
 	<a class="nav-link" href="{{ route('logout') }}"

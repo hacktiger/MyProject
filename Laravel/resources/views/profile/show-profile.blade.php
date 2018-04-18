@@ -90,7 +90,7 @@ document.getElementById("defaultOpen").click();
 	<div class="col-md-4">
 		<h4>ID: {{Auth::user()->id}}</h4>
 		<!--Auth_level-->
-		<h4>Rank: {{Auth::user()-> rank}}</h4>
+		<h4>Rank: {{Auth::user()->auth_level}}</h4>
 	</div>
 </div>
 </br>
