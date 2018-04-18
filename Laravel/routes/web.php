@@ -81,5 +81,5 @@ Route::any('/search',function(){
 
 Route::get('/cart','HomeController@toCart');
 
-
+Route::view('/test','testPage');
 ?>

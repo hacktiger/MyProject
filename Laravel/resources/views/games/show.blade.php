@@ -1,7 +1,42 @@
+<?php
+ 
+$dataPoints = array(
+	array("x"=> 1, "y"=> $star[0]),
+	array("x"=> 2, "y"=> $star[1]),
+	array("x"=> 3, "y"=> $star[2]),
+	array("x"=> 4, "y"=> $star[3]),
+	array("x"=> 5, "y"=> $star[4]),
+
+);
+	
+?>
+
 @extends('layouts.common.master')
 <title>Game Stop | {{  $game->title}}</title>
 
 @section('style')
+<script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: false,
+	exportEnabled: false,
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "This Game Overall Rating"
+	},
+	data: [{
+		type: "pie", //change type to bar, line, area, pie, etc
+		//indexLabel: "{y}", //Shows y value on all Data Points
+		indexLabelFontColor: "#5A5757",
+		indexLabelPlacement: "outside",   
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 .cus-box-sizing {
@@ -209,64 +244,8 @@
 			@if($sumStar !==0)
 			<p>ps: the bars length have no meaning,  but the numbers do, which is something right ? </p>
 			<hr style="border:3px solid #f1f1f1">
-			<div class="cus-row">
-				<div class="side">
-					<div>5 star</div>
-				</div>
-				<div class="middle">
-					<div class="bar-container" style="width: <?50?>%; height: 18px; background-color: #4CAF50">
-						<div class="bar-5"></div>
-					</div>
-				</div>
-				
-				<div class="side right">
-					<div>{{$star[4]}}</div>
-				</div>
-				<div class="side">
-					<div>4 star</div>
-				</div>
-				<div class="middle">
-					<div class="bar-container" style="width: 100%; height: 18px; background-color: #2196F3">
-						<div class="bar-4"></div>
-					</div>
-				</div>
-				<div class="side right">
-					<div>{{$star[3]}}</div>
-				</div>
-				<div class="side">
-					<div>3 star</div>
-				</div>
-				<div class="middle">
-					<div class="bar-container" style="width: 10%; height: 18px; background-color: #00bcd4">
-						<div class="bar-3"></div>
-					</div>
-				</div>
-				<div class="side right">
-					<div>{{$star[2]}}</div>
-				</div>
-				<div class="side">
-					<div>2 star</div>
-				</div>
-				<div class="middle">
-					<div class="bar-container" style="width: 4%; height: 18px; background-color: #ff9800">
-						<div class="bar-2"></div>
-					</div>
-				</div>
-				<div class="side right">
-					<div>{{$star[1]}}</div>
-				</div>
-				<div class="side">
-					<div>1 star</div>
-				</div>
-				<div class="middle">
-					<div class="bar-container" style="width: 15%; height: 18px; background-color: #f44336;">
-						<div class="bar-1"></div>
-					</div>
-				</div>
-				<div class="side right">
-					<div>{{$star[0]}}</div>
-				</div>
-			</div>
+			<div id="chartContainer" style="height: 330px; width: 100%;"></div>
+			<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		</div>
 		@endif	
 		<div class="fb-comments" data-href="https://gamestop.test/games/{{$game->title}}" data-width="700" data-numposts="5"></div>
