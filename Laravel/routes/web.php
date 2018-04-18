@@ -76,7 +76,7 @@ Route::any('/search',function(){
     $gameTitle = games::where('title','LIKE','%'.$q.'%')->get();
     if(count($gameTitle) > 0)
         return view('search')->withDetails($gameTitle)->withQuery ( $q );
-    else return redirect ('/games')->with('error','No Details found. Try to search again !');
+    else return redirect ('/games')->with('error','No Details found. Try to search again!');
 });
 
 Route::get('/cart','HomeController@toCart');

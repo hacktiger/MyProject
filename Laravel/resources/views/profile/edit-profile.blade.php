@@ -15,7 +15,7 @@
     	</div>
     	<div class="form-group">
     		{{Form::label('description',"Description")}}
-    		{{Form::text('description',$user->description,['class'=>'form-control','placeholder'=>'Give a brief description of yourself', 'spellcheck'=>'false'])}}
+    		{{Form::textarea('description',$user->description,['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'Give a brief description of yourself', 'spellcheck'=>'false'])}}
     	</div>
         <!-- Avatar -->      
         <div class="form-group">
