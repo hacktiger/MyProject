@@ -12,7 +12,7 @@ class GenreController extends Controller
     //
 
     public function allGames(){
-        $game =  games::orderBy('created_at','DESC')->paginate(9);
+        $game =  games::orderBy('created_at','DESC')->paginate(12);
         foreach ($game as $games) {
         	$rating = DB::table('rating')->where('game_title', $games->title)->groupBy('game_title')->avg('rating');       
         	if($rating == null){

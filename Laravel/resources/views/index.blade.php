@@ -51,6 +51,10 @@ a:hover{
       <div class="item">
         <img src="https://i.imgur.com/cz8Cxmr.png" style="width:100%;">
       </div>
+      <!-- Add real sales latter here -->
+      @foreach($sales as $sale)
+
+      @endforeach
 
     </div>
       <!-- Left and right controls -->
@@ -93,6 +97,8 @@ a:hover{
       </div>
     @endforeach
   </div>
+
+  {{ $game->links() }}
 </div>
 @endsection
 

@@ -24,16 +24,13 @@ class GamesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //the laravel way
-        //$gamesInfo =  games::orderBy('title','ASC')->take(#)->get();
-        //Take = Limit
-
+    {   
         // Need to change so that each click leads to a personal page
         $game =  games::orderBy('created_at','DESC')->paginate(9);
 
+        $sales = DB::table('games')->where('sales', '<>', 0)->orderBy('created_at','DESC')->take(3)->get();
 
-        return view('index',compact('game'));
+        return view('index',['game'=>$game, 'sales'=>$sales ]);
     }
 
     /**
@@ -126,7 +123,7 @@ class GamesController extends Controller
         // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
-        $tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name'])->where('games_tags.games_title', 'Black Squad 3')->orderBy('games_tags.games_title','asc')->get();
+        $tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name'])->where('games_tags.games_title', $game->title)->orderBy('games_tags.games_title','asc')->get();
         $game_tags = array();
         if(count($tags)>0){
             for($i=0; $i<count($tags); $i++){

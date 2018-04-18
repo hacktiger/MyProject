@@ -46,6 +46,8 @@
 			@endforeach
 		</tbody>
 	</table>
+
+	{{ $game->links() }}
 </div>
 
 @endsection
