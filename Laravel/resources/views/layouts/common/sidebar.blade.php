@@ -114,14 +114,12 @@ body {
   <div class="dropdown-container">
     <form action="/search" method="POST" role="search">
         {{ csrf_field() }}
-        <div class="input-group">
             <input type="text" class="form-control" name="q"
                 placeholder="Search by Title"> <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">
-                    <span class="glyphicon glyphicon-search"></span>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="glyphicon glyphicon-search"> Search </span>
                 </button>
             </span>
-        </div>
     </form>
 </div>
 

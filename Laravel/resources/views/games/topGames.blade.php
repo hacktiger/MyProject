@@ -15,23 +15,23 @@
 		@foreach($top_1 as $top_1)
 		<div class="well container-image" style="position: relative;">
 			<i class="fa fa-star" style="position: absolute; left: 0; top:15px;"></i>
-	   		<h3 ><a  href="/games/{{$top_1->title}}">{{$top_1->title}}</a></h3>
+	   		<h3 ><a  href="/games/{{$top_1->slug}}">{{$top_1->title}}</a></h3>
 	  	</div>
 		@endforeach
 	  	@foreach($top_2 as $top_2)
 	  	<div class="well">
-	   		<h3><a  href="/games/{{$top_2->title}}">{{$top_2->title}}</a></h3>
+	   		<h3><a  href="/games/{{$top_2->slug}}">{{$top_2->title}}</a></h3>
 	  	</div>
 	  	@endforeach
 	  	@foreach($top_3 as $top_3)
 	  	<div class="well">
-	   		<h3><a  href="/games/{{$top_3->title}}">{{$top_3->title}}</a></h3>
+	   		<h3><a  href="/games/{{$top_3->slug}}">{{$top_3->title}}</a></h3>
 	  	</div>
 	  	@endforeach
 	  	<!-- the other 7 games -->
 		@foreach($game as $games)
 		<div class="well">
-	   		<h3><a  href="/games/{{$games->title}}">{{$games->title}}</a></h3>
+	   		<h3><a  href="/games/{{$games->slug}}">{{$games->title}}</a></h3>
 	  	</div>
 		@endforeach
 	</div>
