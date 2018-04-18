@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Tile</th>
-                <th>Genres</th>
+                <th>Developer</th>
             </tr>
         </thead>
         <tbody>
