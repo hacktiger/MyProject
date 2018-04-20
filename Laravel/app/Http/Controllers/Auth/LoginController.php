@@ -25,7 +25,17 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/games';
+     protected $redirectTo = '/games';
+     /**
+    public function set(){
+    if(Auth::user()->auth_level !== casual){
+        $redirectTo = '/somethiong';
+    } else {
+          $redirectTo = '/games';
+    }
+    }
+    **/
+
 
     /**
      * Create a new controller instance.

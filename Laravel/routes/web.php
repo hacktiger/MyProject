@@ -81,5 +81,7 @@ Route::any('/search',function(){
 
 Route::get('/cart','HomeController@toCart');
 
-Route::view('/test','testPage');
+Route::get('/admin',['middleware'=>'admin',function(){
+  return view('admin.admin');
+}])->name('admin');
 ?>

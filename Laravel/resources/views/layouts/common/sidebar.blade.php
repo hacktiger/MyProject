@@ -124,9 +124,9 @@ body {
 </div>
 
 @if (Auth::user()-> auth_level !=='casual')
-  <a class='nav-link' href="{{route('games.create')}}">Upload Game</a>
-
-  <a class='nav-link' href='tags/create'>Add Tags</a>
+  <!-- <a class='nav-link' href="{{route('games.create')}}">Upload Game</a> -->
+  <!-- <a class='nav-link' href='tags/create'>Add Tags</a> -->
+  <a class="nav-link" href="{{route('admin')}}"> Admin Panel </a>
 @endif    
   <!--Logout link-->
   <div style="position: absolute; bottom: 5px">
