@@ -5,14 +5,23 @@
 @endsection
 
 @section('content')
-<div class="container">
-	<table class="table">
+<table class="table table-striped">
+	<thead>
+			<tr>
+					<th>Logo</th>
+					<th>Name</th>
+					<th>Bio</th>
+					<th>ID</th>
+			</tr>
+	</thead>
+	<tbody>
+		@foreach($user as $user)
 		<tr>
-			<td>logo</td>
-			<td>Name</td>
-			<td>Description? or smt</td>
-			<td>Link to userPage</td>
+			<td><img src="{{$user->avatar}} "style ="width:25% height:25%"></td>
+			<td><a href = "/profile/{{$user->id}}">{{$user->name}}</a></td>
+			<td>{{$user->description}}</td>
+			<td>{{$user->id}}</td>
 		</tr>
-	</table>
-	</div>
+		@endforeach
+	</tbody>
 @endsection

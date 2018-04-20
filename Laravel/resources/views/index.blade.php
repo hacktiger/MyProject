@@ -51,7 +51,7 @@ a:hover{
       <div class="item">
         <img src="https://i.imgur.com/cz8Cxmr.png" style="width:100%;">
       </div>
-      <!-- Add real sales latter here -->
+      <!-- Add real sales later here -->
       @foreach($sales as $sale)
 
       @endforeach

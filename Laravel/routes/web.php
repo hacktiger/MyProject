@@ -18,7 +18,7 @@
 **/
 
 Route::get('/', function(){
-	return redirect('/home');
+	return redirect('/games');
 });
 
 Route::get('/backHome',function(){
@@ -70,4 +70,6 @@ Route::post('/search/advancedResults', 'SearchController@advancedSearch');
 Route::get('/admin',['middleware'=>'admin',function(){
   return view('admin.admin');
 }])->name('admin');
+
+Route::post('/addCash', 'MyController@addCash');
 ?>

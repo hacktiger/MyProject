@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use App\User;
 use App\games;
 
@@ -135,7 +136,26 @@ class MyController extends Controller
     }
 
     public function devList(){
+        $user  = User::where('auth_level', 'Like','developer')->get();
+        return view('devList', ['user'=>$user]);
+    }
 
-        return view('devList');
+    public function addCash(){
+        $current = auth()->user()->wallet;
+        $amount = Input::get('Cquery')+ $current;
+        $userID = auth()->user()->id;
+        if($amount <9999.99){
+        $add = DB::table('users')->where('id', 'LIKE', $userID)->update([
+            'wallet' =>$amount,
+        ]);
+        //wallet size limit
+        }else{
+            $add = DB::table('users')->where('id', 'like', $userID)->update([
+                'wallet'=>9999.99,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Cash Added');
+
     }
 }

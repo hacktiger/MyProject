@@ -220,7 +220,12 @@ chart.render();
 				</div>
 			</div>
 		</div>
-		
+		{{-- Show link if purchased  --}}
+		{!! Form::open(['action', 'method'=>'GET']) !!}
+		{{Form::hidden('_method', 'GET')}}
+		{{Form::submit('Download', ['class'=>' btn btn-block btn-primary'])}}
+		{!! Form::close() !!}
+
 		<!-- user rating -->
 		<div class="cus-box-sizing">
 			<span class="heading">Your Rating</span>

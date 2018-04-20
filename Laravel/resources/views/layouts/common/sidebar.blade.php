@@ -106,7 +106,23 @@
     
     <a class="nav-link" href="{{route('dev_list')}}">Developers</a>
     
-    
+    <button class = "dropdown-btn">Wallet
+      <i class = "fa fa-caret-down"></i>
+    </button>
+    <div class = 'dropdown-container'>
+      <center><font color ="white" >Amount: {{Auth::user()->wallet}}$</font></center>
+      <form action ="/addCash" method ="POST">
+        {{ csrf_field()}}
+        <input type = "text" class ="form-control" name = "Cquery"
+        placeholder="Insert Amount...">
+        <span class = "input-group-btn">
+          <button type = "submit" class= "btn btn-primary btn-block">
+            <span class = "glyphicon glyphicon-search"> Add</span>
+          </button>
+        </span>
+      </form>
+    </div>
+
     <button class="dropdown-btn">Search 
       <i class="fa fa-caret-down"></i>
     </button>

@@ -74,7 +74,7 @@ class TagController extends Controller
             }
         }
         var_dump($game_tags);
-        //return view('tags.game_with_tag',['result'=>$result]);
+        // return view('tags.game_with_tag',['result'=>$result]);
 
     }
 
