@@ -18,6 +18,7 @@
 **/
 use App\games;
 use Illuminate\Support\Facades\Input;
+
 Route::get('/', function(){
 	return redirect('/home');
 });
