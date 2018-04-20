@@ -250,12 +250,14 @@ class GamesController extends Controller
 
         //Storing game tags
         $game_tag_id = $request->input('tags');
+        if(isset($game_tag_id)){
         for($i = 0; $i<count($game_tag_id); $i++){
             DB::table('games_tags')->insert(
                 ['games_title' => $game->title, 
                 'tags_id' => $game_tag_id[$i]]
             );
         }; 
+    }
         return redirect('/games')->with('success','Game Updated');
 
     }
