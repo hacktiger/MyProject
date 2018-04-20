@@ -37,7 +37,7 @@ class SearchController extends Controller
         $gameTitle = games::where([
             ['upload_by','LIKE','%'.$upload_by.'%'], 
             ['title', 'like', '%'.$title.'%'],
-            ['avg_rating', "LIKE", '%'.$avg_rating.'%']
+            ['avg_rating', ">=",$avg_rating]
             ])->get();
 
         if(count($gameTitle) > 0)

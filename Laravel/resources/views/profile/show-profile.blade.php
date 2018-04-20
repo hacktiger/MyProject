@@ -94,12 +94,11 @@ document.getElementById("defaultOpen").click();
 	</div>
 </div>
 </br>
-</div>
-<div>
-    <h1>Bio</h1>
-        <p style="overflow-wrap:break-word;">
-                {!!$user->description!!}
-            </p>
+<div><h1>Bio</h1>
+    <p style="overflow-wrap:break-word;">
+            {!!$user->description!!}
+        </p>
+    </div>
 </div>
 <div id="OwnedGames" class="tabcontent">
         <!-- show titles from owned_games-->
