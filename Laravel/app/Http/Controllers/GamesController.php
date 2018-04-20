@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\games;
@@ -11,13 +10,17 @@ use App\Tags;
 use App\games_tags;
 use App\rating;
 
-
-
-
 class GamesController extends Controller
 {
-    
-    
+
+    /**
+    * Enforce middleware.
+    */
+    public function __construct()
+    {
+    // Alternativly
+        $this->middleware('admin', ['except' => ['index', 'show']]);
+    }
     
     /**
      * Display a listing of the resource.
@@ -56,7 +59,7 @@ class GamesController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         //data validation
         $this->validate($request, [
             'title'=>'required',
@@ -100,17 +103,17 @@ class GamesController extends Controller
         $games->title=$request->input('title');
         $game_tag_id = $request->input('tags');
         if($game_tag_id)
-        for($i = 0; $i<count($game_tag_id); $i++){
-            DB::table('games_tags')->insert(
-                ['games_title' => $games->title, 
-                 'tags_id' => $game_tag_id[$i]]
-            );
-        };
+            for($i = 0; $i<count($game_tag_id); $i++){
+                DB::table('games_tags')->insert(
+                    ['games_title' => $games->title, 
+                    'tags_id' => $game_tag_id[$i]]
+                );
+            };
         //get all game
-        $game =  games::orderBy('created_at','DESC')->paginate(12);
-        
-        return view('index',compact('game'));
-    }
+            $game =  games::orderBy('created_at','DESC')->paginate(12);
+
+            return view('index',compact('game'));
+        }
 
     /**
      * Display the specified resource.
@@ -250,7 +253,7 @@ class GamesController extends Controller
         for($i = 0; $i<count($game_tag_id); $i++){
             DB::table('games_tags')->insert(
                 ['games_title' => $game->title, 
-                 'tags_id' => $game_tag_id[$i]]
+                'tags_id' => $game_tag_id[$i]]
             );
         }; 
         return redirect('/games')->with('success','Game Updated');

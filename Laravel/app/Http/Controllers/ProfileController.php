@@ -11,7 +11,10 @@ use App\games_tags;
 use App\rating;
 
 class ProfileController extends Controller
-{
+{   
+    public function __construct(){
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -20,9 +23,14 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
-        $user = User::orderBy('id');
-        return view('profile.profile-index',['user'=>$user]);
+        // get users
+        $user = User::orderBy('created_at','DESC')->paginate(20);
+
+        // get admins
+        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
+
+
+        return view('profile.profile-index',['user'=>$user, 'admin'=>$admin]);
 
     }
 
@@ -74,5 +82,29 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+        //find it
+        $user =User::find($id);
+        //delete it
+        $user->delete();
+        // Session flash
+        return redirect('/profile')->with('success','User Deleted');
+    }
+
+    public function makeAdmin($id){
+        //
+        DB::table('users')->where('id',$id)->update([
+            'auth_level' => 'admin',
+        ]);
+
+        return redirect('/profile');
+    }
+
+    public function dropAdmin($id){
+        //
+        DB::table('users')->where('id',$id)->update([
+            'auth_level' => 'casual',
+        ]);
+
+        return redirect('/profile');
     }
 }

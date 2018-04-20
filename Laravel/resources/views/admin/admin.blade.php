@@ -14,7 +14,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	
 	@yield('styles')
-	@yield('scripts-head')
+	@yield('scripts-top')
 </head>
 <body>
 	@include('admin.common.sidenav')

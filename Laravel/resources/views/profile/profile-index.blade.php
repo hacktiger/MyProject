@@ -1,10 +1,7 @@
-@extends('layouts.common.master')
+@extends('admin.admin')
 
-@section('style')
+@section('styles')
 <style type="text/css">
-ul {
-    list-style-type: none;
-}
 
 * {box-sizing: border-box}
 
@@ -13,6 +10,22 @@ body, html {
     height: 100%;
     margin: 0;
     font-family: Arial;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    padding: 5px;
+    text-align: center
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
 
 /* Style tab links */
@@ -41,13 +54,12 @@ body, html {
 }
 
 #Profile {background-color: white;}
-#OwnedGames {background-color: white;}
+#Admins {background-color: white;}
 
 </style>
-
 @endsection
 
-@section('scripts')
+@section('scripts-bottom')
   <script src="./js/bootstrap.min.js"></script>
 <script>
 function openPage(pageName,elmnt,color) {
@@ -67,39 +79,91 @@ function openPage(pageName,elmnt,color) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 </script>
-
 @endsection
 
 @section('content')
 <div class="row">
-<button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')"id="defaultOpen"><p>Profile</p></button>
-<button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'white')" ><p style="color:black">Owned Games</p></button>
+    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p>Profile</p></button>
+    <button class="tablink col-md-6" onclick="openPage('Admins', this, 'white')" ><p style="color:black">Admins</p></button>
+</div>
+
+<div class="container">
+    <h1>Insert search bar here</h1>
 </div>
 
 <div id='Profile' class="tabcontent">
-<br>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Avatar here</h2>
-        <a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="{{route('profile.edit')}}">&ensp;Edit&ensp;</a>
+    <div class="col">
+        <div class="col-md-8 col-sm-8">
+            <table class="table table-sm table-hove">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>User Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>Make Admin</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach($user as $users)
+                    <tr>
+                        <th><a href="/tags/{{$users->id}}">{{$users->name}}</a></th>
+                        <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@destroy', $users->id], 'method'=>'POST']) !!}
+                            {{Form::hidden('_method', 'DELETE')}}
+                            {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
+                        {!! Form::close() !!}
+                        </th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@makeAdmin', $users->id], 'method'=>'POST']) !!}
+                            {{Form::submit('Make Admin', ['class'=>' btn  btn-primary'])}}
+                        {!! Form::close() !!}</th>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+            {{ $user->links() }}
+        </div>
     </div>
-    <div class="col-md-4">
-    	<h4>Username: {{Auth::user()->name}}</h4>
-    	<h4>Email: {{Auth::user()->email}}</h4>
-    </div>	
-	<div class="col-md-4">
-		<h4>ID: {{Auth::user()->id}}</h4>
-		<!--Auth_level-->
-		<h4>Rank: {{Auth::user()-> auth_level}}</h4>
-	</div>
-</div>
-</br>
+
 </div>
 
-<div id="OwnedGames" class="tabcontent">
-        <!-- show titles from owned_games-->
-</div>
+<div id="Admins" class="tabcontent">
+    <div class="col">
+        <div class="col-md-8 col-sm-8">
+            <table class="table table-sm table-hove">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Admin Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>Turn to User</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach($admin as $admins)
+                    <tr>
+                        <th><a href="/tags/{{$admins->id}}">{{$admins->name}}</a></th>
+                        <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$admins->id}}/edit">&ensp;Edit&ensp;</a></th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@destroy', $admins->id], 'method'=>'POST']) !!}
+                                {{Form::hidden('_method', 'DELETE')}}
+                                {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
+                            {!! Form::close() !!}
+                        </th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@dropAdmin', $admins->id], 'method'=>'POST']) !!}
+                                {{Form::submit('Drop Admin', ['class'=>' btn  btn-primary'])}}
+                            {!! Form::close() !!}</th>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
+@endsection
 
+
+@section('scripts-bottom')
 @endsection
