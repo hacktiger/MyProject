@@ -117,6 +117,7 @@
                 </button>
             </span>
         </form>
+        <a class= 'nav-link' href ='/search/advance'>Advance Search</a>
     </div>
 
     <a class='nav-link' href="{{route('games.create')}}">Upload Game</a> 

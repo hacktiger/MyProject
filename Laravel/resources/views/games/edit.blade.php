@@ -54,7 +54,7 @@
 
         <!-- get user id -->
         <div class=" d-none form-group">       
-            <input class="form-control" d-none" name="upload" value=" <?php echo $id=Auth::user()->id ?>">
+            <input class="form-control" d-none name="upload" value=" <?php echo $id=Auth::user()->id ?>">
         </div>
 
         {{Form::hidden('_method','PUT')}}
@@ -65,7 +65,7 @@
 	{!! Form::close() !!}
 @endsection
 
-@section('scripts-bottom)
+@section('scripts-bottom')
     {!! Html::script('js/select2.min.js') !!}
 
     <script type="text/javascript">

@@ -121,6 +121,7 @@
           </button>
         </span>
       </form>
+      <a class= 'nav-link' href ='/search/advance'>Advance Search</a>
     </div>
 
 
