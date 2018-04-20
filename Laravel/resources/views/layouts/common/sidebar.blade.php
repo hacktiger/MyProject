@@ -124,9 +124,6 @@
     </div>
 
 
-    <a class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
-    <a class='nav-link' href='tags/create'>Add Tags</a> 
-
     @if (Auth::user()-> auth_level !=='casual')
       <a class="nav-link" href="{{route('admin')}}"> Admin Panel </a>
     @endif 

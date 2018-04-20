@@ -21,6 +21,8 @@ class ProfileController extends Controller
     public function index()
     {
         //
+        $user = User::orderBy('id');
+        return view('profile.profile-index',['user'=>$user]);
 
     }
 

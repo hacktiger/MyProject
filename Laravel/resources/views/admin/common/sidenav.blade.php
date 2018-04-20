@@ -120,8 +120,8 @@
     </div>
 
     <a class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
-    <a class='nav-link' href='tags/create'>Tags Manage</a> 
-    <a class="nav-link" href="{{route('dev_list')}}">Profile Manage</a>   
+    <a class="nav-link" href="{{route('tags.index')}}">Tags Manage</a>
+    <a class="nav-link" href="{{route('profile.index')}}">Profile Manage</a>   
     <!--Logout link-->
     <div style="position: absolute; bottom: 5px">
         <a class="nav-link" href="{{ route('logout') }}"
@@ -133,7 +133,7 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
-</div>
+    </div>
 </div>
 
 

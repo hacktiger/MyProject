@@ -1,6 +1,6 @@
-@extends('layouts.common.master')
+@extends('admin.admin')
 
-@section('style')
+@section('styles')
 
 <style type="text/css">
 	.tag-form{
@@ -29,6 +29,6 @@
 
 @endsection
 
-@section('scripts')
+@section('scripts-bottom')
     
 @endsection

@@ -26,7 +26,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		text: "This Game Overall Rating"
 	},
 	data: [{
-		type: "pie", //change type to bar, line, area, pie, etc
+		type: "bar", //change type to bar, line, area, pie, etc
 		//indexLabel: "{y}", //Shows y value on all Data Points
 		indexLabelFontColor: "#5A5757",
 		indexLabelPlacement: "outside",   

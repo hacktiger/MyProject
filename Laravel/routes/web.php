@@ -46,14 +46,7 @@ Route::get('/developers-list','MyController@devList')->name('dev_list');
   *  edit here
   *
 **/
-// game.show with SLUG URL
-Route::get('games','GamesController@index')->name('games.index');
-Route::post('games','GamesController@store')->name('games.store');
-Route::get('games/create','GamesController@create')->name('games.create');
-Route::get('games/{slug}','GamesController@show')->name('games.show');
-Route::delete('games/{slug}','GamesController@destroy')->name('games.destroy');
-Route::put('games/{slug}','GamesController@update')->name('games.update');
-Route::get('games/{slug}/edit','GamesController@edit')->name('games.edit');
+
 
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');

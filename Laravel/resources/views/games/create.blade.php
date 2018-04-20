@@ -1,6 +1,6 @@
-@extends('layouts.common.master')
+@extends('admin.admin')
 
-@section('style')
+@section('styles')
 
 {!! Html::style('css/select2.min.css') !!}
 
@@ -70,7 +70,7 @@
 
 @endsection
 
-@section('scripts')
+@section('scripts-bottom')
     {!! Html::script('js/select2.min.js') !!}
 
     <script type="text/javascript">
