@@ -48,7 +48,6 @@ Route::get('/developers-list','MyController@devList')->name('dev_list');
 
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
-Route::resource('cart','CartController');
 Route::resource('profile','ProfileController');
 //
 // Addtional function in show
@@ -65,9 +64,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/all-games','GenreController@allGames')->name('all_games');
 
-
-Route::any('/search','SearchController@titleSearch');
+Route::post('/search','SearchController@titleSearch');
 Route::get('/search/advance', 'SearchController@searchPage');
+Route::post('/search/advancedResults', 'SearchController@advancedSearch');
 Route::get('/admin',['middleware'=>'admin',function(){
   return view('admin.admin');
 }])->name('admin');

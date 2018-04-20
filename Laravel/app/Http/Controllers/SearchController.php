@@ -17,23 +17,35 @@ class SearchController extends Controller
     public function titleSearch()
     {
         $q = Input::get ( 'q' );
-    $gameTitle = games::where('title','LIKE','%'.$q.'%')->get();
-    if(count($gameTitle) > 0)
-        return view('search.results')->withDetails($gameTitle)->withQuery ( $q );
-    else 
-        return redirect ('/games')->with('error','No Details found. Try to search again!');
+        $gameTitle = games::where('title','LIKE','%'.$q.'%')->get();
+        if(count($gameTitle) > 0)
+            return view('search.results')->withDetails($gameTitle)->withQuery ( $q );
+        else 
+            return redirect ('/games')->with('error','No Details found. Try to search again!');
     }
 
     public function searchPage()
     {
-        $games = games::all();
-        return view ('search.advance')->withDetails($games);
+        return view ('search.advance');
     }
 
     public function advancedSearch()
     {
-        return redirect('games');
+        $title = Input::get('title');
+        $upload_by = Input::get('upload_by');
+        $avg_rating = Input::get('avg_rating');
+        $gameTitle = games::where([
+            ['upload_by','LIKE','%'.$upload_by.'%'], 
+            ['title', 'like', '%'.$title.'%'],
+            ['avg_rating', "LIKE", '%'.$avg_rating.'%']
+            ])->get();
+
+        if(count($gameTitle) > 0)
+            return view('search.aResults')->withDetails($gameTitle);
+        else 
+            return redirect ('/games')->with('error','No Details found. Try to search again!');
     }
+
 }
 
 ?>

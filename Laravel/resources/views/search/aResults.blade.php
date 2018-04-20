@@ -4,7 +4,6 @@
 
 <div class="container">
     @if(isset($details))
-    <h2> Query "{{$query}}" Results</h2>
     <table class="table table-striped">
         <thead>
             <tr>

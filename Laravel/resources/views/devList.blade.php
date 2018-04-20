@@ -1,15 +1,7 @@
 @extends('layouts.common.master')
 @section('style')
   <title>Developers List</title>
-  <style>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./css/bootstrap.min.css">
-  </style>
-@endsection
-
-@section('scripts')
-  <script src="./js/bootstrap.min.js"></script>
+ 
 @endsection
 
 @section('content')
