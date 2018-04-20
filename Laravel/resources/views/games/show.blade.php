@@ -242,8 +242,8 @@ chart.render();
 				echo "<p>Average rating : <b>$avg</b> </p>"
 			?>
 			@if($sumStar !==0)
-			<p>ps: the bars length have no meaning,  but the numbers do, which is something right ? </p>
-			<hr style="border:3px solid #f1f1f1">
+
+			<hr style="border:2px solid #f1f1f1">
 			<div id="chartContainer" style="height: 330px; width: 100%;"></div>
 			<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		</div>
