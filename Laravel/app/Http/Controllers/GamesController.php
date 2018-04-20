@@ -16,7 +16,8 @@ use App\rating;
 
 class GamesController extends Controller
 {
-
+    
+    
     
     /**
      * Display a listing of the resource.
@@ -25,11 +26,12 @@ class GamesController extends Controller
      */
     public function index()
     {   
-        // Need to change so that each click leads to a personal page
+        //$this->middleware('auth');
+        // get game detail
         $game =  games::orderBy('created_at','DESC')->paginate(9);
-
+        // get sales num
         $sales = DB::table('games')->where('sales', '<>', 0)->orderBy('created_at','DESC')->take(3)->get();
-
+        //return
         return view('index',['game'=>$game, 'sales'=>$sales ]);
     }
 
@@ -40,9 +42,9 @@ class GamesController extends Controller
      */
     public function create()
     {
-        //
+        //get all tags
         $tags = Tags::all();
-
+        //return to create game
         return view('games.create')->withTags($tags);
     }
 
@@ -55,7 +57,7 @@ class GamesController extends Controller
     public function store(Request $request)
     {
        
-        //
+        //data validation
         $this->validate($request, [
             'title'=>'required',
             'description'=>'required',
@@ -104,9 +106,9 @@ class GamesController extends Controller
                  'tags_id' => $game_tag_id[$i]]
             );
         };
-
+        //get all game
         $game =  games::orderBy('created_at','DESC')->paginate(12);
-            
+        
         return view('index',compact('game'));
     }
 
@@ -206,7 +208,7 @@ class GamesController extends Controller
      */
     public function update(Request $request, $title)
     {
-        //
+        //data validation
         $this->validate($request, [
             'title'=>'required',
             'description'=>'required',
@@ -263,9 +265,11 @@ class GamesController extends Controller
      */
     public function destroy($title)
     {
-        //
+        //find it
         $game = games::find($title);
+        //delete it
         $game->delete();
+        // Session flash
         return redirect('/games')->with('success','Game Deleted');
     }
 }

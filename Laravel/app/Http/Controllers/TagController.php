@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Tags;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
 
     /**
      * Display a listing of the resource.
@@ -61,6 +66,16 @@ class TagController extends Controller
     public function show($id)
     {
         //
+        $result  = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title'])->where('games_tags.tags_id',$id)->orderBy('games_tags.games_title','asc')->get();
+        $game_tags = array();
+        if(count($result)>0){
+            for($i=0; $i<count($result); $i++){
+                $game_tags[$i] = $result[$i]->games_title;
+            }
+        }
+        var_dump($game_tags);
+        //return view('tags.game_with_tag',['result'=>$result]);
+
     }
 
     /**
@@ -94,6 +109,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Find is only possible with primary key
+        $tag = Tags::find($id);
+
+        $tag->delete();
+        return redirect('/tags')->with('success','Game Deleted');
     }
 }

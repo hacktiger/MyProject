@@ -5,6 +5,9 @@
 	background-color: #f2f2f2;
 	cursor: pointer;
 }
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
 </style>
 @endsection
 
