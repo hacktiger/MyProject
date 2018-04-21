@@ -194,7 +194,16 @@ class GamesController extends Controller
         // put all in array => more compact
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
         
-        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags]);
+
+        $own = DB::table('sales_log')->where([
+            ['game_title', $game->title],
+            ['user_id', $rate_by]
+        ])->get();
+        $owned = false;
+        if(count($own)>0){
+            $owned = true;
+        }
+        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned]);
     }
 
     /**
