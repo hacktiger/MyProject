@@ -136,19 +136,6 @@ class GamesController extends Controller
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
 
-        //check if current user owned the game
-        $owners = DB::table('sales_log')->where('game_title',$game->title)->orderBy('id', 'desc')->get();
-        $owned = false;
-        if (count($owners)>0){
-            for ($i =0; $i<count($owners);$i++){
-                if(auth()->user()->id = $owners[$i]->id){
-                    $owned = true;
-                    break;
-                }
-            }
-        }
-
-
         // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
@@ -209,7 +196,6 @@ class GamesController extends Controller
         // put all in array => more compact
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
         
-
         $own = DB::table('sales_log')->where([
             ['game_title', $game->title],
             ['user_id', $rate_by]
