@@ -96,12 +96,13 @@ document.getElementById("defaultOpen").click();
 </br>
 <div><h1>Bio</h1>
     <p style="overflow-wrap:break-word;">
-            {!!$user->description!!}
+            {{Auth::user()->description}}
         </p>
     </div>
 </div>
 <div id="OwnedGames" class="tabcontent">
         <!-- show titles from owned_games-->
+        
 </div>
 </div>
 

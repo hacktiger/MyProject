@@ -135,6 +135,15 @@ class MyController extends Controller
         return view('games.topGames',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
     }
 
+    public function mostDownload(){
+        //SELECT COUNT(user_id) FROM sales_log GROUP BY game_title
+        $game = DB::table('sales_log')->groupBy('game_title')->select('user_id')->get();
+        
+        var_dump($game);
+
+        //return view('games.topGames',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
+    }
+
     public function devList(){
         $user  = User::where('auth_level', 'Like','developer')->get();
         return view('devList', ['user'=>$user]);

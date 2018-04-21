@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
-use App\Tags;
-use App\games_tags;
-use App\rating;
+
 
 class ProfileController extends Controller
 {   

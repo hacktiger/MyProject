@@ -101,6 +101,7 @@
         </div>
 
         <a class="nav-link" href="{{route('top_games')}}">Top Games</a>
+        <a class="nav-link" href="{{route('most_download')}}">Most Downloads</a>
     </div>
 
     <button class="dropdown-btn">Search 

@@ -15,7 +15,7 @@ body, html {
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
 }
 
 td, th {
@@ -98,6 +98,7 @@ document.getElementById("defaultOpen").click();
                 <thead class="thead-dark">
                     <tr>
                         <th>User Name</th>
+                        <th>E-mail</th>
                         <th>Edit</th>
                         <th>Delete</th>
                         <th>Make Admin</th>
@@ -106,8 +107,10 @@ document.getElementById("defaultOpen").click();
 
                 <tbody>
                     @foreach($user as $users)
+                    @if($users->auth_level == 'casual')
                     <tr>
                         <th><a href="/tags/{{$users->id}}">{{$users->name}}</a></th>
+                        <th>{{$users->email}}</th>
                         <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $users->id], 'method'=>'POST']) !!}
                             {{Form::hidden('_method', 'DELETE')}}
@@ -118,6 +121,7 @@ document.getElementById("defaultOpen").click();
                             {{Form::submit('Make Admin', ['class'=>' btn  btn-primary'])}}
                         {!! Form::close() !!}</th>
                     </tr>
+                    @endif
                     @endforeach
 
                 </tbody>
@@ -135,6 +139,7 @@ document.getElementById("defaultOpen").click();
                 <thead class="thead-dark">
                     <tr>
                         <th>Admin Name</th>
+                        <th>E-mail</th>
                         <th>Edit</th>
                         <th>Delete</th>
                         <th>Turn to User</th>
@@ -145,6 +150,7 @@ document.getElementById("defaultOpen").click();
                     @foreach($admin as $admins)
                     <tr>
                         <th><a href="/tags/{{$admins->id}}">{{$admins->name}}</a></th>
+                        <th>{{$users->email}}</th>
                         <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$admins->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $admins->id], 'method'=>'POST']) !!}
                                 {{Form::hidden('_method', 'DELETE')}}

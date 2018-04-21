@@ -18,26 +18,16 @@
 **/
 
 Route::get('/', function(){
-	return redirect('/games');
+	return redirect('/login');
 });
 
 Route::get('/backHome',function(){
 	return redirect('/games');
 });
 
-Route::get('/games/games/create',function(){
-	return redirect('/games/create');
-});
-
-Route::get('/games/tags/create',function(){
-	return redirect('/tags/create');
-});
-
-Route::get('/tags/games/create',function(){
-	return redirect('/games/create');
-});
 // Cleaning up links 
 Route::get('/top-games','MyController@topGames')->name('top_games');
+Route::get('/most-download','MyController@mostDownload')->name('most_download');
 Route::get('/developers-list','MyController@devList')->name('dev_list');
 
 /**
