@@ -220,19 +220,18 @@ chart.render();
 				</div>
 			</div>
 		</div>
-		@if($owned)
 		{{-- Show link if purchased  --}}
 		<form action="http://{{$game->link}}">
 			<button type="submit" class="btn btn-block btn-primary">Download</button>
 		</form>
-		@endif
 		{{-- Show purchase option --}}
-		@if(!$owned)
+		{{--  @if(!$owned)
 		{!! Form::open(['action'=> ['MyController@purchase', $game->title], 'method'=>'POST', 'id'=>'purchase-form']) !!}
 			<input type="text" class="d-none" name="purchase" value="0">	
 			<button id="purchase" data-toggle="tooltip" data-placement="bottom" title="Purchase Game" class="btn btn-block btn-primary">Purchase Game</button>
 		{!! Form::close() !!}
-		@endif
+		@endif  --}}
+
 		<!-- user rating -->
 		<div class="cus-box-sizing">
 			<span class="heading">Your Rating</span>
