@@ -44,6 +44,7 @@ Route::resource('profile','ProfileController');
 Route::post('/games/{game}/report','MyController@report')->name('games.report');
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
 Route::post('/games/{game}/favorite','MyController@favorite')->name('games.favorite');
+Route::post('/games/{game}/purchase', 'MyController@purchase')->name('games.purchase');
 // Profile route make Admin
 Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
 Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');

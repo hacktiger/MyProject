@@ -228,8 +228,9 @@ chart.render();
 		@endif
 		{{-- Show purchase option --}}
 		@if(!$owned)
-		{!! Form::open(['action'{{--=> ['MyController@dpurchase', $game->title]--}}, 'method'=>'POST']) !!}
-			{{Form::submit('Purchase', ['class'=>' btn btn-block btn-primary'])}}
+		{!! Form::open(['action'=> ['MyController@purchase', $game->title], 'method'=>'POST', 'id'=>'purchase-form']) !!}
+			<input type="text" class="d-none" name="purchase" value="0">	
+			<button id="purchase" data-toggle="tooltip" data-placement="bottom" title="Purchase Game" class="btn btn-block btn-primary">Purchase Game</button>
 		{!! Form::close() !!}
 		@endif
 		<!-- user rating -->
