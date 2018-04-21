@@ -109,10 +109,20 @@ class GamesController extends Controller
                     'tags_id' => $game_tag_id[$i]]
                 );
             };
+
+            //Add to uploader's game list
+            $user_id = auth()->user()->id;
+            $lastupdated = date('Y-m-d H:i:s');
+            DB::table('sales_log')->insert([
+                'game_title'=> $games->title,
+                'user_id'=> $user_id,
+                'created_at'=> $lastupdated,
+                'updated_at'=> $lastupdated
+            ]);
         //get all game
             $game =  games::orderBy('created_at','DESC')->paginate(12);
 
-            return view('index',compact('game'));
+            return view('index',compact('game'))->with('success', 'Game Uploaded');
         }
 
     /**
@@ -125,6 +135,7 @@ class GamesController extends Controller
     {           
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
+<<<<<<< HEAD
         //check if current user owned the game
         $owners = DB::table('sales_log')->where('game_title',$game->title)->orderBy('id', 'desc')->get();
         $owned = false;
@@ -136,6 +147,8 @@ class GamesController extends Controller
                 }
             }
         }
+=======
+>>>>>>> c3f67e288d78c16a5ae93620ab4ad94a95fe2fd9
         // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
@@ -196,6 +209,15 @@ class GamesController extends Controller
         // put all in array => more compact
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
         
+
+        $own = DB::table('sales_log')->where([
+            ['game_title', $game->title],
+            ['user_id', $rate_by]
+        ])->get();
+        $owned = false;
+        if(count($own)>0){
+            $owned = true;
+        }
         return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned]);
     }
 

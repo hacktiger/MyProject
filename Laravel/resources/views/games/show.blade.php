@@ -220,8 +220,9 @@ chart.render();
 				</div>
 			</div>
 		</div>
-		@if($owned)
+		<br>
 		{{-- Show link if purchased  --}}
+		@if($owned)
 		<form action="http://{{$game->link}}">
 			<button type="submit" class="btn btn-block btn-primary">Download</button>
 		</form>
@@ -233,6 +234,7 @@ chart.render();
 			<button id="purchase" data-toggle="tooltip" data-placement="bottom" title="Purchase Game" class="btn btn-block btn-primary">Purchase Game</button>
 		{!! Form::close() !!}
 		@endif
+
 		<!-- user rating -->
 		<div class="cus-box-sizing">
 			<span class="heading">Your Rating</span>

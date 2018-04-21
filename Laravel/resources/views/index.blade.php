@@ -52,9 +52,9 @@ a:hover{
         <img src="https://i.imgur.com/cz8Cxmr.png" style="width:100%;">
       </div>
       <!-- Add real sales later here -->
-      @foreach($sales as $sale)
+      {{-- @foreach($sales as $sale)
 
-      @endforeach
+      @endforeach --}}
 
     </div>
       <!-- Left and right controls -->

@@ -171,7 +171,6 @@ class MyController extends Controller
         $purchase = $request->input('purchase');
         $user_id = auth()->user()->id;
         $game= games::find($title);
-        var_dump($game);
         $cash = $game->price -$game->sales;
         $wallet = auth()->user()->wallet - $cash;
         
