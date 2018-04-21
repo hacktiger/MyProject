@@ -34,6 +34,9 @@ class SearchController extends Controller
         $title = Input::get('title');
         $upload_by = Input::get('upload_by');
         $avg_rating = Input::get('avg_rating');
+        if(!isset($avg_rating)){
+            $avg_rating = 0;
+        }
         $gameTitle = games::where([
             ['upload_by','LIKE','%'.$upload_by.'%'], 
             ['title', 'like', '%'.$title.'%'],

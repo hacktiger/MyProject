@@ -220,12 +220,18 @@ chart.render();
 				</div>
 			</div>
 		</div>
+		@if($owned)
 		{{-- Show link if purchased  --}}
-		{!! Form::open(['action', 'method'=>'GET']) !!}
-		{{Form::hidden('_method', 'GET')}}
-		{{Form::submit('Download', ['class'=>' btn btn-block btn-primary'])}}
+		<form action="http://{{$game->link}}">
+			<button type="submit" class="btn btn-block btn-primary">Download</button>
+		</form>
+		@endif
+		{{-- Show purchase option --}}
+		@if(!$owned)
+		{!! Form::open(['action'{{--=> ['MyController@dpurchase', $game->title]--}}, 'method'=>'POST']) !!}
+			{{Form::submit('Purchase', ['class'=>' btn btn-block btn-primary'])}}
 		{!! Form::close() !!}
-
+		@endif
 		<!-- user rating -->
 		<div class="cus-box-sizing">
 			<span class="heading">Your Rating</span>
