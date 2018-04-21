@@ -135,7 +135,7 @@ class GamesController extends Controller
     {           
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
-<<<<<<< HEAD
+
         //check if current user owned the game
         $owners = DB::table('sales_log')->where('game_title',$game->title)->orderBy('id', 'desc')->get();
         $owned = false;
@@ -147,8 +147,8 @@ class GamesController extends Controller
                 }
             }
         }
-=======
->>>>>>> c3f67e288d78c16a5ae93620ab4ad94a95fe2fd9
+
+
         // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
