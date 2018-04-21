@@ -109,9 +109,9 @@ document.getElementById("defaultOpen").click();
                     @foreach($user as $users)
                     @if($users->auth_level == 'casual')
                     <tr>
-                        <th><a href="/tags/{{$users->id}}">{{$users->name}}</a></th>
+                        <th><a href="/profile/{{$users->id}}">{{$users->name}}</a></th>
                         <th>{{$users->email}}</th>
-                        <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>
+                        <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/profile/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $users->id], 'method'=>'POST']) !!}
                             {{Form::hidden('_method', 'DELETE')}}
                             {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}

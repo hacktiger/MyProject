@@ -79,7 +79,7 @@
   <!-- sidebar -->
   <div class="sidenav">
     <a class="nav-link" href="/games">Home</a>
-    <a class="nav-link" href="/profile/{ <?php echo Auth::user()->name ?> }">{{Auth::user()->name}}</a>
+    <a class="nav-link" href="/profile/{{Auth::user()->id}}">{{Auth::user()->name}}</a>
     
     <button class="dropdown-btn">Game Database 
       <i class="fa fa-caret-down"></i>

@@ -40,10 +40,13 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        //get user
         $user = User::find($id);
-
-        return view('profile.show-profile', ['user'=>$user]); 
+        // get owned games
+        $owned_games = DB::table('sales_log')->leftJoin('users', 'sales_log.user_id','=','users.id')->join('games','sales_log.game_title','=','games.title')->select(['sales_log.game_title', 'games.slug','games.avg_rating', 'games.upload_by','games.image'])->where('sales_log.user_id', $id)->get();
+        
+        
+        return view('profile.show-profile', ['user'=>$user, 'owned_games'=>$owned_games]); 
     }
 
     /**
