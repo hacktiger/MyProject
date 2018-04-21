@@ -109,10 +109,20 @@ class GamesController extends Controller
                     'tags_id' => $game_tag_id[$i]]
                 );
             };
+
+            //Add to uploader's game list
+            $user_id = auth()->user()->id;
+            $lastupdated = date('Y-m-d H:i:s');
+            DB::table('sales_log')->insert([
+                'game_title'=> $games->title,
+                'user_id'=> $user_id,
+                'created_at'=> $lastupdated,
+                'updated_at'=> $lastupdated
+            ]);
         //get all game
             $game =  games::orderBy('created_at','DESC')->paginate(12);
 
-            return view('index',compact('game'));
+            return view('index',compact('game'))->with('success', 'Game Uploaded');
         }
 
     /**

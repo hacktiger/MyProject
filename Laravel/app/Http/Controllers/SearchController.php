@@ -21,7 +21,7 @@ class SearchController extends Controller
         if(count($gameTitle) > 0)
             return view('search.results')->withDetails($gameTitle)->withQuery ( $q );
         else 
-            return redirect ('/games')->with('error','No Details found. Try to search again!');
+            return redirect()->back()->with('error','No Details found. Try to search again!');
     }
 
     public function searchPage()
@@ -46,7 +46,7 @@ class SearchController extends Controller
         if(count($gameTitle) > 0)
             return view('search.aResults')->withDetails($gameTitle);
         else 
-            return redirect ('/games')->with('error','No Details found. Try to search again!');
+            return redirect()->back()->with('error','No Details found. Try to search again!');
     }
 
 }
