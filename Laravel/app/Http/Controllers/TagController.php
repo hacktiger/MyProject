@@ -73,8 +73,8 @@ class TagController extends Controller
                 $game_tags[$i] = $result[$i]->games_title;
             }
         }
-        var_dump($game_tags);
-        // return view('tags.game_with_tag',['result'=>$result]);
+       
+        return view('tags.game_with_tag',['result'=>$result]);
 
     }
 

@@ -19,11 +19,9 @@ tr:nth-child(even) {
 	<table class="table borderless">
 	<thead>
 	<tr class ="success">
-		<td><a href="#Action">Action</td>
-		<td><a href="#Adventure">Adventure</td>
-		<td><a href="#FPS">FPS</td>
-		<td><a href="#Strategy">Strategy</td>
-		<td><a href="#Puzzle">Puzzle</td>
+		@foreach($tags as $tag)
+		<td><a href="/tags/{{$tag->id}}">{{$tag->name}}</td>
+		@endforeach
 	</tr>
 	</thead>
 	</table>
