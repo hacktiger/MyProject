@@ -65,17 +65,15 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
-        $result  = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title'])->where('games_tags.tags_id',$id)->orderBy('games_tags.games_title','asc')->get();
-        $game_tags = array();
-        if(count($result)>0){
-            for($i=0; $i<count($result); $i++){
-                $game_tags[$i] = $result[$i]->games_title;
-            }
-        }
-       
-        return view('tags.game_with_tag',['result'=>$result]);
-
+        //get this tag
+        $this_tag = DB::table('tags')->where('id',$id)->first();
+        // get all possible tags
+        $tags = DB::table('tags')->orderBy('created_at','DESC')->get();
+        // get all games with $this->$id
+        $game  = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->join('games','games_tags.games_title','=','games.title')->select(['games_tags.games_title','games.slug','games.image','games.upload_by','games.avg_rating'])->where('games_tags.tags_id',$id)->orderBy('games_tags.games_title','asc')->paginate(10);
+        //get all games info
+        
+        return view('tags.game_with_tag',['game'=>$game, 'tags'=>$tags, 'this_tag' => $this_tag]);
     }
 
     /**

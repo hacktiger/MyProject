@@ -17,13 +17,13 @@ tr:nth-child(even) {
 <div class="container">
 	<h3>Navigation</h3>
 	<table class="table borderless">
-	<thead>
-	<tr class ="success">
-		@foreach($tags as $tag)
-		<td><a href="/tags/{{$tag->id}}">{{$tag->name}}</td>
-		@endforeach
-	</tr>
-	</thead>
+		<thead>
+		<tr class ="success">
+			@foreach($tags as $tag)
+			<td><a href="/tags/{{$tag->id}}">{{$tag->name}}</td>
+			@endforeach
+		</tr>
+		</thead>
 	</table>
 </div>
 <div class="container">
