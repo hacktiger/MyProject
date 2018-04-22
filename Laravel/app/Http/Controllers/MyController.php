@@ -137,7 +137,9 @@ class MyController extends Controller
 
     public function mostDownload(){
         //SELECT COUNT(user_id) FROM sales_log GROUP BY game_title
-        $game = DB::table('sales_log')->groupBy('game_title')->select('user_id')->get();
+        $game = DB::table('sales_log')->select('user_id')->groupBy('game_title')->get();
+
+       // $game = DB::statement('SELECT COUNT(user_id) FROM sales_log GROUP BY game_title');
         
         var_dump($game);
 

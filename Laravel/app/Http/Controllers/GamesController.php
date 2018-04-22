@@ -8,7 +8,7 @@ use App\games;
 use App\User;
 use App\Tags;
 use App\games_tags;
-use App\rating;
+
 
 class GamesController extends Controller
 {
@@ -18,10 +18,9 @@ class GamesController extends Controller
     */
     public function __construct()
     {
-    // Alternativly
-        $this->middleware('admin', ['except' => ['index', 'show']]);
+        $this->middleware('admin', ['except' => ['index','show']]);
     }
-    
+   
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +28,6 @@ class GamesController extends Controller
      */
     public function index()
     {   
-        //$this->middleware('auth');
         // get game detail
         $game =  games::orderBy('created_at','DESC')->paginate(9);
         // get sales num
@@ -59,7 +57,6 @@ class GamesController extends Controller
      */
     public function store(Request $request)
     {
-
         //data validation
         $this->validate($request, [
             'title'=>'required',
@@ -133,6 +130,7 @@ class GamesController extends Controller
      */
     public function show($slug)
     {           
+        $this->middleware('auth');
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
 
