@@ -15,13 +15,6 @@ class MyController extends Controller
         $this->middleware('auth');
     }
 
-    public function manageGame(){
-
-        $game =  games::orderBy('created_at','DESC')->paginate(14);
-
-        return view('games.manage', ['game'=>$game]);
-    }
-
     public function report(Request $request){
     	$report_1 = $request->input('report_1');
     	$report_2 = $request->input('report_2');
@@ -39,12 +32,7 @@ class MyController extends Controller
 
     	$report_by = auth()->user()->id;
     	$text = $request->input('text');
-        if (!isset($text)){
-            $text = " ";
-        }
-        if ($text==" "&& $report_1=='0'&& $report_2=='0'&& $report_3=='0'){
-            return redirect()->back()->with('error', 'Please Enter Reporting Reason(s)');
-        }
+
     	DB::table('report')->insert([
     		'upload_by' => $report_by,
     		'Impropriate' => $report_1,
@@ -57,9 +45,10 @@ class MyController extends Controller
     }	
 
     public function rating(Request $request, $title){
-        // get the rating + current user id 
+        // get the rating + user id 
         $rating = $request->input('rating');
         $rate_by = auth()->user()->id;
+
         //simplify if statement
         $check = DB::table('rating')->where([
             ['game_title',$title],
@@ -73,24 +62,20 @@ class MyController extends Controller
             DB::table('rating')->insert([
                'user_id'=> $rate_by,
                'game_title' => $title,
-               'rating' => 0,
-            ]);
-            DB::table('rating')->where(['user_id'=> $rate_by, 'game_title' => $title,])->update([
                'rating' => $rating,
-            ]);
+           ]);
         } else {
-            // delete old rating
             DB::table('rating')->where([
                 ['game_title',$title],
                 ['user_id', $rate_by]])->delete();
-            // add new
+
             DB::table('rating')->insert([
                'user_id'=> $rate_by,
                'game_title' => $title,
                'rating' => $rating,
-            ]);
+           ]);
         }
-        // calculate Avg_rating in GAMES table after rating the same game
+
         $game = games::orderBy('created_at','DESC')->get();
         foreach ($game as $games) {
             $rating = DB::table('rating')->where('game_title', $games->title)->groupBy('game_title')->avg('rating'); 
@@ -112,55 +97,56 @@ class MyController extends Controller
     }
 
     public function favorite(Request $request, $title){
-        // get user input
         $favorite = $request->input('favorite');
-        // get current user id
         $user_id = auth()->user()->id;
-        //simplify if statement
+        
         $check_2 = DB::table('favorites')->where([
                 ['game_title',$title],
                 ['user_id', $user_id]
         ]);
-        // check if exist
+        
         if(!$check_2){
             DB::table('favorites')->insert([
                 'user_id' => $user_id,
                 'game_title' => $title,
             ]);
-        } /** if exist delete from database **/else {
+        } else {
             DB::table('favorites')->where([
                 ['game_title',$title],
                 ['user_id', $user_id]])->delete();
+
+            DB::table('favorites')->insert([
+                'user_id' => $user_id,
+                'game_title' => $title,
+            ]);
         }
-        // redirect back 
+
         return redirect()->back();
     }
 
     
+
     public function topGames(){
-        //get games except first 3 by avg_rating
         $game =  games::orderBy('avg_rating','DESC')->skip(3)->take(7)->get();
-        // get top 3 by avg_rating
         $top_1 = games::orderBy('avg_rating','DESC')->take(1)->get();
         $top_2 = games::orderBy('avg_rating','DESC')->skip(1)->take(1)->get();
         $top_3 = games::orderBy('avg_rating','DESC')->skip(2)->take(1)->get();
-        // return view
+
         return view('games.topGames',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
     }
 
     public function mostDownload(){
-        //SELECT game_title, COUNT(user_id) FROM sales_log GROUP BY game_title
-        $game = DB::table('sales_log')->leftJoin('games', 'sales_log.game_title', '=', 'games.title')->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])->groupBy(['sales_log.game_title','games.slug'])->orderBy('downloads','DESC')->skip(3)->take(7)->get();
-        //get top 3 
-        $top_1 = DB::table('sales_log')->leftJoin('games', 'sales_log.game_title', '=', 'games.title')->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])->groupBy(['sales_log.game_title','games.slug'])->orderBy('downloads','DESC')->take(1)->get();
-        $top_2 = DB::table('sales_log')->leftJoin('games', 'sales_log.game_title', '=', 'games.title')->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])->groupBy(['sales_log.game_title','games.slug'])->orderBy('downloads','DESC')->skip(1)->take(1)->get();
-        $top_3 = DB::table('sales_log')->leftJoin('games', 'sales_log.game_title', '=', 'games.title')->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])->groupBy(['sales_log.game_title','games.slug'])->orderBy('downloads','DESC')->skip(2)->take(1)->get();
-        // return view
-        return view('games.mostDownload',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
+        //SELECT COUNT(user_id) FROM sales_log GROUP BY game_title
+        
+        /**
+        *   need fixing now only return the first game count
+        *
+        **/
+
+        //return view('games.topGames',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
     }
 
     public function devList(){
-        // get all user auth_level = developer
         $user  = User::where('auth_level', 'Like','developer')->get();
         return view('devList', ['user'=>$user]);
     }
@@ -182,29 +168,5 @@ class MyController extends Controller
 
         return redirect()->back()->with('success', 'Cash Added');
 
-    }
-    public function purchase( Request $request, $title){
-        $purchase = $request->input('purchase');
-        $user_id = auth()->user()->id;
-        $game= games::find($title);
-        $cash = $game->price -$game->sales;
-        $wallet = auth()->user()->wallet - $cash;
-        
-        if($wallet >=0){
-            $lastupdated = date('Y-m-d H:i:s');
-            DB::table('sales_log')->insert([
-                'game_title'=> $title,
-                'user_id'=> $user_id,
-                'created_at'=> $lastupdated,
-                'updated_at'=> $lastupdated
-            ]);
-            $CashUpdate = DB::table('users')->where('id', 'LIKE', $user_id)->update([
-                'wallet' =>$wallet,
-            ]);
-            return redirect()->back()->with('success', 'Game Purchased');
-        }
-        else{
-            return redirect()->back()->with('error', 'Not Enough Cash');
-        }
     }
 }
