@@ -12,6 +12,9 @@
 + @developer list: thế làm đơn giản bấm link ra advanced Search vậy
 + search ở game manage thì khác gì search thường đâu, auth là admin thì nó vẫn hiện edit delete mà
 
+/NEW
++ thực ra thì mình thiết kế hơi ngu =))) tại search game bình thường nó k ra edit vs delete ở ngoài luôn cho tiện tại lỗi thiết kế hơi dở hơi =))
+
 /Install
 + eloquent sluggable $ composer require cviebrock/eloquent-sluggable:^4.5
 
