@@ -196,6 +196,32 @@ class MyController extends Controller
         return redirect()->back()->with('success', 'Cash Added');
     }
 
+    public function purchase( Request $request, $title){
+        $purchase = $request->input('purchase');
+        $user_id = auth()->user()->id;
+        $game= games::find($title);
+        var_dump($game);
+        $cash = $game->price -$game->sales;
+        $wallet = auth()->user()->wallet - $cash;
+        
+        if($wallet >=0){
+            $lastupdated = date('Y-m-d H:i:s');
+            DB::table('sales_log')->insert([
+                'game_title'=> $title,
+                'user_id'=> $user_id,
+                'created_at'=> $lastupdated,
+                'updated_at'=> $lastupdated
+            ]);
+            $CashUpdate = DB::table('users')->where('id', 'LIKE', $user_id)->update([
+                'wallet' =>$wallet,
+            ]);
+            return redirect()->back()->with('success', 'Game Purchased');
+        }
+        else{
+            return redirect()->back()->with('error', 'Not Enough Cash');
+        }
+    }
+
     public function manageGame(){
         $game =  games::orderBy('created_at','DESC')->paginate(14);
         return view('games.manage',['game'=>$game]); 
