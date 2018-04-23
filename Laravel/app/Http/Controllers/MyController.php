@@ -39,7 +39,12 @@ class MyController extends Controller
 
     	$report_by = auth()->user()->id;
     	$text = $request->input('text');
-
+        if (!isset($text)){
+            $text = " ";
+        }
+        if ($text==" "&& $report_1=='0'&& $report_2=='0'&& $report_3=='0'){
+            return redirect()->back()->with('error', 'Please Enter Reporting Reason(s)');
+        }
     	DB::table('report')->insert([
     		'upload_by' => $report_by,
     		'Impropriate' => $report_1,

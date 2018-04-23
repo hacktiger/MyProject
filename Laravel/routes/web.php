@@ -64,4 +64,6 @@ Route::get('/admin',['middleware'=>'admin',function(){
 }])->name('admin');
 
 Route::post('/addCash', 'MyController@addCash');
+
+Route::get('/showReports', 'GamesController@showReports')
 ?>

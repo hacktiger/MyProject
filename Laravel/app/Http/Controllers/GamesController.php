@@ -297,5 +297,10 @@ class GamesController extends Controller
         return redirect()->back()->with('success','Game Deleted');
     }
 
+    public function showReports(){
+        $reports = DB::table('report')->orderBy('id', 'DESC')->paginate(10);
+        return view('admin.reports', ['reports'=>$reports]);
+        
+    }
     
 }
