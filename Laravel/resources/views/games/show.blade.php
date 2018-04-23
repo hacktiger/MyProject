@@ -149,7 +149,7 @@ chart.render();
 		</p>
 		<hr>
 		<!-- uploader user name -->
-		<h4 class="" style="padding:20px">Publisher : {{$game->upload_by}}</h4>
+		<h4 class="" style="padding:20px">Developer : {{$game->upload_by}}</h4>
 		<h4 class="" style="padding:20px">Price : {{$game->price}}$</h4>
 
 		

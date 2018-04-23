@@ -88,7 +88,21 @@ document.getElementById("defaultOpen").click();
 </div>
 
 <div class="container">
-    <h1>Insert search bar here</h1>
+    <h1>Profile Search</h1>
+    {!! Form::open(['action'=>"SearchController@profileSearch", 'method' =>'POST', 'enctype'=>'multipart/form-data'])!!}
+    
+    <div class = 'form-group'>
+        {{Form::label('userName', 'userName')}}
+        {{Form::text('userName', '',['class'=>'form-control', 'placeholder'=>'...'])}}
+    </div>
+
+    <div class = 'form-group'>
+        {{Form::label('id', 'id')}}
+        {{Form::text('ID','', ['class'=>'form-control', 'placeholder'=>'...'])}}
+    </div>
+
+    {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+    {!!Form::close()!!}
 </div>
 
 <div id='Profile' class="tabcontent">

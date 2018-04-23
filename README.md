@@ -10,6 +10,7 @@
 /NEW
 + xong report games
 + @developer list: thế làm đơn giản bấm link ra advanced Search vậy
++ search ở game manage thì khác gì search thường đâu, auth là admin thì nó vẫn hiện edit delete mà
 
 /Install
 + eloquent sluggable $ composer require cviebrock/eloquent-sluggable:^4.5

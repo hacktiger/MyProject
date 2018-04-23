@@ -46,6 +46,20 @@ class SearchController extends Controller
             return redirect()->back()->with('error','No Details found. Try to search again!');
     }
 
+    public function profileSearch()
+    {
+        $userName = Input::get('userName');
+        $id = Input::get('id');
+        $user = User::where([
+            ['name', 'LIKE', $userName],
+            ['id', 'LIKE', $id]
+        ])->get();
+        if (count($user)>0)
+            return view('profile.profile-index-search')->withDetails($user);
+        else
+            return redirect()->back()->with('error', 'No such User found');
+    }
+
 }
 
 ?>
