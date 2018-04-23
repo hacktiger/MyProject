@@ -15,6 +15,13 @@ class MyController extends Controller
         $this->middleware('auth');
     }
 
+    public function manageGame(){
+
+        $game =  games::orderBy('created_at','DESC')->paginate(14);
+
+        return view('games.manage', ['game'=>$game]);
+    }
+
     public function report(Request $request){
     	$report_1 = $request->input('report_1');
     	$report_2 = $request->input('report_2');

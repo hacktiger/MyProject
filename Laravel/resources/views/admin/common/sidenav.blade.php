@@ -76,6 +76,7 @@
 </head>
 
 <body>
+    <!-- SIDE bar for admin page -->
     <!-- sidebar -->
     <div class="sidenav">
       <a class="nav-link" href="/games">Home</a>
@@ -87,19 +88,7 @@
     </button>
     <div class="dropdown-container">
         <a class="nav-link" href="/all-games">All Games</a>
-
-        <button class= "dropdown-btn">Genres
-            <i class="fa fa-caret-down"></i>
-        </button>
-
-        <div class="dropdown-container">
-            <a class="nav-link" href="/allGames#Action">Action</a>
-            <a class="nav-link" href="/allGames#Adventure">Adventure</a>
-            <a class="nav-link" href="/allGames#FPS">FPS</a>
-            <a class="nav-link" href="/allGames#Strategy">Strategy</a>
-            <a class="nav-link" href="/allGames#Puzzle">Puzzle</a>
-        </div>
-
+        <a class="nav-link" href="/tags/1">All Genres</a>  
         <a class="nav-link" href="{{route('top_games')}}">Top Games</a>
         <a class="nav-link" href="{{route('most_download')}}">Most Downloads</a>
     </div>
@@ -122,6 +111,7 @@
     </div>
 
     <a class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
+    <a class="nav-link" href="{{route('games.manage')}}">Game Manage</a>
     <a class="nav-link" href="{{route('tags.index')}}">Tags Manage</a>
     <a class="nav-link" href="{{route('profile.index')}}">Profile Manage</a>   
     <!--Logout link-->

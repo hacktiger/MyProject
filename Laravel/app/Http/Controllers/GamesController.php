@@ -49,6 +49,8 @@ class GamesController extends Controller
         return view('games.create')->withTags($tags);
     }
 
+  
+
     /**
      * Store a newly created resource in storage.
      *
@@ -133,7 +135,6 @@ class GamesController extends Controller
         $this->middleware('auth');
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
-
         // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
@@ -293,6 +294,8 @@ class GamesController extends Controller
         //delete it
         $game->delete();
         // Session flash
-        return redirect('/games')->with('success','Game Deleted');
+        return redirect()->back()->with('success','Game Deleted');
     }
+
+    
 }
