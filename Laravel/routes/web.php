@@ -68,6 +68,6 @@ Route::post('/addCash', 'MyController@addCash');
 
 Route::get('/show-reports','GamesController@showReports')->name('show.report');
 Route::post('/profileSearch', 'SearchController@profileSearch');
-
+Route::post('/tagSearch', 'SearchController@tagSearch');
 
 ?>

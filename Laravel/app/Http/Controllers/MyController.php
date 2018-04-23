@@ -32,7 +32,14 @@ class MyController extends Controller
 
     	$report_by = auth()->user()->id;
     	$text = $request->input('text');
-
+        //blank report check
+        if (!isset($text)){
+            $text = '%20';
+        }
+        if ($text =='%20' &&$report_1==0&&$report_2==0&&$report_3==0){
+            return redirect()->back()->with('error', 'Blank Report');
+        }
+        else{
     	DB::table('report')->insert([
     		'upload_by' => $report_by,
     		'Impropriate' => $report_1,
@@ -41,7 +48,8 @@ class MyController extends Controller
     		'text' => $text,
     	]);	
 
-    	return redirect('/games')->with('success','Game Reported');
+        return redirect('/games')->with('success','Game Reported');
+        }
     }	
 
     public function rating(Request $request, $title){

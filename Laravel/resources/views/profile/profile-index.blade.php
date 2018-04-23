@@ -92,7 +92,7 @@ document.getElementById("defaultOpen").click();
     {!! Form::open(['action'=>"SearchController@profileSearch", 'method' =>'POST', 'enctype'=>'multipart/form-data'])!!}
     
     <div class = 'form-group'>
-        {{Form::label('userName', 'userName')}}
+        {{Form::label('username', 'username')}}
         {{Form::text('userName', '',['class'=>'form-control', 'placeholder'=>'...'])}}
     </div>
 

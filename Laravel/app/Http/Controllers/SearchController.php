@@ -64,6 +64,20 @@ class SearchController extends Controller
             return redirect()->back()->with('error', 'No such User found');
     }
 
+    public function tagSearch()
+    {
+        $tag = Input::get('tag');
+        $result = DB::table('tags')->where([
+            ['name', 'LIKE', $tag]
+        ])->get();
+        if (count($result)>0){
+            return view('tags.index', ['tag'=>$result]);
+        }
+        else{
+            return redirect()->back()->with('error', 'No tags found');
+        }
+    }
+
 }
 
 ?>
