@@ -11,6 +11,10 @@ use App\User;
 class GenreController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function allGames(){
     	// get all games in DESC order of creation

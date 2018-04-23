@@ -25,6 +25,10 @@ Route::get('/backHome',function(){
 	return redirect('/games');
 });
 
+Route::get('/admin',['middleware'=>'admin',function(){
+  return view('admin.admin');
+}])->name('admin');
+
 // Cleaning up links 
 Route::get('/top-games','MyController@topGames')->name('top_games');
 Route::get('/most-download','MyController@mostDownload')->name('most_download');
@@ -59,12 +63,11 @@ Route::get('/all-games','GenreController@allGames')->name('all_games');
 Route::post('/search','SearchController@titleSearch');
 Route::get('/search/advance', 'SearchController@searchPage');
 Route::post('/search/advancedResults', 'SearchController@advancedSearch');
-Route::get('/admin',['middleware'=>'admin',function(){
-  return view('admin.admin');
-}])->name('admin');
 
 Route::post('/addCash', 'MyController@addCash');
 
-Route::get('/showReports', 'GamesController@showReports');
+Route::get('/show-reports','GamesController@showReports')->name('show.report');
 Route::post('/profileSearch', 'SearchController@profileSearch');
+
+
 ?>

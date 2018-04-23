@@ -11,7 +11,8 @@ use App\User;
 class ProfileController extends Controller
 {   
     public function __construct(){
-        $this->middleware('admin', ['except' => ['index','show']]);
+        $this->middleware('auth')->only( ['index','show']);
+        $this->middleware('admin')->except( ['index','show']);
     }
 
     /**
@@ -43,7 +44,12 @@ class ProfileController extends Controller
         //get user
         $user = User::find($id);
         // get owned games
-        $owned_games = DB::table('sales_log')->leftJoin('users', 'sales_log.user_id','=','users.id')->join('games','sales_log.game_title','=','games.title')->select(['sales_log.game_title', 'games.slug','games.avg_rating', 'games.upload_by','games.image'])->where('sales_log.user_id', $id)->get();
+        $owned_games = DB::table('sales_log')
+                            ->leftJoin('users', 'sales_log.user_id','=','users.id')
+                            ->join('games','sales_log.game_title','=','games.title')
+                            ->select(['sales_log.game_title', 'games.slug','games.avg_rating', 'games.upload_by','games.image'])
+                            ->where('sales_log.user_id', $id)
+                            ->paginate(12);
         
         
         return view('profile.show-profile', ['user'=>$user, 'owned_games'=>$owned_games]); 

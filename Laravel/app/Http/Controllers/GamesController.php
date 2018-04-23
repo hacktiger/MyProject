@@ -18,8 +18,9 @@ class GamesController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('admin', ['except' => ['index','show']]);
-    }
+        $this->middleware('auth')->only(['index','show']);
+
+        $this->middleware('admin')->except(['index','show']);    }
    
     /**
      * Display a listing of the resource.
@@ -31,7 +32,9 @@ class GamesController extends Controller
         // get game detail
         $game =  games::orderBy('created_at','DESC')->paginate(9);
         // get sales num
-        $sales = DB::table('games')->where('sales', '<>', 0)->orderBy('created_at','DESC')->take(3)->get();
+        $sales = DB::table('games')->where('sales', '<>', 0)
+                ->orderBy('created_at','DESC')
+                ->take(3)->get();
         //return
         return view('index',['game'=>$game, 'sales'=>$sales ]);
     }
@@ -163,11 +166,26 @@ class GamesController extends Controller
             $favorite = 0;
         }
         //get number of stars ( using db )
-        $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',1],['game_title',$game->title]])->groupBy('game_title')->first();
-        $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',2],['game_title',$game->title]])->groupBy('game_title')->first();
-        $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',3],['game_title',$game->title]])->groupBy('game_title')->first();
-        $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',4],['game_title',$game->title]])->groupBy('game_title')->first();
-        $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))->where([['rating',5],['game_title',$game->title]])->groupBy('game_title')->first();
+        $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',1],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',2],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',3],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',4],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',5],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
         // set default values
         $pre_star = array(
             'star_1' => 0,
@@ -298,9 +316,9 @@ class GamesController extends Controller
     }
 
     public function showReports(){
-        $reports = DB::table('report')->orderBy('id', 'DESC')->paginate(10);
+        $reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')->orderBy('report.id', 'DESC')->paginate(10);
+
         return view('admin.reports', ['reports'=>$reports]);
-        
     }
     
 }

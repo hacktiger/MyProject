@@ -129,6 +129,7 @@ document.getElementById("defaultOpen").click();
             @endforeach
         </tbody>
     </table>
+    {{$owned_games->links()}}
 </div>
     
 @endsection

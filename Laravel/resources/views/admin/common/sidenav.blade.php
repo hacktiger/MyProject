@@ -114,7 +114,7 @@
     <a class="nav-link" href="{{route('games.manage')}}">Game Manage</a>
     <a class="nav-link" href="{{route('tags.index')}}">Tags Manage</a>
     <a class="nav-link" href="{{route('profile.index')}}">Profile Manage</a>   
-    <a class ='nav-link' href='/showReports'>Game Reports</a>
+    <a class ='nav-link' href="{{route('show.report')}}">Game Reports</a>
     <!--Logout link-->
     <div style="position: absolute; bottom: 5px">
         <a class="nav-link" href="{{ route('logout') }}"
