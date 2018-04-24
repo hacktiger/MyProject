@@ -76,7 +76,7 @@ document.getElementById("defaultOpen").click();
 @section('content')
 <!-- TABS -->
 <div class="row">
-    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p>Profile</p></button>
+    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'white')" id="defaultOpen"><p style='color:black'>Profile</p></button>
     <button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'white')" ><p style="color:black">Owned Games</p></button>
 </div>
 <!-- PROFILE -->
