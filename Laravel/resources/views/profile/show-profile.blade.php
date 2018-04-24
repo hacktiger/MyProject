@@ -89,17 +89,17 @@ document.getElementById("defaultOpen").click();
             @if (Auth::user()->id == $user->id)
             <a class="btn btn-primary" style="background-color: #4CAF50; color:white;" href="/profile/{{Auth::user()->id}}/edit">&ensp;Edit&ensp;</a>
             @endif
-        	<h4>Username: {{Auth::user()->name}}</h4>
-        	<h4>Email: {{Auth::user()->email}}</h4>
+        	<h4>Username: {{$user->name}}</h4>
+        	<h4>Email: {{$user->email}}</h4>
         
-    		<h4>ID: {{Auth::user()->id}}</h4>
+    		<h4>ID: {{$user->id}}</h4>
     		<!--Auth_level-->
-    		<h4>Rank: {{Auth::user()->auth_level}}</h4>
+    		<h4>Rank: {{$user->auth_level}}</h4>
     	</div>
    
     <div class ='col-md-8'><h1>Bio</h1>
         <p style="overflow-wrap:break-word;">
-                {!!Auth::user()->description!!}
+                {!!$user->description!!}
             </p>
         </div>
         </div>
