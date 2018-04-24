@@ -83,8 +83,8 @@ document.getElementById("defaultOpen").click();
 
 @section('content')
 <div class="row">
-    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'white')" id="defaultOpen"><p style='color:black'>Profile</p></button>
-    <button class="tablink col-md-6" onclick="openPage('Admins', this, 'white')" ><p style="color:black">Admins</p></button>
+    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p style='color:white'>Profile</p></button>
+    <button class="tablink col-md-6" onclick="openPage('Admins', this, 'black')" ><p style="color:white">Admins</p></button>
 </div>
 
 <div class="container">

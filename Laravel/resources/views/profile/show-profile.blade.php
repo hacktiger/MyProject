@@ -76,32 +76,32 @@ document.getElementById("defaultOpen").click();
 @section('content')
 <!-- TABS -->
 <div class="row">
-    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'white')" id="defaultOpen"><p style='color:black'>Profile</p></button>
-    <button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'white')" ><p style="color:black">Owned Games</p></button>
+    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p style='color:white'>Profile</p></button>
+    <button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'black')" ><p style="color:white">Owned Games</p></button>
 </div>
 <!-- PROFILE -->
 <div id='Profile' class="tabcontent">
-    <br>
     <div class="row">
         <div class="col-md-4">
-            <h2>Avatar here</h2>
-            <a class="btn btn-block" style="background-color: #4CAF50; color:white;" href="/profile/{{Auth::user()->id}}/edit">&ensp;Edit&ensp;</a>
-        </div>
-        <div class="col-md-4">
+            <img  style="height: 70%; width: 70%; object-fit: contain;" alt="{{$user->avatar}}" src="/storage/avatars/{{$user->avatar}}">
+            <br>
+            {{--  edit profile  --}}
+            @if (Auth::user()->id == $user->id)
+            <a class="btn btn-primary" style="background-color: #4CAF50; color:white;" href="/profile/{{Auth::user()->id}}/edit">&ensp;Edit&ensp;</a>
+            @endif
         	<h4>Username: {{Auth::user()->name}}</h4>
         	<h4>Email: {{Auth::user()->email}}</h4>
-        </div>	
-    	<div class="col-md-4">
+        
     		<h4>ID: {{Auth::user()->id}}</h4>
     		<!--Auth_level-->
     		<h4>Rank: {{Auth::user()->auth_level}}</h4>
     	</div>
-    </div>
-    </br>
-    <div><h1>Bio</h1>
+   
+    <div class ='col-md-8'><h1>Bio</h1>
         <p style="overflow-wrap:break-word;">
-                {{Auth::user()->description}}
+                {!!Auth::user()->description!!}
             </p>
+        </div>
         </div>
 </div>
 

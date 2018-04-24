@@ -77,7 +77,38 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //data validation
+        $this->validate($request,[
+            'name'=> 'required',
+            'description'=> 'nullable',
+            'avatar'=> 'image|nullable|max:5999'
+        ]);
+        
+        //handle file upload
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()){
+            //with extension
+            $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
+            //get file name only
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get ext
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+            //file name to store
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //upload
+            $path = $request->file('avatar')->storeAs('public/avatars', $fileNameToStore);
+        }
+
+        //create user info
+        $profile = User::find($id);
+        var_dump($profile);
+        $profile->name = $request->input('name');
+        $profile->description =$request->input('description');
+        if ($request->hasFile('avatar')){
+            $profile->avatar = $fileNameToStore;
+        }
+        $profile->save();
+
+        return redirect('/games')->with('success', 'Profile Updated');
     }
 
     /**
