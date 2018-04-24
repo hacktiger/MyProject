@@ -59,8 +59,8 @@
         </div>
 
         <div class="form-group">
-            {{Form::label('sales',"Sales")}}
-            {{Form::text('sales','',['class'=>'form-control','placeholder'=>'Give the price', 'spellcheck'=>'false'])}}
+            {{Form::label('sales',"Promotion Price")}}
+            {{Form::text('sales','',['class'=>'form-control','placeholder'=>'Give the sales price', 'spellcheck'=>'false'])}}
         </div>
 
     	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}

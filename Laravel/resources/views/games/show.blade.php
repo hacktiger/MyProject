@@ -150,9 +150,12 @@ chart.render();
 		<hr>
 		<!-- uploader user name -->
 		<h4 class="" style="padding:20px">Developer : {{$game->upload_by}}</h4>
+		@if ($game->sales ==0)
 		<h4 class="" style="padding:20px">Price : {{$game->price}}$</h4>
-
-		
+		@endif
+		@if ($game->sales != 0)
+		<h4 class="" style='padding:20px'>Price : <font color='gray'><s>{{$game->price}}</s></font>  {{$game->price -$game->sales}}$</h4>
+		@endif
 		
 		<!-- upvote - downvote + report -->
 		<div class="row">

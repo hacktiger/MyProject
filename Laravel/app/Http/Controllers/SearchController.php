@@ -23,7 +23,7 @@ class SearchController extends Controller
         $q = Input::get ( 'q' );
         $gameTitle = games::where('title','LIKE','%'.$q.'%')->get();
         if(count($gameTitle) > 0)
-            return view('search.results')->withDetails($gameTitle)->withQuery ( $q );
+            return view('search.results')->withDetails($gameTitle);
         else 
             return redirect()->back()->with('error','No Details found. Try to search again!');
     }
@@ -38,6 +38,15 @@ class SearchController extends Controller
         $title = Input::get('title');
         $upload_by = Input::get('upload_by');
         $avg_rating = Input::get('avg_rating');
+        
+        //check blank numeric value
+        if(!isset($avg_rating)){
+            $avg_rating = 0;
+        }
+        //check out of range
+        if ($avg_rating >5){
+            $avg_rating = 5;
+        }
         $gameTitle = games::where([
             ['upload_by','LIKE','%'.$upload_by.'%'], 
             ['title', 'like', '%'.$title.'%'],
@@ -45,7 +54,7 @@ class SearchController extends Controller
             ])->get();
 
         if(count($gameTitle) > 0)
-            return view('search.aResults')->withDetails($gameTitle);
+            return view('search.results')->withDetails($gameTitle);
         else 
             return redirect()->back()->with('error','No Details found. Try to search again!');
     }

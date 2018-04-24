@@ -48,8 +48,8 @@
         </div>
 
         <div class="form-group">
-            {{Form::label('sales',"Sales")}}
-            {{Form::text('sales',$game->sales,['class'=>'form-control','placeholder'=>'Give the price', 'spellcheck'=>'false'])}}
+            {{Form::label('sales',"Promotion Price")}}
+            {{Form::text('sales',$game->sales,['class'=>'form-control','placeholder'=>'Give the sales price', 'spellcheck'=>'false'])}}
         </div>
 
         <!-- get user id -->

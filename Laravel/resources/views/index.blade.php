@@ -85,7 +85,12 @@ a:hover{
           <!-- Body -->
           <div class="card-body">
             <h4 class="card-title"><a href="/games/{{$games->slug}}">{{$games->title}}</a></h4>
+            @if ( $games->sales ==0)
             <h5>Price : <b>{{$games->price}}$</b></h5>
+            @endif
+            @if ( $games->sales != 0)
+            <h5>Price : <s>{{$games->price}}$</s> <font color = 'red'><b>{{$games->price - $games->sales}}$</b></font><small>  On Sale</small></h5>
+            @endif
             <p class="card-text">something about this game that takes really long sentences</p>
           </div>
           <!-- Footer -->

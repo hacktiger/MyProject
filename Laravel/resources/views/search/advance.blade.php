@@ -2,7 +2,7 @@
 
 @section ('content')
 
-<h1> Advance Search</h1>
+<h1> Advanced Search</h1>
 
 {!! Form::open(['action'=>"SearchController@advancedSearch", 'method' =>'POST', 'enctype'=>'multipart/form-data'])!!}
 
@@ -22,7 +22,7 @@
 {{--  Search by rating  --}}
 <div class = 'form-group'>
     {{Form::label('avg_rating', 'Rating')}}
-    {{Form::text('avg_rating','',['class'=>'form-control', 'placeholder'=>'Minimum Rating...', 'spellcheck'=>'false'])}}
+    {{Form::text('avg_rating','',['class'=>'form-control', 'placeholder'=>'Minimum Rating (from 0 to 5)...', 'spellcheck'=>'false'])}}
   </div>
 
 {{Form::submit('Submit', ['class' =>'btn btn-primary'])}}
