@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {   
     public function __construct(){
         $this->middleware('auth')->only( ['index','show']);
-        $this->middleware('admin')->except( ['index','show']);
+        $this->middleware('admin')->except( ['index','show','edit', 'update']);
     }
 
     /**
@@ -100,6 +100,11 @@ class ProfileController extends Controller
 
         //create user info
         $profile = User::find($id);
+        //change upload_by in 'games'
+        if ($profile->auth_level =='developer'){
+            games::where('upload_by', 'LIKE', $profile->name)
+            ->update(['upload_by'=>$request->input('name')]);
+        }
         var_dump($profile);
         $profile->name = $request->input('name');
         $profile->description =$request->input('description');

@@ -20,7 +20,8 @@ class GamesController extends Controller
     {
         $this->middleware('auth')->only(['index','show']);
 
-        $this->middleware('admin')->except(['index','show']);    }
+        $this->middleware('admin')->except(['index','show', 'edit', 'update']);
+    }
    
     /**
      * Display a listing of the resource.

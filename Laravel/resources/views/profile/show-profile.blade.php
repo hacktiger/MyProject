@@ -77,7 +77,14 @@ document.getElementById("defaultOpen").click();
 <!-- TABS -->
 <div class="row">
     <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p style='color:white'>Profile</p></button>
-    <button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'black')" ><p style="color:white">Owned Games</p></button>
+    <button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'black')" ><p style="color:white">
+        @if ($user->auth_level !== 'developer')
+        Owned Games
+        @endif
+        @if ($user->auth_level =='developer')
+        Games
+        @endif
+    </p></button>
 </div>
 <!-- PROFILE -->
 <div id='Profile' class="tabcontent">
@@ -109,16 +116,16 @@ document.getElementById("defaultOpen").click();
 <div id="OwnedGames" class="tabcontent">
     <!-- show titles from owned_games-->
     <div class="container">
-    <h3>All Games</h3>
     <table class="table border">
-        <tbody>
+        <thead>
             <tr>
                 <td>Thumbnail</td>
                 <td>Title</td>
                 <td>Rating</td>
                 <td>Developer</td>  
             </tr>
-            <h2></h2>
+        </thead>
+        <tbody>
             @foreach($owned_games as $games)
             <tr  class="clickable-row hover-row" data-href="/games/{{$games->slug}}">
                 <td><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
