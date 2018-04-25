@@ -15,7 +15,7 @@ class MyController extends Controller
         $this->middleware('auth');
     }
 
-    public function report(Request $request){
+    public function report(Request $request, $title){
     	$report_1 = $request->input('report_1');
     	$report_2 = $request->input('report_2');
     	$report_3 = $request->input('report_3');
@@ -41,11 +41,12 @@ class MyController extends Controller
         }
         else{
     	DB::table('report')->insert([
-    		'upload_by' => $report_by,
+    		'reporter' => $report_by,
     		'Impropriate' => $report_1,
     		'Fraud'	=> $report_2,
     		'Plagarism' => $report_3,
-    		'text' => $text,
+            'text' => $text,
+            'title' => $title,
     	]);	
 
         return redirect('/games')->with('success','Game Reported');

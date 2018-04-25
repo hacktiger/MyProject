@@ -16,7 +16,7 @@
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: #111;
+        background-color: #fefefe;
         overflow-x: hidden;
         padding-top: 20px;
     }
@@ -38,14 +38,14 @@
 
     /* On mouse-over */
     .sidenav a:hover, .dropdown-btn:hover {
-        color: #f1f1f1;
+        color: #111;
     }
 
     /* Main content */
     .main {
         margin-left: 200px; /* Same as the width of the sidenav */
         font-size: 20px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
+
     }
 
     /* Add an active class to the active dropdown button */
@@ -57,7 +57,7 @@
     /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
     .dropdown-container {
         display: none;
-        background-color: #262626;
+        background-color: #fefefe;
         padding-left: 8px;
     }
 
@@ -79,37 +79,8 @@
     <!-- SIDE bar for admin page -->
     <!-- sidebar -->
     <div class="sidenav">
-      <a class="nav-link" href="/games">Home</a>
-
-      <a class="nav-link" href="/profile/{{Auth::user()->id}}">My Profile</a>
-
-      <button class="dropdown-btn">Game Database 
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a class="nav-link" href="/all-games">All Games</a>
-        <a class="nav-link" href="/tags/1">All Genres</a>  
-        <a class="nav-link" href="{{route('top_games')}}">Top Games</a>
-        <a class="nav-link" href="{{route('most_download')}}">Most Downloads</a>
-    </div>
-
-    <button class="dropdown-btn">Search 
-        <i class="fa fa-caret-down"></i>
-    </button>
-
-    <div class="dropdown-container">
-        <form action="/search" method="POST" role="search">
-            {{ csrf_field() }}
-            <input type="text" class="form-control" name="q"
-            placeholder="Search by Title"> <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary btn-block">
-                    <span class="glyphicon glyphicon-search"> Search </span>
-                </button>
-            </span>
-        </form>
-        <a class= 'nav-link' href ='/search/advance'>Advance Search</a>
-    </div>
-
+    <a class="nav-link" href="/games">Home</a>
+    <a class="nav-link" href="/profile/{{Auth::user()->id}}">My Profile</a>
     <a class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
     <a class="nav-link" href="{{route('games.manage')}}">Game Manage</a>
     <a class="nav-link" href="{{route('tags.index')}}">Tags Manage</a>

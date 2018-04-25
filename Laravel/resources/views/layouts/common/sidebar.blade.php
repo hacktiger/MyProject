@@ -45,7 +45,6 @@
   .main {
     margin-left: 200px; /* Same as the width of the sidenav */
     font-size: 20px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
   }
 
   /* Add an active class to the active dropdown button */

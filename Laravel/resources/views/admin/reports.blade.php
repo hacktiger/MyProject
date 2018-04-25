@@ -20,6 +20,7 @@ tr:nth-child(even) {
 <thead>
     <tr>
         <th scope='col'>ID</th>
+        <th scope='col'>Game Title</th>
         <th scope='col'>Reporter Name</th>
         <th scope='col'>Reporter Email</th>
         <th scope='col'>Fraud</th>
@@ -33,8 +34,9 @@ tr:nth-child(even) {
     @foreach($reports as $reports)
         <tr>
             <td>{{$reports->id}}</td>
+            <td><a href="/games/{{$reports->slug}}">{{$reports->title}}</td>
             <td>{{$reports->name}}</td>
-            <td><a href="/profile/{{$reports->upload_by}}">{{$reports->email}}</a></td>
+            <td><a href="/profile/{{$reports->reporter}}">{{$reports->email}}</a></td>
             <td>{{$reports->Fraud}}</td>
             <td>{{$reports->Impropriate}}</td>
             <td>{{$reports->Plagarism}}</td>

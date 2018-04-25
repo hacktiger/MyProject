@@ -316,7 +316,7 @@ class GamesController extends Controller
     }
 
     public function showReports(){
-        $reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')->orderBy('report.id', 'DESC')->paginate(10);
+        $reports = DB::table('report')->leftJoin('users','report.reporter','=','users.id')->leftJoin('games','report.title','=','games.title')->orderBy('report.id', 'DESC')->paginate(10);
 
         return view('admin.reports', ['reports'=>$reports]);
     }

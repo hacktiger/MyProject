@@ -77,7 +77,7 @@ class SearchController extends Controller
     {
         $tag = Input::get('tag');
         $result = DB::table('tags')->where([
-            ['name', 'LIKE', $tag]
+            ['name', 'LIKE', '%'.$tag.'%']
         ])->get();
         if (count($result)>0){
             return view('tags.index', ['tag'=>$result]);
