@@ -74,7 +74,7 @@ a:hover{
 <div class="container content-row">
   <div class="row">
     @foreach($game as $games)
-      <div class="col-lg-4 col-md-6 mb-4" style="margin-top:30px;">
+      <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top:30px;">
         <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd">
           <!-- IMG -->
           <a href="/games/{{$games->slug}}">

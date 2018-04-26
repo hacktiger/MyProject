@@ -27,7 +27,7 @@ tr:nth-child(even) {
 	</table>
 </div>
 <div class="container">
-	<h3>All Games</h3>
+	<h1>All Games</h1>
 	<table class="table border">
 		<tbody>
 			<tr>
@@ -35,10 +35,6 @@ tr:nth-child(even) {
 				<td>Title</td>
 				<td>Rating</td>
 				<td>Developer</td>	
-				@if(Auth::user()->auth_level !=='casual')
-				<td>Edit</td>
-				<td>Delete</td>
-				@endif
 			</tr>
 			<h2></h2>
 			@foreach($game as $games)
@@ -47,13 +43,6 @@ tr:nth-child(even) {
 				<td>{{$games->title}}</td>
 				<td>{{$games->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
 				<td>{{$games->upload_by}}</td>
-				@if (Auth::user()-> auth_level !=='casual')
-				<td><a class="btn" style="background-color: #4CAF50; color:white;" href="/games/{{$games->slug}}/edit">&ensp;Edit&ensp;</a></td>
-                    <td>{!! Form::open(['action'=> ['GamesController@destroy', $games->title], 'method'=>'POST']) !!}
-                    {{Form::hidden('_method', 'DELETE')}}
-                    {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
-                    {!! Form::close() !!}</td>
-				@endif
 			</tr>
 			@endforeach
 		</tbody>

@@ -7,33 +7,27 @@
 @endsection
 
 @section('content')
-<div class="row">
-	<div class="col-md-8">
-		<h2 style="text-align: center;">TOP GAMES CURRENTLY</h2>
-		<br>
-		<!-- will make look better with time -->
-		@foreach($top_1 as $top_1)
-		<div class="well container-image" style="position: relative;">
-			<i class="fa fa-star" style="position: absolute; left: 0; top:15px;"></i>
-	   		<h3 ><a  href="/games/{{$top_1->slug}}">{{$top_1->title}}</a></h3>
-	  	</div>
-		@endforeach
-	  	@foreach($top_2 as $top_2)
-	  	<div class="well">
-	   		<h3><a  href="/games/{{$top_2->slug}}">{{$top_2->title}}</a></h3>
-	  	</div>
-	  	@endforeach
-	  	@foreach($top_3 as $top_3)
-	  	<div class="well">
-	   		<h3><a  href="/games/{{$top_3->slug}}">{{$top_3->title}}</a></h3>
-	  	</div>
-	  	@endforeach
-	  	<!-- the other 7 games -->
-		@foreach($game as $games)
-		<div class="well">
-	   		<h3><a  href="/games/{{$games->slug}}">{{$games->title}}</a></h3>
-	  	</div>
-		@endforeach
-	</div>
+<div class="container">
+	<h1>Top Games</h1>
+	<table class="table border">
+		<tbody>
+			<tr>
+				<td>Thumbnail</td>
+				<td>Title</td>
+				<td>Rating</td>
+				<td>Developer</td>	
+			</tr>
+			<h2></h2>
+			@foreach($game as $games)
+			<tr  class="clickable-row hover-row" data-href="/games/{{$games->slug}}">
+				<td><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
+				<td>{{$games->title}}</td>
+				<td>{{$games->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
+				<td>{{$games->upload_by}}</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+
 </div>
 @endsection

@@ -141,43 +141,22 @@ class MyController extends Controller
     
 
     public function topGames(){
-        $game =  games::orderBy('avg_rating','DESC')->skip(3)->take(7)->get();
-        $top_1 = games::orderBy('avg_rating','DESC')->take(1)->get();
-        $top_2 = games::orderBy('avg_rating','DESC')->skip(1)->take(1)->get();
-        $top_3 = games::orderBy('avg_rating','DESC')->skip(2)->take(1)->get();
+        $game =  games::orderBy('avg_rating','DESC')->take(10)->get();
 
-        return view('games.topGames',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
+        return view('games.topGames',['game'=>$game]);
     }
 
     public function mostDownload(){
         //SELECT game_title, COUNT(user_id) FROM sales_log GROUP BY game_title
        $game = DB::table('sales_log')
                 ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
-                ->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])
-                ->groupBy(['sales_log.game_title','games.slug'])
+                ->select(['sales_log.game_title', 'games.slug','games.image', 'avg_rating', 'games.upload_by',DB::raw(' COUNT(sales_log.user_id) as downloads')])
+                ->groupBy(['sales_log.game_title','games.slug','games.image', 'avg_rating', 'games.upload_by'])
                 ->orderBy('downloads','DESC')
-                ->skip(3)->take(7)->get();
-        //get top 3 
-        $top_1 = DB::table('sales_log')
-                ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
-                ->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])
-                ->groupBy(['sales_log.game_title','games.slug'])
-                ->orderBy('downloads','DESC')
-                ->take(1)->get();
-       $top_2 = DB::table('sales_log')
-                ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
-                ->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])
-                ->groupBy(['sales_log.game_title','games.slug'])
-                ->orderBy('downloads','DESC')
-                ->skip(1)->take(1)->get();
-        $top_3 = DB::table('sales_log')
-                ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
-                ->select(['sales_log.game_title', 'games.slug',DB::raw(' COUNT(sales_log.user_id) as downloads')])
-                ->groupBy(['sales_log.game_title','games.slug'])
-                ->orderBy('downloads','DESC')
-                ->skip(2)->take(1)->get();
+                ->take(10)->paginate(10);
+
         // return view
-        return view('games.mostDownload',['game'=>$game,'top_1'=>$top_1, 'top_2'=>$top_2, 'top_3'=>$top_3]);
+        return view('games.mostDownload',['game'=>$game]);
     }
 
     public function devList(){
