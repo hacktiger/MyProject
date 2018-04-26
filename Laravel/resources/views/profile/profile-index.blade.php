@@ -78,6 +78,8 @@ function openPage(pageName,elmnt,color) {
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
+$('#profile_manage').addClass('current-active');
+$('#main,#upload_game,#game_manage,#game_report,#tag_manage').removeClass('current-active');
 </script>
 @endsection
 

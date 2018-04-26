@@ -82,7 +82,6 @@
 
 	#sidebar ul.components {
 	    padding: 20px 0;
-	    border-bottom: 1px solid #47748b;
 	}
 
 	#sidebar ul p {
@@ -111,7 +110,7 @@
 	}
 
 	a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
-	    content: '\e259';
+
 	    display: block;
 	    position: absolute;
 	    right: 20px;
@@ -119,7 +118,7 @@
 	    font-size: 0.6em;
 	}
 	a[aria-expanded="true"]::before {
-	    content: '\e260';
+	    
 	}
 
 
@@ -186,7 +185,12 @@
 	    #sidebarCollapse span {
 	        display: none;
 	    }
-	}		
+	}	
+	.current-active {
+		background-color: #fff;
+		color: #7386D5;
+	}	
+
 </style>
 @yield('styles')
 </head>
@@ -194,78 +198,66 @@
         <div class="wrapper">
             <!-- Sidebar Holder -->
             <nav id="sidebar">
+            	<!-- Sidebar HEADER -->
                 <div class="sidebar-header">
                     <h3>GameStop Img here</h3>
                 </div>
-
+                <!-- Sidebar BODY -->
                 <ul class="list-unstyled components">
                     <p>Welcome &nbsp; {{Auth::user()->name}}</p>
                     <hr>
                     <li>
-                        <a class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
+                        <a id="main" class='nav-link current-active' href="{{route('admin')}}">Admin Dashboard</a> 
                     </li>
                     <li>
-                        <a class="nav-link" href="{{route('games.manage')}}">Game Manage</a>                 
+                        <a id="upload_game" class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
                     </li>
                     <li>
-                    	<a class ='nav-link' href="{{route('show.report')}}">Game Reports</a>
+                        <a id="game_manage" class="nav-link" href="{{route('games.manage')}}">Game Manage</a>                 
                     </li>
                     <li>
-                        <a class="nav-link" href="{{route('tags.manage')}}">Tags Manage</a>
+                    	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{route('profiles.manage')}}">Profile Manage</a>  
+                        <a id="tag_manage" class="nav-link" href="{{route('tags.manage')}}">Tags Manage</a>
                     </li>
-
-                    <li style="margin-top: 60%"><a class="nav-link" href="{{ route('logout') }}"
-     						onclick="event.preventDefault();
-							document.getElementById('logout-form').submit();">
-							{{ __('Logout') }} </a>
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						    @csrf
-						</form></li>
+                    <li>
+                        <a id="profile_manage" class="nav-link" href="{{route('profiles.manage')}}">Profile Manage</a>  
+                    </li>           
                 </ul>
-
-    
-     
-    
-                <hr>
-
-                <ul class="list-unstyled CTAs">
-                    <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
-                    <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
+                
+                <ul class="list-unstyled CTAs" style="margin-top: 60%;">
+                	<hr>
+                    <li><a class="download" href="{{ route('logout') }}"
+     									onclick="event.preventDefault();
+									     document.getElementById('logout-form').submit();">
+									    {{ __('Logout') }} </a>
+						    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						    @csrf
+						    </form></li>
                 </ul>
             </nav>
 
             <!-- Page Content Holder -->
             <div id="content">
-
+            <!-- Navbar -->
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
-
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <button type="button" id="sidebarCollapse" class="btn  navbar-btn" style="background-color: #7386D5; color: #fff">
                                 <i class="glyphicon glyphicon-align-left"></i>
                                 <span>Toggle Sidebar</span>
-                            </button>
-                            
-                            
+                            </button>                                                   
                         </div>
 
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        	<ul class="nav navbar-nav navbar-left" style=" padding-left: 10%;">
+                        	<ul class="nav navbar-nav navbar-left" style=" padding-left: 20%;">
                         		<li><h3>Admin Dashboard</h3></li>
                         	</ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a class="nav-link" href="{{ route('logout') }}"
-     									onclick="event.preventDefault();
-									     document.getElementById('logout-form').submit();">
-									    {{ __('Logout') }} </a>
-
-						    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						    @csrf
-						    </form></li>
+	                            <li><a class="nav-link" href="#">Something </a>
+								</li>
                             </ul>
                         </div>
                     </div>
@@ -276,9 +268,8 @@
             <!-- END MAIN CONTENT -->
             </div>
         </div>
-		<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    	<script>CKEDITOR.replace( 'article-ckeditor' );</script>
-		<!-- jQuery CDN -->
+
+        <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <!-- Bootstrap Js CDN -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -295,7 +286,7 @@
                     $('#sidebar, #content').toggleClass('active');
                     $('.collapse.in').toggleClass('in');
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
+                });   
             });
         </script>
         @yield('scripts')

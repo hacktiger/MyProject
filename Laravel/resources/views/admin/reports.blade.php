@@ -50,3 +50,10 @@ tr:nth-child(even) {
 
 </table>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $('#game_report').addClass('current-active');
+        $('#main,#profile_manage,#upload_game,#game_manage,#tag_manage').removeClass('current-active');
+    </script>
+@endsection

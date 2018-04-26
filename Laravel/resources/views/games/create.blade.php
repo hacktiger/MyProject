@@ -75,5 +75,7 @@
 
     <script type="text/javascript">
         $('.select2-multi').select2();
+        $('#upload_game').addClass('current-active');
+        $('#main,#profile_manage,#game_manage,#game_report,#tag_manage').removeClass('current-active');
     </script>
 @endsection
