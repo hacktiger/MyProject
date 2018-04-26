@@ -16,14 +16,15 @@
 	</thead>
 	<tbody>
 	 
-		@foreach($user as $user)
+		@foreach($user as $users)
 		<tr>
-			<td><img src="{{$user->avatar}} "style ="width:25% height:25%"></td>
-			<td><a href = "/profile/{{$user->id}}">{{$user->name}}</a></td>
-			<td>{{$user->description}}</td>
-			<td>{{$user->id}}</td>
+			<td><img src="{{$users->avatar}} "style ="width:25% height:25%"></td>
+			<td><a href = "/profile/{{$users->id}}">{{$users->name}}</a></td>
+			<td>{!!$users->description!!}</td>
+			<td>{{$users->id}}</td>
 		</tr>
 		@endforeach
+		{{$user->links()}}
 	</tbody>
 </table>
 @endsection

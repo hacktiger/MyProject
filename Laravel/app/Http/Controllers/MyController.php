@@ -160,7 +160,7 @@ class MyController extends Controller
     }
 
     public function devList(){
-        $user  = User::where('auth_level', 'Like','developer')->get();
+        $user  = User::where('auth_level', 'Like','developer')->paginate(7);
         return view('devList', ['user'=>$user]);
     }
 

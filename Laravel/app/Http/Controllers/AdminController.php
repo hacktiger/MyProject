@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
 use App\Tags;
-
+use App\report;
 
 class AdminController extends Controller
 {
@@ -27,9 +27,23 @@ class AdminController extends Controller
     }
     //GAMES-report
     public function gameReport(){
-    	$reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')->leftJoin('games','report.title','=','games.title')->orderBy('report.id', 'DESC')->paginate(10);
+        $reports = DB::table('report')->leftJoin('users','report.reporter','=','users.id')
+        ->leftJoin('games','report.title','=','games.title')
+        ->select(
+        'report.id as id','report.reporter as userID',
+        'report.Impropriate as Impropriate','report.Fraud as Fraud',
+        'report.Plagarism as Plagarism', 'report.text as text',
+        'report.title as title',
+        'games.slug as slug',
+        'users.name as userName')
+        ->orderBy('report.id', 'ASC')->paginate(10);
 
         return view('admin.reports', ['reports'=>$reports]);
+    }
+
+    public function removeReport($id){
+        $report = report::find($id)->delete();
+        return redirect()->back()->with('success', 'Report Deleted');
     }
 
     //TAGS

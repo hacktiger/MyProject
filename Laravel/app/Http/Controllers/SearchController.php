@@ -64,11 +64,11 @@ class SearchController extends Controller
         $userName = Input::get('userName');
         $id = Input::get('id');
         $user = User::where([
-            ['name', 'LIKE', $userName],
+            ['name', 'LIKE', '%'.$userName.'%'],
             ['id', 'LIKE', $id]
         ])->get();
         if (count($user)>0)
-            return view('profile.profile-index-search')->withDetails($user);
+            return view('profile.profile-index-search',['user'=>$user]);
         else
             return redirect()->back()->with('error', 'No such User found');
     }

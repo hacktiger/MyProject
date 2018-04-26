@@ -21,26 +21,29 @@ tr:nth-child(even) {
     <tr>
         <th scope='col'>ID</th>
         <th scope='col'>Game Title</th>
-        <th scope='col'>Reporter Name</th>
-        <th scope='col'>Reporter Email</th>
+        <th scope='col'>Reporter</th>
         <th scope='col'>Fraud</th>
         <th scope='col'>Impropriate</th>
         <th scope='col'>Plagarism</th>
         <th scope='col'>Other Reasons</th>
+        <th scope='col'><font color='red'>Delete Report</font></th>
     </tr>
 </thead>
 <tbody>
     
-    @foreach($reports as $reports)
+    @foreach($reports as $report)
         <tr>
-            <td>{{$reports->id}}</td>
-            <td><a href="/games/{{$reports->slug}}">{{$reports->title}}</td>
-            <td>{{$reports->name}}</td>
-            <td><a href="/profile/{{$reports->reporter}}">{{$reports->email}}</a></td>
-            <td>{{$reports->Fraud}}</td>
-            <td>{{$reports->Impropriate}}</td>
-            <td>{{$reports->Plagarism}}</td>
-            <td>{{$reports->text}}</td>
+            <td>{{$report->id}}</td>
+            <td><a href="/games/{{$report->slug}}">{{$report->title}}</td>
+            <td><a href="/profile/{{$report->userID}}">{{$report->userName}}</a></td>
+            <td>{{$report->Fraud}}</td>
+            <td>{{$report->Impropriate}}</td>
+            <td>{{$report->Plagarism}}</td>
+            <td>{{$report->text}}</td>
+            <td>{!! Form::open(['action'=> ['AdminController@removeReport', $report->id], 'method'=>'POST']) !!}
+                    {{Form::hidden('_method', 'DELETE')}}
+                    {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
+                {!! Form::close() !!}</td>
         </tr>
     @endforeach
 </tbody>

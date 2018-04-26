@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2018 at 10:23 AM
+-- Generation Time: Apr 26, 2018 at 03:55 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -62,7 +62,7 @@ CREATE TABLE `games` (
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `release` smallint(5) UNSIGNED NOT NULL,
   `link` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `upload_by` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` int(11) NOT NULL DEFAULT '0',
   `sales` int(11) NOT NULL DEFAULT '0',
@@ -77,12 +77,12 @@ CREATE TABLE `games` (
 INSERT INTO `games` (`title`, `slug`, `avg_rating`, `description`, `release`, `link`, `image`, `upload_by`, `price`, `sales`, `created_at`, `updated_at`) VALUES
 ('Age of Empire', 'age-of-empire', 0.0, '<p>Play as different races in ancient time and defeat your enemy</p>', 1997, 'none.com', 'age-of-empires-hd-edition_1523966846.jpg', 'Ensemble Studios', 0, 0, '2018-04-17 12:07:26', '2018-04-17 12:07:26'),
 ('BioShock : Infinite', 'bioshock-infinite', 5.0, '<p>BioShock is a first-person shooter video game series developed by Irrational Games&mdash;the first under the name 2K Boston/2K Australia&mdash;and designed by Ken Levine</p>', 2013, 'none.com', '3121022-trailer_bioshockinfinite_letsplay_20160826_1523966962.jpg', 'Irrational Games', 40, 0, '2018-04-17 12:09:22', '2018-04-17 12:09:22'),
-('BioShock 1 Remastered', 'bioshock-1-remastered', 0.0, '<p>BioShock is a first-person shooter video game developed by 2K Boston and 2K Australia, and published by 2K Games</p>', 2007, 'none.com', '1_1524236715.png', '2K Game', 10, 0, '2018-04-17 12:25:24', '2018-04-20 15:05:15'),
-('BioShock 2 Remastered', 'bioshock-2-remastered', 3.0, '<p><strong>BioShock </strong>2 is a first-person shooter video game developed by 2K Marin and published by 2K Games. It is the sequel to the 2007 video game BioShock and was released worldwide for Microsoft Windows, the ...</p>', 2010, 'none.com', 'BioShock2-Re_1523967976.jpg', '2K Game', 15, 0, '2018-04-17 12:26:17', '2018-04-24 13:23:30'),
-('BlazeBlue : Central Fiction', 'blazeblue-central-fiction', 0.0, '<p>BlazBlue: Central Fiction, released in Japan as BlazBlue: Centralfiction is a 2-D fighting video game developed by Arc System Works. It is the fourth game in the BlazBlue series, and is set after the events of BlazBlue: Chrono Phantasma.</p>', 2015, 'none yet', 'discovering-blazblue-central-fiction-thumbnail_1523967685.png', 'Arc System Works', 20, 0, '2018-04-17 11:56:38', '2018-04-17 12:21:25'),
-('Metal Gear Rising : Revengeance', 'metal-gear-rising-revengeance', 5.0, '<p><em><strong>Metal Gear Rising: Revengeance</strong></em>&nbsp;is an&nbsp;<a href=\"https://en.wikipedia.org/wiki/Action_game\">action</a>&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hack_and_slash\">hack and slash</a>&nbsp;<a href=\"https://en.wikipedia.org/wiki/Video_game\">video game</a>&nbsp;developed by&nbsp;<a href=\"https://en.wikipedia.org/wiki/PlatinumGames\">PlatinumGames</a>&nbsp;and published by&nbsp;<a href=\"https://en.wikipedia.org/wiki/Konami_Digital_Entertainment\">Konami Digital Entertainment</a>. Released for the&nbsp;<a href=\"https://en.wikipedia.org/wiki/PlayStation_3\">PlayStation 3</a>,&nbsp;<a href=\"https://en.wikipedia.org/wiki/Xbox_360\">Xbox 360</a>&nbsp;and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Microsoft_Windows\">Microsoft Windows</a>, it is a spin-off in the&nbsp;<em><a href=\"https://en.wikipedia.org/wiki/Metal_Gear\">Metal Gear</a></em>series, and is set four years after the events of&nbsp;<em><a href=\"https://en.wikipedia.org/wiki/Metal_Gear_Solid_4:_Guns_of_the_Patriots\">Metal Gear Solid 4: Guns of the Patriots</a></em>. In the game, players control&nbsp;<a href=\"https://en.wikipedia.org/wiki/Raiden_(Metal_Gear)\">Raiden</a>, a cyborg who confronts the&nbsp;<a href=\"https://en.wikipedia.org/wiki/Private_military_company\">private military company</a>&nbsp;Desperado Enforcement, with the gameplay focusing on fighting enemies using a sword and other weapons to perform combos and counterattacks. Through the use of Blade Mode, Raiden can dismember cyborgs in slow motion and steal parts stored in their bodies. The series&#39; usual stealth elements are also optional to reduce combat.</p>', 2013, 'none.com', 'MGS_1523960666.jpg', 'PlatinumGames', 40, 0, '2018-04-17 10:24:26', '2018-04-17 10:24:26'),
-('Nier: Automata', 'nier-automata', 5.0, '<p>Nier: Automata is an action role-playing game developed by PlatinumGames and published by Square Enix for PlayStation 4 and Microsoft Windows. The game was released in Japan in February 2017, and worldwide the following month</p>', 2017, 'none.com', 'neir_automata_1523966111.jpg', 'PlatinumGames', 60, 0, '2018-04-17 11:55:12', '2018-04-17 11:55:12'),
-('StarCraft 2 : Legacy of the Void', 'starcraft-2-legacy-of-the-void', 0.0, '<p>StarCraft II: Legacy of the Void is a standalone expansion pack to the military science fiction real-time strategy game StarCraft II: Wings of Liberty, and the third and final part of the StarCraft II trilogy developed by <b>Blizzard Entertainment</b>.</p>\r\n\r\nasd', 2015, 'none.com', '1_1524301082.png', 'Blizzard Entertainment', 35, 0, '2018-04-17 12:28:52', '2018-04-21 08:58:50'),
+('BioShock 1 Remastered', 'bioshock-1-remastered', 5.0, '<p>BioShock is a first-person shooter video game developed by 2K Boston and 2K Australia, and published by 2K Games</p>', 2007, 'none.com', '1_1524236715.png', '2K Game', 10, 0, '2018-04-17 12:25:24', '2018-04-20 15:05:15'),
+('BioShock 2 Remastered', 'bioshock-2-remastered', 3.0, '<p><strong>BioShock </strong>2 is a first-person shooter video game developed by 2K Marin and published by 2K Games. It is the sequel to the 2007 video game BioShock and was released worldwide for Microsoft Windows, the ...</p>', 2010, 'none.com', 'BioShock2-Re_1523967976.jpg', '2K Game', 15, 12, '2018-04-17 12:26:17', '2018-04-24 13:23:30'),
+('BlazeBlue : Central Fiction', 'blazeblue-central-fiction', 0.0, '<p>BlazBlue: Central Fiction, released in Japan as BlazBlue: Centralfiction is a 2-D fighting video game developed by Arc System Works. It is the fourth game in the BlazBlue series, and is set after the events of BlazBlue: Chrono Phantasma.</p>', 2015, 'none yet', 'discovering-blazblue-central-fiction-thumbnail_1523967685.png', 'Arc System Works', 20, 12, '2018-04-17 11:56:38', '2018-04-17 12:21:25'),
+('Metal Gear Rising : Revengeance', 'metal-gear-rising-revengeance', 5.0, '<p><em><strong>Metal Gear Rising: Revengeance</strong></em>&nbsp;is an&nbsp;<a href=\"https://en.wikipedia.org/wiki/Action_game\">action</a>&nbsp;<a href=\"https://en.wikipedia.org/wiki/Hack_and_slash\">hack and slash</a>&nbsp;<a href=\"https://en.wikipedia.org/wiki/Video_game\">video game</a>&nbsp;developed by&nbsp;<a href=\"https://en.wikipedia.org/wiki/PlatinumGames\">PlatinumGames</a>&nbsp;and published by&nbsp;<a href=\"https://en.wikipedia.org/wiki/Konami_Digital_Entertainment\">Konami Digital Entertainment</a>. Released for the&nbsp;<a href=\"https://en.wikipedia.org/wiki/PlayStation_3\">PlayStation 3</a>,&nbsp;<a href=\"https://en.wikipedia.org/wiki/Xbox_360\">Xbox 360</a>&nbsp;and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Microsoft_Windows\">Microsoft Windows</a>, it is a spin-off in the&nbsp;<em><a href=\"https://en.wikipedia.org/wiki/Metal_Gear\">Metal Gear</a></em>series, and is set four years after the events of&nbsp;<em><a href=\"https://en.wikipedia.org/wiki/Metal_Gear_Solid_4:_Guns_of_the_Patriots\">Metal Gear Solid 4: Guns of the Patriots</a></em>. In the game, players control&nbsp;<a href=\"https://en.wikipedia.org/wiki/Raiden_(Metal_Gear)\">Raiden</a>, a cyborg who confronts the&nbsp;<a href=\"https://en.wikipedia.org/wiki/Private_military_company\">private military company</a>&nbsp;Desperado Enforcement, with the gameplay focusing on fighting enemies using a sword and other weapons to perform combos and counterattacks. Through the use of Blade Mode, Raiden can dismember cyborgs in slow motion and steal parts stored in their bodies. The series&#39; usual stealth elements are also optional to reduce combat.</p>', 2013, 'none.com', 'MGS_1523960666.jpg', 'PlatinumGames', 40, 5, '2018-04-17 10:24:26', '2018-04-17 10:24:26'),
+('Nier: Automata', 'nier-automata', 5.0, '<p>Nier: Automata is an action role-playing game developed by PlatinumGames and published by Square Enix for PlayStation 4 and Microsoft Windows. The game was released in Japan in February 2017, and worldwide the following month</p>', 2017, 'none.com', 'neir_automata_1523966111.jpg', 'PlatinumGames', 60, 4, '2018-04-17 11:55:12', '2018-04-17 11:55:12'),
+('StarCraft 2 : Legacy of the Void', 'starcraft-2-legacy-of-the-void', 0.0, '<p>StarCraft II: Legacy of the Void is a standalone expansion pack to the military science fiction real-time strategy game StarCraft II: Wings of Liberty, and the third and final part of the StarCraft II trilogy developed by <b>Blizzard Entertainment</b>.</p>\r\n\r\nasd', 2015, 'none.com', '1_1524301082.png', 'Blizzard', 35, 10, '2018-04-17 12:28:52', '2018-04-25 18:09:58'),
 ('The Escapists 2', 'the-escapists-2', 0.0, '<p>Just try and escape.. If you can lol</p>', 2017, 'none.com', 'The-Escapists-2_1523968039.jpg', 'Team17', 5, 0, '2018-04-17 12:27:19', '2018-04-17 12:27:19');
 
 -- --------------------------------------------------------
@@ -168,7 +168,8 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('admin@gmail.com', '$2y$10$QK3RznVpcM8NodtZIfreOOP/94aI/U8flPDEIS9WUhpR3YU7OSm6O', '2018-04-19 14:21:35');
+('admin@gmail.com', '$2y$10$QK3RznVpcM8NodtZIfreOOP/94aI/U8flPDEIS9WUhpR3YU7OSm6O', '2018-04-19 14:21:35'),
+('gobanme.pierro@gmail.com', '$2y$10$6MmvWPbpL2Z5YEhDjOBHxOZ7cf4jdg7c5W8/FbN121.D4JV2F8iuG', '2018-04-25 12:27:27');
 
 -- --------------------------------------------------------
 
@@ -190,7 +191,8 @@ INSERT INTO `rating` (`game_title`, `user_id`, `rating`) VALUES
 ('Nier: Automata', 53, 5),
 ('Metal Gear Rising : Revengeance', 53, 5),
 ('BioShock 2 Remastered', 53, 3),
-('BioShock : Infinite', 53, 5);
+('BioShock : Infinite', 53, 5),
+('BioShock 1 Remastered', 53, 5);
 
 -- --------------------------------------------------------
 
@@ -207,14 +209,6 @@ CREATE TABLE `report` (
   `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `report`
---
-
-INSERT INTO `report` (`id`, `reporter`, `Impropriate`, `Fraud`, `Plagarism`, `text`, `title`) VALUES
-(1, 53, 0, 0, 0, 'asd', NULL),
-(2, 53, 0, 1, 0, 'jpoj', 'The Escapists 2');
 
 -- --------------------------------------------------------
 
@@ -235,7 +229,6 @@ CREATE TABLE `sales_log` (
 --
 
 INSERT INTO `sales_log` (`id`, `game_title`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Bioshock 1 Remastered', 1, NULL, NULL),
 (21, 'BlazeBlue : Central Fiction', 53, '2018-04-21 10:34:28', '2018-04-21 10:34:28'),
 (22, 'BioShock 2 Remastered', 53, '2018-04-21 11:39:33', '2018-04-21 11:39:33'),
 (23, 'Age of Empire', 53, '2018-04-21 12:53:56', '2018-04-21 12:53:56'),
@@ -284,7 +277,7 @@ CREATE TABLE `users` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
   `wallet` double(6,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `auth_level` enum('admin','developer','casual') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'casual',
+  `auth_level` enum('admin','developer','casual','banned') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'casual',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -296,14 +289,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `wallet`, `auth_level`, `remember_token`, `created_at`, `updated_at`, `description`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$bu1/afJgVxVTcpbCDGpnUuQWKv7dv8N4PrBi5pgno9qIpztTalENm', 'none', 0.00, 'admin', 't3KB3qPCQMH9xbLVaF2xBDxCUxDYJb8S7pFC5PDaiGgXz7o5nDbmDDaBjmkA', '2018-04-17 10:18:22', '2018-04-17 10:18:22', NULL),
+(1, 'admin', 'admin@gmail.com', '$2y$10$bu1/afJgVxVTcpbCDGpnUuQWKv7dv8N4PrBi5pgno9qIpztTalENm', 'none', 0.00, 'banned', 't3KB3qPCQMH9xbLVaF2xBDxCUxDYJb8S7pFC5PDaiGgXz7o5nDbmDDaBjmkA', '2018-04-17 10:18:22', '2018-04-26 13:50:54', NULL),
 (2, 'user 2', '2@gmail.com', '$2y$10$uEcTmIijBswIhqN27J5mh.qVDazMaawd2SCHFZciINT1hGrsqE3We', 'none', 0.00, 'casual', 'c2GqUrfZUfAmqKu3fPmkMVOpQhRXoRII4O0EqlNHoA0zadL9EgmgK8OzgBRe', '2018-04-20 02:37:20', '2018-04-20 02:37:20', NULL),
-(30, 'nHFNGEOBVx', 'jYa7lbm4GS@gmail.com', '$2y$10$jQAHch0LYqOBRGonJ1NbSeDkiKUtSPgB2km7kJrdkTUFXyU3GBynS', 'none', 3.62, 'casual', NULL, NULL, NULL, NULL),
+(30, 'nHFNGEOBVx', 'jYa7lbm4GS@gmail.com', '$2y$10$jQAHch0LYqOBRGonJ1NbSeDkiKUtSPgB2km7kJrdkTUFXyU3GBynS', 'none', 3.62, 'banned', NULL, NULL, '2018-04-26 13:07:58', NULL),
 (50, 'VKLTbsqCfI', 'YIcX7dz0xB@gmail.com', '$2y$10$aRX048GGpsIWYVm29m6MmeWlWlpf.J1Ybi9HL22ZBgefeXH8ddVxy', 'none', 6.10, 'casual', NULL, NULL, NULL, NULL),
 (51, 'w06HPHLg0i', 'r8J0XnEE0D@gmail.com', '$2y$10$FaRQ9jH80pJhEMUyzG.2I.VkRierug6Ck.PsoRDQ4X4eoQkjhCjF6', 'none', 8.69, 'casual', NULL, NULL, NULL, NULL),
 (52, 'FsWKysqZwA', 'QYwYqPy3LM@gmail.com', '$2y$10$aA.3esDglXu21a3GKAI9De0CDOIxamp6.4qR0Z5l9vrFQ1sy4oiOS', 'none', 2.22, 'casual', NULL, NULL, NULL, NULL),
-(53, 'hieu2102', 'gobanme.pierro@gmail.com', '$2y$10$Jv3WqnYRMj6bj6tEkdsJGeUt/zsLxyMDapwli4AD17shjsiN3gYQS', '1_1524592954.png', 9694.00, 'admin', 'Gu2ucbRvIbvL1HkzFiutU0hUGPB5EIZFXvZl3yQYbrTS4BH1oeHZgnf77Yv9', '2018-04-20 04:57:45', '2018-04-24 18:02:34', '<p><em><strong>lkjclkzjd</strong></em></p>\r\n\r\n<p><em>poajsoajs</em></p>'),
-(54, 'zc', 'asd@gmail.com', '$2y$10$zpimGz.nu6KfGkoFTqW0B.ylZWAF8.E8gfpBCJu3Y/yPwq5UxzZsi', 'none', 10.00, 'casual', 'ASnugj5JFakf99CCzhyAqSn0rprPRagT95Upe6pWVfSYXe0CEfmGxt7mgioX', '2018-04-21 09:33:07', '2018-04-21 09:33:07', NULL);
+(53, 'hieu2102', 'gobanme.pierro@gmail.com', '$2y$10$Jv3WqnYRMj6bj6tEkdsJGeUt/zsLxyMDapwli4AD17shjsiN3gYQS', '1_1524592954.png', 9694.00, 'admin', 'djh5mEc84ak01OPPTBTH0wl8QqCwqTstm2q8TUzBpvGxhMLNKwVWrzWqUHes', '2018-04-20 04:57:45', '2018-04-24 18:02:34', '<p><em><strong>lkjclkzjd</strong></em></p>\r\n\r\n<p><em>poajsoajs</em></p>'),
+(54, 'zc', 'asd@gmail.com', '$2y$10$zpimGz.nu6KfGkoFTqW0B.ylZWAF8.E8gfpBCJu3Y/yPwq5UxzZsi', 'none', 10.00, 'casual', 'ASnugj5JFakf99CCzhyAqSn0rprPRagT95Upe6pWVfSYXe0CEfmGxt7mgioX', '2018-04-21 09:33:07', '2018-04-21 09:33:07', NULL),
+(55, 'asd', 'joei@gmail.com', '$2y$10$kr72.7tNyeVlUCfjCIVKAe1.gEkQLougto7auk9YSuakmmMJ1gK0.', 'none', 0.00, 'banned', 'ZsoRxTMGOfx1S1NzWlM2pn6Cd56fsTeP6AP79p5tX2h7xQF5iM4JYAp2fDc6', '2018-04-25 12:28:23', '2018-04-26 12:23:00', NULL),
+(56, 'Blizzard', 'asd2@gmail.com', '$2y$10$weui6QFDWnUYLtvgNmtwlu3txAtcpx1CMvvwWhF2zQsav/jq6/H3W', 'none', 0.00, 'developer', NULL, '2018-04-25 17:17:52', '2018-04-25 18:09:58', NULL);
 
 --
 -- Indexes for dumped tables
@@ -398,7 +393,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sales_log`
@@ -416,7 +411,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Constraints for dumped tables

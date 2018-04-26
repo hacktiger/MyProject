@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
+use App\sales_log;
 
 
 class ProfileController extends Controller
@@ -124,13 +125,14 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
         //find it
-        $user =User::find($id);
-        //delete it
-        $user->delete();
+        User::where('id', '=', $id)->update([
+            'auth_level'=>'banned'
+        ]);
+        //remove games
+        sales_log::where('user_id', '=', $id)->delete();
         // Session flash
-        return redirect('/profile')->with('success','User Deleted');
+        return redirect('/profile')->with('success','User Banned');
     }
 
     public function makeAdmin($id){

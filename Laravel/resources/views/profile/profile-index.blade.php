@@ -114,7 +114,7 @@ document.getElementById("defaultOpen").click();
                         <th>User Name</th>
                         <th>E-mail</th>
                         <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Ban</th>
                         <th>Make Admin</th>
                     </tr>
                 </thead>
@@ -128,7 +128,7 @@ document.getElementById("defaultOpen").click();
                         <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/profile/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $users->id], 'method'=>'POST']) !!}
                             {{Form::hidden('_method', 'DELETE')}}
-                            {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
+                            {{Form::submit('Ban', ['class'=>' btn  btn-danger'])}}
                         {!! Form::close() !!}
                         </th>
                         <th>{!! Form::open(['action'=> ['ProfileController@makeAdmin', $users->id], 'method'=>'POST']) !!}
@@ -155,7 +155,7 @@ document.getElementById("defaultOpen").click();
                         <th>Admin Name</th>
                         <th>E-mail</th>
                         <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Ban</th>
                         <th>Turn to User</th>
                     </tr>
                 </thead>
@@ -168,7 +168,7 @@ document.getElementById("defaultOpen").click();
                         <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$admins->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $admins->id], 'method'=>'POST']) !!}
                                 {{Form::hidden('_method', 'DELETE')}}
-                                {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
+                                {{Form::submit('Ban', ['class'=>' btn  btn-danger'])}}
                             {!! Form::close() !!}
                         </th>
                         <th>{!! Form::open(['action'=> ['ProfileController@dropAdmin', $admins->id], 'method'=>'POST']) !!}

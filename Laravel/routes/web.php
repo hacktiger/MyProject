@@ -48,6 +48,7 @@ Route::get('/admin/manage','AdminController@manageGame')->name('games.manage');
 Route::get('/admin/profile','AdminController@manageProfile')->name('profiles.manage');
 Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');
 Route::get('/admin/game-reports','AdminController@gameReport')->name('show.report');
+Route::delete('/admin/game-reports/{id}', 'AdminController@removeReport');
 // Addtional function in show
 Route::post('/games/{game}/report','MyController@report')->name('games.report');
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
