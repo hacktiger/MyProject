@@ -210,8 +210,5 @@ class MyController extends Controller
         }
     }
 
-    public function manageGame(){
-        $game =  games::orderBy('created_at','DESC')->paginate(14);
-        return view('games.manage',['game'=>$game]); 
-    }
+    
 }

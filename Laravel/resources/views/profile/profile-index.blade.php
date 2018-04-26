@@ -59,7 +59,7 @@ tr:nth-child(even) {
 </style>
 @endsection
 
-@section('scripts-bottom')
+@section('scripts')
   <script src="./js/bootstrap.min.js"></script>
 <script>
 function openPage(pageName,elmnt,color) {
@@ -86,8 +86,8 @@ document.getElementById("defaultOpen").click();
     <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p style='color:white'>Profile</p></button>
     <button class="tablink col-md-6" onclick="openPage('Admins', this, 'black')" ><p style="color:white">Admins</p></button>
 </div>
-
-<div class="container">
+<div class="row">
+<div class="container col-sm-12 col-md-8 col-lg-8">
     <h1>Profile Search</h1>
     {!! Form::open(['action'=>"SearchController@profileSearch", 'method' =>'POST', 'enctype'=>'multipart/form-data'])!!}
     
@@ -104,10 +104,10 @@ document.getElementById("defaultOpen").click();
     {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
     {!!Form::close()!!}
 </div>
-
+</div>
 <div id='Profile' class="tabcontent">
-    <div class="col">
-        <div class="col-md-8 col-sm-8">
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
             <table class="table table-sm table-hove">
                 <thead class="thead-dark">
                     <tr>
@@ -185,5 +185,5 @@ document.getElementById("defaultOpen").click();
 @endsection
 
 
-@section('scripts-bottom')
+@section('scripts')
 @endsection

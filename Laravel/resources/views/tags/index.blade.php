@@ -35,6 +35,7 @@ tr:nth-child(even) {
 				{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
 				{!!Form::close()!!}
 			</div>
+			<br><br>
 		<table class="table table-sm table-hove">
 			<thead class="thead-dark">
 				<tr>

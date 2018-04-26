@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\games;
 use App\User;
 use App\Tags;
@@ -317,7 +318,7 @@ class GamesController extends Controller
     }
 
     public function showReports(){
-        $reports = DB::table('report')->leftJoin('users','report.reporter','=','users.id')->leftJoin('games','report.title','=','games.title')->orderBy('report.id', 'DESC')->paginate(10);
+        $reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')->leftJoin('games','report.title','=','games.title')->orderBy('report.id', 'DESC')->paginate(10);
 
         return view('admin.reports', ['reports'=>$reports]);
     }

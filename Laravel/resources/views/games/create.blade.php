@@ -70,7 +70,7 @@
 
 @endsection
 
-@section('scripts-bottom')
+@section('scripts')
     {!! Html::script('js/select2.min.js') !!}
 
     <script type="text/javascript">

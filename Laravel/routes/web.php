@@ -43,8 +43,11 @@ Route::get('/developers-list','MyController@devList')->name('dev_list');
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('profile','ProfileController');
-//
-Route::get('/admin/manage','MyController@manageGame')->name('games.manage');
+//admin routes
+Route::get('/admin/manage','AdminController@manageGame')->name('games.manage');
+Route::get('/admin/profile','AdminController@manageProfile')->name('profiles.manage');
+Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');
+Route::get('/admin/game-reports','AdminController@gameReport')->name('show.report');
 // Addtional function in show
 Route::post('/games/{game}/report','MyController@report')->name('games.report');
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
@@ -66,7 +69,7 @@ Route::post('/search/advancedResults', 'SearchController@advancedSearch');
 
 Route::post('/addCash', 'MyController@addCash');
 
-Route::get('/show-reports','GamesController@showReports')->name('show.report');
+
 Route::post('/profileSearch', 'SearchController@profileSearch');
 Route::post('/tagSearch', 'SearchController@tagSearch');
 
