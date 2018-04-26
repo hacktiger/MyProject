@@ -228,13 +228,17 @@
                 
                 <ul class="list-unstyled CTAs" style="margin-top: 60%;">
                 	<hr>
+                	<li><a class="article" href="{{ route('main') }}">
+						User Interface
+					</a></li>
                     <li><a class="download" href="{{ route('logout') }}"
-     									onclick="event.preventDefault();
-									     document.getElementById('logout-form').submit();">
-									    {{ __('Logout') }} </a>
-						    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						    @csrf
-						    </form></li>
+     						onclick="event.preventDefault();
+							document.getElementById('logout-form').submit();">
+							{{ __('Logout') }} </a>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						@csrf
+						</form>
+					</li>
                 </ul>
             </nav>
 

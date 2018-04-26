@@ -25,7 +25,7 @@ tr:nth-child(even) {
 
 <!-- prints out every tags -->
 <div class="col col-group">
-	<div class="col-md-8 col-sm-8">
+	<div class="col-md-8 col-sm-12">
 		<h1>Tag Search</h1>
 		<div>
 			{!! Form::open(['action'=>"SearchController@tagSearch", 'method' =>'POST'])!!}

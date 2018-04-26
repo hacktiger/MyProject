@@ -25,7 +25,7 @@ tr:nth-child(even) {
 
 <!-- prints out every tags -->
 <div class="col">
-    <div class="col-md-8 col-sm-8">
+    <div class="col-md-8 col-sm-12">
         <table class="table table-sm table-hove">
             <thead class="thead-dark">
                 <tr>

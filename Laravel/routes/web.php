@@ -23,7 +23,7 @@ Route::get('/', function(){
 
 Route::get('/backHome',function(){
 	return redirect('/games');
-});
+})->name('main');
 
 Route::get('/admin',['middleware'=>'admin',function(){
   return view('admin.admin');

@@ -123,7 +123,6 @@ $('#main,#upload_game,#game_manage,#game_report,#tag_manage').removeClass('curre
 
                 <tbody>
                     @foreach($user as $users)
-                    @if($users->auth_level == 'casual')
                     <tr>
                         <th><a href="/profile/{{$users->id}}">{{$users->name}}</a></th>
                         <th>{{$users->email}}</th>
@@ -137,7 +136,6 @@ $('#main,#upload_game,#game_manage,#game_report,#tag_manage').removeClass('curre
                             {{Form::submit('Make Admin', ['class'=>' btn  btn-primary'])}}
                         {!! Form::close() !!}</th>
                     </tr>
-                    @endif
                     @endforeach
 
                 </tbody>
