@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+<div class="row">
+    <div class="col-md-8 col-sm-12">
 	<h1>Share your games now !!</h1>
             <!-- Additional macros -->
 
@@ -67,6 +69,8 @@
         <br><br>
 
 	{!! Form::close() !!}
+    </div>
+</div>
 
 @endsection
 
