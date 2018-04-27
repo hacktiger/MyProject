@@ -244,7 +244,7 @@
 
             <!-- Page Content Holder -->
             <div id="content">
-            <!-- Navbar -->
+            <!-- HORIZONTAL Navbar -->
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <div class="navbar-header">
@@ -256,13 +256,9 @@
 
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        	<ul class="nav navbar-nav navbar-left" style=" padding-left: 20%;">
+                        	<ul class="nav navbar-nav navbar-left" style=" padding-left: 20%; color: #7386D5">
                         		<li><h3>Admin Dashboard</h3></li>
                         	</ul>
-                            <ul class="nav navbar-nav navbar-right">
-	                            <li><a class="nav-link" href="#">Something </a>
-								</li>
-                            </ul>
                         </div>
                     </div>
                 </nav>

@@ -8,15 +8,12 @@ td, th {
     text-align: center
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
 
 </style>
 @endsection
 
 @section('content')
-<table class = 'table'>
+<table class = 'table table-responsive-sm table-hover table-striped'>
 <thead>
     <tr>
         <th scope='col'>ID</th>
@@ -33,7 +30,7 @@ tr:nth-child(even) {
     
     @foreach($reports as $report)
         <tr>
-            <td>{{$report->id}}</td>
+            <th scope="row">{{$report->id}}</th>
             <td><a href="/games/{{$report->slug}}">{{$report->title}}</td>
             <td><a href="/profile/{{$report->userID}}">{{$report->userName}}</a></td>
             <td>{{$report->Fraud}}</td>

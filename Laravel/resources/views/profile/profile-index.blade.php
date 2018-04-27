@@ -30,7 +30,7 @@ tr:nth-child(even) {
 
 /* Style tab links */
 .tablink {
-    background-color: #555;
+    background-color: #c4cced;
     color: white;
     float: left;
     border: none;
@@ -42,7 +42,7 @@ tr:nth-child(even) {
 }
 
 .tablink:hover {
-    background-color: #777;
+    background-color: #7689d6 ;
 }
 
 /* Style the tab content (and add height:100% for full page content) */
@@ -53,8 +53,6 @@ tr:nth-child(even) {
     height: 100%;
 }
 
-#Profile {background-color: white;}
-#Admins {background-color: white;}
 
 </style>
 @endsection
@@ -85,11 +83,11 @@ $('#main,#upload_game,#game_manage,#game_report,#tag_manage').removeClass('curre
 
 @section('content')
 <div class="row">
-    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p style='color:white'>Profile</p></button>
-    <button class="tablink col-md-6" onclick="openPage('Admins', this, 'black')" ><p style="color:white">Admins</p></button>
+    <button class="tablink" onclick="openPage('Profile', this, '#4e67ca')" id="defaultOpen"><p style='color:white'>Profile</p></button>
+    <button class="tablink col-md-6" onclick="openPage('Admins', this, '#4e67ca')" ><p style="color:white">Admins</p></button>
 </div>
 <div class="row">
-<div class="container col-sm-12 col-md-8 col-lg-8">
+<div class="container col-sm-12 col-md-8">
     <h1>Profile Search</h1>
     {!! Form::open(['action'=>"SearchController@profileSearch", 'method' =>'POST', 'enctype'=>'multipart/form-data'])!!}
     
@@ -110,21 +108,21 @@ $('#main,#upload_game,#game_manage,#game_report,#tag_manage').removeClass('curre
 <div id='Profile' class="tabcontent">
     <div class="row">
         <div class="col-md-8 col-sm-12">
-            <table class="table table-sm table-hove">
+            <table class="table table-sm table-hover table-responsive-sm">
                 <thead class="thead-dark">
                     <tr>
-                        <th>User Name</th>
-                        <th>E-mail</th>
-                        <th>Edit</th>
-                        <th>Ban</th>
-                        <th>Make Admin</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Ban</th>
+                        <th scope="col">Make Admin</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach($user as $users)
                     <tr>
-                        <th><a href="/profile/{{$users->id}}">{{$users->name}}</a></th>
+                        <th scope="row"><a href="/profile/{{$users->id}}">{{$users->name}}</a></th>
                         <th>{{$users->email}}</th>
                         <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/profile/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $users->id], 'method'=>'POST']) !!}

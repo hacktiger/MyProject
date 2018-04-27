@@ -49,7 +49,7 @@ class AdminController extends Controller
     //TAGS
     public function manageTag(){
     	//
-        $tag = Tags::all();
+        $tag = Tags::orderBy('created_at','DESC')->paginate(8);
         return view('tags.index',['tag' => $tag]);
     }
 
@@ -61,7 +61,6 @@ class AdminController extends Controller
 
         // get admins
         $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
-
 
         return view('profile.profile-index',['user'=>$user, 'admin'=>$admin]);
     }

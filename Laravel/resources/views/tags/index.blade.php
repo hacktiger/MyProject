@@ -25,7 +25,7 @@ tr:nth-child(even) {
 
 <!-- prints out every tags -->
 <div class="col col-group">
-	<div class="col-md-8 col-sm-12">
+	<div class="col-md-8 ">
 		<h1>Tag Search</h1>
 		<div>
 			{!! Form::open(['action'=>"SearchController@tagSearch", 'method' =>'POST'])!!}
@@ -36,7 +36,7 @@ tr:nth-child(even) {
 				{!!Form::close()!!}
 			</div>
 			<br><br>
-		<table class="table table-sm table-hove">
+		<table class="table table-sm table-hover">
 			<thead class="thead-dark">
 				<tr>
 					<th>Tag Name</th>
@@ -58,6 +58,7 @@ tr:nth-child(even) {
 				@endforeach
 			</tbody>
 		</table>
+		{{$tag->links()}}
 	</div>
 
 	<div class="col-md-4 card" >
