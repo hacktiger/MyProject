@@ -24,7 +24,11 @@ thead {
 @endsection
 
 @section('content')
-
+<h1>Game Search</h1>
+{!! Form::open(['action'=>'SearchController@gameManageSearch', 'method'=>'POST'])!!}
+{{ Form::text('title', '', ['class'=>'form-control','placeholder'=>'Title Contains...', 'spellcheck'=>'false'])}}
+{{Form::submit('Search', ['class'=>'btn btn-primary'])}}
+{!!Form::close()!!}
 <!-- prints out every tags -->
 <div class="col">
     <div class="col-md-8 col-sm-12">

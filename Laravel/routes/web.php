@@ -82,7 +82,7 @@ Route::post('/addCash', 'MyController@addCash');
 
 Route::post('/profileSearch', 'SearchController@profileSearch');
 Route::post('/tagSearch', 'SearchController@tagSearch');
-
+Route::post('/gameManageSearch', 'SearchController@gameManageSearch');
 
 //TESTS
 Route::get('/test',function(){
