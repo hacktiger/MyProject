@@ -20,9 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar')->default('none');
             $table->float('wallet',6,2)->unsigned()->default(0);
-            $table->enum('auth_level',['admin', 'developer', 'casual'])->default('casual');
+            $table->enum('auth_level',['ban','admin', 'developer', 'casual'])->default('casual');
             $table->rememberToken();
             $table->timestamps();
+            $table->enum('status',['Read','Unread'])->default('Unread');
         });
     }
 

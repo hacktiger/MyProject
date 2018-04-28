@@ -26,7 +26,8 @@ class CreateGamesTable extends Migration
             $table->string('upload_by');
             $table->integer('price')->default(0);
             $table->integer('sales')->default(0);
-            $table->timestamps();          
+            $table->timestamps();   
+            $table->enum('status',['Read','Unread'])->default('Unread');       
         });
     }
 

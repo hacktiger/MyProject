@@ -16,10 +16,17 @@ class CreateReportTable extends Migration
         Schema::create('report', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('upload_by')->unsigned();
+            $table->string('game_title')->unique();
             $table->boolean('Impropriate')->default(0);
             $table->boolean('Fraud')->default(0);
             $table->boolean('Plagarism')->default(0);           
             $table->text('text');
+            $table->enum('status',['Read','Unread'])->default('Unread');
+        });
+
+        Schema::table('report', function(Blueprint $table){
+            $table->foreign('game_title')->references('title')->on('games')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('upload_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
 
     }

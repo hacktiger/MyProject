@@ -18,6 +18,7 @@ class CreateSalesLogTable extends Migration
             $table->string('game_title');
             $table->integer('user_id')->unsigned();          
             $table->timestamps();
+            $table->enum('status',['Read','Unread'])->default('Unread');
 
             
         });
