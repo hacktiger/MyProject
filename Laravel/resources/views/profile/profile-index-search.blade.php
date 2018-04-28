@@ -11,8 +11,8 @@
             </div>
         
             <div class = 'form-group'>
-                {{Form::label('id', 'id')}}
-                {{Form::text('ID','', ['class'=>'form-control', 'placeholder'=>'...'])}}
+                {{Form::label('id', 'ID')}}
+                {{Form::text('id','', ['class'=>'form-control', 'placeholder'=>'...'])}}
             </div>
         
             {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}

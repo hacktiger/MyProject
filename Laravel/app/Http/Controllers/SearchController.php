@@ -65,7 +65,7 @@ class SearchController extends Controller
         $id = Input::get('id');
         $user = User::where([
             ['name', 'LIKE', '%'.$userName.'%'],
-            ['id', 'LIKE', $id]
+            ['id', '=', $id]
         ])->get();
         if (count($user)>0)
             return view('profile.profile-index-search',['user'=>$user]);
@@ -85,6 +85,15 @@ class SearchController extends Controller
         else{
             return redirect()->back()->with('error', 'No tags found');
         }
+    }
+    public function gameManageSearch()
+    {
+        $q = Input::get ( 'title' );
+        $gameTitle = games::where('title','LIKE','%'.$q.'%')->paginate(12);
+        if(count($gameTitle) > 0)
+            return view('admin.game-manage', ['game'=>$gameTitle]);
+        else 
+            return redirect()->back()->with('error', 'No game found');
     }
 
 }
