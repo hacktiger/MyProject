@@ -32,7 +32,7 @@ thead {
         <th scope='col'>Impropriate</th>
         <th scope='col'>Plagarism</th>
         <th scope='col'>Other Reasons</th>
-        <th scope='col'><font color='red'>Delete Report</font></th>
+        <th scope='col'>Delete Report</th>
     </tr>
 </thead>
 <tbody>

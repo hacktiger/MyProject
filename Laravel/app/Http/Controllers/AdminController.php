@@ -31,7 +31,11 @@ class AdminController extends Controller
         return view('admin.salesLog',['sales_log'=>$sales_log]);
     }
     public  function showSalesLog($id){
-        return view('admin.show.show-salesLog');
+        $log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')
+                ->select(['sales_log.id','sales_log.user_id','sales_log.game_title','sales_log.price','sales_log.created_at','sales_log.updated_at','users.email','users.name'])
+                ->where('sales_log.id',$id)->first();
+        //RETURN VIEW
+        return view('admin.show.show-salesLog',['log'=>$log]);
     }
     public function walletHistory(){
         return view('admin.walletHistory');
