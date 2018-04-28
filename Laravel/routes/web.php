@@ -49,7 +49,7 @@ Route::resource('profile','ProfileController');
 Route::get('/admin/game-manage','AdminController@manageGame')->name('games.manage');
 
 Route::get('/admin/sales-log','AdminController@salesLog')->name('admin.sales_log');
-Route
+Route::get('/admin/sales-log/{id}','AdminController@showSalesLog')->name('admin.show-sales_log');
 Route::get('/admin/wallet-history','AdminController@walletHistory')->name('admin.wallet_history');
 Route::get('/admin/profile','AdminController@manageProfile')->name('profiles.manage');
 Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');
@@ -59,7 +59,7 @@ Route::delete('/admin/game-reports/{id}', 'AdminController@removeReport');
 Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
 Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');
 //END ADMIN routes
-
+Route::get('/profile/{id}/wallet','ProfileController@wallet')->name('profile.wallet');
 // Addtional function in show
 Route::post('/games/{game}/report','MyController@report')->name('games.report');
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');

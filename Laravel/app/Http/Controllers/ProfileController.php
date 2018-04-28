@@ -152,4 +152,9 @@ class ProfileController extends Controller
 
         return redirect('/profile');
     }
+
+    public function wallet($id){
+        $user = DB::table('users')->where('id',$id)->first();
+        return view('profile.wallet',['user'=>$user]);
+    }
 }

@@ -26,9 +26,12 @@ class AdminController extends Controller
         return view('admin.game-manage',['game'=>$game]); 
     }
     public function salesLog(){
-        $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->orderBy('sales_log.id','DESC')->paginate(12);
+        $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->select(['sales_log.id','sales_log.game_title','users.email'])->orderBy('sales_log.id','DESC')->paginate(12);
 
         return view('admin.salesLog',['sales_log'=>$sales_log]);
+    }
+    public  function showSalesLog($id){
+        return view('admin.show.show-salesLog');
     }
     public function walletHistory(){
         return view('admin.walletHistory');

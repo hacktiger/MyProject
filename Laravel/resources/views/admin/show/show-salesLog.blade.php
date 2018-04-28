@@ -1,9 +1,11 @@
 @extends('admin.admin')
 
 @section('styles')
+
 @endsection
 
 @section('content')
+CARD HERE
 @endsection
 
 @section('scripts')
