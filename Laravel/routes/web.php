@@ -83,4 +83,9 @@ Route::post('/addCash', 'MyController@addCash');
 Route::post('/profileSearch', 'SearchController@profileSearch');
 Route::post('/tagSearch', 'SearchController@tagSearch');
 
+
+//TESTS
+Route::get('/test',function(){
+	return view('layouts.common.master-test');
+});
 ?>

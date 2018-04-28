@@ -66,7 +66,7 @@
 	    left: 0;
 	    height: 100vh;
 	    z-index: 999;
-	    background: #7386D5;
+	    background: 	#47c2eb;
 	    color: #fff;
 	    transition: all 0.3s;
 	}
@@ -77,7 +77,7 @@
 
 	#sidebar .sidebar-header {
 	    padding: 20px;
-	    background: #6d7fcc;
+	    background: #19b3e6;
 	}
 
 	#sidebar ul.components {
@@ -95,7 +95,7 @@
 	    display: block;
 	}
 	#sidebar ul li a:hover {
-	    color: #7386D5;
+	    color: 	#47c2eb;
 	    background: #fff;
 	}
 
@@ -141,7 +141,7 @@
 	}
 	a.download {
 	    background: #fff;
-	    color: #7386D5;
+	    color: 	#47c2eb;
 	}
 	a.article, a.article:hover {
 	    background: #6d7fcc !important;
@@ -188,7 +188,7 @@
 	}	
 	.current-active {
 		background-color: #fff;
-		color: #7386D5;
+		color: 	#47c2eb;
 	}	
 
 </style>
@@ -197,7 +197,7 @@
     <body>
         <div class="wrapper">
             <!-- Sidebar Holder -->
-            @include('admin.common.sidebar')
+            @include('layouts.common.sidebar-test')
 
             <!-- Page Content Holder -->
             <div id="content">
@@ -205,7 +205,7 @@
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn  navbar-btn" style="background-color: #7386D5; color: #fff">
+                            <button type="button" id="sidebarCollapse" class="btn  navbar-btn" style="background-color: 	#47c2eb; color: #fff">
                                 <i class="glyphicon glyphicon-align-left"></i>
                                 <span>Toggle Sidebar</span>
                             </button>                                                   
@@ -213,10 +213,17 @@
 
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        	<ul class="nav navbar-nav navbar-left" style=" padding-left: 20%; color: #7386D5">
-                        		<li><h3>Admin Dashboard</h3></li>
+                        	<ul class="nav navbar-nav navbar-left" style=" padding-left: 8%; color: 	#47c2eb">
+                        		<li><h3>User Dashboard</h3></li>
+                  
                         	</ul>
+                        	<ul class="nav navbar-nav navbar-right">
+                        		<li style="margin-top:30%;">My Profile</li>
+                        	</ul>
+                        	
                         </div>
+
+
                     </div>
                 </nav>
 
