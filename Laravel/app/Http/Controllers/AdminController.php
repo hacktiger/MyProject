@@ -23,7 +23,13 @@ class AdminController extends Controller
     //GAMES
     public function manageGame(){
         $game =  games::orderBy('created_at','DESC')->paginate(14);
-        return view('games.manage',['game'=>$game]); 
+        return view('admin.game-manage',['game'=>$game]); 
+    }
+    public function salesLog(){
+        return view('admin.salesLog');
+    }
+    public function walletHistory(){
+        return view('admin.walletHistory');
     }
     //GAMES-report
     public function gameReport(){
@@ -50,7 +56,7 @@ class AdminController extends Controller
     public function manageTag(){
     	//
         $tag = Tags::orderBy('created_at','DESC')->paginate(8);
-        return view('tags.index',['tag' => $tag]);
+        return view('admin.tag-manage',['tag' => $tag]);
     }
 
 
@@ -64,4 +70,6 @@ class AdminController extends Controller
 
         return view('profile.profile-index',['user'=>$user, 'admin'=>$admin]);
     }
+
+
 }

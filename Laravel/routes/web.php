@@ -44,7 +44,9 @@ Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('profile','ProfileController');
 //admin routes
-Route::get('/admin/manage','AdminController@manageGame')->name('games.manage');
+Route::get('/admin/game-manage','AdminController@manageGame')->name('games.manage');
+Route::get('/admin/sales-log','AdminController@salesLog')->name('admin.sales_log');
+Route::get('/admin/wallet-history','AdminController@walletHistory')->name('admin.wallet_history');
 Route::get('/admin/profile','AdminController@manageProfile')->name('profiles.manage');
 Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');
 Route::get('/admin/game-reports','AdminController@gameReport')->name('show.report');

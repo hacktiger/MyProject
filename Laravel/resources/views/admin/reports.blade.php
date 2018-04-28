@@ -51,6 +51,6 @@ td, th {
 @section('scripts')
     <script type="text/javascript">
         $('#game_report').addClass('current-active');
-        $('#main,#profile_manage,#upload_game,#game_manage,#tag_manage').removeClass('current-active');
+        $('#main,#profile_manage,#upload_game,#game_manage,#wallet_history,#sales_log,#tag_manage').removeClass('current-active');
     </script>
 @endsection

@@ -81,6 +81,6 @@ tr:nth-child(even) {
 @section('scripts')
     <script type="text/javascript">
         $('#tag_manage').addClass('current-active');
-        $('#main,#profile_manage,#upload_game,#game_manage,#game_report').removeClass('current-active');
+        $('#main,#profile_manage,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report').removeClass('current-active');
     </script>
 @endsection

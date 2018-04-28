@@ -216,6 +216,12 @@
                         <a id="game_manage" class="nav-link" href="{{route('games.manage')}}">Game Manage</a>                 
                     </li>
                     <li>
+                    	<a id="sales_log" class="nav-link" href="{{route('admin.sales_log')}}">Sales Log</a>
+                    </li>
+                    <li>
+                    	<a id="wallet_history" class="nav-link" href="{{route('admin.wallet_history')}}">Wallet History</a>
+                    </li>
+                    <li>
                     	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports</a>
                     </li>
                     <li>
