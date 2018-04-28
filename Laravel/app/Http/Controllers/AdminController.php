@@ -22,11 +22,13 @@ class AdminController extends Controller
 
     //GAMES
     public function manageGame(){
-        $game =  games::orderBy('created_at','DESC')->paginate(14);
+        $game =  games::orderBy('created_at','DESC')->paginate(12);
         return view('admin.game-manage',['game'=>$game]); 
     }
     public function salesLog(){
-        return view('admin.salesLog');
+        $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->orderBy('sales_log.id','DESC')->paginate(12);
+
+        return view('admin.salesLog',['sales_log'=>$sales_log]);
     }
     public function walletHistory(){
         return view('admin.walletHistory');
@@ -42,7 +44,7 @@ class AdminController extends Controller
         'report.title as title',
         'games.slug as slug',
         'users.name as userName')
-        ->orderBy('report.id', 'ASC')->paginate(10);
+        ->orderBy('report.id', 'ASC')->paginate(12);
 
         return view('admin.reports', ['reports'=>$reports]);
     }
@@ -63,7 +65,7 @@ class AdminController extends Controller
     //PROFILES
     public function manageProfile(){
     	// get users
-        $user = User::orderBy('created_at','DESC')->paginate(20);
+        $user = User::orderBy('created_at','DESC')->paginate(18);
 
         // get admins
         $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();

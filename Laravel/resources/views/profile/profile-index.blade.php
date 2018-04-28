@@ -2,29 +2,21 @@
 
 @section('styles')
 <style type="text/css">
-
-* {box-sizing: border-box}
-
-/* Set height of body and the document to 100% */
-body, html {
-    height: 100%;
-    margin: 0;
-}
-
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
 td, th {
-    border: 1px solid #dddddd;
-    padding: 5px;
+    padding: 2px;
     text-align: center
 }
-
-tr:nth-child(even) {
-    background-color: #dddddd;
+thead {
+    background-color: #7386D5;
+    color:white;
+}
+.content:hover{
+    background-color: #ebeef9;
 }
 
 /* Style tab links */
@@ -107,8 +99,8 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
 <div id='Profile' class="tabcontent">
     <div class="row">
         <div class="col-md-8 col-sm-12">
-            <table class="table table-sm table-hover table-responsive-sm">
-                <thead class="thead-dark">
+            <table class="table table-sm  table-responsive-sm">
+                <thead >
                     <tr>
                         <th scope="col">User Name</th>
                         <th scope="col">E-mail</th>
@@ -120,7 +112,7 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
 
                 <tbody>
                     @foreach($user as $users)
-                    <tr>
+                    <tr class="content">
                         <th scope="row"><a href="/profile/{{$users->id}}">{{$users->name}}</a></th>
                         <th>{{$users->email}}</th>
                         <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/profile/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>

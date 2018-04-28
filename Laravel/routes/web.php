@@ -39,26 +39,33 @@ Route::get('/developers-list','MyController@devList')->name('dev_list');
   *
 **/
 
-
+// Resources
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('profile','ProfileController');
-//admin routes
+// End Resources
+
+//ADMIN routes
 Route::get('/admin/game-manage','AdminController@manageGame')->name('games.manage');
+
 Route::get('/admin/sales-log','AdminController@salesLog')->name('admin.sales_log');
+Route
 Route::get('/admin/wallet-history','AdminController@walletHistory')->name('admin.wallet_history');
 Route::get('/admin/profile','AdminController@manageProfile')->name('profiles.manage');
 Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');
 Route::get('/admin/game-reports','AdminController@gameReport')->name('show.report');
 Route::delete('/admin/game-reports/{id}', 'AdminController@removeReport');
+// Profile route make Admin
+Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
+Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');
+//END ADMIN routes
+
 // Addtional function in show
 Route::post('/games/{game}/report','MyController@report')->name('games.report');
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
 Route::post('/games/{game}/favorite','MyController@favorite')->name('games.favorite');
 Route::post('/games/{game}/purchase', 'MyController@purchase')->name('games.purchase');
-// Profile route make Admin
-Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
-Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');
+
 //
 Auth::routes();
 

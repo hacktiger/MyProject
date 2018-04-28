@@ -3,20 +3,22 @@
 @section('styles')
 <style type="text/css">
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
 }
 
 td, th {
-    border: 1px solid #dddddd;
-    padding: 5px;
+    padding: 2px;
     text-align: center
 }
-
-tr:nth-child(even) {
-    background-color: #dddddd;
+thead {
+    background-color: #7386D5;
+    color:white;
 }
+.content:hover{
+    background-color: #ebeef9;
+}
+
 
 </style>
 @endsection
@@ -26,10 +28,10 @@ tr:nth-child(even) {
 <!-- prints out every tags -->
 <div class="col">
     <div class="col-md-8 col-sm-12">
-        <table class="table table-sm table-hove">
-            <thead class="thead-dark">
+        <table class="table table-sm">
+            <thead >
                 <tr>
-                    <th>Game Name</th>
+                    <th>Game Title</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -37,7 +39,7 @@ tr:nth-child(even) {
 
             <tbody>
                 @foreach($game as $games)
-                <tr>
+                <tr class="content">
                     <th><a href="/games/{{$games->slug}}">{{$games->title}}</a></th>
                     <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/games/{{$games->slug}}/edit">&ensp;Edit&ensp;</a></th>
                     <th>{!! Form::open(['action'=> ['GamesController@destroy', $games->title], 'method'=>'POST']) !!}

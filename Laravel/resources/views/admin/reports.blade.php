@@ -2,13 +2,22 @@
 
 @section('styles')
 <style type="text/css">
-td, th {
-    border: 1px solid #dddddd;
-    padding: 5px;
-    text-align: center
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-
+td, th {
+    padding: 2px;
+    text-align: center
+}
+thead {
+    background-color: #7386D5;
+    color:white;
+}
+.content:hover{
+    background-color: #ebeef9;
+}
 </style>
 @endsection
 
@@ -29,7 +38,7 @@ td, th {
 <tbody>
     
     @foreach($reports as $report)
-        <tr>
+        <tr class="content">
             <th scope="row">{{$report->id}}</th>
             <td><a href="/games/{{$report->slug}}">{{$report->title}}</td>
             <td><a href="/profile/{{$report->userID}}">{{$report->userName}}</a></td>
