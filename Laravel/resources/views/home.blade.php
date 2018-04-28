@@ -16,6 +16,9 @@
                     <h4 class="text-center">You are logged in!</h4>
                     <br>
                     <a class="btn-block btn btn-primary" href="backHome">Check out our games</a>
+                    @if(Auth::user()->auth_level == 'admin')
+                    <a class="btn btn-block btn-danger" href="/admin">Enter Admin Dashboard</a>
+                    @endif
                 </div>
             </div>
         </div>

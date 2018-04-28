@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 use App\User;
 use App\games;
 
@@ -166,8 +167,17 @@ class MyController extends Controller
 
     public function addCash(){
         $current = auth()->user()->wallet;
-        $amount = Input::get('Cquery')+ $current;
         $userID = auth()->user()->id;
+        $get_input_amount = Input::get('Cquery');
+        $mytime = Carbon::now();
+        // Log the amount added to wallet
+        DB::table('wallet_history')->insert([
+            'user_id'=> $userID,
+            'amount' => $get_input_amount,
+            'created_at' => $mytime,
+        ]);
+        //insert amount to wallet
+        $amount = $get_input_amount + $current;
         if($amount <9999.99){
         $add = DB::table('users')->where('id', 'LIKE', $userID)
                         ->update([
@@ -181,6 +191,7 @@ class MyController extends Controller
                         ]);
         }
 
+        //Return view
         return redirect()->back()->with('success', 'Cash Added');
     }
 

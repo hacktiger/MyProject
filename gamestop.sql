@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 26, 2018 at 03:55 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th4 28, 2018 lúc 10:23 AM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gamestop`
+-- Cơ sở dữ liệu: `gamestop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `favorites`
+-- Cấu trúc bảng cho bảng `favorites`
 --
 
 CREATE TABLE `favorites` (
@@ -34,7 +34,7 @@ CREATE TABLE `favorites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `favorites`
+-- Đang đổ dữ liệu cho bảng `favorites`
 --
 
 INSERT INTO `favorites` (`user_id`, `game_title`) VALUES
@@ -52,7 +52,7 @@ INSERT INTO `favorites` (`user_id`, `game_title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `games`
+-- Cấu trúc bảng cho bảng `games`
 --
 
 CREATE TABLE `games` (
@@ -71,7 +71,7 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `games`
+-- Đang đổ dữ liệu cho bảng `games`
 --
 
 INSERT INTO `games` (`title`, `slug`, `avg_rating`, `description`, `release`, `link`, `image`, `upload_by`, `price`, `sales`, `created_at`, `updated_at`) VALUES
@@ -88,7 +88,7 @@ INSERT INTO `games` (`title`, `slug`, `avg_rating`, `description`, `release`, `l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `games_tags`
+-- Cấu trúc bảng cho bảng `games_tags`
 --
 
 CREATE TABLE `games_tags` (
@@ -98,7 +98,7 @@ CREATE TABLE `games_tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `games_tags`
+-- Đang đổ dữ liệu cho bảng `games_tags`
 --
 
 INSERT INTO `games_tags` (`id`, `games_title`, `tags_id`) VALUES
@@ -126,7 +126,7 @@ INSERT INTO `games_tags` (`id`, `games_title`, `tags_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Cấu trúc bảng cho bảng `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -136,7 +136,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Đang đổ dữ liệu cho bảng `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -149,12 +149,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2018_04_08_095145_create_report_table', 1),
 (8, '2018_04_08_113430_create_favorites_table', 1),
 (9, '2018_04_08_151042_create_rating_table', 2),
-(10, '2018_04_21_085111_add_description_to_users', 3);
+(10, '2018_04_21_085111_add_description_to_users', 3),
+(12, '2018_04_28_090517_wallet_history_table', 4),
+(13, '2018_04_28_104730_add_price_to_sales_log', 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Cấu trúc bảng cho bảng `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -164,7 +166,7 @@ CREATE TABLE `password_resets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `password_resets`
+-- Đang đổ dữ liệu cho bảng `password_resets`
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -174,7 +176,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rating`
+-- Cấu trúc bảng cho bảng `rating`
 --
 
 CREATE TABLE `rating` (
@@ -184,7 +186,7 @@ CREATE TABLE `rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `rating`
+-- Đang đổ dữ liệu cho bảng `rating`
 --
 
 INSERT INTO `rating` (`game_title`, `user_id`, `rating`) VALUES
@@ -197,7 +199,7 @@ INSERT INTO `rating` (`game_title`, `user_id`, `rating`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `report`
+-- Cấu trúc bảng cho bảng `report`
 --
 
 CREATE TABLE `report` (
@@ -213,34 +215,37 @@ CREATE TABLE `report` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sales_log`
+-- Cấu trúc bảng cho bảng `sales_log`
 --
 
 CREATE TABLE `sales_log` (
   `id` int(10) UNSIGNED NOT NULL,
   `game_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double(6,2) DEFAULT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `sales_log`
+-- Đang đổ dữ liệu cho bảng `sales_log`
 --
 
-INSERT INTO `sales_log` (`id`, `game_title`, `user_id`, `created_at`, `updated_at`) VALUES
-(21, 'BlazeBlue : Central Fiction', 53, '2018-04-21 10:34:28', '2018-04-21 10:34:28'),
-(22, 'BioShock 2 Remastered', 53, '2018-04-21 11:39:33', '2018-04-21 11:39:33'),
-(23, 'Age of Empire', 53, '2018-04-21 12:53:56', '2018-04-21 12:53:56'),
-(24, 'The Escapists 2', 53, '2018-04-23 11:57:28', '2018-04-23 11:57:28'),
-(25, 'StarCraft 2 : Legacy of the Void', 53, '2018-04-23 13:33:35', '2018-04-23 13:33:35'),
-(26, 'Metal Gear Rising : Revengeance', 53, '2018-04-23 13:35:32', '2018-04-23 13:35:32'),
-(28, 'BioShock : Infinite', 53, '2018-04-24 17:18:45', '2018-04-24 17:18:45');
+INSERT INTO `sales_log` (`id`, `game_title`, `price`, `user_id`, `created_at`, `updated_at`) VALUES
+(21, 'BlazeBlue : Central Fiction', NULL, 53, '2018-04-21 10:34:28', '2018-04-21 10:34:28'),
+(22, 'BioShock 2 Remastered', NULL, 53, '2018-04-21 11:39:33', '2018-04-21 11:39:33'),
+(23, 'Age of Empire', NULL, 53, '2018-04-21 12:53:56', '2018-04-21 12:53:56'),
+(24, 'The Escapists 2', NULL, 53, '2018-04-23 11:57:28', '2018-04-23 11:57:28'),
+(25, 'StarCraft 2 : Legacy of the Void', NULL, 53, '2018-04-23 13:33:35', '2018-04-23 13:33:35'),
+(26, 'Metal Gear Rising : Revengeance', NULL, 53, '2018-04-23 13:35:32', '2018-04-23 13:35:32'),
+(28, 'BioShock : Infinite', NULL, 53, '2018-04-24 17:18:45', '2018-04-24 17:18:45'),
+(29, 'StarCraft 2 : Legacy of the Void', NULL, 1, '2018-04-28 08:10:35', '2018-04-28 08:10:35'),
+(30, 'BioShock 2 Remastered', NULL, 1, '2018-04-28 08:13:46', '2018-04-28 08:13:46');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tags`
+-- Cấu trúc bảng cho bảng `tags`
 --
 
 CREATE TABLE `tags` (
@@ -251,7 +256,7 @@ CREATE TABLE `tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `tags`
+-- Đang đổ dữ liệu cho bảng `tags`
 --
 
 INSERT INTO `tags` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -262,12 +267,14 @@ INSERT INTO `tags` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (5, 'Adventure', '2018-04-17 10:21:03', '2018-04-17 10:21:03'),
 (6, 'Fighting', '2018-04-17 12:21:35', '2018-04-17 12:21:35'),
 (7, 'Horror', '2018-04-17 12:21:46', '2018-04-17 12:21:46'),
-(8, '2 Person', '2018-04-17 12:21:53', '2018-04-17 12:21:53');
+(8, '2 Person', '2018-04-17 12:21:53', '2018-04-17 12:21:53'),
+(9, 'aa', '2018-04-27 09:58:14', '2018-04-27 09:58:14'),
+(10, 'as', '2018-04-27 10:15:12', '2018-04-27 10:15:12');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -285,11 +292,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `wallet`, `auth_level`, `remember_token`, `created_at`, `updated_at`, `description`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$bu1/afJgVxVTcpbCDGpnUuQWKv7dv8N4PrBi5pgno9qIpztTalENm', 'none', 0.00, 'banned', 't3KB3qPCQMH9xbLVaF2xBDxCUxDYJb8S7pFC5PDaiGgXz7o5nDbmDDaBjmkA', '2018-04-17 10:18:22', '2018-04-26 13:50:54', NULL),
+(1, 'admin', 'admin@gmail.com', '$2y$10$bu1/afJgVxVTcpbCDGpnUuQWKv7dv8N4PrBi5pgno9qIpztTalENm', 'none', 130.00, 'admin', 'k9aRkCRk9YKUXZmxaDGGkmnaDF0A8IXgSlitbEdf5RBAjlmJ8bEqs0FbcYsM', '2018-04-17 10:18:22', '2018-04-26 13:50:54', NULL),
 (2, 'user 2', '2@gmail.com', '$2y$10$uEcTmIijBswIhqN27J5mh.qVDazMaawd2SCHFZciINT1hGrsqE3We', 'none', 0.00, 'casual', 'c2GqUrfZUfAmqKu3fPmkMVOpQhRXoRII4O0EqlNHoA0zadL9EgmgK8OzgBRe', '2018-04-20 02:37:20', '2018-04-20 02:37:20', NULL),
 (30, 'nHFNGEOBVx', 'jYa7lbm4GS@gmail.com', '$2y$10$jQAHch0LYqOBRGonJ1NbSeDkiKUtSPgB2km7kJrdkTUFXyU3GBynS', 'none', 3.62, 'banned', NULL, NULL, '2018-04-26 13:07:58', NULL),
 (50, 'VKLTbsqCfI', 'YIcX7dz0xB@gmail.com', '$2y$10$aRX048GGpsIWYVm29m6MmeWlWlpf.J1Ybi9HL22ZBgefeXH8ddVxy', 'none', 6.10, 'casual', NULL, NULL, NULL, NULL),
@@ -300,25 +307,49 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `wallet`, `aut
 (55, 'asd', 'joei@gmail.com', '$2y$10$kr72.7tNyeVlUCfjCIVKAe1.gEkQLougto7auk9YSuakmmMJ1gK0.', 'none', 0.00, 'banned', 'ZsoRxTMGOfx1S1NzWlM2pn6Cd56fsTeP6AP79p5tX2h7xQF5iM4JYAp2fDc6', '2018-04-25 12:28:23', '2018-04-26 12:23:00', NULL),
 (56, 'Blizzard', 'asd2@gmail.com', '$2y$10$weui6QFDWnUYLtvgNmtwlu3txAtcpx1CMvvwWhF2zQsav/jq6/H3W', 'none', 0.00, 'developer', NULL, '2018-04-25 17:17:52', '2018-04-25 18:09:58', NULL);
 
+-- --------------------------------------------------------
+
 --
--- Indexes for dumped tables
+-- Cấu trúc bảng cho bảng `wallet_history`
+--
+
+CREATE TABLE `wallet_history` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `amount` double(6,2) UNSIGNED NOT NULL DEFAULT '0.00',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `wallet_history`
+--
+
+INSERT INTO `wallet_history` (`id`, `user_id`, `amount`, `created_at`, `updated_at`) VALUES
+(1, 1, 12.00, NULL, NULL),
+(2, 1, 12.00, '2018-04-28 08:21:47', NULL),
+(3, 1, 12.00, '2018-04-28 08:22:10', NULL),
+(4, 1, 6.00, '2018-04-28 08:22:33', NULL);
+
+--
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `favorites`
+-- Chỉ mục cho bảng `favorites`
 --
 ALTER TABLE `favorites`
   ADD KEY `favorites_game_title_foreign` (`game_title`),
   ADD KEY `favorites_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `games`
+-- Chỉ mục cho bảng `games`
 --
 ALTER TABLE `games`
   ADD PRIMARY KEY (`title`);
 
 --
--- Indexes for table `games_tags`
+-- Chỉ mục cho bảng `games_tags`
 --
 ALTER TABLE `games_tags`
   ADD PRIMARY KEY (`id`),
@@ -326,26 +357,26 @@ ALTER TABLE `games_tags`
   ADD KEY `games_tags_tags_id_foreign` (`tags_id`);
 
 --
--- Indexes for table `migrations`
+-- Chỉ mục cho bảng `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
+-- Chỉ mục cho bảng `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `rating`
+-- Chỉ mục cho bảng `rating`
 --
 ALTER TABLE `rating`
   ADD KEY `rating_game_title_foreign` (`game_title`),
   ADD KEY `rating_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `report`
+-- Chỉ mục cho bảng `report`
 --
 ALTER TABLE `report`
   ADD PRIMARY KEY (`id`),
@@ -353,7 +384,7 @@ ALTER TABLE `report`
   ADD KEY `title` (`title`);
 
 --
--- Indexes for table `sales_log`
+-- Chỉ mục cho bảng `sales_log`
 --
 ALTER TABLE `sales_log`
   ADD PRIMARY KEY (`id`),
@@ -361,96 +392,115 @@ ALTER TABLE `sales_log`
   ADD KEY `sales_log_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `tags`
+-- Chỉ mục cho bảng `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Chỉ mục cho bảng `wallet_history`
+--
+ALTER TABLE `wallet_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `wallet_history_user_id_foreign` (`user_id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `games_tags`
+-- AUTO_INCREMENT cho bảng `games_tags`
 --
 ALTER TABLE `games_tags`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT cho bảng `report`
+--
+ALTER TABLE `report`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `sales_log`
+--
+ALTER TABLE `sales_log`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT cho bảng `tags`
+--
+ALTER TABLE `tags`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `report`
---
-ALTER TABLE `report`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `sales_log`
---
-ALTER TABLE `sales_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `tags`
---
-ALTER TABLE `tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT cho bảng `wallet_history`
+--
+ALTER TABLE `wallet_history`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `favorites`
+-- Các ràng buộc cho bảng `favorites`
 --
 ALTER TABLE `favorites`
   ADD CONSTRAINT `favorites_game_title_foreign` FOREIGN KEY (`game_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `favorites_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `games_tags`
+-- Các ràng buộc cho bảng `games_tags`
 --
 ALTER TABLE `games_tags`
   ADD CONSTRAINT `games_tags_games_title_foreign` FOREIGN KEY (`games_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `games_tags_tags_id_foreign` FOREIGN KEY (`tags_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `rating`
+-- Các ràng buộc cho bảng `rating`
 --
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_game_title_foreign` FOREIGN KEY (`game_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rating_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `report`
+-- Các ràng buộc cho bảng `report`
 --
 ALTER TABLE `report`
   ADD CONSTRAINT `report_ibfk_1` FOREIGN KEY (`reporter`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `report_ibfk_2` FOREIGN KEY (`title`) REFERENCES `games` (`title`);
 
 --
--- Constraints for table `sales_log`
+-- Các ràng buộc cho bảng `sales_log`
 --
 ALTER TABLE `sales_log`
   ADD CONSTRAINT `sales_log_game_title_foreign` FOREIGN KEY (`game_title`) REFERENCES `games` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sales_log_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `wallet_history`
+--
+ALTER TABLE `wallet_history`
+  ADD CONSTRAINT `wallet_history_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

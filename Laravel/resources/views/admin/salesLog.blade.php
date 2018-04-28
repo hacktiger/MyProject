@@ -47,6 +47,7 @@ thead {
                 @endforeach
             </tbody>
         </table>
+        {{$sales_log->links()}}
     </div>
 </div>
 @endsection

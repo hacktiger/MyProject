@@ -154,7 +154,7 @@ chart.render();
 		<h4 class="" style="padding:20px">Price : {{$game->price}}$</h4>
 		@endif
 		@if ($game->sales != 0)
-		<h4 class="" style='padding:20px'>Price : <font color='gray'><s>{{$game->price}}</s></font>  {{$game->price -$game->sales}}$</h4>
+		<h4 class="" style='padding:20px'>Price : <font color='gray'><s>{{$game->price}}$</s></font>  {{$game->price -$game->sales}}$</h4>
 		@endif
 		
 		<!-- upvote - downvote + report -->
@@ -232,10 +232,38 @@ chart.render();
 		@endif
 		{{-- Show purchase option --}}
 		@if(!$owned)
-		{!! Form::open(['action'=> ['MyController@purchase', $game->title], 'method'=>'POST', 'id'=>'purchase-form']) !!}
-			<input type="text" class="d-none" name="purchase" value="0">	
-			<button id="purchase" data-toggle="tooltip" data-placement="bottom" title="Purchase Game" class="btn btn-block btn-primary">Purchase Game</button>
-		{!! Form::close() !!}
+		<div class="col-sm-12 col-md-12">
+				<button  type="button"  class="btn btn-block btn-primary" data-toggle="modal" data-target="#purchaseModal">
+					Purchase
+				</button>
+				<!--the actual modal-->
+				<div class="modal fade" id="purchaseModal">
+					<div class="modal-dialog modal-md">
+						<div class="modal-content">
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title">Are you sure about this payment ?</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<!-- Modal body -->
+							<div class="modal-body">
+								<!-- Price of game -->
+								<h4>Your Wallet : {{Auth::user()->wallet}}$</h4>
+								<h4>Game Price : {{$game->price}}$;</h4>
+								<hr style="width: 70%;">
+								<h4>Remaining &ensp;: {{Auth::user()->wallet-$game->price}}$</h4>
+								<!-- FORM -->
+								<br><br>
+								{!! Form::open(['action'=> ['MyController@purchase', $game->title], 'method'=>'POST', 'id'=>'purchase-form']) !!}
+								<input type="text" class="d-none" name="purchase" value="0">	
+								<button id="purchase" data-toggle="tooltip" data-placement="bottom" title="Purchase Game" class="btn btn-block btn-primary">Purchase Game</button>
+								{!! Form::close() !!}	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
 		@endif
 
 		<!-- user rating -->

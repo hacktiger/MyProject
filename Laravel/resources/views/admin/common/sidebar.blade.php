@@ -23,7 +23,8 @@
                     	<a id="wallet_history" class="nav-link" href="{{route('admin.wallet_history')}}">Wallet History</a>
                     </li>
                     <li>
-                    	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports</a>
+                    	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports </a>
+
                     </li>
                     <li>
                         <a id="tag_manage" class="nav-link" href="{{route('tags.manage')}}">Tags Manage</a>

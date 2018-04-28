@@ -38,7 +38,8 @@ class AdminController extends Controller
         return view('admin.show.show-salesLog',['log'=>$log]);
     }
     public function walletHistory(){
-        return view('admin.walletHistory');
+        $log = DB::table('wallet_history')->orderBy('id','DESC')->paginate(12);
+        return view('admin.walletHistory',['log'=>$log]);
     }
     //GAMES-report
     public function gameReport(){
