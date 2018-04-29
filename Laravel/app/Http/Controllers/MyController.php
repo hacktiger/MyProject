@@ -42,12 +42,12 @@ class MyController extends Controller
         }
         else{
     	DB::table('report')->insert([
-    		'reporter' => $report_by,
+    		'upload_by' => $report_by,
     		'Impropriate' => $report_1,
     		'Fraud'	=> $report_2,
     		'Plagarism' => $report_3,
             'text' => $text,
-            'title' => $title,
+            'game_title' => $title,
     	]);	
 
         return redirect('/games')->with('success','Game Reported');
@@ -170,12 +170,7 @@ class MyController extends Controller
         $userID = auth()->user()->id;
         $get_input_amount = Input::get('Cquery');
         $mytime = Carbon::now();
-        // Log the amount added to wallet
-        DB::table('wallet_history')->insert([
-            'user_id'=> $userID,
-            'amount' => $get_input_amount,
-            'created_at' => $mytime,
-        ]);
+        
         //insert amount to wallet
         $amount = $get_input_amount + $current;
         if($amount <9999.99){
@@ -183,12 +178,24 @@ class MyController extends Controller
                         ->update([
                             'wallet' =>$amount,
                         ]);
+                // Log the amount added to wallet
+                DB::table('wallet_history')->insert([
+                    'user_id'=> $userID,
+                    'amount' => $get_input_amount,
+                    'created_at' => $mytime,
+                ]);
         //wallet size limit
         }else{
             $add = DB::table('users')->where('id', 'like', $userID)
                         ->update([
                             'wallet'=>9999.99,
                         ]);
+                                // Log the amount added to wallet
+        DB::table('wallet_history')->insert([
+            'user_id'=> $userID,
+            'amount' => 9999.99,
+            'created_at' => $mytime,
+        ]);
         }
 
         //Return view
