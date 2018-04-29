@@ -45,9 +45,9 @@ Route::resource('tags','TagController');
 Route::resource('profile','ProfileController');
 // End Resources
 
-//ADMIN routes
+//ADMIN routes 
+Route::get('/admin/index','AdminController@index')->name('admin.index');
 Route::get('/admin/game-manage','AdminController@manageGame')->name('games.manage');
-
 Route::get('/admin/sales-log','AdminController@salesLog')->name('admin.sales_log');
 Route::get('/admin/sales-log/{id}','AdminController@showSalesLog')->name('admin.show-sales_log');
 Route::get('/admin/wallet-history','AdminController@walletHistory')->name('admin.wallet_history');
@@ -60,6 +60,8 @@ Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make')
 Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');
 //END ADMIN routes
 Route::get('/profile/{id}/wallet','ProfileController@wallet')->name('profile.wallet');
+
+
 // Addtional function in show
 Route::post('/games/{game}/report','MyController@report')->name('games.report');
 Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
@@ -72,13 +74,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/all-games','GenreController@allGames')->name('all_games');
+Route::post('/addCash', 'MyController@addCash');
 
 Route::post('/search','SearchController@titleSearch');
 Route::get('/search/advance', 'SearchController@searchPage');
 Route::post('/search/advancedResults', 'SearchController@advancedSearch');
-
-Route::post('/addCash', 'MyController@addCash');
-
 
 Route::post('/profileSearch', 'SearchController@profileSearch');
 Route::post('/tagSearch', 'SearchController@tagSearch');

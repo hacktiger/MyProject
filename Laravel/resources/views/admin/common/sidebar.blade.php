@@ -8,29 +8,52 @@
                     <p>Welcome &nbsp; {{Auth::user()->name}}</p>
                     <hr>
                     <li>
-                        <a id="main" class='nav-link current-active' href="{{route('admin')}}">Admin Dashboard</a> 
+                        <a id="main" class='nav-link current-active' href="{{route('admin.index')}}">Admin Dashboard</a> 
                     </li>
                     <li>
                         <a id="upload_game" class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
                     </li>
                     <li>
-                        <a id="game_manage" class="nav-link" href="{{route('games.manage')}}">Game Manage</a>                 
+                        <a id="game_manage" class="nav-link" href="{{route('games.manage')}}">Game Manage &nbsp; 
+                            @if($new_game_count != 0)
+                            <span class="badge badge-light"> &nbsp; {{$new_game_count}}&nbsp; </span>
+                            @endif
+                        </a>                 
                     </li>
                     <li>
-                    	<a id="sales_log" class="nav-link" href="{{route('admin.sales_log')}}">Sales Log</a>
+                    	<a id="sales_log" class="nav-link" href="{{route('admin.sales_log')}}">Sales Log &nbsp; 
+                            @if($new_sales_log_count != 0)
+                            <span class="badge badge-light"> &nbsp; {{$new_sales_log_count}}&nbsp; </span>
+                            @endif
+                        </a>
                     </li>
                     <li>
-                    	<a id="wallet_history" class="nav-link" href="{{route('admin.wallet_history')}}">Wallet History</a>
+                    	<a id="wallet_history" class="nav-link" href="{{route('admin.wallet_history')}}">Wallet History &nbsp; 
+                            @if($new_wallet_count != 0)
+                            <span class="badge badge-light"> &nbsp; {{$new_wallet_count}}&nbsp; </span>
+                            @endif 
+                        </a>
                     </li>
                     <li>
-                    	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports </a>
-
+                    	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports  &nbsp; 
+                            @if($new_game_report_count != 0)
+                            <span class="badge badge-light"> &nbsp; {{$new_game_report_count}}&nbsp; </span>
+                            @endif 
+                        </a>
                     </li>
                     <li>
-                        <a id="tag_manage" class="nav-link" href="{{route('tags.manage')}}">Tags Manage</a>
+                        <a id="tag_manage" class="nav-link" href="{{route('tags.manage')}}">Tags Manage &nbsp; 
+                            @if($new_tag_count != 0)
+                            <span class="badge badge-light"> &nbsp; {{$new_tag_count}}&nbsp; </span>
+                            @endif 
+                        </a>
                     </li>
                     <li>
-                        <a id="profile_manage" class="nav-link" href="{{route('profiles.manage')}}">Profile Manage</a>  
+                        <a id="profile_manage" class="nav-link" href="{{route('profiles.manage')}}">Profile Manage &nbsp; 
+                            @if($new_profile_count != 0)
+                            <span class="badge badge-light"> &nbsp; {{$new_profile_count}}&nbsp; </span>
+                            @endif  
+                        </a>  
                     </li>           
                 </ul>
                 

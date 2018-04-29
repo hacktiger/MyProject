@@ -140,6 +140,7 @@ class ProfileController extends Controller
         DB::table('users')->where('id',$id)->update([
             'auth_level' => 'admin',
         ]);
+        // notification
 
         return redirect('/profile');
     }

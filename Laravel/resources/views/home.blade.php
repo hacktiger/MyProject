@@ -17,7 +17,7 @@
                     <br>
                     <a class="btn-block btn btn-primary" href="backHome">Check out our games</a>
                     @if(Auth::user()->auth_level == 'admin')
-                    <a class="btn btn-block btn-danger" href="/admin">Enter Admin Dashboard</a>
+                    <a class="btn btn-block btn-danger" href="{{route('admin.index')}}">Enter Admin Dashboard</a>
                     @endif
                 </div>
             </div>
