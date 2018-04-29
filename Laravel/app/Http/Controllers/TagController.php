@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Tags;
-
 class TagController extends Controller
 {
     public function __construct()
@@ -51,10 +50,17 @@ class TagController extends Controller
         ]);
         $tag = new Tags;
         $tag->name =  $request->input('name');
+        if (!isset($tag->name)){
+            return redirect()->back()->with('error', 'Empty field: Tag Name');
+        }
+        if (Tags::where('name', $tag->name)->exists()){
+            return redirect()->back()->with('error', 'Tag already exist');
+        }
         $tag->save();
 
 
-        return redirect()->route('tags.index')->with('success','Tag Created');
+        return redirect()->back()->with('success', 'Tag created');
+        
 
     }
 
@@ -112,6 +118,6 @@ class TagController extends Controller
         $tag = Tags::find($id);
 
         $tag->delete();
-        return redirect('/tags')->with('success','Game Deleted');
+        return redirect()->back()->with('success','Game Deleted');
     }
 }
