@@ -210,7 +210,9 @@
                                 <span>Toggle Sidebar</span>
                             </button>                                                   
                         </div>
-
+						<section style="margin-left : 200px">	
+							@include('inc.messages')
+							</section>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         	<ul class="nav navbar-nav navbar-left" style=" padding-left: 20%; color: #7386D5">
