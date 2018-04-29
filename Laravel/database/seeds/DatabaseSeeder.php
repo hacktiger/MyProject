@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 
 class DatabaseSeeder extends Seeder
@@ -12,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /**
+        
         for($i = 0;$i<50;$i++){
             DB::table('users')->insert([
                 'name' => str_random(10),
@@ -24,51 +25,33 @@ class DatabaseSeeder extends Seeder
 
         }
 
-    	for($i = 0;$i<50;$i++){
-        // $this->call(UsersTableSeeder::class);
-            DB::table('rating')->insert([
-                'game_title' => 'Nier: Automata',
-                'user_id'=> $i+1,
-                'rating'=>  mt_rand (0,5),
-            ]);
 
-            DB::table('rating')->insert([
-                'game_title' => 'Age of Empire',
-                'user_id'=> $i+1,
-                'rating'=>  mt_rand (0,5),
-            ]);
-
-            DB::table('rating')->insert([
-                'game_title' => 'BioShock : Infinite',
-                'user_id'=> $i+1,
-                'rating'=>  mt_rand (0,5),
-            ]);   
-
-            DB::table('rating')->insert([
-                'game_title' => 'BlazeBlue : Central Fiction',
-                'user_id'=> $i+1,
-                'rating'=>  mt_rand (0,5),
-            ]);
-        } 
-        **/
+        
 
         for($i = 0;$i<20;$i++){
+            $date = Carbon::create(2018, 4, 30, 0, 0, 0);
             DB::table('sales_log')->insert([
                 
                 'game_title'=> 'Counter-Strike : Global Offensive',
                 'user_id'=> mt_rand(1,50),
+                'price' => 40.00,
+                'created_at'  => $date->subDays(rand(1,6))->format('Y-m-d H:i:s')
             ]);
 
             DB::table('sales_log')->insert([
                 
                 'game_title'=> 'StarCraft 2 : Legacy of the Void',
                 'user_id'=> mt_rand(1,50),
+                'price' => 35.00,
+                'created_at'  => $date->subDays(rand(1,6))->format('Y-m-d H:i:s')
             ]);
 
             DB::table('sales_log')->insert([
                 
                 'game_title'=> 'Nier: Automata',
                 'user_id'=> mt_rand(1,50),
+                'price'=>60.00,
+                'created_at'  => $date->subDays(rand(1,6))->format('Y-m-d H:i:s')
             ]);
 
         }              

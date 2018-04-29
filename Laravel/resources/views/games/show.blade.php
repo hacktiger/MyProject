@@ -113,7 +113,7 @@ chart.render();
 <div class="row">
 	<!-- main content of game -->
 	<section class="col-md-8 col-sm-8">
-		<div style="height: 417.6px ; width: 742.4px">
+		<div style="max-height: 417.6px ; max-width: 742.4px">
 			<img  style="height: 100%; width: 100%; object-fit: contain;" alt="{{$game->title}}" src="/storage/cover_images/{{$game->image}}">
 		</div> 
 
