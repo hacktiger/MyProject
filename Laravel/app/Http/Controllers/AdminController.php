@@ -210,10 +210,10 @@ class AdminController extends Controller
         $reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')
         ->leftJoin('games','report.game_title','=','games.title')
         ->select(
-        'report.id as id','report.reporter as userID',
+        'report.id as id','report.upload_by as userID',
         'report.Impropriate as Impropriate','report.Fraud as Fraud',
         'report.Plagarism as Plagarism', 'report.text as text',
-        'report.title as title',
+        'report.game_title as title',
         'games.slug as slug',
         'users.name as userName')
         ->orderBy('report.id', 'ASC')->paginate(12);
