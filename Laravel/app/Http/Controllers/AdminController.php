@@ -39,6 +39,33 @@ class AdminController extends Controller
         $num_admin     =   DB::table('users')->where('auth_level','admin')->count();
         $num_developer =   DB::table('users')->where('auth_level','developer')->count();
         $num_ban       =   DB::table('users')->where('auth_level','ban')->count();
+        // GET DATE LAST WEEK -> NOW
+        $date = array();
+        array_push($date, $date_0 = Carbon::now());
+        array_push($date, $date_1 = Carbon::now()->subDay(1));
+        array_push($date,$date_2 = Carbon::now()->subDay(2));
+        array_push($date,$date_3 = Carbon::now()->subDay(3));
+        array_push($date,$date_4 = Carbon::now()->subDay(4));
+        array_push($date,$date_5 = Carbon::now()->subDay(5));
+        array_push($date,$date_6 = Carbon::now()->subDay(6));
+        array_push($date,$date_6 = Carbon::now()->subDay(7));
+ 
+        $dt = array();
+        $dt_0 = DB::table('sales_log')->where('created_at','<',$date[0])->where('created_at','>',$date[1])->sum('price');
+        $dt_1 = DB::table('sales_log')->where('created_at','<',$date[1])->where('created_at','>',$date[2])->sum('price');
+        $dt_2 = DB::table('sales_log')->where('created_at','<',$date[2])->where('created_at','>',$date[3])->sum('price');
+        $dt_3 = DB::table('sales_log')->where('created_at','<',$date[3])->where('created_at','>',$date[4])->sum('price');
+        $dt_4 = DB::table('sales_log')->where('created_at','<',$date[4])->where('created_at','>',$date[5])->sum('price');
+        $dt_5 = DB::table('sales_log')->where('created_at','<',$date[5])->where('created_at','>',$date[6])->sum('price');
+        $dt_6 = DB::table('sales_log')->where('created_at','<',$date[6])->where('created_at','>',$date[7])->sum('price');
+        array_push($dt,$dt_0);
+        array_push($dt,$dt_1);
+        array_push($dt,$dt_2);
+        array_push($dt,$dt_3);
+        array_push($dt,$dt_4);
+        array_push($dt,$dt_5);
+        array_push($dt,$dt_6);
+        
         return view('admin.admin-index',[
             //USERS NUM
             'num_casual'=>$num_casual,
@@ -52,7 +79,9 @@ class AdminController extends Controller
             'new_sales_log_count'=>$new_sales_log_count,
             'new_game_report_count'=>$new_game_report_count,
             'new_tag_count'=>$new_tag_count,
+            'dt'=>$dt,
         ]);
+        
     }
 
     //GAMES

@@ -199,7 +199,7 @@ class MyController extends Controller
         $purchase = $request->input('purchase');
         $user_id = auth()->user()->id;
         $game= games::find($title);
-        $cash = $game->price -$game->sales;
+        $cash = $game->price - $game->sales;
         $wallet = auth()->user()->wallet - $cash;
         
         if($wallet >=0){
@@ -207,6 +207,7 @@ class MyController extends Controller
             DB::table('sales_log')->insert([
                 'game_title'=> $title,
                 'user_id'=> $user_id,
+                'price'=>$cash,
                 'created_at'=> $lastupdated,
                 'updated_at'=> $lastupdated
             ]);

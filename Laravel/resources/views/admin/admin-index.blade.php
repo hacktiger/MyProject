@@ -8,13 +8,13 @@ $dataPoints = array(
 );
 
 $dataPoints_2 = array( 
-	array("y" => 1,"label" => "Monday" ),
-	array("y" => 2,"label" => "Tuesday" ),
-	array("y" => 3,"label" => "Wednesday" ),
-	array("y" => 4,"label" => "Thursday" ),
-	array("y" => 5,"label" => "Friday" ),
-	array("y" => 6,"label" => "Saturday" ),
-	array("y" => 7,"label" => "Sunday" )
+	array("y" => $dt[0],"label" => "Last 1 Day" ),
+	array("y" => $dt[1],"label" => "Last 2 Days" ),
+	array("y" => $dt[2],"label" => "Last 3 Days" ),
+	array("y" => $dt[3],"label" => "Last 4 Days" ),
+	array("y" => $dt[4],"label" => "Last 5 Days" ),
+	array("y" => $dt[5],"label" => "Last 6 Days" ),
+	array("y" => $dt[6],"label" => "Last 7 Days" )
 );
  
 ?>
@@ -67,7 +67,7 @@ chart.render();
 var chart_2 = new CanvasJS.Chart("chartContainer-2", {
 	animationEnabled: true,
 	title:{
-		text: "Revenue Chart On Days of the Week"
+		text: "Revenue Of Past Week"
 	},
 	axisY: {
 		title: "Revenue (in USD)",
@@ -75,7 +75,7 @@ var chart_2 = new CanvasJS.Chart("chartContainer-2", {
 	},
 	data: [{
 		type: "bar",
-		yValueFormatString: "$#,##0$",
+		yValueFormatString: "$#,##0",
 		indexLabel: "{y}",
 		indexLabelPlacement: "inside",
 		indexLabelFontWeight: "bolder",
