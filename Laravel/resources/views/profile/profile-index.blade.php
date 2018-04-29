@@ -153,7 +153,7 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
                     @foreach($admin as $admins)
                     <tr>
                         <th><a href="/tags/{{$admins->id}}">{{$admins->name}}</a></th>
-                        <th>{{$users->email}}</th>
+                        <th>{{$admins->email}}</th>
                         <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$admins->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $admins->id], 'method'=>'POST']) !!}
                                 {{Form::hidden('_method', 'DELETE')}}
