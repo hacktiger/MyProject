@@ -199,7 +199,6 @@ class MyController extends Controller
         $purchase = $request->input('purchase');
         $user_id = auth()->user()->id;
         $game= games::find($title);
-        var_dump($game);
         $cash = $game->price -$game->sales;
         $wallet = auth()->user()->wallet - $cash;
         
@@ -211,7 +210,7 @@ class MyController extends Controller
                 'created_at'=> $lastupdated,
                 'updated_at'=> $lastupdated
             ]);
-            $CashUpdate = DB::table('users')->where('id', 'LIKE', $user_id)->update([
+            DB::table('users')->where('id',$user_id)->update([
                 'wallet' =>$wallet,
             ]);
             return redirect()->back()->with('success', 'Game Purchased');

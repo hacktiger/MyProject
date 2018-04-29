@@ -66,18 +66,17 @@
 	    left: 0;
 	    height: 100vh;
 	    z-index: 999;
-	    background: 	#47c2eb;
+	    background: #737373;
 	    color: #fff;
 	    transition: all 0.3s;
 	}
-
 	#sidebar.active {
 	    margin-left: -250px;
 	}
 
 	#sidebar .sidebar-header {
 	    padding: 20px;
-	    background: #19b3e6;
+	    background: #4d4d4d;
 	}
 
 	#sidebar ul.components {
@@ -95,7 +94,7 @@
 	    display: block;
 	}
 	#sidebar ul li a:hover {
-	    color: 	#47c2eb;
+	    color: 	#737373;
 	    background: #fff;
 	}
 
@@ -141,7 +140,7 @@
 	}
 	a.download {
 	    background: #fff;
-	    color: 	#47c2eb;
+	    color: 	#737373;
 	}
 	a.article, a.article:hover {
 	    background: #6d7fcc !important;
@@ -188,7 +187,7 @@
 	}	
 	.current-active {
 		background-color: #fff;
-		color: 	#47c2eb;
+		color: 	#737373;
 	}	
 
 </style>
@@ -205,7 +204,7 @@
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn  navbar-btn" style="background-color: 	#47c2eb; color: #fff">
+                            <button type="button" id="sidebarCollapse" class="btn  navbar-btn" style="background-color: 	#737373; color: #fff">
                                 <i class="glyphicon glyphicon-align-left"></i>
                                 <span>Toggle Sidebar</span>
                             </button>                                                   
@@ -213,13 +212,26 @@
 
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        	<ul class="nav navbar-nav navbar-left" style=" padding-left: 8%; color: 	#47c2eb">
-                        		<li><h3>User Dashboard</h3></li>
+                        	
+							
                   
-                        	</ul>
+
                         	<ul class="nav navbar-nav navbar-right">
-                        		<li style="margin-top:30%;">My Profile</li>
-                        	</ul>
+                        		<li><h3>User Dashboard</h3></li>
+                        		<li>Wallet Amount : $$$</li>
+                                <li><div class="dropdown">
+									  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">USER NAME
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu">
+									    <li style="color:red;"><a href="#">MyProfile</a></li>
+									    <li><a href="#">SMT1</a></li>
+									    <li><a href="#">SMT2</a></li>
+									    <li><hr></li>
+									    <li><a href="#">Logout</a></li>
+									  </ul>
+									</div>
+                                </li>
+                            </ul>
                         	
                         </div>
 

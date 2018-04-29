@@ -8,12 +8,13 @@ $dataPoints = array(
 );
 
 $dataPoints_2 = array( 
-	array("y" => 7,"label" => "Monday" ),
-	array("y" => 12,"label" => "Tuesday" ),
-	array("y" => 28,"label" => "Wednesday" ),
-	array("y" => 18,"label" => "June" ),
-	array("y" => 41,"label" => "July" ),
-	array("y" => 41,"label" => "July" )
+	array("y" => 1,"label" => "Monday" ),
+	array("y" => 2,"label" => "Tuesday" ),
+	array("y" => 3,"label" => "Wednesday" ),
+	array("y" => 4,"label" => "Thursday" ),
+	array("y" => 5,"label" => "Friday" ),
+	array("y" => 6,"label" => "Saturday" ),
+	array("y" => 7,"label" => "Sunday" )
 );
  
 ?>
@@ -66,7 +67,7 @@ chart.render();
 var chart_2 = new CanvasJS.Chart("chartContainer-2", {
 	animationEnabled: true,
 	title:{
-		text: "Revenue Chart Over the Week"
+		text: "Revenue Chart On Days of the Week"
 	},
 	axisY: {
 		title: "Revenue (in USD)",
@@ -74,7 +75,7 @@ var chart_2 = new CanvasJS.Chart("chartContainer-2", {
 	},
 	data: [{
 		type: "bar",
-		yValueFormatString: "$#,##0K",
+		yValueFormatString: "$#,##0$",
 		indexLabel: "{y}",
 		indexLabelPlacement: "inside",
 		indexLabelFontWeight: "bolder",

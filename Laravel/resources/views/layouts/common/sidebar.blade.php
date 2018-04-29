@@ -113,7 +113,7 @@
 
 
     @if (Auth::user()-> auth_level !=='casual')
-      <a class="nav-link" href="{{route('admin')}}"> Admin Panel </a>
+      <a class="nav-link" href="{{route('admin.index')}}"> Admin Panel </a>
     @endif 
     
     <!--Logout link-->
