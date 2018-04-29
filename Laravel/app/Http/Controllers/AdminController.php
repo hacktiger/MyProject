@@ -22,14 +22,30 @@ class AdminController extends Controller
     }
     //INDEX
     public function index(){
+        //NOTIFICATION
         $new_profile_count      = DB::table('users')->where('status','Unread')->count();
         $new_game_count         = DB::table('games')->where('status','Unread')->count();
         $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
         $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
         $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
         $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
-
-        return view('admin.admin',[
+        //----------------------------------------------------------------------------------------//
+        //                                                                                        //
+        //                                      CHARTS DATA                                       //
+        //                                                                                        //
+        //----------------------------------------------------------------------------------------//
+        //USERS
+        $num_casual    =   DB::table('users')->where('auth_level','casual')->count();
+        $num_admin     =   DB::table('users')->where('auth_level','admin')->count();
+        $num_developer =   DB::table('users')->where('auth_level','developer')->count();
+        $num_ban       =   DB::table('users')->where('auth_level','ban')->count();
+        return view('admin.admin-index',[
+            //USERS NUM
+            'num_casual'=>$num_casual,
+            'num_admin'=>$num_admin,
+            'num_developer'=>$num_developer,
+            'num_ban'=>$num_ban,
+            // NOTIFICATION
             'new_profile_count'=>$new_profile_count,
             'new_game_count'=>$new_game_count,
             'new_wallet_count'=>$new_wallet_count,
@@ -238,7 +254,7 @@ class AdminController extends Controller
         //   MAIN
         // -------//
     	// get users
-        $user = User::orderBy('created_at','DESC')->paginate(18);
+        $user = DB::table('users')->where('auth_level','casual')->orderBy('id','DESC')->paginate(20);
 
         // get admins
         $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
