@@ -44,7 +44,7 @@
                     @if (Auth::user()-> auth_level =='admin')
                     <li>   
                         <hr>        
-                <a class="nav-link" href="{{route('admin')}}"> Admin Panel </a>
+                <a class="nav-link" href="{{route('admin.index')}}"> Admin Panel </a>
                         <hr>
                     </li>
                     @endif         

@@ -198,7 +198,7 @@
     <body>
         <div class="wrapper">
             <!-- Sidebar Holder -->
-            @include('layouts.common.sidebar-test')
+            @include('layouts.common.sidebar')
 
             <!-- Page Content Holder -->
             <div id="content">
@@ -234,6 +234,7 @@
                     </div>
                 </nav>
             <div style=" padding : 5px; box-shadow: 2px 2px #888888;">Notification by admins</div>
+            <br><br>
             @yield('content')
 
             <!-- END MAIN CONTENT -->
