@@ -156,7 +156,19 @@ class GamesController extends Controller
     {           
         $this->middleware('auth');
         //get game in games database
-        $game = DB::table('games')->where('slug',$slug)->first();
+        $game = DB::table('games')->leftJoin('users', 'users.name','=', 'games.upload_by')->select([
+            'users.id as devID',
+            'games.title as title',
+            'games.slug as slug',
+            'games.avg_rating as avg_rating',
+            'games.description as description',
+            'games.release as release',
+            'games.link as link',
+            'games.image as image',
+            'games.upload_by as upload_by',
+            'games.price as price',
+            'games.sales as sales'
+        ])->where('slug',$slug)->first();
         // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
