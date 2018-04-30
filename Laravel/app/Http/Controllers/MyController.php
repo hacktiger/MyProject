@@ -17,6 +17,7 @@ class MyController extends Controller
     }
 
     public function report(Request $request, $title){
+        //
     	$report_1 = $request->input('report_1');
     	$report_2 = $request->input('report_2');
     	$report_3 = $request->input('report_3');
@@ -50,7 +51,7 @@ class MyController extends Controller
             'game_title' => $title,
     	]);	
 
-        return redirect('/games')->with('success','Game Reported');
+        return redirect()->back()->with('success','Game Reported');
         }
     }	
 

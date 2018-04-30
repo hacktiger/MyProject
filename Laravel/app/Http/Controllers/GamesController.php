@@ -37,8 +37,10 @@ class GamesController extends Controller
         $sales = DB::table('games')->where('sales', '<>', 0)
                 ->orderBy('created_at','DESC')
                 ->take(3)->get();
+        //notification
+        $notification = DB::table('notification')->orderBy('id','DESC')->paginate(3);
         //return
-        return view('index',['game'=>$game, 'sales'=>$sales ]);
+        return view('index',['game'=>$game, 'sales'=>$sales, 'notification'=>$notification ]);
     }
 
     /**

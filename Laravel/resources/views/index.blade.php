@@ -2,6 +2,24 @@
 
 @section('style')
 <style type="text/css">
+/** 
+Card - BS 4
+**/
+.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}
+.card>hr{margin-right:0;margin-left:0}
+.card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}
+.card>.list-group:last-child .list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}
+.card-body{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}
+.card-title{margin-bottom:.75rem}
+.card-subtitle{margin-top:-.375rem;margin-bottom:0}
+.card-text:last-child{margin-bottom:0}
+.card-header{padding:.75rem 1.25rem;margin-bottom:0;background-color:rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.125)}
+.card-header:first-child{border-radius:calc(.25rem - 1px) calc(.25rem - 1px) 0 0}
+.card-header+.list-group .list-group-item:first-child{border-top:0}
+.card-footer{padding:.75rem 1.25rem;background-color:rgba(0,0,0,.03);border-top:1px solid rgba(0,0,0,.125)}
+.card-footer:last-child{border-radius:0 0 calc(.25rem - 1px) calc(.25rem - 1px)}
+
+
 
 .carousel-caption {
   top: 0;
@@ -11,7 +29,6 @@
   background-color: #f2f2f2;
   cursor: pointer;
 }
-
 </style>
 
 @endsection
@@ -20,6 +37,17 @@
 @endsection
 
 @section('content')
+
+<div style=" border: 1px solid #737373;
+    border-radius: 5px;">
+@foreach($notification as $noti)
+  <div style="padding: 5px">
+      <p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub;?></p>
+  </div> 
+@endforeach
+</div>
+<br><br>
+
 <h1><center>Ongoing Sales</center></h1>
 <div class="container">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -84,7 +112,7 @@
             @if ( $games->sales != 0)
             <h5>Price : <s>{{$games->price}}$</s> <font color = 'red'><b>{{$games->price - $games->sales}}$</b></font><small>  On Sale</small></h5>
             @endif
-            <p class="card-text">something about this game that takes really long sentences</p>
+            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,150); echo $sub;?></p>
           </div>
           <!-- Footer -->
           <div class="card-footer">

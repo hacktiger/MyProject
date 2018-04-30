@@ -236,8 +236,7 @@
                         </div>
                     </div>
                 </nav>
-            <div style=" padding : 5px; box-shadow: 2px 2px #888888; background-color: #f2f2f2">Notification by admins</div>
-            <br><br>
+
             <section style="margin-left : 50px; margin-right: 50px;">	
 				@include('inc.messages')
 			</section>

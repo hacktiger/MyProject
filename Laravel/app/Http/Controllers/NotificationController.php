@@ -187,7 +187,7 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //        //
+        //
         $new_profile_count      = DB::table('users')->where('status','Unread')->count();
         $new_game_count         = DB::table('games')->where('status','Unread')->count();
         $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();

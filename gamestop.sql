@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 30, 2018 lúc 09:15 AM
--- Phiên bản máy phục vụ: 10.1.31-MariaDB
--- Phiên bản PHP: 7.2.3
+-- Thời gian đã tạo: Th4 30, 2018 lúc 05:09 PM
+-- Phiên bản máy phục vụ: 10.1.30-MariaDB
+-- Phiên bản PHP: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -93,6 +93,14 @@ CREATE TABLE `games_tags` (
   `tags_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `games_tags`
+--
+
+INSERT INTO `games_tags` (`id`, `games_title`, `tags_id`) VALUES
+(1, 'The Witcher 2: Assassins of Kings', 3),
+(2, 'The Witcher 2: Assassins of Kings', 10);
+
 -- --------------------------------------------------------
 
 --
@@ -132,11 +140,18 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `notification` (
   `id` int(10) UNSIGNED NOT NULL,
   `admin_id` int(11) NOT NULL,
-  `imange` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `notification`
+--
+
+INSERT INTO `notification` (`id`, `admin_id`, `image`, `text`, `created_at`, `updated_at`) VALUES
+(1, 1, 'khongCoImage.jpg', 'Noti 1 231 213 12 55555555555555555555', '2018-04-30 14:22:40', '2018-04-30 14:54:17');
 
 -- --------------------------------------------------------
 
@@ -188,6 +203,13 @@ CREATE TABLE `report` (
   `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('Read','Unread') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Unread'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `report`
+--
+
+INSERT INTO `report` (`id`, `upload_by`, `game_title`, `Impropriate`, `Fraud`, `Plagarism`, `text`, `status`) VALUES
+(1, 1, 'For Honor', 0, 1, 0, 'None', 'Unread');
 
 -- --------------------------------------------------------
 
@@ -373,7 +395,7 @@ CREATE TABLE `users` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'none',
   `wallet` double(6,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `auth_level` enum('ban','admin','developer','casual') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'casual',
+  `auth_level` enum('banned','admin','developer','casual') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'casual',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -526,17 +548,17 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `wallet`, `aut
 (138, '64kpLZUoiH', '1JmPvOzvTM@gmail.com', '$2y$10$JHN6O6u5gZKjTgftwN6JeuZ3C/zMgOOUB7KDzWTTBf7wh4YoIdbb.', 'none', 50.51, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
 (139, 'dCDxP0xvWR', 'PXTJ7AGrMe@gmail.com', '$2y$10$NTSaJ.ddqEtuZ7xN1/kgJu6NkJxq6gRV2sSYC2ybEUObHDhguf5y2', 'none', 92.35, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
 (140, 'YXjoi1jpJG', '994xbmkPvy@gmail.com', '$2y$10$gWQ..bFllci9cTpY7YP0uetV4FjTxYtQUy0b..6/NBsbhUopW.2NO', 'none', 63.61, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
-(141, 'jdopeoxgfQ', '9kjcV2OqsP@gmail.com', '$2y$10$drQetmmSbcfB9ZmKK7cVnO0yd.fqL7b7nmZVpNaVJvZNwucFSqpWq', 'none', 16.81, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
+(141, 'jdopeoxgfQ', '9kjcV2OqsP@gmail.com', '$2y$10$drQetmmSbcfB9ZmKK7cVnO0yd.fqL7b7nmZVpNaVJvZNwucFSqpWq', 'none', 16.81, 'banned', NULL, NULL, '2018-04-30 13:59:00', 'Read', NULL),
 (142, '1UrkDRzXpY', '6gBEcjeIZB@gmail.com', '$2y$10$TQTn32htO2hbUdxh90scdeuc2m0xbgI90TxySppE18PCUqUdDfJcW', 'none', 23.60, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
 (143, 'LORC2ywpOg', 'CzXb1OP6La@gmail.com', '$2y$10$SGlWtAfVzwGNECQ758Nqf.d9dV8qiaKmWJfzSnPIX5RB8AeHGHO8G', 'none', 47.60, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
 (144, 'uhZpoJRwHF', 'eEXtZDVOYs@gmail.com', '$2y$10$nnCk6H/HwRErK/rUu5Vk7./CudMkRzDA1RYOVXunDbcm0TTUOIUd2', 'none', 90.87, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
-(145, 'Totz7n5zr8', 'PGnZZWytCz@gmail.com', '$2y$10$d1Y7tn73txea4jMe6lykH.d263r5MXyIhX04PTnI9E3/kc/L7g3Oe', 'none', 11.11, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
+(145, 'Totz7n5zr8', 'PGnZZWytCz@gmail.com', '$2y$10$d1Y7tn73txea4jMe6lykH.d263r5MXyIhX04PTnI9E3/kc/L7g3Oe', 'none', 11.11, 'banned', NULL, NULL, '2018-04-30 13:55:33', 'Read', NULL),
 (146, 'iiHkU4Q6rC', 'hT0837NKco@gmail.com', '$2y$10$2PQfwwG3zyWkSdsm.sxKDeIG5VZ3nvXmxGd5IsQ9bDQF1f0.FHUj.', 'none', 17.67, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
-(147, 'qCsDck5MEU', 'AO9Y5lscK7@gmail.com', '$2y$10$exzdjCbURCtvn7d1Td0OXeMmshXxbWnH3CR3.mqFiliKZ3X2YvYaa', 'none', 52.76, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
-(148, 'jnJG1h8bTU', '3brDIn4Evj@gmail.com', '$2y$10$6o6j2m1AtCnSoocsJLmlquoqHLyLoCaNpE/N7/3MnGRHf6hO1uEeK', 'none', 81.23, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
+(147, 'qCsDck5MEU', 'AO9Y5lscK7@gmail.com', '$2y$10$exzdjCbURCtvn7d1Td0OXeMmshXxbWnH3CR3.mqFiliKZ3X2YvYaa', 'none', 52.76, 'banned', NULL, NULL, '2018-04-30 13:55:25', 'Read', NULL),
+(148, 'jnJG1h8bTU', '3brDIn4Evj@gmail.com', '$2y$10$6o6j2m1AtCnSoocsJLmlquoqHLyLoCaNpE/N7/3MnGRHf6hO1uEeK', 'none', 81.23, 'banned', NULL, NULL, '2018-04-30 13:57:59', 'Read', NULL),
 (149, '41ehSRYSaz', 'xcxWwxfuld@gmail.com', '$2y$10$QvbhbcZ/TND93f0ONYPwEuZsqUzFeT7Zml/HjEUWd6H880qSke68i', 'none', 60.46, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
 (150, '6qHb1bmadp', '3U9W2Bmhva@gmail.com', '$2y$10$.6V3CYvuUvUQDdENUpuTm.NLXSS6VU7yIxuaEdM4XwLXzxM3RRLsy', 'none', 25.01, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL),
-(151, 'UtF5AqBGxN', 'DrgyyZ4NrL@gmail.com', '$2y$10$iebR0P9XEa5v8Xr1kUCQIu26uh8PRkZgz/XLZZxjYzuUrJBwvskk6', 'none', 28.39, 'casual', NULL, NULL, '2018-04-29 13:03:58', 'Read', NULL);
+(151, 'UtF5AqBGxN', 'DrgyyZ4NrL@gmail.com', '$2y$10$iebR0P9XEa5v8Xr1kUCQIu26uh8PRkZgz/XLZZxjYzuUrJBwvskk6', 'none', 28.39, 'banned', NULL, NULL, '2018-04-30 13:52:54', 'Read', NULL);
 
 -- --------------------------------------------------------
 
@@ -655,25 +677,25 @@ ALTER TABLE `wallet_history`
 -- AUTO_INCREMENT cho bảng `games_tags`
 --
 ALTER TABLE `games_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `report`
 --
 ALTER TABLE `report`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sales_log`

@@ -25,6 +25,7 @@
         </div>
     	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
         <br><br>
+    {{Form::hidden('_method','PUT')}}
 	{!! Form::close() !!}
     </div>
 </div>
