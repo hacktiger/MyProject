@@ -66,6 +66,5 @@ thead {
 @section('scripts')
     <script type="text/javascript">
         $('#game_manage').addClass('current-active');
-        $('#main,#profile_manage,#wallet_history,#sales_log,#upload_game,#game_report,#tag_manage').removeClass('current-active');
     </script>
 @endsection

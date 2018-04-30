@@ -85,5 +85,7 @@ var chart_2 = new CanvasJS.Chart("chartContainer-2", {
 });
 chart_2.render();
 }
+
+$('#main').addClass('current-active');
 </script>
 @endsection

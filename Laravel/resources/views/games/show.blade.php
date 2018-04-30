@@ -128,7 +128,7 @@ chart.render();
 			<!-- Favorite -->
 			<div class="col-md-4 col-sm-4" style="margin-top:1%;"> 
 				{!! Form::open(['action'=> ['MyController@favorite', $game->title], 'method'=>'POST', 'id'=>'favorite-form']) !!}
-					<input type="text" class="d-none" name="favorite" value="0">	
+					<input type="text" style="display: none;" name="favorite" value="0">	
 					<button id="favorite" data-toggle="tooltip" data-placement="bottom" title="Set as Favorite !" class="fa fa-star cus-button"></button>
 				{!! Form::close() !!}
 			</div>
@@ -268,9 +268,10 @@ chart.render();
 
 		<!-- user rating -->
 		<div class="cus-box-sizing">
+			<br><br>
 			<span class="heading">Your Rating</span>
 			{!! Form::open(['action'=> ['MyController@rating', $game->title], 'method'=>'POST', 'id'=>'target']) !!}
-			{{Form::text('rating','',['class'=>'form-control','placeholder'=>'Give the rating', 'value'=> '0' , 'class'=>'d-none'])}}
+			{{Form::text('rating','',['class'=>'form-control','placeholder'=>'Give the rating', 'value'=> '0' , 'style'=>'display:none;'])}}
 			<button id="1-star" class="fa fa-star cus-button" type="submit"></button>
 			<button id="2-star" class="fa fa-star cus-button" type="submit"></button>
 			<button id="3-star" class="fa fa-star cus-button" type="submit"></button>
@@ -289,10 +290,11 @@ chart.render();
 			@if($sumStar !==0)
 
 			<hr style="border:2px solid #f1f1f1">
-			<div id="chartContainer" style="height: 330px; width: 100%;"></div>
-			<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			
 		</div>
 		@endif	
+		<div id="chartContainer" style="height: 330px; width: 100%;"></div>
+			<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		<div class="fb-comments" data-href="https://gamestop.test/games/{{$game->title}}" data-width="700" data-numposts="5"></div>
 	</section>
 	

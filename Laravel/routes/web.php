@@ -43,6 +43,7 @@ Route::get('/developers-list','MyController@devList')->name('dev_list');
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('profile','ProfileController');
+Route::resource('notification','NotificationController');
 // End Resources
 
 //ADMIN routes 

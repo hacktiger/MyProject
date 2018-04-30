@@ -8,7 +8,7 @@
                     <p>Welcome &nbsp; {{Auth::user()->name}}</p>
                     <hr>
                     <li>
-                        <a id="main" class='nav-link current-active' href="{{route('admin.index')}}">Admin Dashboard</a> 
+                        <a id="main" class='nav-link' href="{{route('admin.index')}}">Admin Dashboard</a> 
                     </li>
                     <li>
                         <a id="upload_game" class='nav-link' href="{{route('games.create')}}">Upload Game</a> 
@@ -56,7 +56,7 @@
                         </a>  
                     </li>
                     <li>
-                        <a id="profile_manage" class="nav-link" href="{{route('admin.notify')}}">Notifications
+                        <a id="notification" class="nav-link" href="{{route('notification.index')}}">Notifications
                         </a>  
                     </li>             
                 </ul>
