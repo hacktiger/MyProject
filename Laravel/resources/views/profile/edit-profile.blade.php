@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-	<h1>Edit Games</h1>
+	<h1>Edit Your Profile Here</h1>
             <!-- Additional macros -->
 
 	{!! Form::open(['action'=>['ProfileController@update',$user->id], 'method'=>'POST','enctype'=>'multipart/form-data']) !!}

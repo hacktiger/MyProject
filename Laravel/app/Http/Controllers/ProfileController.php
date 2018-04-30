@@ -124,6 +124,19 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
+        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+        $new_game_count         = DB::table('games')->where('status','Unread')->count();
+        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
+        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
+        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
+        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+         // get users
+        $user = User::orderBy('created_at','DESC')->paginate(20);
+        // get admins
+        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
+        // -------------------------------------------------------------------------------//
+        // ------------------------------   MAIN        ----------------------------------//
+        // -------------------------------------------------------------------------------//
         //find it
         User::where('id', '=', $id)->update([
             'auth_level'=>'banned'
@@ -131,17 +144,48 @@ class ProfileController extends Controller
         //remove games
         sales_log::where('user_id', '=', $id)->delete();
         // Session flash
-        return redirect('/profile')->with('success','User Banned');
+        return view('profile.profile-index',[
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,
+            'user'=>$user, 
+            'admin'=>$admin,
+        ])->with('success','User Banned');
     }
 
     public function makeAdmin($id){
         //
+        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+        $new_game_count         = DB::table('games')->where('status','Unread')->count();
+        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
+        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
+        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
+        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        // get users
+        $user = User::orderBy('created_at','DESC')->paginate(20);
+        // get admins
+        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
+        // -------------------------------------------------------------------------------//
+        // ------------------------------   MAIN        ----------------------------------//
+        // -------------------------------------------------------------------------------//
         DB::table('users')->where('id',$id)->update([
             'auth_level' => 'admin',
         ]);
         // notification
 
-        return redirect('/profile');
+        return view('profile.profile-index',[
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,
+            'user'=>$user, 
+            'admin'=>$admin,
+        ]);
     }
 
     public function dropAdmin($id){

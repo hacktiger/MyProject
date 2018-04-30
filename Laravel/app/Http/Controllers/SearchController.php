@@ -61,16 +61,59 @@ class SearchController extends Controller
 
     public function profileSearch()
     {
+        //
+        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+        $new_game_count         = DB::table('games')->where('status','Unread')->count();
+        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
+        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
+        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
+        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        // -------------------------------------------------------------------------------//
+        // ------------------------------   MAIN        ----------------------------------//
+        // -------------------------------------------------------------------------------//
         $userName = Input::get('userName');
         $id = Input::get('id');
-        $user = User::where([
-            ['name', 'LIKE', '%'.$userName.'%'],
-            ['id', '=', $id]
-        ])->get();
-        if (count($user)>0)
-            return view('profile.profile-index-search',['user'=>$user]);
-        else
+        $admin = 0;
+        if($userName && !$id){
+            $user= DB::table('users')->where('name','LIKE','%'.$userName."%")->paginate(8);
+        return view('profile.profile-index',[
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,
+            'user'=>$user, 
+            'admin'=>$admin,
+        ]);
+        }elseif (!$userName && $id) {
+            $user= DB::table('users')->where('id','=',$id)->paginate(8);
+        return view('profile.profile-index',[
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,
+            'user'=>$user, 
+            'admin'=>$admin,
+        ]);
+        } 
+        elseif($userName && $id){
+            $user = DB::table('users')->where('name','LIKE','%'.$userName."%")->where('id','=',$id)->paginate(8);
+        return view('profile.profile-index',[
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,
+            'user'=>$user, 
+            'admin'=>$admin,
+        ]);
+        } else {
             return redirect()->back()->with('error', 'No such User found');
+        }
     }
 
     public function tagSearch()

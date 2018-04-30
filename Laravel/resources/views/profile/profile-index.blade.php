@@ -104,7 +104,6 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
                     <tr>
                         <th scope="col">User Name</th>
                         <th scope="col">E-mail</th>
-                        <th scope="col">Edit</th>
                         <th scope="col">Ban</th>
                         <th scope="col">Make Admin</th>
                     </tr>
@@ -115,7 +114,6 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
                     <tr class="content">
                         <th scope="row"><a href="/profile/{{$users->id}}">{{$users->name}}</a></th>
                         <th>{{$users->email}}</th>
-                        <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/profile/{{$users->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $users->id], 'method'=>'POST']) !!}
                             {{Form::hidden('_method', 'DELETE')}}
                             {{Form::submit('Ban', ['class'=>' btn  btn-danger'])}}
@@ -143,18 +141,16 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
                     <tr>
                         <th>Admin Name</th>
                         <th>E-mail</th>
-                        <th>Edit</th>
                         <th>Ban</th>
                         <th>Turn to User</th>
                     </tr>
                 </thead>
-
+                @if($admin != 0)
                 <tbody>
                     @foreach($admin as $admins)
                     <tr>
                         <th><a href="/tags/{{$admins->id}}">{{$admins->name}}</a></th>
                         <th>{{$admins->email}}</th>
-                        <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$admins->id}}/edit">&ensp;Edit&ensp;</a></th>
                         <th>{!! Form::open(['action'=> ['ProfileController@destroy', $admins->id], 'method'=>'POST']) !!}
                                 {{Form::hidden('_method', 'DELETE')}}
                                 {{Form::submit('Ban', ['class'=>' btn  btn-danger'])}}
@@ -166,6 +162,7 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
                     </tr>
                     @endforeach
                 </tbody>
+                @endif
             </table>
         </div>
     </div>
