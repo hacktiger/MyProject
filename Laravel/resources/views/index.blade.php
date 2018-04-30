@@ -2,13 +2,7 @@
 
 @section('style')
 <style type="text/css">
-a:link{
-  text-decoration: none;
-}
 
-a:hover{
-  color: red;
-}
 .carousel-caption {
   top: 0;
   bottom: auto;
@@ -19,11 +13,10 @@ a:hover{
 }
 
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 @endsection
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 @endsection
 
 @section('content')

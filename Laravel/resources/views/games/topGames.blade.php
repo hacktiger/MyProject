@@ -1,7 +1,6 @@
 @extends('layouts.common.master')
 
 @section('style')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style type="text/css">
 </style>
 @endsection

@@ -89,8 +89,9 @@ document.getElementById("defaultOpen").click();
 <!-- PROFILE -->
 <div id='Profile' class="tabcontent">
     <div class="row">
-        <div class="col-md-4">
-            <img  style="height: 70%; width: 70%; object-fit: contain;" alt="{{$user->avatar}}" src="/storage/avatars/{{$user->avatar}}">
+        <div class="col-md-4 col-sm-12">
+            <img  style="height: 100%; width: 80%; object-fit: cover;" alt="{{$user->avatar}}" src="/storage/avatars/{{$user->avatar}}">
+
             <br>
             {{--  edit profile  --}}
             @if (Auth::user()->id == $user->id)
@@ -110,7 +111,7 @@ document.getElementById("defaultOpen").click();
                 @endif
     	</div>
    
-    <div class ='col-md-8'><h1>Bio</h1>
+    <div class ='col-md-8 col-sm-12'><h1>Bio</h1>
         <p style="overflow-wrap:break-word;">
                 {!!$user->description!!}
             </p>

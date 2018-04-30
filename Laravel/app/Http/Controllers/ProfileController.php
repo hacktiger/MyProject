@@ -106,7 +106,6 @@ class ProfileController extends Controller
             games::where('upload_by', 'LIKE', $profile->name)
             ->update(['upload_by'=>$request->input('name')]);
         }
-        var_dump($profile);
         $profile->name = $request->input('name');
         $profile->description =$request->input('description');
         if ($request->hasFile('avatar')){
