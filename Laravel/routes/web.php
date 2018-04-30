@@ -55,6 +55,7 @@ Route::get('/admin/profile','AdminController@manageProfile')->name('profiles.man
 Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');
 Route::get('/admin/game-reports','AdminController@gameReport')->name('show.report');
 Route::delete('/admin/game-reports/{id}', 'AdminController@removeReport');
+Route::get('/admin/notification','AdminController@notify')->name('admin.notify');
 // Profile route make Admin
 Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
 Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');

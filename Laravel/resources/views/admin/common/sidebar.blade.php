@@ -54,7 +54,11 @@
                             <span class="badge badge-light"> &nbsp; {{$new_profile_count}}&nbsp; </span>
                             @endif  
                         </a>  
-                    </li>           
+                    </li>
+                    <li>
+                        <a id="profile_manage" class="nav-link" href="{{route('admin.notify')}}">Notifications
+                        </a>  
+                    </li>             
                 </ul>
                 
                 <ul class="list-unstyled CTAs" style="margin-top: 8%;">
