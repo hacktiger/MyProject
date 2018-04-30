@@ -35,9 +35,9 @@ class MyController extends Controller
     	$text = $request->input('text');
         //blank report check
         if (!isset($text)){
-            $text = '%20';
+            $text = 'None';
         }
-        if ($text =='%20' &&$report_1==0&&$report_2==0&&$report_3==0){
+        if ($text =='None' &&$report_1==0&&$report_2==0&&$report_3==0){
             return redirect()->back()->with('error', 'Blank Report');
         }
         else{

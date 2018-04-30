@@ -251,11 +251,27 @@ class GamesController extends Controller
      */
     public function edit($slug)
     {
+        //
+        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+        $new_game_count         = DB::table('games')->where('status','Unread')->count();
+        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
+        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
+        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
+        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
         $tags = Tags::all();
 
-        return view('games.edit',['game'=>$game, 'tags'=>$tags]);
+        return view('games.edit',[
+            'game'=>$game,
+             'tags'=>$tags,
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,             
+         ]);
     }
 
     /**
