@@ -190,8 +190,11 @@
 	.avatar-main:hover{
 	    background-color: #fff;
 	}
-
+	.avatar-main:hover a{
+		color: #737373;
 	}
+
+	
 </style>
 @yield('style')
 </head>
@@ -233,7 +236,7 @@
                         </div>
                     </div>
                 </nav>
-            <div style=" padding : 5px; box-shadow: 2px 2px #888888;">Notification by admins</div>
+            <div style=" padding : 5px; box-shadow: 2px 2px #888888; background-color: #f2f2f2">Notification by admins</div>
             <br><br>
             @yield('content')
 
