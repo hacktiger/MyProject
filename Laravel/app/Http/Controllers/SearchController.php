@@ -73,7 +73,6 @@ class SearchController extends Controller
         // -------------------------------------------------------------------------------//
         $userName = Input::get('userName');
         $id = Input::get('id');
-        $admin = 0;
         if($userName && !$id){
             $user= DB::table('users')->where('name','LIKE','%'.$userName."%")->paginate(8);
         return view('profile.profile-index',[
@@ -84,7 +83,6 @@ class SearchController extends Controller
             'new_game_report_count'=>$new_game_report_count,
             'new_tag_count'=>$new_tag_count,
             'user'=>$user, 
-            'admin'=>$admin,
         ]);
         }elseif (!$userName && $id) {
             $user= DB::table('users')->where('id','=',$id)->paginate(8);
@@ -96,7 +94,6 @@ class SearchController extends Controller
             'new_game_report_count'=>$new_game_report_count,
             'new_tag_count'=>$new_tag_count,
             'user'=>$user, 
-            'admin'=>$admin,
         ]);
         } 
         elseif($userName && $id){
@@ -109,7 +106,6 @@ class SearchController extends Controller
             'new_game_report_count'=>$new_game_report_count,
             'new_tag_count'=>$new_tag_count,
             'user'=>$user, 
-            'admin'=>$admin,
         ]);
         } else {
             return redirect()->back()->with('error', 'No such User found');

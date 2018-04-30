@@ -154,6 +154,28 @@ class NotificationController extends Controller
     public function edit($id)
     {
         //
+        //
+        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+        $new_game_count         = DB::table('games')->where('status','Unread')->count();
+        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
+        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
+        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
+        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        // -------------------------------------------------------------------------------//
+        // ------------------------------   MAIN        ----------------------------------//
+        // -------------------------------------------------------------------------------//
+        $notification = DB::table('notification')->where('id',$id)->first();
+
+        //RETURN VIEW
+        return view('admin.notification.noti-edit',[
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,
+            'notification'=>$notification
+        ]);
     }
 
     /**
@@ -165,7 +187,54 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //        //
+        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+        $new_game_count         = DB::table('games')->where('status','Unread')->count();
+        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
+        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
+        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
+        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        // -------------------------------------------------------------------------------//
+        // ------------------------------   MAIN        ----------------------------------//
+        // -------------------------------------------------------------------------------//
+        //data validation
+        $this->validate($request, [
+            'text'=>'required',
+            'image'=>'image|nullable|max:5999',
+        ]);
+        //Handle File Upload
+        if($request->hasFile('image')){
+            //with extension
+            $fileNameWithExt = $request->file('image')->getClientOriginalName();
+            //get just file name
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //get ext
+            $extension = $request->file('image')->getClientOriginalExtension();
+            //file name to store 
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //Upload
+            $path = $request->file('image')->storeAs('public/cover_images', $fileNameToStore);
+        }  else {
+            $fileNameToStore = 'khongCoImage.jpg';
+        }
+        //CREATE INFO
+        $noti = Notification::find($id);
+        $noti->admin_id = Auth::user()->id;
+        $noti->text = $request->input('text');
+        $noti->image = $fileNameToStore;
+        $noti->save();
+
+        //Return view
+        $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
+        return view('admin.notification.noti-index',[
+            'notification'=>$notification,
+            'new_profile_count'=>$new_profile_count,
+            'new_game_count'=>$new_game_count,
+            'new_wallet_count'=>$new_wallet_count,
+            'new_sales_log_count'=>$new_sales_log_count,
+            'new_game_report_count'=>$new_game_report_count,
+            'new_tag_count'=>$new_tag_count,
+        ])->with('success','Notice Edited');
     }
 
     /**

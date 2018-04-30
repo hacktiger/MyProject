@@ -309,7 +309,6 @@ class GamesController extends Controller
 
         //Create games info
         $game = games::find($title);
-        var_dump($game);
         $game->title = $request->input('title');
         $game->description = $request->input('description');
         $game->link = $request->input('link');

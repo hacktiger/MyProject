@@ -6,15 +6,32 @@
 
 </style>
 @endsection
+
 @section('content')
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+	<h1>Notice to Users</h1>
+	{!! Form::open(['action'=>['NotificationController@update',$notification->id], 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
+        <!-- DES -->
+    	<div class="form-group">
+    		{{Form::label('text',"Write about the Notice")}}
+    		{{Form::textarea('text',$notification->text,['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'What is the notice about', 'spellcheck'=>'false'])}}
+    	</div> 
 
-@foreach($notification as $noti)
-
+        <!-- link to images -->
+        <div class="form-group">
+            {{Form::label('image',"Upload an image with it")}}
+            {{Form::file('image')}}
+        </div>
+    	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+        <br><br>
+	{!! Form::close() !!}
+    </div>
+</div>
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
     $('#notification').addClass('current-active');
-    $('#main,#profile_manage,#wallet_history,#sales_log,#upload_game,#game_report,#tag_manage,#game_manage').removeClass('current-active');
 </script>
 @endsection

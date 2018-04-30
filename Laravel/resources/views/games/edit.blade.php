@@ -8,7 +8,6 @@
 
 @section('content')
 	<h1>Edit Games</h1>
-            <!-- Additional macros -->
 
 	{!! Form::open(['action'=>['GamesController@update',$game->title], 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
@@ -29,8 +28,6 @@
                 @endforeach
             </select>
         </div>
-        
-        
         <!-- link to download -->
         <div class="form-group">
             {{Form::label('link',"Download Link")}}
@@ -51,12 +48,6 @@
             {{Form::label('sales',"Promotion Price")}}
             {{Form::text('sales',$game->sales,['class'=>'form-control','placeholder'=>'Give the sales price', 'spellcheck'=>'false'])}}
         </div>
-
-        <!-- get user id -->
-        <div class=" d-none form-group">       
-            <input class="form-control" d-none name="upload" value=" <?php echo $id=Auth::user()->id ?>">
-        </div>
-
         {{Form::hidden('_method','PUT')}}
 
     	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
@@ -65,7 +56,7 @@
 	{!! Form::close() !!}
 @endsection
 
-@section('scripts-bottom')
+@section('scripts')
     {!! Html::script('js/select2.min.js') !!}
 
     <script type="text/javascript">

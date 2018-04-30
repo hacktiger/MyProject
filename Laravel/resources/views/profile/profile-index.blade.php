@@ -145,7 +145,7 @@ $('#main,#upload_game,#game_manage,#wallet_history,#sales_log,#game_report,#tag_
                         <th>Turn to User</th>
                     </tr>
                 </thead>
-                @if($admin != 0)
+                @if(isset($admin))
                 <tbody>
                     @foreach($admin as $admins)
                     <tr>
