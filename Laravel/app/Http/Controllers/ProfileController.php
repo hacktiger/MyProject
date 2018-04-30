@@ -45,6 +45,7 @@ class ProfileController extends Controller
         //get user
         $user = User::find($id);
         // get owned games
+        if (User::where('id', $id)->exists()){
         $owned_games = DB::table('sales_log')
                             ->leftJoin('users', 'sales_log.user_id','=','users.id')
                             ->join('games','sales_log.game_title','=','games.title')
@@ -54,6 +55,10 @@ class ProfileController extends Controller
         
         
         return view('profile.show-profile', ['user'=>$user, 'owned_games'=>$owned_games]); 
+        }
+        else{
+            return redirect()->back()->with('error', 'User Does not Exist');
+        }
     }
 
     /**
