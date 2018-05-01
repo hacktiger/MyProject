@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\games;
 use App\User;
 use App\sales_log;
@@ -12,8 +13,8 @@ use App\sales_log;
 class ProfileController extends Controller
 {   
     public function __construct(){
-        $this->middleware('auth')->only( ['index','show']);
-        $this->middleware('admin')->except( ['index','show','edit', 'update']);
+        $this->middleware('auth')->only( ['index','show','wallet']);
+        $this->middleware('admin')->except( ['index','show','edit', 'update','wallet']);
     }
 
     /**
@@ -89,9 +90,11 @@ class ProfileController extends Controller
             'description'=> 'nullable',
             'avatar'=> 'image|nullable|max:5999'
         ]);
+
         
         //handle file upload
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()){
+            //delete old one
             //with extension
             $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
             //get file name only
@@ -118,7 +121,7 @@ class ProfileController extends Controller
         }
         $profile->save();
 
-        return redirect('/games')->with('success', 'Profile Updated');
+        //return redirect('/games')->with('success', 'Profile Updated');
     }
 
     /**
