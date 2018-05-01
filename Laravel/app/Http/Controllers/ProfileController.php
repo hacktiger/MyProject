@@ -106,7 +106,6 @@ class ProfileController extends Controller
             //upload
             $path = $request->file('avatar')->storeAs('public/avatars', $fileNameToStore);
         }
-
         //create user info
         $profile = User::find($id);
         //change upload_by in 'games'
@@ -121,7 +120,7 @@ class ProfileController extends Controller
         }
         $profile->save();
 
-        //return redirect('/games')->with('success', 'Profile Updated');
+        return redirect('/games')->with('success', 'Profile Updated');
     }
 
     /**

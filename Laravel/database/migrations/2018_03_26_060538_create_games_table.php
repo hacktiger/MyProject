@@ -22,7 +22,7 @@ class CreateGamesTable extends Migration
             $table->text('description');
             $table->smallInteger('release')->unsigned();
             $table->string('link');
-            $table->string('image');
+            $table->string('image')->default('khongCoImage_game.jpg');
             $table->string('upload_by');
             $table->integer('price')->default(0);
             $table->integer('sales')->default(0);

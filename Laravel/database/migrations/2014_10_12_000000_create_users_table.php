@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('avatar')->default('none');
+            $table->string('avatar')->default('khongCoImage.jpg');
             $table->float('wallet',6,2)->unsigned()->default(0);
             $table->enum('auth_level',['ban','admin', 'developer', 'casual'])->default('casual');
             $table->rememberToken();

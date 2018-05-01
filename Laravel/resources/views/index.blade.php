@@ -100,7 +100,7 @@ Card - BS 4
           <!-- IMG -->
           <a href="/games/{{$games->slug}}">
             <div style="">
-              <img style="border-top-left-radius: 10px; border-top-right-radius: 10px; border: 1px solid #ddd; max-height: 140px" src="/storage/cover_images/{{$games->image}}" class="card-img-top" alt="{{$games->title}}">
+              <img style="border-top-left-radius: 10px; border-top-right-radius: 10px; border: 1px solid #ddd; max-height: 140px; " src="/storage/cover_images/{{$games->image}}" class="card-img-top" alt="{{$games->title}}">
             </div>
           </a>
           <!-- Body -->
@@ -112,7 +112,7 @@ Card - BS 4
             @if ( $games->sales != 0)
             <h5>Price : <s>{{$games->price}}$</s> <font color = 'red'><b>{{$games->price - $games->sales}}$</b></font><small>  On Sale</small></h5>
             @endif
-            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,150); echo $sub;?></p>
+            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,70); echo $sub;?></p>
           </div>
           <!-- Footer -->
           <div class="card-footer">

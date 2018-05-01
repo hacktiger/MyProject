@@ -107,7 +107,7 @@ class GamesController extends Controller
             //Upload
             $path = $request->file('image')->storeAs('public/cover_images', $fileNameToStore);
         }  else {
-            $fileNameToStore = 'khongCoImage.jpg';
+            $fileNameToStore = 'khongCoImage_game.jpg';
         }
 
         //Create games info
@@ -143,9 +143,9 @@ class GamesController extends Controller
                 'updated_at'=> $lastupdated
             ]);
         //get all game
-            $game =  games::orderBy('created_at','DESC')->paginate(12);
-
-            return view('index',compact('game'))->with('success', 'Game Uploaded');
+        $game =  games::orderBy('created_at','DESC')->paginate(12);
+        $notification =  Notification::orderBy('created_at','DESC')->paginate(3);
+            return view('index',['game'=>$game,'notification'=>$notification])->with('success', 'Game Uploaded');
         }
 
     /**
