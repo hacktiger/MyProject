@@ -139,7 +139,7 @@ chart.render();
 		<div class="tags"> 
 			<span>Game Tags : </span>
 			@foreach($game_tags as $tag)
-			<span class="label label-default"><a href="/allGames/{{$tag}}">{{$tag}}</a></span>
+			<span class="label label-default"><a href="/tags/{{$tag->tags_id}}">{{$tag->name}}</a></span>
 			@endforeach
 		</div>
 		<hr>

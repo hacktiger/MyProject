@@ -174,14 +174,8 @@ class GamesController extends Controller
         // get current user id   
         $rate_by = auth()->user()->id;
         //get tags
-        $tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name'])->where('games_tags.games_title', $game->title)->orderBy('games_tags.games_title','asc')->get();
+        $game_tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name','games_tags.tags_id as tags_id'])->where('games_tags.games_title', $game->title)->orderBy('games_tags.games_title','asc')->get();
         // put tags in an array for handling purposes
-        $game_tags = array();
-        if(count($tags)>0){
-            for($i=0; $i<count($tags); $i++){
-                $game_tags[$i] = $tags[$i]->name;
-            }
-        }
         // get the rating
         $rating = DB::table('rating')->select('rating')->where([
             ['game_title',$game->title],
@@ -337,10 +331,19 @@ class GamesController extends Controller
         $game_tag_id = $request->input('tags');
         if(isset($game_tag_id)){
         for($i = 0; $i<count($game_tag_id); $i++){
+            if (DB::table('games_tags')->where([
+                ['games_title',$game->title],
+                ['tags_id', $game_tag_id]
+            ])->exists()){
+                return redirect()->back()->with('error', 'Game already tagged');
+            
+        }else{
             DB::table('games_tags')->insert(
                 ['games_title' => $game->title, 
                 'tags_id' => $game_tag_id[$i]]
             );
+        }
+
         }; 
     }
         return redirect('/games')->with('success','Game Updated');
