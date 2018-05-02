@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use App\User;
 use App\games;
+use Exception;
 
 class MyController extends Controller
 {
@@ -167,6 +168,7 @@ class MyController extends Controller
     }
 
     public function addCash(){
+        try{
         $current = auth()->user()->wallet;
         $userID = auth()->user()->id;
         $get_input_amount = Input::get('Cquery');
@@ -201,6 +203,9 @@ class MyController extends Controller
 
         //Return view
         return redirect()->back()->with('success', 'Cash Added');
+    }catch(Exception $e){
+        return redirect()->back()->with('error', 'Invalid Amount');
+    }
     }
 
     public function purchase( Request $request, $title){
