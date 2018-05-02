@@ -20,7 +20,7 @@ class GenreController extends Controller
     	// get all games in DESC order of creation
         $game =  games::orderBy('created_at','DESC')->paginate(12);
         // get all possible tags
-        $tags = DB::table('tags')->orderBy('created_at','DESC')->get();
+        $tags = DB::table('tags')->orderBy('name','ASC')->get();
         // return view resource.views.allGames
         return view('allGames',['game'=>$game, 'tags'=>$tags]);
     }

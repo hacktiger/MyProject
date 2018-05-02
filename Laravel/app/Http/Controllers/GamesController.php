@@ -280,7 +280,7 @@ class GamesController extends Controller
                 ['games_title',$game->title],
                 ['tags_id', $game_tag_id]
             ])->exists()){
-                return redirect()->back()->with('error', 'Game already tagged');
+                return redirect()->back()->with('error', 'Duplicate tag');
             
         }else{
             DB::table('games_tags')->insert(
