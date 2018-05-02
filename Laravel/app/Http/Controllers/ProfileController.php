@@ -49,7 +49,7 @@ class ProfileController extends Controller
         //get user
         $user = User::find($id);
         //
-        $favorited = DB::table('favorites')->where('user_id',$id)->paginate(12);
+        $favorited = DB::table('favorites')->leftJoin('games','favorites.game_title','=','games.title')->where('favorites.user_id',$id)->select(['favorites.game_title', 'games.slug','games.avg_rating', 'games.upload_by','games.image'])->paginate(12);
         // get owned games
         $owned_games = DB::table('sales_log')
             ->leftJoin('users', 'sales_log.user_id','=','users.id')
