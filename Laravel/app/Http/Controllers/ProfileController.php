@@ -9,6 +9,8 @@ use App\games;
 use App\User;
 use App\sales_log;
 
+include('AdminController.php');
+
 
 class ProfileController extends Controller
 {   
@@ -131,12 +133,8 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
          // get users
         $user = User::orderBy('created_at','DESC')->paginate(20);
         // get admins
@@ -152,12 +150,7 @@ class ProfileController extends Controller
         sales_log::where('user_id', '=', $id)->delete();
         // Session flash
         return view('profile.profile-index',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'user'=>$user, 
             'admin'=>$admin,
         ])->with('success','User Banned');
@@ -165,12 +158,8 @@ class ProfileController extends Controller
 
     public function makeAdmin($id){
         //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
         // get users
         $user = User::orderBy('created_at','DESC')->paginate(20);
         // get admins
@@ -184,12 +173,7 @@ class ProfileController extends Controller
         // notification
 
         return view('profile.profile-index',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'user'=>$user, 
             'admin'=>$admin,
         ]);

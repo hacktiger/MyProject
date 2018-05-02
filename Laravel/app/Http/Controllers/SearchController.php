@@ -12,6 +12,8 @@ use App\games_tags;
 use App\rating;
 use Illuminate\Support\Facades\Input;
 
+include('AdminController.php');
+
 class SearchController extends Controller
 {
     public function __construct(){
@@ -62,12 +64,8 @@ class SearchController extends Controller
     public function profileSearch()
     {
         //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -76,35 +74,20 @@ class SearchController extends Controller
         if($userName && !$id){
             $user= DB::table('users')->where('name','LIKE','%'.$userName."%")->paginate(8);
         return view('profile.profile-index',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'user'=>$user, 
         ]);
         }elseif (!$userName && $id) {
             $user= DB::table('users')->where('id','=',$id)->paginate(8);
         return view('profile.profile-index',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'user'=>$user, 
         ]);
         } 
         elseif($userName && $id){
             $user = DB::table('users')->where('name','LIKE','%'.$userName."%")->where('id','=',$id)->paginate(8);
         return view('profile.profile-index',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'user'=>$user, 
         ]);
         } else {

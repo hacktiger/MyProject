@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\games;
 use App\User;
 
+include('AdminController.php');
+
 
 class NotificationController extends Controller
 {
@@ -20,13 +22,10 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        // get notification unread
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
+
         // ------ //
         //   MAIN
         // -------//
@@ -35,12 +34,7 @@ class NotificationController extends Controller
         //Return view
         return view('admin.notification.noti-index',[
             'notification'=>$notification,
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
         ]);
     }
 
@@ -52,25 +46,15 @@ class NotificationController extends Controller
     public function create()
     {
         //
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
         // ------ //
         //   MAIN
         // -------//
 
         //Return view
         return view('admin.notification.noti-create',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
         ]);
     }
 
@@ -82,14 +66,9 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        // get unread
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -125,12 +104,7 @@ class NotificationController extends Controller
         $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
         return view('admin.notification.noti-index',[
             'notification'=>$notification,
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
         ])->with('success','Notice Created');
     }
 
@@ -154,13 +128,8 @@ class NotificationController extends Controller
     public function edit($id)
     {
         //
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -168,12 +137,7 @@ class NotificationController extends Controller
 
         //RETURN VIEW
         return view('admin.notification.noti-edit',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'notification'=>$notification
         ]);
     }
@@ -188,12 +152,8 @@ class NotificationController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -228,12 +188,7 @@ class NotificationController extends Controller
         $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
         return view('admin.notification.noti-index',[
             'notification'=>$notification,
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
         ])->with('success','Notice Edited');
     }
 
@@ -245,14 +200,6 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
-
         // ---------------------------------------//
         //                  MAIN                  //
         // ---------------------------------------//

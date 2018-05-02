@@ -10,6 +10,8 @@ use App\User;
 use App\Tags;
 use App\games_tags;
 
+include('AdminController.php');
+
 
 class GamesController extends Controller
 {
@@ -50,27 +52,21 @@ class GamesController extends Controller
      */
     public function create()
     {
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
+
         // ------ //
         //  MAIN  //
         // -------//
         //get all tags
         $tags = Tags::all();
         //return to create game
+        
         return view('games.create',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'tags'=>$tags,
         ]);
+        
     }
 
   
@@ -193,53 +189,9 @@ class GamesController extends Controller
             $favorite = 0;
         }
         //get number of stars ( using db )
-        $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',1],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
-        $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',2],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
-        $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',3],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
-        $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',4],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
-        $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',5],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
-        // set default values
-        $pre_star = array(
-            'star_1' => 0,
-            'star_2' => 0,
-            'star_3' => 0,
-            'star_4' => 0,
-            'star_5' => 0,
-        );
-        // check if not null => assigned value found
-        if($star_1 !== null){
-            $pre_star['star_1'] = $star_1->number;
-        }   
-        if($star_2 !== null){
-            $pre_star['star_2'] = $star_2->number;
-        }
-        if($star_3 !== null){
-            $pre_star['star_3'] = $star_3->number;
-        }
-        if($star_4 !== null){
-            $pre_star['star_4'] = $star_4->number;
-        }
-        if($star_5 !== null){
-            $pre_star['star_5'] = $star_5->number;
-        }
-        // put all in array => more compact
-        $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
+        $star = $this->getStar($game);
         
+        // boolean owned/not
         $own = DB::table('sales_log')->where([
             ['game_title', $game->title],
             ['user_id', $rate_by]
@@ -248,6 +200,7 @@ class GamesController extends Controller
         if(count($own)>0){
             $owned = true;
         }
+        // return view
         return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned]);
     }
 
@@ -259,26 +212,18 @@ class GamesController extends Controller
      */
     public function edit($slug)
     {
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        // get all unread
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
+        // get all available tags
         $tags = Tags::all();
 
         return view('games.edit',[
             'game'=>$game,
-             'tags'=>$tags,
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,             
+            'tags'=>$tags,
+            'all_unread'=>$all_unread,          
          ]);
     }
 
@@ -371,5 +316,62 @@ class GamesController extends Controller
 
         return view('admin.reports', ['reports'=>$reports]);
     }
-    
+
+    /**
+    *   get rating of the game
+    *    
+    *   @param JSON data of the game get in data
+    *   @return    array $star;
+    **/
+    public function getStar($game){
+        //get number of stars ( using db )
+        $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',1],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',2],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',3],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',4],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))
+                    ->where([['rating',5],['game_title',$game->title]])
+                    ->groupBy('game_title')
+                    ->first();
+        // set default values
+        $pre_star = array(
+            'star_1' => 0,
+            'star_2' => 0,
+            'star_3' => 0,
+            'star_4' => 0,
+            'star_5' => 0,
+        );
+        // check if not null => assigned value found
+        if($star_1 !== null){
+            $pre_star['star_1'] = $star_1->number;
+        }   
+        if($star_2 !== null){
+            $pre_star['star_2'] = $star_2->number;
+        }
+        if($star_3 !== null){
+            $pre_star['star_3'] = $star_3->number;
+        }
+        if($star_4 !== null){
+            $pre_star['star_4'] = $star_4->number;
+        }
+        if($star_5 !== null){
+            $pre_star['star_5'] = $star_5->number;
+        }
+        // put all in array => more compact
+        $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
+
+        return $star;
+    }
 }

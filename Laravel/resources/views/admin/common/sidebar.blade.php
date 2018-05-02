@@ -15,43 +15,43 @@
                     </li>
                     <li>
                         <a id="game_manage" class="nav-link" href="{{route('games.manage')}}">Game Manage &nbsp; 
-                            @if($new_game_count != 0)
-                            <span class="badge badge-light"> &nbsp; {{$new_game_count}}&nbsp; </span>
+                            @if($all_unread[0] != 0)
+                            <span class="badge badge-light"> &nbsp; {{$all_unread[0]}}&nbsp; </span>
                             @endif
                         </a>                 
                     </li>
                     <li>
                     	<a id="sales_log" class="nav-link" href="{{route('admin.sales_log')}}">Sales Log &nbsp; 
-                            @if($new_sales_log_count != 0)
-                            <span class="badge badge-light"> &nbsp; {{$new_sales_log_count}}&nbsp; </span>
+                            @if($all_unread[1] != 0)
+                            <span class="badge badge-light"> &nbsp; {{$all_unread[1]}}&nbsp; </span>
                             @endif
                         </a>
                     </li>
                     <li>
                     	<a id="wallet_history" class="nav-link" href="{{route('admin.wallet_history')}}">Wallet History &nbsp; 
-                            @if($new_wallet_count != 0)
-                            <span class="badge badge-light"> &nbsp; {{$new_wallet_count}}&nbsp; </span>
+                            @if($all_unread[2] != 0)
+                            <span class="badge badge-light"> &nbsp; {{$all_unread[2]}}&nbsp; </span>
                             @endif 
                         </a>
                     </li>
                     <li>
                     	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports  &nbsp; 
-                            @if($new_game_report_count != 0)
-                            <span class="badge badge-light"> &nbsp; {{$new_game_report_count}}&nbsp; </span>
+                            @if($all_unread[3] != 0)
+                            <span class="badge badge-light"> &nbsp; {{$all_unread[3]}}&nbsp; </span>
                             @endif 
                         </a>
                     </li>
                     <li>
                         <a id="tag_manage" class="nav-link" href="{{route('tags.manage')}}">Tags Manage &nbsp; 
-                            @if($new_tag_count != 0)
-                            <span class="badge badge-light"> &nbsp; {{$new_tag_count}}&nbsp; </span>
+                            @if($all_unread[4] != 0)
+                            <span class="badge badge-light"> &nbsp; {{$all_unread[4]}}&nbsp; </span>
                             @endif 
                         </a>
                     </li>
                     <li>
                         <a id="profile_manage" class="nav-link" href="{{route('profiles.manage')}}">Profile Manage &nbsp; 
-                            @if($new_profile_count != 0)
-                            <span class="badge badge-light"> &nbsp; {{$new_profile_count}}&nbsp; </span>
+                            @if($all_unread[5] != 0)
+                            <span class="badge badge-light"> &nbsp; {{$all_unread[5]}}&nbsp; </span>
                             @endif  
                         </a>  
                     </li>

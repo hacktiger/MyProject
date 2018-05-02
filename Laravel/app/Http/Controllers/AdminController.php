@@ -20,26 +20,34 @@ class AdminController extends Controller
     {
         $this->middleware('admin');
     }
-    //INDEX
-    public function index(){
-        //NOTIFICATION
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+    /**
+    *   return #unread -> array -> lessen code
+    *
+    *   @return array;
+    **/
+    public function getNotice(){
+        $notice = array();
         $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
         $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
+        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();  
         $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
         $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
-        //----------------------------------------------------------------------------------------//
-        //                                                                                        //
-        //                                      CHARTS DATA                                       //
-        //                                                                                        //
-        //----------------------------------------------------------------------------------------//
-        //USERS
-        $num_casual    =   DB::table('users')->where('auth_level','casual')->count();
-        $num_admin     =   DB::table('users')->where('auth_level','admin')->count();
-        $num_developer =   DB::table('users')->where('auth_level','developer')->count();
-        $num_ban       =   DB::table('users')->where('auth_level','ban')->count();
-        // GET DATE LAST WEEK -> NOW
+        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
+        array_push($notice, $new_game_count);
+        array_push($notice, $new_sales_log_count);
+        array_push($notice, $new_wallet_count);
+        array_push($notice, $new_game_report_count);
+        array_push($notice, $new_tag_count);
+        array_push($notice, $new_profile_count);
+        // RETURN ARRAY of No of unread
+        return $notice;
+    }
+    /**
+    *   return dates and that alike
+    *
+    *   @return array
+    **/
+    public function customGetDate(){
         $date = array();
         array_push($date, $date_0 = Carbon::now());
         array_push($date, $date_1 = Carbon::now()->subDay(1));
@@ -49,7 +57,7 @@ class AdminController extends Controller
         array_push($date,$date_5 = Carbon::now()->subDay(5));
         array_push($date,$date_6 = Carbon::now()->subDay(6));
         array_push($date,$date_6 = Carbon::now()->subDay(7));
- 
+
         $dt = array();
         $dt_0 = DB::table('sales_log')->where('created_at','<',$date[0])->where('created_at','>',$date[1])->sum('price');
         $dt_1 = DB::table('sales_log')->where('created_at','<',$date[1])->where('created_at','>',$date[2])->sum('price');
@@ -65,7 +73,25 @@ class AdminController extends Controller
         array_push($dt,$dt_4);
         array_push($dt,$dt_5);
         array_push($dt,$dt_6);
-        
+
+        return $dt;
+    }
+    //INDEX
+    public function index(){
+        //NOTIFICATION
+        $all_unread = $this->getNotice();
+        //----------------------------------------------------------------------------------------//
+        //                                                                                        //
+        //                                      CHARTS DATA                                       //
+        //                                                                                        //
+        //----------------------------------------------------------------------------------------//
+        //USERS
+        $num_casual    =   DB::table('users')->where('auth_level','casual')->count();
+        $num_admin     =   DB::table('users')->where('auth_level','admin')->count();
+        $num_developer =   DB::table('users')->where('auth_level','developer')->count();
+        $num_ban       =   DB::table('users')->where('auth_level','ban')->count();
+ 
+        $dt = $this->customGetDate();
         return view('admin.admin-index',[
             //USERS NUM
             'num_casual'=>$num_casual,
@@ -73,12 +99,7 @@ class AdminController extends Controller
             'num_developer'=>$num_developer,
             'num_ban'=>$num_ban,
             // NOTIFICATION
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'dt'=>$dt,
         ]);
         
@@ -86,67 +107,44 @@ class AdminController extends Controller
 
     //GAMES
     public function manageGame(){
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
-
+        // all unread games->read
         DB::table('games')->where('status','Unread')->update([
             'status' => 'Read',
             'updated_at' => Carbon::now(),
         ]);
-        $new_game_count = 0;
+        //get all unread -> for admin
+        $all_unread = $this->getNotice();
         // ------ //
         //   MAIN
         // -------//
         $game =  games::orderBy('created_at','DESC')->paginate(12);
         return view('admin.game-manage',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'game'=>$game
         ]); 
     }
     public function salesLog(){
+        // all unread sales_log ->read
         DB::table('sales_log')->where('status','Unread')->update([
             'status' => 'Read',
             'updated_at' => Carbon::now(),
         ]);
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = 0;
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
-
-        
+        //get all unread -> for admin
+        $all_unread = $this->getNotice();
 
         // ------ //
         //   MAIN
         // -------//
         $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->select(['sales_log.id','sales_log.game_title','users.email'])->orderBy('sales_log.id','DESC')->paginate(12);
         return view('admin.salesLog',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'sales_log'=>$sales_log
         ]);
     }
     public  function showSalesLog($id){
 
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        //get all unread -> for admin
+        $all_unread = $this->getNotice();
         // ------ //
         //   MAIN
         // -------//
@@ -155,39 +153,24 @@ class AdminController extends Controller
                 ->where('sales_log.id',$id)->first();
         //RETURN VIEW
         return view('admin.show.show-salesLog',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'log'=>$log
         ]);
     }
     public function walletHistory(){
-                //
+        //
         DB::table('wallet_history')->where('status','Unread')->update([
             'status' => 'Read',
             'updated_at' => Carbon::now(),
         ]);
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        //get all unread -> for admin
+        $all_unread = $this->getNotice();
         // ------ //
         //   MAIN
         // -------//
         $log = DB::table('wallet_history')->orderBy('id','DESC')->paginate(12);
         return view('admin.walletHistory',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'log'=>$log
         ]);
     }
@@ -197,13 +180,8 @@ class AdminController extends Controller
         DB::table('report')->where('status','Unread')->update([
             'status' => 'Read',
         ]);
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        //get all unread -> for admin
+        $all_unread = $this->getNotice();
         // ------ //
         //   MAIN
         // -------//
@@ -219,12 +197,7 @@ class AdminController extends Controller
         ->orderBy('report.id', 'ASC')->paginate(12);
 
         return view('admin.reports', [
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'reports'=>$reports
         ]);
     }
@@ -241,25 +214,15 @@ class AdminController extends Controller
             'status' => 'Read',
             'updated_at' => Carbon::now(),
         ]);
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        //get all unread -> for admin
+        $all_unread = $this->getNotice();
         // ------ //
         //   MAIN
         // -------//
     	//
         $tag = Tags::orderBy('created_at','DESC')->paginate(8);
         return view('admin.tag-manage',[
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
             'tag' => $tag
     ]);
     }
@@ -272,13 +235,8 @@ class AdminController extends Controller
             'status' => 'Read',
             'updated_at' => Carbon::now(),
         ]);
-        //
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
+        //get all unread -> for admin
+        $all_unread = $this->getNotice();
         // ------ //
         //   MAIN
         // -------//
@@ -291,12 +249,7 @@ class AdminController extends Controller
         return view('profile.profile-index',[
             'user'=>$user, 
             'admin'=>$admin,
-            'new_profile_count'=>$new_profile_count,
-            'new_game_count'=>$new_game_count,
-            'new_wallet_count'=>$new_wallet_count,
-            'new_sales_log_count'=>$new_sales_log_count,
-            'new_game_report_count'=>$new_game_report_count,
-            'new_tag_count'=>$new_tag_count,
+            'all_unread'=>$all_unread,
         ]);
     }
 
