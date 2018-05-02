@@ -89,7 +89,7 @@ class AdminController extends Controller
         $num_casual    =   DB::table('users')->where('auth_level','casual')->count();
         $num_admin     =   DB::table('users')->where('auth_level','admin')->count();
         $num_developer =   DB::table('users')->where('auth_level','developer')->count();
-        $num_ban       =   DB::table('users')->where('auth_level','ban')->count();
+        $num_ban       =   DB::table('users')->where('auth_level','banned')->count();
  
         $dt = $this->customGetDate();
         return view('admin.admin-index',[
@@ -132,9 +132,9 @@ class AdminController extends Controller
         //get all unread -> for admin
         $all_unread = $this->getNotice();
 
-        // ------ //
-        //   MAIN
-        // -------//
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
         $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->select(['sales_log.id','sales_log.game_title','users.email'])->orderBy('sales_log.id','DESC')->paginate(12);
         return view('admin.salesLog',[
             'all_unread'=>$all_unread,
@@ -145,9 +145,9 @@ class AdminController extends Controller
 
         //get all unread -> for admin
         $all_unread = $this->getNotice();
-        // ------ //
-        //   MAIN
-        // -------//
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
         $log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')
                 ->select(['sales_log.id','sales_log.user_id','sales_log.game_title','sales_log.price','sales_log.created_at','sales_log.updated_at','users.email','users.name'])
                 ->where('sales_log.id',$id)->first();
@@ -165,9 +165,9 @@ class AdminController extends Controller
         ]);
         //get all unread -> for admin
         $all_unread = $this->getNotice();
-        // ------ //
-        //   MAIN
-        // -------//
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
         $log = DB::table('wallet_history')->orderBy('id','DESC')->paginate(12);
         return view('admin.walletHistory',[
             'all_unread'=>$all_unread,
@@ -182,9 +182,9 @@ class AdminController extends Controller
         ]);
         //get all unread -> for admin
         $all_unread = $this->getNotice();
-        // ------ //
-        //   MAIN
-        // -------//
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
         $reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')
         ->leftJoin('games','report.game_title','=','games.title')
         ->select(
@@ -216,9 +216,9 @@ class AdminController extends Controller
         ]);
         //get all unread -> for admin
         $all_unread = $this->getNotice();
-        // ------ //
-        //   MAIN
-        // -------//
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
     	//
         $tag = Tags::orderBy('created_at','DESC')->paginate(8);
         return view('admin.tag-manage',[
@@ -237,9 +237,9 @@ class AdminController extends Controller
         ]);
         //get all unread -> for admin
         $all_unread = $this->getNotice();
-        // ------ //
-        //   MAIN
-        // -------//
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
     	// get users
         $user = DB::table('users')->where('auth_level','casual')->orderBy('id','DESC')->paginate(20);
 
