@@ -4,13 +4,6 @@
 <style type="text/css">
 * {box-sizing: border-box}
 
-/* Set height of body and the document to 100% */
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial;
-}
-
 /* Style tab links */
 .tablink {
     background-color: #555;
@@ -44,14 +37,10 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-
-#Profile {background-color: white;}
-#OwnedGames {background-color: white;}
 </style>
 @endsection
 
 @section('scripts')
-  <script src="./js/bootstrap.min.js"></script>
 <script>
 function openPage(pageName,elmnt,color) {
     var i, tabcontent, tablinks;
@@ -76,16 +65,20 @@ document.getElementById("defaultOpen").click();
 @section('content')
 <!-- TABS -->
 <div class="row">
-    <button class="tablink col-md-6" onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p style='color:white'>Profile</p></button>
-    <button class="tablink col-md-6" onclick="openPage('OwnedGames', this, 'black')" ><p style="color:white">
+    <button class="col-md-4 tablink " onclick="openPage('Profile', this, 'black')" id="defaultOpen"><p style='color:white'>Profile</p></button>
+    <button class="col-md-4 tablink " onclick="openPage('MyFavorites', this, 'black')" ><p style="color:white">Favorited Games</p></button>
+    <button class="col-md-4 tablink " onclick="openPage('OwnedGames', this, 'black')" ><p style="color:white">
         @if ($user->auth_level !== 'developer')
         Owned Games
         @endif
         @if ($user->auth_level =='developer')
-        Games
+        Games by {{$user->name}}
         @endif
     </p></button>
 </div>
+
+
+<!-- TAB CONTENTS -->
 <!-- PROFILE -->
 <div id='Profile' class="tabcontent">
     <div class="row">
@@ -118,12 +111,37 @@ document.getElementById("defaultOpen").click();
         </div>
         </div>
 </div>
-
+<!-- favorite games -->
+<div id="MyFavorites" class="tabcontent">
+    <div class="container">
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <td>Thumbnail</td>
+                <td>Title</td>
+                <td>Rating</td>
+                <td>Developer</td>  
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($favorited as $game)
+            <tr  class="clickable-row hover-row" data-href="/games/{{$game->slug}}">
+                <td><img style="width:180px;height: 60px" src="/storage/cover_images/{{$game->image}}"></td>
+                <td><a href="/games/{{$game->slug}}"> {{$game->game_title}}</a></td>
+                <td>{{$game->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
+                <td>{{$game->upload_by}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    {{$favorited->links()}}
+</div>
 <!-- OWNED GAMES -->
 <div id="OwnedGames" class="tabcontent">
+    aaaaaaaaaaaaaaaaaaaa
     <!-- show titles from owned_games-->
     <div class="container">
-    <table class="table border">
+    <table class="table table-hover table-sm">
         <thead>
             <tr>
                 <td>Thumbnail</td>

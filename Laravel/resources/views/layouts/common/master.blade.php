@@ -190,7 +190,7 @@
 	.avatar-main:hover{
 	    background-color: #fff;
 	}
-	.avatar-main:hover a{
+	.avatar-main:hover span{
 		color: #737373;
 	}
 

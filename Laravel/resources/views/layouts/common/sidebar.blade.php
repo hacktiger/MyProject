@@ -6,10 +6,10 @@
 <!-- Sidebar BODY -->
 <ul class="list-unstyled components" >
 
-    <p class="avatar-main"><img  style="height: 50px; width: 70px; object-fit: cover;" alt="{{Auth::user()->avatar}}" src="/storage/avatars/{{Auth::user()->avatar}}">
-       &nbsp; <a class="nav-link" href="/profile/{{Auth::user()->id}}"><b>{{Auth::user()->name}}</b></a>
+    <a class="nav-link" href="/profile/{{Auth::user()->id}}"><p class="avatar-main"><img  style="height: 50px; width: 70px; object-fit: cover;" alt="{{Auth::user()->avatar}}" src="/storage/avatars/{{Auth::user()->avatar}}">
+       &nbsp; <b><span>{{Auth::user()->name}}</span></b>
 
-   </p>
+   </p></a>
    <li>
       <a class="nav-link" href="/profile/{{Auth::user()->id}}/wallet">My wallet : {{Auth::user()->wallet}}$ &nbsp; <span class="glyphicon glyphicon-plus-sign"></span></a>
   </li>
