@@ -254,8 +254,7 @@ chart.render();
 								<h4>Remaining &ensp;: {{Auth::user()->wallet-$game->price}}$</h4>
 								<!-- FORM -->
 								<br><br>
-								{!! Form::open(['action'=> ['MyController@purchase', $game->title], 'method'=>'POST', 'id'=>'purchase-form']) !!}
-								<input type="text" class="d-none" name="purchase" value="0">	
+								{!! Form::open(['action'=> ['MyController@purchase', $game->title], 'method'=>'POST', 'id'=>'purchase-form']) !!}	
 								<button id="purchase" data-toggle="tooltip" data-placement="bottom" title="Purchase Game" class="btn btn-block btn-primary">Purchase Game</button>
 								{!! Form::close() !!}	
 							</div>

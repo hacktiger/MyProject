@@ -204,7 +204,6 @@ class MyController extends Controller
     }
 
     public function purchase( Request $request, $title){
-        $purchase = $request->input('purchase');
         $user_id = auth()->user()->id;
         $game= games::find($title);
         $cash = $game->price - $game->sales;
