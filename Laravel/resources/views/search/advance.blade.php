@@ -25,6 +25,10 @@
     {{Form::text('avg_rating','',['class'=>'form-control', 'placeholder'=>'Minimum Rating (from 0 to 5)...', 'spellcheck'=>'false'])}}
   </div>
 
+<div class = 'form-group'>
+  {{Form::label ('tag', 'Genre')}}
+  {{Form::text ('tag', '', ['class' =>'form-control', 'placeholder' =>'...', 'spellcheck' =>'false'])}}
+</div>
 {{Form::submit('Submit', ['class' =>'btn btn-primary'])}}
 {!! Form::close() !!}
 

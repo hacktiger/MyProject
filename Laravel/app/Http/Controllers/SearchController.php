@@ -25,7 +25,7 @@ class SearchController extends Controller
         $q = Input::get ( 'q' );
         $gameTitle = games::where('title','LIKE','%'.$q.'%')->get();
         if(count($gameTitle) > 0)
-            return view('search.results')->withDetails($gameTitle);
+            return view('search.results', ['gameTitle'=> $gameTitle]);
         else 
             return redirect()->back()->with('error','No Details found. Try to search again!');
     }
@@ -40,7 +40,7 @@ class SearchController extends Controller
         $title = Input::get('title');
         $upload_by = Input::get('upload_by');
         $avg_rating = Input::get('avg_rating');
-        
+        $tagName = Input::get('tag');
         //check blank numeric value
         if(!isset($avg_rating)){
             $avg_rating = 0;
@@ -49,14 +49,15 @@ class SearchController extends Controller
         if ($avg_rating >5){
             $avg_rating = 5;
         }
-        $gameTitle = games::where([
+        $gameTitle = games::leftJoin('games_tags', 'games_tags.games_title', '=', 'title')->leftJoin('tags', 'tags.id', '=', 'games_tags.tags_id')->where([
             ['upload_by','LIKE','%'.$upload_by.'%'], 
             ['title', 'like', '%'.$title.'%'],
-            ['avg_rating', ">=",$avg_rating]
+            ['avg_rating', ">=",$avg_rating],
+            ['tags.name', $tagName]
             ])->get();
 
         if(count($gameTitle) > 0)
-            return view('search.results')->withDetails($gameTitle);
+            return view('search.results', ['gameTitle'=> $gameTitle]);
         else 
             return redirect()->back()->with('error','No Details found. Try to search again!');
     }
