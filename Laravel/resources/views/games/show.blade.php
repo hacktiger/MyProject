@@ -128,7 +128,8 @@ chart.render();
 			<!-- Favorite -->
 			<div class="col-md-4 col-sm-4" style="margin-top:1%;"> 
 				{!! Form::open(['action'=> ['MyController@favorite', $game->title], 'method'=>'POST', 'id'=>'favorite-form']) !!}
-					<input type="text" style="display: none;" name="favorite" value="0">	
+
+					<input type="text" style="display: none;" name="favorite" value="0"><span>Set as Favorite !</span>
 					<button id="favorite" data-toggle="tooltip" data-placement="bottom" title="Set as Favorite !" class="fa fa-star cus-button"></button>
 				{!! Form::close() !!}
 			</div>

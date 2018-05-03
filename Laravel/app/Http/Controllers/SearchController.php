@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\games;
 use App\User;
 use App\Tags;
-use App\games_tags;
-use App\rating;
 use Illuminate\Support\Facades\Input;
 
 include('AdminController.php');
@@ -32,15 +30,24 @@ class SearchController extends Controller
 
     public function searchPage()
     {
-        return view ('search.advance');
+        $tags = Tags::all();
+        return view ('search.advance', ['tags'=>$tags]);
     }
 
-    public function advancedSearch()
+    public function advancedSearch(Request $request)
     {
         $title = Input::get('title');
         $upload_by = Input::get('upload_by');
         $avg_rating = Input::get('avg_rating');
-        $tagName = Input::get('tag');
+        // get tagName
+        $tagID  = $request->input('tags');
+        if(isset($tagID)){
+            $tag = DB::table('tags')->where('id', $tagID)->select('name')->get();
+            $tagName = $tag[0]->name;
+        } else {
+            $tagName = 'none';
+        }
+        
         //check blank numeric value
         if(!isset($avg_rating)){
             $avg_rating = 0;
@@ -49,17 +56,28 @@ class SearchController extends Controller
         if ($avg_rating >5){
             $avg_rating = 5;
         }
-        $gameTitle = games::leftJoin('games_tags', 'games_tags.games_title', '=', 'title')->leftJoin('tags', 'tags.id', '=', 'games_tags.tags_id')->where([
+
+        if($tagName == 'none'){
+            $gameTitle = games::leftJoin('games_tags', 'games_tags.games_title', '=', 'title')->leftJoin('tags', 'tags.id', '=', 'games_tags.tags_id')->where([
+            ['upload_by','LIKE','%'.$upload_by.'%'], 
+            ['title', 'like', '%'.$title.'%'],
+            ['avg_rating', ">=",$avg_rating],
+            ])->get();
+        } else {
+            $gameTitle = games::leftJoin('games_tags', 'games_tags.games_title', '=', 'title')->leftJoin('tags', 'tags.id', '=', 'games_tags.tags_id')->where([
             ['upload_by','LIKE','%'.$upload_by.'%'], 
             ['title', 'like', '%'.$title.'%'],
             ['avg_rating', ">=",$avg_rating],
             ['tags.name', $tagName]
             ])->get();
+        }
+        
 
         if(count($gameTitle) > 0)
             return view('search.results', ['gameTitle'=> $gameTitle]);
         else 
             return redirect()->back()->with('error','No Details found. Try to search again!');
+
     }
 
     public function profileSearch()
