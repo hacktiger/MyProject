@@ -1,13 +1,25 @@
-@extends('layouts.common.master')
+@extends('admin.admin')
 
-
-@section('style')
+@section('styles')
 <style type="text/css">
-thead {
-    background-color: #737373;
-    color : white;
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
-table
+
+td, th {
+    padding: 2px;
+    text-align: center
+}
+thead {
+    background-color: #7386D5;
+    color:white;
+}
+.content:hover{
+    background-color: #ebeef9;
+}
+
+
 </style>
 @endsection
 
@@ -95,7 +107,7 @@ table
                 </thead>
                 <tbody>
                     @foreach($owned_games as $games)
-                    <tr  class="clickable-row hover-row" data-href="/games/{{$games->slug}}">
+                    <tr  class="content" data-href="/games/{{$games->slug}}">
                         <td class="hidden-sm hidden-xs"><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
                         <td><a href="/games/{{$games->slug}}"> {{$games->game_title}}</a></td>
                         <td>{{$games->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
@@ -122,7 +134,7 @@ table
                 </thead>
                 <tbody>
                     @foreach($favorited as $game)
-                    <tr  class="clickable-row hover-row" data-href="/games/{{$game->slug}}">
+                    <tr  class="content" data-href="/games/{{$game->slug}}">
                         <td class="hidden-sm hidden-xs"><img style="width:180px;height: 60px" src="/storage/cover_images/{{$game->image}}"></td>
                         <td><a href="/games/{{$game->slug}}"> {{$game->game_title}}</a></td>
                         <td>{{$game->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
@@ -137,4 +149,10 @@ table
     </div>
 <!-- END CONTAINER -->
 </div>   
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $('#profile_manage').addClass('current-active');
+</script>
 @endsection

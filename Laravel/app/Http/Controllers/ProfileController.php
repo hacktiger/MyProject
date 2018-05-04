@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\games;
 use App\User;
 use App\sales_log;
@@ -15,8 +15,8 @@ include('AdminController.php');
 class ProfileController extends Controller
 {   
     public function __construct(){
-        $this->middleware('auth')->only( ['index','show','wallet']);
-        $this->middleware('admin')->except( ['index','show','edit', 'update','wallet']);
+        $this->middleware('auth')->only( ['show','edit','update']);
+        $this->middleware('admin')->only(['makeAdmin','dropAdmin','destroy','index']);
     }
 
     /**
@@ -57,7 +57,16 @@ class ProfileController extends Controller
             ->select(['sales_log.game_title', 'games.slug','games.avg_rating', 'games.upload_by','games.image'])
             ->where('sales_log.user_id', $id)
             ->paginate(12);
-        return view('profile.show-profile', ['user'=>$user, 'owned_games'=>$owned_games,'favorited'=>$favorited]); 
+
+            if(Auth::user()->auth_level == 'admin'){
+                $admin_controller = new AdminController();
+                $all_unread = $admin_controller->getNotice();
+
+                return view('admin.show.show-profile',['all_unread'=>$all_unread, 'user'=>$user,'owned_games'=>$owned_games,'favorited'=>$favorited]);
+            } else {
+                return view('profile.show-profile', ['user'=>$user, 'owned_games'=>$owned_games,'favorited'=>$favorited]); 
+            }
+        
         }
         else{
             return redirect()->back()->with('error', 'User Does not Exist');
