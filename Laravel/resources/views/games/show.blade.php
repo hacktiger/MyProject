@@ -128,9 +128,9 @@ chart.render();
 			<!-- Favorite -->
 			<div class="col-md-4 col-sm-4" style="margin-top:1%;"> 
 				{!! Form::open(['action'=> ['MyController@favorite', $game->title], 'method'=>'POST', 'id'=>'favorite-form']) !!}
-
-					<input type="text" style="display: none;" name="favorite" value="0"><span>Set as Favorite !</span>
+					<span>Set as Favorite !</span>
 					<button id="favorite" data-toggle="tooltip" data-placement="bottom" title="Set as Favorite !" class="fa fa-star cus-button"></button>
+
 				{!! Form::close() !!}
 			</div>
 		</div>
@@ -309,47 +309,43 @@ chart.render();
 <script type="text/javascript"> 
 	
 	<?php
-		try {
+		if(isset($rating)){
 			$phpVar = $rating->rating;
 			echo "var rate = '{$phpVar}';";	
-		} catch (Exception $e) {}
+		}
+			
 
-		try {
-			$fav = $favorite;
-			echo "var favo = '{$fav}';";			
-		} catch (Exception $e) {}
-
-		
 
 	?>
+	if (typeof rate !== 'undefined') {
+		if(rate == '1'){
+			$("#1-star").addClass("checked");
+		}	
+		if(rate == '2'){
+			$("#1-star").addClass("checked");
+			$("#2-star").addClass("checked");	
+		}	
+		if(rate == '3'){
+			$("#1-star").addClass("checked");
+			$("#2-star").addClass("checked");
+			$("#3-star").addClass("checked");
+		}
+		if(rate == '4'){
+			$("#1-star").addClass("checked");
+			$("#2-star").addClass("checked");
+			$("#3-star").addClass("checked");
+			$("#4-star").addClass("checked");
+		}
+		
+		if(rate == '5'){
+			$("#1-star").addClass("checked");
+			$("#2-star").addClass("checked");
+			$("#3-star").addClass("checked");
+			$("#4-star").addClass("checked");
+			$("#5-star").addClass("checked");
+		}
+	}
 	
-	if(rate == '1'){
-		$("#1-star").addClass("checked");
-	}	
-	if(rate == '2'){
-		$("#1-star").addClass("checked");
-		$("#2-star").addClass("checked");	
-	}	
-	if(rate == '3'){
-		$("#1-star").addClass("checked");
-		$("#2-star").addClass("checked");
-		$("#3-star").addClass("checked");
-	}
-	if(rate == '4'){
-		$("#1-star").addClass("checked");
-		$("#2-star").addClass("checked");
-		$("#3-star").addClass("checked");
-		$("#4-star").addClass("checked");
-	}
-	
-	if(rate == '5'){
-		$("#1-star").addClass("checked");
-		$("#2-star").addClass("checked");
-		$("#3-star").addClass("checked");
-		$("#4-star").addClass("checked");
-		$("#5-star").addClass("checked");
-	}
-
 	
 	$("#1-star").click(function(){
 		$("input:text").val("1");
@@ -369,17 +365,16 @@ chart.render();
 	});
 
 	// Favorite function
-
+	<?php 
+		if(isset($favorite)){
+			$fav = $favorite;
+			echo "var favo = '{$fav}';";	
+		}
+	?>
 	if(favo == '1'){
+	console.log(1);	
 		$("#favorite").addClass("checked");	
-		$("#favorite").click(function(){
-			$("input:text").val("0");
-		});
-	} else {
-		$("#favorite").click(function(){
-			$("input:text").val("1");
-		});
-	}
+	} 
 </script>
 
 

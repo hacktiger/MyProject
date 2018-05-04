@@ -114,15 +114,12 @@ class MyController extends Controller
     }
 
     public function favorite(Request $request, $title){
-        $favorite = $request->input('favorite');
         $user_id = auth()->user()->id;
-        
         $check_2 = DB::table('favorites')->where([
-                ['game_title',$title],
-                ['user_id', $user_id]
-        ]);
-        
-        if(!$check_2){
+            ['game_title',$title],
+            ['user_id', $user_id]
+        ])->get();
+        if(!isset($check_2[0]->game_title)){
             DB::table('favorites')->insert([
                 'user_id' => $user_id,
                 'game_title' => $title,
@@ -131,11 +128,6 @@ class MyController extends Controller
             DB::table('favorites')->where([
                 ['game_title',$title],
                 ['user_id', $user_id]])->delete();
-
-            DB::table('favorites')->insert([
-                'user_id' => $user_id,
-                'game_title' => $title,
-            ]);
         }
 
         return redirect()->back();
