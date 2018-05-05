@@ -22,6 +22,10 @@
         <!-- tags -->
         <div class="form-group">
             {{Form::label('tag_id', 'Tags: ') }} <br>
+            @foreach($games_tags as $Gtag)
+            <a class ='btn btn-light' href="{{action('GamesController@removeTag', 
+            ['title'=>$game->title, 'tagID'=>$Gtag->tags_id])}}">{{$Gtag->name}}</a>
+            @endforeach
             <select class="form-control select2-multi" name="tags[]" multiple="multiple">
                 @foreach($tags as $tag)
                     <option value='{{$tag->id}}'>{{$tag->name}}</option>

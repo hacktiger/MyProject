@@ -219,10 +219,13 @@ class GamesController extends Controller
         $game = DB::table('games')->where('slug',$slug)->first();
         // get all available tags
         $tags = Tags::all();
-
+        // get games tags
+        $games_tags = DB::table('games_tags')->leftJoin('tags', 'tags.id', '=', 'games_tags.tags_id')
+        ->select('tags.name', 'games_tags.tags_id')->where('games_title', $game->title)->get();
         return view('games.edit',[
             'game'=>$game,
             'tags'=>$tags,
+            'games_tags'=>$games_tags,
             'all_unread'=>$all_unread,          
          ]);
     }
@@ -373,5 +376,14 @@ class GamesController extends Controller
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
 
         return $star;
+    }
+    public function removeTag( Request $request, $title, $tagID)
+    {
+        $game = games::find($title);
+        DB::table('games_tags')->where([
+            ['games_title', $game->title],
+            ['tags_id', $tagID]
+        ])->delete();
+        return redirect()->back()->with('success', 'Tag Deleted');
     }
 }
