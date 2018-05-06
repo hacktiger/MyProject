@@ -133,29 +133,60 @@ class MyController extends Controller
         return redirect()->back();
     }
 
-    
+    /**
+    *   All games sorting order
+    *
+    *   @return view('games.allGames',['game'=>$game, 'tags'=>$tags])
+    *
+    **/
+    public function allGames(){
+        // page info
+        $page_title = "All Games";
+        $page_desc = "This is the list of all available games from most recent to oldest";
+        // get all games in DESC order of creation
+        $game =  games::orderBy('created_at','DESC')->paginate(12);
+        // get all possible tags
+        $tags = DB::table('tags')->orderBy('name','ASC')->paginate(9);
+        // return view resource.views.allGames
+        return view('allGames',['game'=>$game, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
+    }
 
     public function topGames(){
-        $game =  games::orderBy('avg_rating','DESC')->take(10)->get();
+        // page info
+        $page_title = "Top Games";
+        $page_desc = "This is the list of the highest to lowest average rating on the site";
+        // Get top rated games
+        $game =  games::orderBy('avg_rating','DESC')->paginate(12);
+        // get all possible tags
+        $tags = DB::table('tags')->orderBy('name','ASC')->get();
 
-        return view('games.topGames',['game'=>$game]);
+         return view('allGames',['game'=>$game, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
     }
 
     public function mostDownload(){
+        // page info
+        $page_title = "MostPurchased";
+        $page_desc = "This is the list of games with the most purchases to least";
         //SELECT game_title, COUNT(user_id) FROM sales_log GROUP BY game_title
-       $game = DB::table('sales_log')
+        $game = DB::table('sales_log')
                 ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
-                ->select(['sales_log.game_title', 'games.slug','games.image', 'avg_rating', 'games.upload_by',DB::raw(' COUNT(sales_log.user_id) as downloads')])
-                ->groupBy(['sales_log.game_title','games.slug','games.image', 'avg_rating', 'games.upload_by'])
+                ->select(['games.title', 'games.slug','games.image', 'avg_rating', 'games.upload_by',DB::raw(' COUNT(sales_log.user_id) as downloads')])
+                ->groupBy(['games.title','games.slug','games.image', 'avg_rating', 'games.upload_by'])
                 ->orderBy('downloads','DESC')
-                ->take(10)->paginate(10);
+                ->paginate(12);
+        // get all possible tags
+        $tags = DB::table('tags')->orderBy('name','ASC')->get();
+
 
         // return view
-        return view('games.mostDownload',['game'=>$game]);
+        return view('allGames',['game'=>$game, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
     }
+    // END 
 
+
+    //
     public function devList(){
-        $user  = User::where('auth_level', 'Like','developer')->paginate(7);
+        $user  = User::where('auth_level', 'Like','developer')->get();
         return view('devList', ['user'=>$user]);
     }
 

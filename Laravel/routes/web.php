@@ -75,7 +75,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/all-games','GenreController@allGames')->name('all_games');
+Route::get('/all-games','MyController@allGames')->name('all_games');
 Route::post('/addCash', 'MyController@addCash');
 
 Route::post('/search','SearchController@titleSearch');

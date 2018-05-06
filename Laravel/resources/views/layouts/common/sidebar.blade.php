@@ -34,14 +34,12 @@
     <a class= 'nav-link' href ='/search/advance'>Advance Search</a>
 </li>
 <li style="text-align: center;">
-    <a id = "all_games" class="nav-link" href="/all-games">All Games</a> 
-</li>
-<li style="text-align: center;">
-    <a id = "all_genres" class="nav-link" href="/tags/1">All Genres</a>
+    <a id = "all_games" class="nav-link" href="{{route('all_games')}}">All Games</a> 
 </li>
 <li style="text-align: center;">
     <a id="top_games" class="nav-link" href="{{route('top_games')}}">Top Games</a>                
 </li style="text-align: center;">
+
 <li style="text-align: center;">
   <a id="most_downloads" class="nav-link" href="{{route('most_download')}}">Most Downloads</a>
 </li>

@@ -27,7 +27,8 @@ tr:nth-child(even) {
 	</table>
 </div>
 <div class="container">
-	<h1>All Games</h1>
+	<h1>{{$page_title}}</h1>
+	<p>{{$page_desc}}</p>
 	<table class="table border">
 		<tbody>
 			<tr>
