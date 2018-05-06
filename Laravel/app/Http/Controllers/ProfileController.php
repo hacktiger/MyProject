@@ -15,7 +15,7 @@ include('AdminController.php');
 class ProfileController extends Controller
 {   
     public function __construct(){
-        $this->middleware('auth')->only( ['show','edit','update']);
+        $this->middleware('auth')->only( ['show','edit','update','walletHistory','purchaseHistory']);
         $this->middleware('admin')->only(['makeAdmin','dropAdmin','destroy','index']);
     }
 
@@ -197,8 +197,24 @@ class ProfileController extends Controller
         return redirect('/profile');
     }
 
+    /**
+    *
+    *   WALLET FUNCTIONS
+    *
+    **/
     public function wallet($id){
         $user = DB::table('users')->where('id',$id)->first();
         return view('profile.wallet',['user'=>$user]);
+    }
+    public function walletHistory(){
+
+
+        return view('profile.wallet.wallet-history');
+
+    }
+    public function purchaseHistory(){
+
+
+        return view('profile.wallet.purchase-history');
     }
 }

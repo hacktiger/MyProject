@@ -61,7 +61,7 @@ Route::get('/admin/notification','AdminController@notify')->name('admin.notify')
 Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
 Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');
 //END ADMIN routes
-Route::get('/profile/{id}/wallet','ProfileController@wallet')->name('profile.wallet');
+
 
 
 // Addtional function in show
@@ -71,12 +71,20 @@ Route::post('/games/{game}/favorite','MyController@favorite')->name('games.favor
 Route::post('/games/{game}/purchase', 'MyController@purchase')->name('games.purchase');
 
 //
+Route::post('/addCash', 'MyController@addCash');
+Route::get('/profile/{id}/wallet','ProfileController@wallet')->name('profile.wallet');
+Route::get('/profile/my-purchase-history','ProfileController@purchaseHistory')->name('profile.purchase_history');
+Route::get('/profile/my-wallet-history','ProfileController@walletHistory')->name('profile.wallet_history');
+//
 Auth::routes();
+
+// Wallet - Cash functions
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/all-games','MyController@allGames')->name('all_games');
-Route::post('/addCash', 'MyController@addCash');
+
 
 Route::post('/search','SearchController@titleSearch');
 Route::get('/search/advance', 'SearchController@searchPage');
