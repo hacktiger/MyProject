@@ -16,6 +16,7 @@ tr:nth-child(even) {
 
 <div class="container">
 	<h3>Navigation</h3>
+	<!-- need to change in case there are too many tags -->
 	<table class="table borderless">
 		<thead>
 		<tr class ="success">
