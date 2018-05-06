@@ -1,8 +1,8 @@
 /** viet ban luan vao day **/
+// NEW
+// NEW
 
-+ search thấy cái đám noti counts nên cho vào 1 cái service provider 
-/NEW
-+ How to =))
+EEE dung co cho 1 dong if vao may cai store hay update, co cai validate la no kiem tra input r
 
 /Install
 + eloquent sluggable $ composer require cviebrock/eloquent-sluggable:^4.5
