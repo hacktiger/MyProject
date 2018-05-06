@@ -73,8 +73,8 @@ Route::post('/games/{game}/purchase', 'MyController@purchase')->name('games.purc
 //
 Route::post('/addCash', 'MyController@addCash');
 Route::get('/profile/{id}/wallet','ProfileController@wallet')->name('profile.wallet');
-Route::get('/profile/my-purchase-history','ProfileController@purchaseHistory')->name('profile.purchase_history');
-Route::get('/profile/my-wallet-history','ProfileController@walletHistory')->name('profile.wallet_history');
+Route::get('/my-purchase-history','ProfileController@purchaseHistory')->name('profile.purchase_history');
+Route::get('/my-wallet-history','ProfileController@walletHistory')->name('profile.wallet_history');
 //
 Auth::routes();
 

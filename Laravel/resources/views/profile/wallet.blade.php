@@ -32,7 +32,10 @@
 	</div>
 
 	<div class="col-md-4 col-sm-12">
-		<div><p>Our contace info : hacktiegr1989@gmail.com</p></div>
+		<div>
+			<p>Our contace info : hacktiegr1989@gmail.com</p>
+			<p>Address : 221B BakerStreet</p>
+		</div>
 	</div>
 </div>
 @endsection
