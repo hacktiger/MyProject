@@ -25,7 +25,7 @@ thead {
 @section('content')
 
 <!-- prints out every tags -->
-<div class="col col-group">
+<div class="row">
 	<div class="col-md-8 ">
 		<h1>Tag Search</h1>
 		<div>
@@ -52,8 +52,8 @@ thead {
 					<th><a href="/tags/{{$tags->id}}">{{$tags->name}}</a></th>
 					<th><a class="btn" style="background-color: #4CAF50; color:white;" href="/tags/{{$tags->id}}/edit">&ensp;Edit&ensp;</a></th>
 					<th>{!! Form::open(['action'=> ['TagController@destroy', $tags->id], 'method'=>'POST']) !!}
-					{{Form::hidden('_method', 'DELETE')}}
-					{{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
+						{{Form::hidden('_method', 'DELETE')}}
+						{{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
 					{!! Form::close() !!}</th>
 				</tr>
 				@endforeach

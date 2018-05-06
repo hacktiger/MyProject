@@ -50,12 +50,6 @@ class TagController extends Controller
         ]);
         $tag = new Tags;
         $tag->name =  $request->input('name');
-        if (!isset($tag->name)){
-            return redirect()->back()->with('error', 'Empty field: Tag Name');
-        }
-        if (Tags::where('name', $tag->name)->exists()){
-            return redirect()->back()->with('error', 'Tag already exist');
-        }
         $tag->save();
 
 
@@ -94,7 +88,18 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        //// get all unread
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
+        //get tag in games database
+        $tag = DB::table('tags')->where('id',$id)->first();
+
+
+        return view('tags.tags-edit',[
+            'tag'=>$tag,
+            'all_unread'=>$all_unread,          
+        ]);
+
     }
 
     /**
@@ -106,7 +111,16 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'=>'required|max:255'
+        ]);
+        $tag = games::find($id);
+        $tag->name =  $request->input('name');
+        $tag->save();
+
+
+        return redirect('/tags');
+        
     }
 
     /**
@@ -121,6 +135,6 @@ class TagController extends Controller
         $tag = Tags::find($id);
 
         $tag->delete();
-        return redirect()->back()->with('success','Game Deleted');
+        return redirect()->back()->with('success','Tag Deleted');
     }
 }

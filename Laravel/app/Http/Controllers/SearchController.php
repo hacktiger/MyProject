@@ -116,16 +116,20 @@ class SearchController extends Controller
 
     public function tagSearch()
     {
-        $tag = Input::get('tag');
-        $result = DB::table('tags')->where([
-            ['name', 'LIKE', '%'.$tag.'%']
-        ])->get();
-        if (count($result)>0){
-            return view('tags.index', ['tag'=>$result]);
-        }
-        else{
-            return redirect()->back()->with('error', 'No tags found');
-        }
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
+        /////
+        ///// MAIN
+        /////
+        $input = Input::get('tag');
+        $tag = DB::table('tags')->where([
+            ['name', 'LIKE', '%'.$input.'%']
+        ])->paginate(7);
+
+
+        return view('admin.tag-manage', ['tag'=>$tag, 'all_unread'=>$all_unread]);
+
+    
     }
     public function gameManageSearch()
     {
