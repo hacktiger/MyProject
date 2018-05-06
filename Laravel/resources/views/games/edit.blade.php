@@ -22,16 +22,25 @@
         <!-- tags -->
         <div class="form-group">
             {{Form::label('tag_id', 'Tags: ') }} <br>
-            @foreach($games_tags as $Gtag)
-            <a class ='btn btn-light' href="{{action('GamesController@removeTag', 
-            ['title'=>$game->title, 'tagID'=>$Gtag->tags_id])}}">{{$Gtag->name}}</a>
-            @endforeach
+            <div class = 'row'>
+            <div class ='col-sm-6'>
+            <p class = 'btn btn-danger'>Remove Tag</p>
+            <select class = "form-control select2-multi" name ="remove[]" multiple = "multiple">
+                @foreach($games_tags as $Gtag)
+                <option value = '{{$Gtag->tags_id}}'>{{$Gtag->name}}</option>
+                @endforeach
+            </select>
+            </div>
+            <div class = 'col-sm-6'>
+            <p class=" btn btn-success">Add Tag</p>
             <select class="form-control select2-multi" name="tags[]" multiple="multiple">
                 @foreach($tags as $tag)
                     <option value='{{$tag->id}}'>{{$tag->name}}</option>
                 @endforeach
             </select>
+            </div>
         </div>
+    </div>
         <!-- link to download -->
         <div class="form-group">
             {{Form::label('link',"Download Link")}}

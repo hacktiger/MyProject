@@ -291,6 +291,17 @@ class GamesController extends Controller
                 'tags_id' => $game_tag_id[$i]]
             );
         }
+        //Remove tag
+        $tag_remove = $request->remove;
+        var_dump($tag_remove);
+        if (isset($tag_remove)){
+            for ($j = 0; $j < count($tag_remove); $j++){
+                DB::table('games_tags')->where([
+                    ['games_title', $game->title],
+                    ['tags_id', $tag_remove]
+                ])->delete();
+            }
+        }
 
         }; 
     }
@@ -376,14 +387,5 @@ class GamesController extends Controller
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
 
         return $star;
-    }
-    public function removeTag( Request $request, $title, $tagID)
-    {
-        $game = games::find($title);
-        DB::table('games_tags')->where([
-            ['games_title', $game->title],
-            ['tags_id', $tagID]
-        ])->delete();
-        return redirect()->back()->with('success', 'Tag Deleted');
     }
 }

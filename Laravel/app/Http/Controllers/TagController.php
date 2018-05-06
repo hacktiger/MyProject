@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Tags;
+use Exception;
 class TagController extends Controller
 {
     public function __construct()
@@ -23,8 +24,9 @@ class TagController extends Controller
     public function store(Request $request)
     {
         //
+        try{
         $this->validate($request, [
-            'name'=>'required|max:255'
+            'name'=>'required|max:20'
         ]);
         $tag = new Tags;
         $tag->name =  $request->input('name');
@@ -32,7 +34,9 @@ class TagController extends Controller
 
 
         return redirect()->back()->with('success', 'Tag created');
-        
+        }catch (Exception $e){
+            return redirect()->back()->with('error', 'Tag already Existed');
+        }
 
     }
 
@@ -94,8 +98,9 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try {
         $this->validate($request, [
-            'name'=>'required|max:255'
+            'name'=>'required|max:20'
         ]);
         $tag = Tags::find($id);
         $tag->name =  $request->input('name');
@@ -103,7 +108,9 @@ class TagController extends Controller
 
 
         return redirect()->back()->with('success','Tag Edited');
-        
+        }catch (Exception $e){
+            return redirect()->back()->with('error', 'Duplicated Tag name');
+        }
     }
 
     /**
