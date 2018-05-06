@@ -207,14 +207,16 @@ class ProfileController extends Controller
         return view('profile.wallet',['user'=>$user]);
     }
     public function walletHistory(){
+        $user_id = Auth::user()->id;
+        $result = DB::table('wallet_history')->where('user_id',$user_id)->paginate(12);
 
-
-        return view('profile.wallet.wallet-history');
+        return view('profile.wallet.wallet-history',['result'=>$result]);
 
     }
     public function purchaseHistory(){
+        $user_id = Auth::user()->id;
+        $result = DB::table('sales_log')->where('user_id',$user_id)->paginate(12);
 
-
-        return view('profile.wallet.purchase-history');
+        return view('profile.wallet.purchase-history',['result'=>$result]);
     }
 }

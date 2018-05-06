@@ -17,34 +17,37 @@
  **
 **/
 
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function(){
 	return redirect('/login');
 });
 
+
+//backHome ?
 Route::get('/backHome',function(){
 	return redirect('/games');
 })->name('main');
 
+
+// admin middleware
 Route::get('/admin',['middleware'=>'admin',function(){
   return view('admin.admin');
 }])->name('admin');
 
-// Cleaning up links 
+
+// All games/ top games/most downloads/ dev list
+Route::get('/all-games','MyController@allGames')->name('all_games');
 Route::get('/top-games','MyController@topGames')->name('top_games');
 Route::get('/most-download','MyController@mostDownload')->name('most_download');
 Route::get('/developers-list','MyController@devList')->name('dev_list');
 
-/**
-  *  edit here
-  *
-**/
 
 // Resources
 Route::resource('games','GamesController');
 Route::resource('tags','TagController');
 Route::resource('profile','ProfileController');
 Route::resource('notification','NotificationController');
-// End Resources
+
 
 //ADMIN routes 
 Route::get('/admin/index','AdminController@index')->name('admin.index');
@@ -57,11 +60,11 @@ Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');
 Route::get('/admin/game-reports','AdminController@gameReport')->name('show.report');
 Route::delete('/admin/game-reports/{id}', 'AdminController@removeReport');
 Route::get('/admin/notification','AdminController@notify')->name('admin.notify');
+
+
 // Profile route make Admin
 Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
 Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');
-//END ADMIN routes
-
 
 
 // Addtional function in show
@@ -70,26 +73,22 @@ Route::post('/games/{game}/rating','MyController@rating')->name('games.rating');
 Route::post('/games/{game}/favorite','MyController@favorite')->name('games.favorite');
 Route::post('/games/{game}/purchase', 'MyController@purchase')->name('games.purchase');
 
-//
+// Wallet - Cash functions
 Route::post('/addCash', 'MyController@addCash');
 Route::get('/profile/{id}/wallet','ProfileController@wallet')->name('profile.wallet');
-Route::get('/profile/my-purchase-history','ProfileController@purchaseHistory')->name('profile.purchase_history');
-Route::get('/profile/my-wallet-history','ProfileController@walletHistory')->name('profile.wallet_history');
-//
+Route::get('/my-purchase-history','ProfileController@purchaseHistory')->name('profile.purchase_history');
+Route::get('/my-wallet-history','ProfileController@walletHistory')->name('profile.wallet_history');
+// Auth
 Auth::routes();
 
-// Wallet - Cash functions
 
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/all-games','MyController@allGames')->name('all_games');
-
-
+// Search Functions
 Route::post('/search','SearchController@titleSearch');
 Route::get('/search/advance', 'SearchController@searchPage');
 Route::post('/search/advancedResults', 'SearchController@advancedSearch');
 
+
+//Admin Search funcs
 Route::post('/profileSearch', 'SearchController@profileSearch');
 Route::post('/tagSearch', 'SearchController@tagSearch');
 Route::post('/gameManageSearch', 'SearchController@gameManageSearch');
