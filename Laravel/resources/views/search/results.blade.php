@@ -1,5 +1,8 @@
 @extends('layouts.common.master')
 
+
+
+
 @section('content')
 
 <div class="container">
@@ -24,4 +27,6 @@
             @endforeach
         </tbody>
     </table>
-</div>@endsection
+</div>
+@endsection
+

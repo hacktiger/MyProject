@@ -14,6 +14,8 @@ table
 @section('scripts')
 <script>
 
+$('#myProfile').addClass('current-active');
+
 </script>
 
 @endsection

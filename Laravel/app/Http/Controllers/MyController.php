@@ -165,7 +165,7 @@ class MyController extends Controller
 
     public function mostDownload(){
         // page info
-        $page_title = "MostPurchased";
+        $page_title = "Most Purchased";
         $page_desc = "This is the list of games with the most purchases to least";
         //SELECT game_title, COUNT(user_id) FROM sales_log GROUP BY game_title
         $game = DB::table('sales_log')

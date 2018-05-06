@@ -6,15 +6,15 @@
 <!-- Sidebar BODY -->
 <ul class="list-unstyled components" >
 
-    <a class="nav-link" href="/profile/{{Auth::user()->id}}"><p class="avatar-main"><img  style="height: 50px; width: 70px; object-fit: cover;" alt="{{Auth::user()->avatar}}" src="/storage/avatars/{{Auth::user()->avatar}}">
+    <a id = "myProfile" class="nav-link" href="/profile/{{Auth::user()->id}}"><p class="avatar-main"><img  style="height: 50px; width: 70px; object-fit: cover;" alt="{{Auth::user()->avatar}}" src="/storage/avatars/{{Auth::user()->avatar}}">
        &nbsp; <b><span>{{Auth::user()->name}}</span></b>
 
    </p></a>
-   <li>
+   <li id="myWallet">
       <a class="nav-link" href="/profile/{{Auth::user()->id}}/wallet">My wallet : {{Auth::user()->wallet}}$ &nbsp; <span class="glyphicon glyphicon-plus-sign"></span></a>
   </li>
   <hr>
-  <li style="text-align: center;">
+  <li id="home" style="text-align: center;">
     <a href="/backHome" class="nav-link">Home</a>
 </li> <br>
 <li >
@@ -30,8 +30,8 @@
     </form>
 </li>
 <br>
-<li style="text-align: center;">
-    <a class= 'nav-link' href ='/search/advance'>Advance Search</a>
+<li id="advancedSearch" style="text-align: center;">
+    <a class= 'nav-link' href ='/search/advance'>Advanced Search</a>
 </li>
 <li style="text-align: center;">
     <a id = "all_games" class="nav-link" href="{{route('all_games')}}">All Games</a> 

@@ -33,7 +33,9 @@ Card - BS 4
 
 @endsection
 @section('scripts')
-
+<script type="text/javascript">
+  $('#home').addClass('current-active');
+</script>
 @endsection
 
 @section('content')

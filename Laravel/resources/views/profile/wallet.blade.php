@@ -4,6 +4,9 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript">
+	$('#myWallet').addClass('current-active');
+</script>
 @endsection
 
 @section('content')

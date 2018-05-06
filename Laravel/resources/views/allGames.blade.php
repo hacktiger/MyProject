@@ -57,10 +57,29 @@ tr:nth-child(even) {
 
 @section('scripts')
 <script type="text/javascript">
+	// making the row clickable 
 	$(document).ready(function(){
     $(".clickable-row").click(function() {
         window.location = $(this).data("href");
     });
 	});
+
+	// get the currently active page (because this is a common view for many funcs)
+	<?php 
+		if($page_title == 'All Games'){
+			$page_id = 'all_games';
+			echo "var page_id_js = '{$page_id}';";	
+		} elseif ($page_title == 'Top Games'){
+			$page_id = 'top_games';
+			echo "var page_id_js = '{$page_id}';";	
+		}elseif ($page_title == 'Most Purchased') {
+			$page_id = 'most_downloads';
+			echo "var page_id_js = '{$page_id}';";			
+		}
+	?>
+
+	if(typeof page_id_js !== 'undefined'){
+		$('#'+page_id_js).addClass('current-active');
+	}
 </script>
 @endsection
