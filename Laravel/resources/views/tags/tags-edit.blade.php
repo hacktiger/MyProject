@@ -17,7 +17,7 @@
 	</div>
 
 	{{Form::submit('Submit', ['class'=>'btn btn-block btn-primary',])}}
-
+	{{Form::hidden('_method','PUT')}}
 {!! Form::close() !!}
 </div>
 @endsection

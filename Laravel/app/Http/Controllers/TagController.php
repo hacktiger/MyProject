@@ -9,31 +9,9 @@ class TagController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('show');
-        $this->middleware('admin')->except('show');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        $tag = Tags::all();
-        return view('tags.index',['tag' => $tag]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        return view('tags.create');
+        $this->middleware('auth')->only('show'); 
+        $this->middleware('admin');
+         
     }
 
     /**
@@ -114,12 +92,12 @@ class TagController extends Controller
         $this->validate($request, [
             'name'=>'required|max:255'
         ]);
-        $tag = games::find($id);
+        $tag = Tags::find($id);
         $tag->name =  $request->input('name');
         $tag->save();
 
 
-        return redirect('/tags');
+        return redirect()->back()->with('success','Tag Edited');
         
     }
 

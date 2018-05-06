@@ -311,7 +311,7 @@ class GamesController extends Controller
         //delete it
         $game->delete();
         // Session flash
-        return redirect('/games')->with('success','Game Deleted');
+        return redirect()->back()->with('success','Game Deleted');
     }
 
     public function showReports(){

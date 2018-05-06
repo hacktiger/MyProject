@@ -126,17 +126,24 @@ class SearchController extends Controller
             ['name', 'LIKE', '%'.$input.'%']
         ])->paginate(7);
 
-
-        return view('admin.tag-manage', ['tag'=>$tag, 'all_unread'=>$all_unread]);
+        if(count($tag) > 0)
+            return view('admin.tag-manage', ['tag'=>$tag, 'all_unread'=>$all_unread]);
+        else
+            return redirect()->back()->with('error','No tag found');
 
     
     }
     public function gameManageSearch()
     {
+        $admin_controller = new AdminController();
+        $all_unread = $admin_controller->getNotice();
+        /////
+        ///// MAIN
+        /////
         $q = Input::get ( 'title' );
         $gameTitle = games::where('title','LIKE','%'.$q.'%')->paginate(12);
         if(count($gameTitle) > 0)
-            return view('admin.game-manage', ['game'=>$gameTitle]);
+            return view('admin.game-manage', ['game'=>$gameTitle,'all_unread'=>$all_unread]);
         else 
             return redirect()->back()->with('error', 'No game found');
     }
