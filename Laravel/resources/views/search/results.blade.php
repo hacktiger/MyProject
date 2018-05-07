@@ -7,7 +7,7 @@
 
 <div class="container">
     <h1>Search Results</h1>
-    <table class="table table-striped">
+    <table class="table table-striped" style="width: 90%">
         <thead>
             <tr>
                 <th>Thumbnail</th>

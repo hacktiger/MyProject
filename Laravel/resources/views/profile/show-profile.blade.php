@@ -7,7 +7,7 @@ thead {
     background-color: #737373;
     color : white;
 }
-table
+
 </style>
 @endsection
 
@@ -21,7 +21,7 @@ $('#myProfile').addClass('current-active');
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" style="width: 90%">
     <h2>My Profile</h2>
     <p>Navigate through your profile with the tabs below.</p>
 
@@ -44,7 +44,7 @@ $('#myProfile').addClass('current-active');
         <!-- MY PROFILE TAB -->
         <div id="home" class="tab-pane fade in active">
             <h3>My Profile</h3>
-            <div class="row">
+            <div class="row" style="width: 90%">
                 <div class="col-md-4 col-sm-12">
                     <img  style="height: 100%; width: 80%; object-fit: cover;" alt="{{$user->avatar}}" src="/storage/avatars/{{$user->avatar}}">
                     <br>

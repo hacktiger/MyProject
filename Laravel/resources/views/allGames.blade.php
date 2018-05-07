@@ -14,7 +14,7 @@ tr:nth-child(even) {
 
 @section('content')
 
-<div class="container">
+<div class="container" style="width: 90%;">
 	<h3>Navigation</h3>
 	<!-- need to change in case there are too many tags -->
 	<table class="table borderless">
@@ -27,7 +27,7 @@ tr:nth-child(even) {
 		</thead>
 	</table>
 </div>
-<div class="container">
+<div class="container" style="width: 90%">
 	<h1>{{$page_title}}</h1>
 	<p>{{$page_desc}}</p>
 	<table class="table border">
