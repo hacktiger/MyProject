@@ -49,7 +49,12 @@
     <a class="nav-link" href="{{route('admin.index')}}"> Admin Panel </a>
     <hr>
 </li>
-@endif         
+@endif   
+@if(Auth::user()->auth_level == 'admin' ||Auth::user()->auth_level == 'developer')      
+<li style = 'text-align:center'>
+    <a id="upload_game" class="btn btn-primary" href="{{route('games.create')}}">Upload Game</a> 
+</li>
+@endif
 </ul>
 
 <ul class="list-unstyled CTAs" style="position:relative;">

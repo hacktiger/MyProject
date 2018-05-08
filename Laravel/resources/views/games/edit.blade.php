@@ -1,6 +1,6 @@
-@extends('admin.admin')
+@extends('layouts.common.master')
 
-@section('styles')
+@section('style ')
 
 {!! Html::style('css/select2.min.css') !!}
 

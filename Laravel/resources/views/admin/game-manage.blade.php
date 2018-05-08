@@ -42,6 +42,7 @@ thead {
                     <th>Game Title</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Approve Game</th>
                 </tr>
             </thead>
 
@@ -50,10 +51,19 @@ thead {
                 <tr class="content">
                     <th><a href="/games/{{$games->slug}}">{{$games->title}}</a></th>
                     <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/games/{{$games->slug}}/edit">&ensp;Edit&ensp;</a></th>
+                    
                     <th>{!! Form::open(['action'=> ['GamesController@destroy', $games->title], 'method'=>'POST']) !!}
                     {{Form::hidden('_method', 'DELETE')}}
                     {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
                     {!! Form::close() !!}</th>
+                        @if($games->approved =='N')
+                        <th>{!! Form::open(['action'=> ['GamesController@approve'], 'method'=>'POST']) !!}
+                                {{ Form::text('title', $games->title, ['class'=>'form-control hidden'])}}
+
+                            {{Form::submit('Approve', ['class'=>' btn  btn-light'])}}
+                        {!!Form::close() !!}
+                        @endif
+                </th>
                 </tr>
                 @endforeach
             </tbody>

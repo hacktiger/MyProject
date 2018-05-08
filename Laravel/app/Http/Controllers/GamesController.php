@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use App\games;
 use App\User;
 use App\Tags;
@@ -53,8 +54,8 @@ class GamesController extends Controller
      */
     public function create()
     {
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
+        // $admin_controller = new AdminController();
+        // $all_unread = $admin_controller->getNotice();
 
         // ------ //
         //  MAIN  //
@@ -62,10 +63,11 @@ class GamesController extends Controller
         //get all tags
         $tags = Tags::all();
         //return to create game
-        
+        $user = auth()->user()->name;
         return view('games.create',[
-            'all_unread'=>$all_unread,
+            // 'all_unread'=>$all_unread,
             'tags'=>$tags,
+            'userName'=>$user,
         ]);
         
     }
@@ -166,9 +168,13 @@ class GamesController extends Controller
             'games.image as image',
             'games.upload_by as upload_by',
             'games.price as price',
-            'games.sales as sales'
+            'games.sales as sales',
+            'games.approved as approved',
         ])->where('slug',$slug)->first();
         // get current user id   
+        if ($game->approved == 'N'){
+            return redirect('/games')->with('error', 'Game does not Exist / have yet to be Approved');
+        }
         $rate_by = auth()->user()->id;
         //get tags
         $game_tags = DB::table('games_tags')->leftJoin('tags', 'games_tags.tags_id', '=', 'tags.id')->select(['games_tags.games_title','tags.name','games_tags.tags_id as tags_id'])->where('games_tags.games_title', $game->title)->orderBy('games_tags.games_title','asc')->get();
@@ -214,8 +220,8 @@ class GamesController extends Controller
     public function edit($slug)
     {
         // get all unread
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
+        // $admin_controller = new AdminController();
+        // $all_unread = $admin_controller->getNotice();
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
         // get all available tags
@@ -227,7 +233,7 @@ class GamesController extends Controller
             'game'=>$game,
             'tags'=>$tags,
             'games_tags'=>$games_tags,
-            'all_unread'=>$all_unread,          
+            // 'all_unread'=>$all_unread,          
          ]);
     }
 
@@ -388,5 +394,11 @@ class GamesController extends Controller
         $star = array($pre_star['star_1'], $pre_star['star_2'], $pre_star['star_3'], $pre_star['star_4'], $pre_star['star_5']);
 
         return $star;
+    }
+    public function approve()
+    {
+        $game=Input::get('title');
+        games::where('title', $game)->update(['approved'=>'Y']);
+        return redirect()->back()->with('success', 'Game Approved');
     }
 }

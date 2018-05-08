@@ -1,6 +1,6 @@
-@extends('admin.admin')
+@extends('layouts.common.master')
 
-@section('styles')
+@section('style')
 
 {!! Html::style('css/select2.min.css') !!}
 
@@ -26,7 +26,7 @@
     	</div> 
         <div class="form-group">
             {{Form::label('upload_by',"Developer Name")}}
-            {{Form::text('upload_by','',['class'=>'form-control','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
+            {{Form::text('upload_by',$userName,['class'=>'form-control','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
         </div>
 
         <div class="form-group">
