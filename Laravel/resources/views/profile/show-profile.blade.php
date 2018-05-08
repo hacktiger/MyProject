@@ -1,12 +1,24 @@
 @extends('layouts.common.master')
 
-
 @section('style')
 <style type="text/css">
-thead {
-    background-color: #737373;
-    color : white;
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
+
+td, th {
+    padding: 2px;
+    text-align: center
+}
+thead {
+    background-color: #7386D5;
+    color:white;
+}
+.content:hover{
+    background-color: #ebeef9;
+}
+
 
 </style>
 @endsection
@@ -14,20 +26,18 @@ thead {
 @section('scripts')
 <script>
 
-$('#myProfile').addClass('current-active');
-
 </script>
 
 @endsection
 
 @section('content')
-<div class="container" style="width: 90%">
+<div class="container">
     <h2>My Profile</h2>
     <p>Navigate through your profile with the tabs below.</p>
 
     <!-- TABS -->
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">My Profile</a></li>
+        <li class="active"><a href="/profile/{{Auth::user()->id}}">My Profile</a></li>
         <li><a data-toggle="tab" href="#menu1">
             @if ($user->auth_level !== 'developer')
             Owned Games
@@ -44,7 +54,7 @@ $('#myProfile').addClass('current-active');
         <!-- MY PROFILE TAB -->
         <div id="home" class="tab-pane fade in active">
             <h3>My Profile</h3>
-            <div class="row" style="width: 90%">
+            <div class="row">
                 <div class="col-md-4 col-sm-12">
                     <img  style="height: 100%; width: 80%; object-fit: cover;" alt="{{$user->avatar}}" src="/storage/avatars/{{$user->avatar}}">
                     <br>
@@ -58,10 +68,10 @@ $('#myProfile').addClass('current-active');
                     <h4>ID: {{$user->id}}</h4>
                     <!--Auth_level-->
                     <h4>Rank: 
-                        @if ($user->auth_level == 'banned')
+                        @if ($user->auth_level == 'ban')
                         <font color='red'><s>{{$user->auth_level}}</s></font></h4>
                         @endif
-                        @if ($user->auth_level !='banned')
+                        @if ($user->auth_level !='ban')
                         {{$user->auth_level}}
                         @endif
                 </div>
@@ -97,7 +107,7 @@ $('#myProfile').addClass('current-active');
                 </thead>
                 <tbody>
                     @foreach($owned_games as $games)
-                    <tr  class="clickable-row hover-row" data-href="/games/{{$games->slug}}">
+                    <tr  class="content" data-href="/games/{{$games->slug}}">
                         <td class="hidden-sm hidden-xs"><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
                         <td><a href="/games/{{$games->slug}}"> {{$games->game_title}}</a></td>
                         <td>{{$games->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
@@ -124,7 +134,7 @@ $('#myProfile').addClass('current-active');
                 </thead>
                 <tbody>
                     @foreach($favorited as $game)
-                    <tr  class="clickable-row hover-row" data-href="/games/{{$game->slug}}">
+                    <tr  class="content" data-href="/games/{{$game->slug}}">
                         <td class="hidden-sm hidden-xs"><img style="width:180px;height: 60px" src="/storage/cover_images/{{$game->image}}"></td>
                         <td><a href="/games/{{$game->slug}}"> {{$game->game_title}}</a></td>
                         <td>{{$game->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
@@ -139,4 +149,10 @@ $('#myProfile').addClass('current-active');
     </div>
 <!-- END CONTAINER -->
 </div>   
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $('#profile_manage').addClass('current-active');
+</script>
 @endsection

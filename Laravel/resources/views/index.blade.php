@@ -41,17 +41,17 @@ Card - BS 4
 @section('content')
 
 <div style=" border: 1px solid #737373;
-    border-radius: 5px;">
-@foreach($notification as $noti)
-  <div style="padding: 5px">
-      <p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub;?></p>
-  </div> 
-@endforeach
+    border-radius: 5px;" style="width: 90%">
+  @foreach($notification as $noti)
+    <div style="padding: 5px">
+        <p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub;?></p>
+    </div> 
+  @endforeach
 </div>
 <br><br>
 
 <h1><center>Ongoing Sales</center></h1>
-<div class="container">
+<div class="container" style="width: 90%;">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -97,12 +97,12 @@ Card - BS 4
 <div class="container content-row">
   <div class="row">
     @foreach($game as $games)
-      <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top:30px;">
-        <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd">
+      <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top:30px;">
+        <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd;width: 90%;">
           <!-- IMG -->
           <a href="/games/{{$games->slug}}">
             <div style="">
-              <img style="border-top-left-radius: 10px; border-top-right-radius: 10px; border: 1px solid #ddd; max-height: 140px;object-fit: cover; " src="/storage/cover_images/{{$games->image}}" class="card-img-top" alt="{{$games->title}}">
+              <img style="border-top-left-radius: 10px; border-top-right-radius: 10px; border: 1px solid #ddd; max-height: 140px;width: 100% " src="/storage/cover_images/{{$games->image}}" class="card-img-top" alt="{{$games->title}}">
             </div>
           </a>
           <!-- Body -->

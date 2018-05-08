@@ -9,6 +9,7 @@ use App\games;
 use App\User;
 use App\Tags;
 use App\games_tags;
+use App\Notification;
 
 include('AdminController.php');
 

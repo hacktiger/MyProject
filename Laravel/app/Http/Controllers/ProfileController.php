@@ -153,7 +153,7 @@ class ProfileController extends Controller
         // -------------------------------------------------------------------------------//
         //find it
         User::where('id', '=', $id)->update([
-            'auth_level'=>'banned'
+            'auth_level'=>'ban'
         ]);
         //remove games
         sales_log::where('user_id', '=', $id)->delete();

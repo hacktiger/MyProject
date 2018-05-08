@@ -68,10 +68,10 @@ thead {
                     <h4>ID: {{$user->id}}</h4>
                     <!--Auth_level-->
                     <h4>Rank: 
-                        @if ($user->auth_level == 'banned')
+                        @if ($user->auth_level == 'ban')
                         <font color='red'><s>{{$user->auth_level}}</s></font></h4>
                         @endif
-                        @if ($user->auth_level !='banned')
+                        @if ($user->auth_level !='ban')
                         {{$user->auth_level}}
                         @endif
                 </div>
