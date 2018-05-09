@@ -50,7 +50,7 @@
     <hr>
 </li>
 @endif   
-@if(Auth::user()->auth_level == 'admin' ||Auth::user()->auth_level == 'developer')      
+@if(Auth::user()->auth_level == 'admin' || Auth::user()->auth_level == 'developer')      
 <li style = 'text-align:center'>
     <a id="upload_game" class="btn btn-primary" href="{{route('games.create')}}">Upload Game</a> 
 </li>

@@ -36,7 +36,7 @@ class GamesController extends Controller
     public function index()
     {   
         // get game detail
-        $game =  games::orderBy('created_at','DESC')->paginate(9);
+        $game =  games::orderBy('created_at','DESC')->where('approved','Y')->paginate(9);
         // get sales num
         $sales = DB::table('games')->where('sales', '<>', 0)
                 ->orderBy('created_at','DESC')
@@ -208,7 +208,14 @@ class GamesController extends Controller
             $owned = true;
         }
         // return view
-        return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned]);
+        if(Auth::user()->auth_level == 'admin'){
+            $admin_controller = new AdminController();
+            $all_unread = $admin_controller->getNotice();
+            return view('admin.show.show-game',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned, 'all_unread'=>$all_unread, ]);
+        } else {
+            return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned]);
+        }
+
     }
 
     /**

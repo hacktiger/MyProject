@@ -56,14 +56,20 @@ thead {
                     {{Form::hidden('_method', 'DELETE')}}
                     {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
                     {!! Form::close() !!}</th>
-                        @if($games->approved =='N')
-                        <th>{!! Form::open(['action'=> ['GamesController@approve'], 'method'=>'POST']) !!}
-                                {{ Form::text('title', $games->title, ['class'=>'form-control hidden'])}}
 
-                            {{Form::submit('Approve', ['class'=>' btn  btn-light'])}}
+                    
+                    <th>
+                    @if($games->approved =='N')
+                        {!! Form::open(['action'=> ['GamesController@approve'], 'method'=>'POST']) !!}
+                        {{ Form::text('title', $games->title, ['class'=>'form-control hidden'])}}
+                        {{Form::submit('Approve Game', ['class'=>' btn  btn-primary'])}}
                         {!!Form::close() !!}
-                        @endif
-                </th>
+                    @endif
+                    @if($games->approved == 'Y')
+                        <button class="btn btn-light"> Approved </button>
+                    @endif
+                    </th>
+
                 </tr>
                 @endforeach
             </tbody>

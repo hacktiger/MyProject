@@ -144,8 +144,7 @@ class MyController extends Controller
         $page_title = "All Games";
         $page_desc = "This is the list of all available games from most recent to oldest";
         // get all games in DESC order of creation
-        $game =  games::orderBy('created_at','DESC')->where('approved', 1)
-        ->paginate(12);
+        $game =  games::orderBy('created_at','DESC')->where('approved', 'Y')->paginate(12);
         // get all possible tags
         $tags = DB::table('tags')->orderBy('name','ASC')->paginate(9);
         // return view resource.views.allGames
@@ -157,8 +156,7 @@ class MyController extends Controller
         $page_title = "Top Games";
         $page_desc = "This is the list of the highest to lowest average rating on the site";
         // Get top rated games
-        $game =  games::orderBy('avg_rating','DESC')->where('approved', 1)
-        ->paginate(12);
+        $game =  games::orderBy('avg_rating','DESC')->where('approved', 'Y')->paginate(12);
         // get all possible tags
         $tags = DB::table('tags')->orderBy('name','ASC')->get();
 
@@ -173,7 +171,7 @@ class MyController extends Controller
         $game = DB::table('sales_log')
                 ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
                 ->select(['games.title', 'games.slug','games.image', 'avg_rating', 'games.upload_by',DB::raw(' COUNT(sales_log.user_id) as downloads')])
-                ->where('approved', 1)
+                ->where('approved', 'Y')
                 ->groupBy(['games.title','games.slug','games.image', 'avg_rating', 'games.upload_by'])
                 ->orderBy('downloads','DESC')
                 ->paginate(12);
