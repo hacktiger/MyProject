@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 12, 2018 lúc 09:05 AM
+-- Thời gian đã tạo: Th5 12, 2018 lúc 03:22 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.1
 
@@ -68,7 +68,8 @@ CREATE TABLE `games` (
 --
 
 INSERT INTO `games` (`title`, `slug`, `avg_rating`, `description`, `release`, `link`, `image`, `upload_by`, `price`, `sales`, `created_at`, `updated_at`, `approved`) VALUES
-('test', 'test', 3.00, '<p>teste</p>', 1998, 'asd', 'khongCoImage_game.jpg', 'admin', '0.00', '0.00', '2018-05-12 07:04:43', '2018-05-12 07:04:57', 'Y');
+('buy1', 'buy1', 0.00, '<p>a</p>', 12424, 'jk', 'khongCoImage_game.jpg', 'admin', '10.00', '5.00', '2018-05-12 10:59:43', '2018-05-12 10:59:54', 'Y'),
+('test', 'test', 3.00, '<p>teste</p>', 1998, 'asd', 'khongCoImage_game.jpg', 'admin', '30.00', '0.00', '2018-05-12 07:04:43', '2018-05-12 10:12:16', 'Y');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,7 @@ CREATE TABLE `games_tags` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -133,8 +134,8 @@ CREATE TABLE `notification` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -171,6 +172,13 @@ CREATE TABLE `report` (
   `text` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `report`
+--
+
+INSERT INTO `report` (`id`, `upload_by`, `game_title`, `text`) VALUES
+(1, 1, 'test', 'asfasf');
+
 -- --------------------------------------------------------
 
 --
@@ -191,7 +199,13 @@ CREATE TABLE `sales_log` (
 --
 
 INSERT INTO `sales_log` (`id`, `game_title`, `user_id`, `price`, `created_at`, `updated_at`) VALUES
-(1, 'test', 1, '0.00', '2018-05-12 07:04:43', '2018-05-12 07:04:43');
+(1, 'test', 1, '0.00', '2018-05-12 07:04:43', '2018-05-12 07:04:43'),
+(2, 'test', 2, '30.00', '2018-05-12 10:17:56', '2018-05-12 10:17:56'),
+(3, 'buy1', 1, '0.00', '2018-05-12 10:59:43', '2018-05-12 10:59:43'),
+(4, 'buy1', 2, '5.00', '2018-05-12 11:03:17', '2018-05-12 11:03:17'),
+(5, 'buy1', 3, '5.00', '2018-05-12 11:05:46', '2018-05-12 11:05:46'),
+(6, 'test', 3, '30.00', '2018-05-12 11:07:10', '2018-05-12 11:07:10'),
+(7, 'buy1', 4, '5.00', '2018-05-12 11:11:20', '2018-05-12 11:11:20');
 
 -- --------------------------------------------------------
 
@@ -201,7 +215,7 @@ INSERT INTO `sales_log` (`id`, `game_title`, `user_id`, `price`, `created_at`, `
 
 CREATE TABLE `tags` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -231,7 +245,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `wallet`, `description`, `auth_level`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$rtrJqW/1pdCDO9KS5e0CC.RUnudW4RBeCDdtqgivjyjbwy1mCFUM2', 'khongCoImage.jpg', '0.00', NULL, 'admin', NULL, '2018-05-12 06:58:36', '2018-05-12 06:58:36');
+(1, 'admin', 'admin@gmail.com', '$2y$10$rtrJqW/1pdCDO9KS5e0CC.RUnudW4RBeCDdtqgivjyjbwy1mCFUM2', 'khongCoImage.jpg', '2000.00', NULL, 'admin', 'zX3EwVWrJcfC2ONGfU3SeArGvyAFH9Si07bK03gd0iQnfsSa1vwttlMZwa4G', '2018-05-12 06:58:36', '2018-05-12 06:58:36'),
+(2, 'user', 'user@gmail.com', '$2y$10$gNIyTinvlIhKWsgEbe/CceiBLYM6Fgf8cMzlC7ZG283/jz1FmYh2O', 'khongCoImage.jpg', '9964.99', NULL, 'casual', 'kDBrDQreU4UYxCSn5kQ66u1OzclSJMlFPWQX2AavhvWBqDWeK3CKPs8JR8XN', '2018-05-12 10:17:42', '2018-05-12 10:17:42'),
+(3, 'user2', 'user2@gmail.com', '$2y$10$cnDKwQrw1zrL32vT4RguXuKvA877DJbu1hKLCLnHCHgTwZEvul4ZG', 'khongCoImage.jpg', '4207.00', NULL, 'casual', 'JddqVknDCZljwsYtsCEcf5Bl6UqA9IZASb6FOOw6SsXletKAN3VOaPIKE6dI', '2018-05-12 11:05:33', '2018-05-12 11:05:33'),
+(4, 'user3', 'user3@gmail.com', '$2y$10$CGeBvTmZYFilPFVn06tMNO2z/hj5l/lQpYSU.IbV29d8mW89iauvS', 'khongCoImage.jpg', '2138.00', NULL, 'casual', NULL, '2018-05-12 11:11:06', '2018-05-12 11:11:06');
 
 -- --------------------------------------------------------
 
@@ -246,6 +263,16 @@ CREATE TABLE `wallet_history` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `wallet_history`
+--
+
+INSERT INTO `wallet_history` (`id`, `user_id`, `amount`, `created_at`, `updated_at`) VALUES
+(1, 1, '2000.00', '2018-05-12 10:12:21', NULL),
+(2, 2, '9999.99', '2018-05-12 10:17:47', NULL),
+(3, 3, '4242.00', '2018-05-12 11:05:37', NULL),
+(4, 4, '2143.00', '2018-05-12 11:11:10', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -376,13 +403,13 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT cho bảng `report`
 --
 ALTER TABLE `report`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `sales_log`
 --
 ALTER TABLE `sales_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `tags`
@@ -394,13 +421,13 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `wallet_history`
 --
 ALTER TABLE `wallet_history`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
