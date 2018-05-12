@@ -18,16 +18,16 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->string('title'); $table->primary('title');
             $table->string('slug')->nullable();
-            $table->float('avg_rating',2,1)->default(0);
+            $table->float('avg_rating',2,2)->default(0);
             $table->text('description');
             $table->smallInteger('release')->unsigned();
             $table->string('link');
             $table->string('image')->default('khongCoImage_game.jpg');
             $table->string('upload_by');
-            $table->integer('price')->default(0);
-            $table->integer('sales')->default(0);
+            $table->unsignedDecimal('price',6,2)->default(0);
+            $table->unsignedDecimal('sales',6,2)->default(0);
             $table->timestamps();   
-            $table->enum('status',['Read','Unread'])->default('Unread');       
+            $table->enum('approved',['N', 'Y'])->default('N');   
         });
     }
 

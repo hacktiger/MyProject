@@ -16,11 +16,9 @@ class CreateSalesLogTable extends Migration
         Schema::create('sales_log', function (Blueprint $table) {
             $table->increments('id');
             $table->string('game_title');
-            $table->integer('user_id')->unsigned();          
-            $table->timestamps();
-            $table->enum('status',['Read','Unread'])->default('Unread');
-
-            
+            $table->integer('user_id')->unsigned();  
+            $table->unsignedDecimal('price',6,2)->default(0);          
+            $table->timestamps();         
         });
 
         Schema::table('sales_log',function(Blueprint $table){

@@ -17,9 +17,8 @@ class WalletHistoryTable extends Migration
         Schema::create('wallet_history', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();    
-            $table->float('amount',6,2)->unsigned()->default(0); 
+            $table->unsignedDecimal('amount',6,2)->default(0); 
             $table->timestamps();  
-            $table->enum('status',['Read','Unread'])->default('Unread'); 
         });
 
         Schema::table('wallet_history', function(Blueprint $table){
