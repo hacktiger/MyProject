@@ -38,7 +38,7 @@ thead {
             @foreach($notification as $noti)
             <tbody>
                 <tr class="content">
-                    <th>{{$noti->id}}</th>
+                    <th><a href="/notification/{{$noti->id}}">{{$noti->id}}<a></th>
                     <th><?php $string = $noti->text; $sub = substr($string,0,12); echo $sub;?></th>
                     <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/notification/{{$noti->id}}/edit">&ensp;Edit&ensp;</a></th>
                     <th>{!! Form::open(['action'=> ['NotificationController@destroy', $noti->id], 'method'=>'POST']) !!}
@@ -61,6 +61,5 @@ thead {
 @section('scripts')
 <script type="text/javascript">
     $('#notification').addClass('current-active');
-    $('#main,#profile_manage,#wallet_history,#sales_log,#upload_game,#game_report,#tag_manage,#game_manage').removeClass('current-active');
 </script>
 @endsection

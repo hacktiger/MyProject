@@ -62,28 +62,13 @@ class NotificationController extends Controller
         //data validation
         $this->validate($request, [
             'text'=>'required',
-            'image'=>'image|nullable|max:5999',
+            'title'=>'required|max:255',
         ]);
-        //Handle File Upload
-        if($request->hasFile('image')){
-            //with extension
-            $fileNameWithExt = $request->file('image')->getClientOriginalName();
-            //get just file name
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            //get ext
-            $extension = $request->file('image')->getClientOriginalExtension();
-            //file name to store 
-            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            //Upload
-            $path = $request->file('image')->storeAs('public/cover_images', $fileNameToStore);
-        }  else {
-            $fileNameToStore = 'khongCoImage.jpg';
-        }
         //CREATE INFO
         $noti = new Notification();
         $noti->admin_id = Auth::user()->id;
         $noti->text = $request->input('text');
-        $noti->image = $fileNameToStore;
+        $noti->title = $request->intput('title');
 
         $noti->save();
 
@@ -91,7 +76,6 @@ class NotificationController extends Controller
         $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
         return view('admin.notification.noti-index',[
             'notification'=>$notification,
-            'all_unread'=>$all_unread,
         ])->with('success','Notice Created');
     }
 
@@ -104,6 +88,14 @@ class NotificationController extends Controller
     public function show($id)
     {
         //
+        $notification = Notification::find($id);
+
+        if(Auth::user()->auth_level == 'admin'){
+            return view('admin.notification.noti-show',['notification'=>$notification]);
+        } else {
+            return view('show-notification',['notification'=>$notification]);
+        }
+        
     }
 
     /**
@@ -137,31 +129,15 @@ class NotificationController extends Controller
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
-        //data validation
         $this->validate($request, [
             'text'=>'required',
-            'image'=>'image|nullable|max:5999',
+            'title'=>'required|max:255',
         ]);
-        //Handle File Upload
-        if($request->hasFile('image')){
-            //with extension
-            $fileNameWithExt = $request->file('image')->getClientOriginalName();
-            //get just file name
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            //get ext
-            $extension = $request->file('image')->getClientOriginalExtension();
-            //file name to store 
-            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            //Upload
-            $path = $request->file('image')->storeAs('public/cover_images', $fileNameToStore);
-        }  else {
-            $fileNameToStore = 'khongCoImage.jpg';
-        }
         //CREATE INFO
-        $noti = Notification::find($id);
+        $noti = new Notification();
         $noti->admin_id = Auth::user()->id;
         $noti->text = $request->input('text');
-        $noti->image = $fileNameToStore;
+        $noti->title = $request->intput('title');
         $noti->save();
 
         //Return view

@@ -35,6 +35,8 @@ Route::get('/admin',['middleware'=>'admin',function(){
 }])->name('admin');
 
 
+
+
 // All games/ top games/most downloads/ dev list
 Route::get('/all-games','MyController@allGames')->name('all_games');
 Route::get('/top-games','MyController@topGames')->name('top_games');

@@ -9,29 +9,28 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 col-sm-12">
-	<h1>Notice to Users</h1>
+       <h1>Notice to Users</h1>
 
 
-	{!! Form::open(['action'=>'NotificationController@store', 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
+       {!! Form::open(['action'=>'NotificationController@store', 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
-        <!-- DES -->
-    	<div class="form-group">
-    		{{Form::label('text',"Write about the Notice")}}
-    		{{Form::textarea('text','',['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'What is the notice about', 'spellcheck'=>'false'])}}
-    	</div> 
-
-        <!-- link to images -->
-        <div class="form-group">
-            {{Form::label('image',"Upload an image with it")}}
-            {{Form::file('image')}}
-        </div>
+    <div class="form-group">
+        {{Form::label('title',"What is the title of the notice")}}
+        {{Form::textarea('title','',['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'Title here', 'spellcheck'=>'false'])}}
+    </div> 
+    <!-- DES -->
+    <div class="form-group">
+      {{Form::label('text',"Write about the Notice")}}
+      {{Form::textarea('text','',['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'What is the notice about', 'spellcheck'=>'false'])}}
+  </div> 
 
 
-    	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
-        <br><br>
 
-	{!! Form::close() !!}
-    </div>
+  {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+  <br><br>
+
+  {!! Form::close() !!}
+</div>
 </div>
 
 @endsection

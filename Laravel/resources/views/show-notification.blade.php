@@ -1,6 +1,6 @@
-@extends('admin.admin')
+@extends('layouts.common.master')
 
-@section('styles')
+@section('style')
 <style type="text/css">
 
 
@@ -18,7 +18,5 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-    $('#notification').addClass('current-active');
-</script>
+
 @endsection
