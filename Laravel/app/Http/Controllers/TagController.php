@@ -75,16 +75,11 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //// get all unread
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
         //get tag in games database
         $tag = DB::table('tags')->where('id',$id)->first();
 
-
         return view('tags.tags-edit',[
-            'tag'=>$tag,
-            'all_unread'=>$all_unread,          
+            'tag'=>$tag,       
         ]);
 
     }

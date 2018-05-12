@@ -15,44 +15,37 @@
                     </li>
                     <li>
                         <a id="game_manage" class="nav-link" href="{{route('games.manage')}}">Game Manage &nbsp; 
-                            @if($all_unread[0] != 0)
-                            <span class="badge badge-light"> &nbsp; {{$all_unread[0]}}&nbsp; </span>
-                            @endif
+
+
+                            
                         </a>                 
                     </li>
                     <li>
                     	<a id="sales_log" class="nav-link" href="{{route('admin.sales_log')}}">Sales Log &nbsp; 
-                            @if($all_unread[1] != 0)
-                            <span class="badge badge-light"> &nbsp; {{$all_unread[1]}}&nbsp; </span>
-                            @endif
+
+                            
                         </a>
                     </li>
                     <li>
                     	<a id="wallet_history" class="nav-link" href="{{route('admin.wallet_history')}}">Wallet History &nbsp; 
-                            @if($all_unread[2] != 0)
-                            <span class="badge badge-light"> &nbsp; {{$all_unread[2]}}&nbsp; </span>
-                            @endif 
+
+                             
                         </a>
                     </li>
                     <li>
                     	<a id="game_report" class ='nav-link' href="{{route('show.report')}}">Game Reports  &nbsp; 
-                            @if($all_unread[3] != 0)
-                            <span class="badge badge-light"> &nbsp; {{$all_unread[3]}}&nbsp; </span>
-                            @endif 
+
+                             
                         </a>
                     </li>
                     <li>
                         <a id="tag_manage" class="nav-link" href="{{route('tags.manage')}}">Tags Manage &nbsp; 
-                            @if($all_unread[4] != 0)
-                            <span class="badge badge-light"> &nbsp; {{$all_unread[4]}}&nbsp; </span>
-                            @endif 
+
+                             
                         </a>
                     </li>
                     <li>
                         <a id="profile_manage" class="nav-link" href="{{route('profiles.manage')}}">Profile Manage &nbsp; 
-                            @if($all_unread[5] != 0)
-                            <span class="badge badge-light"> &nbsp; {{$all_unread[5]}}&nbsp; </span>
-                            @endif  
                         </a>  
                     </li>
                     <li>

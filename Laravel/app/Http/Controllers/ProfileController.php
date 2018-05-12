@@ -59,10 +59,8 @@ class ProfileController extends Controller
             ->paginate(12);
 
             if(Auth::user()->auth_level == 'admin'){
-                $admin_controller = new AdminController();
-                $all_unread = $admin_controller->getNotice();
 
-                return view('admin.show.show-profile',['all_unread'=>$all_unread, 'user'=>$user,'owned_games'=>$owned_games,'favorited'=>$favorited]);
+                return view('admin.show.show-profile',['user'=>$user,'owned_games'=>$owned_games,'favorited'=>$favorited]);
             } else {
                 return view('profile.show-profile', ['user'=>$user, 'owned_games'=>$owned_games,'favorited'=>$favorited]); 
             }
@@ -142,8 +140,6 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
          // get users
         $user = User::orderBy('created_at','DESC')->paginate(20);
         // get admins
@@ -159,7 +155,6 @@ class ProfileController extends Controller
         sales_log::where('user_id', '=', $id)->delete();
         // Session flash
         return view('profile.profile-index',[
-            'all_unread'=>$all_unread,
             'user'=>$user, 
             'admin'=>$admin,
         ])->with('success','User Banned');
@@ -167,8 +162,6 @@ class ProfileController extends Controller
 
     public function makeAdmin($id){
         //
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
         // get users
         $user = User::orderBy('created_at','DESC')->paginate(20);
         // get admins
@@ -182,7 +175,6 @@ class ProfileController extends Controller
         // notification
 
         return view('profile.profile-index',[
-            'all_unread'=>$all_unread,
             'user'=>$user, 
             'admin'=>$admin,
         ]);

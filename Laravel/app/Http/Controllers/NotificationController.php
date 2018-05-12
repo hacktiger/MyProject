@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\games;
 use App\User;
 
-include('AdminController.php');
 
 
 class NotificationController extends Controller
@@ -22,9 +21,6 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        // get notification unread
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
 
         // ------ //
         //   MAIN
@@ -34,7 +30,6 @@ class NotificationController extends Controller
         //Return view
         return view('admin.notification.noti-index',[
             'notification'=>$notification,
-            'all_unread'=>$all_unread,
         ]);
     }
 
@@ -45,17 +40,12 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
         // ------ //
         //   MAIN
         // -------//
 
         //Return view
-        return view('admin.notification.noti-create',[
-            'all_unread'=>$all_unread,
-        ]);
+        return view('admin.notification.noti-create');
     }
 
     /**
@@ -66,9 +56,6 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        // get unread
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -127,9 +114,6 @@ class NotificationController extends Controller
      */
     public function edit($id)
     {
-        //
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -137,7 +121,6 @@ class NotificationController extends Controller
 
         //RETURN VIEW
         return view('admin.notification.noti-edit',[
-            'all_unread'=>$all_unread,
             'notification'=>$notification
         ]);
     }
@@ -151,9 +134,6 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -188,7 +168,6 @@ class NotificationController extends Controller
         $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
         return view('admin.notification.noti-index',[
             'notification'=>$notification,
-            'all_unread'=>$all_unread,
         ])->with('success','Notice Edited');
     }
 

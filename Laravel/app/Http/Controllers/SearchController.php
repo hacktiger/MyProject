@@ -82,9 +82,6 @@ class SearchController extends Controller
 
     public function profileSearch()
     {
-        //
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -93,20 +90,20 @@ class SearchController extends Controller
         if($userName && !$id){
             $user= DB::table('users')->where('name','LIKE','%'.$userName."%")->paginate(8);
         return view('profile.profile-index',[
-            'all_unread'=>$all_unread,
+            
             'user'=>$user, 
         ]);
         }elseif (!$userName && $id) {
             $user= DB::table('users')->where('id','=',$id)->paginate(8);
         return view('profile.profile-index',[
-            'all_unread'=>$all_unread,
+            
             'user'=>$user, 
         ]);
         } 
         elseif($userName && $id){
             $user = DB::table('users')->where('name','LIKE','%'.$userName."%")->where('id','=',$id)->paginate(8);
         return view('profile.profile-index',[
-            'all_unread'=>$all_unread,
+            
             'user'=>$user, 
         ]);
         } else {
@@ -116,8 +113,7 @@ class SearchController extends Controller
 
     public function tagSearch()
     {
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
+
         /////
         ///// MAIN
         /////
@@ -127,7 +123,7 @@ class SearchController extends Controller
         ])->paginate(7);
 
         if(count($tag) > 0)
-            return view('admin.tag-manage', ['tag'=>$tag, 'all_unread'=>$all_unread]);
+            return view('admin.tag-manage', ['tag'=>$tag]);
         else
             return redirect()->back()->with('error','No tag found');
 
@@ -135,15 +131,14 @@ class SearchController extends Controller
     }
     public function gameManageSearch()
     {
-        $admin_controller = new AdminController();
-        $all_unread = $admin_controller->getNotice();
+
         /////
         ///// MAIN
         /////
         $q = Input::get ( 'title' );
         $gameTitle = games::where('title','LIKE','%'.$q.'%')->paginate(12);
         if(count($gameTitle) > 0)
-            return view('admin.game-manage', ['game'=>$gameTitle,'all_unread'=>$all_unread]);
+            return view('admin.game-manage', ['game'=>$gameTitle]);
         else 
             return redirect()->back()->with('error', 'No game found');
     }

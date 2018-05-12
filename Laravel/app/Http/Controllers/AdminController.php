@@ -21,28 +21,6 @@ class AdminController extends Controller
         $this->middleware('admin');
     }
     /**
-    *   return #unread -> array -> lessen code
-    *
-    *   @return array;
-    **/
-    public function getNotice(){
-        $notice = array();
-        $new_game_count         = DB::table('games')->where('status','Unread')->count();
-        $new_sales_log_count    = DB::table('sales_log')->where('status','Unread')->count();
-        $new_wallet_count       = DB::table('wallet_history')->where('status','Unread')->count();  
-        $new_game_report_count  = DB::table('report')->where('status','Unread')->count();
-        $new_tag_count          = DB::table('tags')->where('status','Unread')->count();
-        $new_profile_count      = DB::table('users')->where('status','Unread')->count();
-        array_push($notice, $new_game_count);
-        array_push($notice, $new_sales_log_count);
-        array_push($notice, $new_wallet_count);
-        array_push($notice, $new_game_report_count);
-        array_push($notice, $new_tag_count);
-        array_push($notice, $new_profile_count);
-        // RETURN ARRAY of No of unread
-        return $notice;
-    }
-    /**
     *   return dates and that alike
     *
     *   @return array
@@ -78,8 +56,6 @@ class AdminController extends Controller
     }
     //INDEX
     public function index(){
-        //NOTIFICATION
-        $all_unread = $this->getNotice();
         //----------------------------------------------------------------------------------------//
         //                                                                                        //
         //                                      CHARTS DATA                                       //
@@ -98,8 +74,6 @@ class AdminController extends Controller
             'num_admin'=>$num_admin,
             'num_developer'=>$num_developer,
             'num_ban'=>$num_ban,
-            // NOTIFICATION
-            'all_unread'=>$all_unread,
             'dt'=>$dt,
         ]);
         
@@ -107,44 +81,24 @@ class AdminController extends Controller
 
     //GAMES
     public function manageGame(){
-        // all unread games->read
-        DB::table('games')->where('status','Unread')->update([
-            'status' => 'Read',
-            'updated_at' => Carbon::now(),
-        ]);
-        //get all unread -> for admin
-        $all_unread = $this->getNotice();
         // ------ //
         //   MAIN
         // -------//
         $game =  games::orderBy('created_at','DESC')->paginate(12);
         return view('admin.game-manage',[
-            'all_unread'=>$all_unread,
             'game'=>$game
         ]); 
     }
     public function salesLog(){
-        // all unread sales_log ->read
-        DB::table('sales_log')->where('status','Unread')->update([
-            'status' => 'Read',
-            'updated_at' => Carbon::now(),
-        ]);
-        //get all unread -> for admin
-        $all_unread = $this->getNotice();
-
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
         $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->select(['sales_log.id','sales_log.game_title','users.email'])->orderBy('sales_log.id','DESC')->paginate(12);
         return view('admin.salesLog',[
-            'all_unread'=>$all_unread,
             'sales_log'=>$sales_log
         ]);
     }
     public  function showSalesLog($id){
-
-        //get all unread -> for admin
-        $all_unread = $this->getNotice();
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
@@ -153,35 +107,20 @@ class AdminController extends Controller
                 ->where('sales_log.id',$id)->first();
         //RETURN VIEW
         return view('admin.show.show-salesLog',[
-            'all_unread'=>$all_unread,
             'log'=>$log
         ]);
     }
     public function walletHistory(){
-        //
-        DB::table('wallet_history')->where('status','Unread')->update([
-            'status' => 'Read',
-            'updated_at' => Carbon::now(),
-        ]);
-        //get all unread -> for admin
-        $all_unread = $this->getNotice();
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
         $log = DB::table('wallet_history')->orderBy('id','DESC')->paginate(12);
         return view('admin.walletHistory',[
-            'all_unread'=>$all_unread,
             'log'=>$log
         ]);
     }
     //GAMES-report
     public function gameReport(){
-                //
-        DB::table('report')->where('status','Unread')->update([
-            'status' => 'Read',
-        ]);
-        //get all unread -> for admin
-        $all_unread = $this->getNotice();
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
@@ -197,32 +136,24 @@ class AdminController extends Controller
         ->orderBy('report.id', 'ASC')->paginate(12);
 
         return view('admin.reports', [
-            'all_unread'=>$all_unread,
             'reports'=>$reports
         ]);
     }
 
     public function removeReport($id){
         $report = report::find($id)->delete();
+
         return redirect()->back()->with('success', 'Report Deleted');
     }
 
     //TAGS
     public function manageTag(){
-        //
-        DB::table('tags')->where('status','Unread')->update([
-            'status' => 'Read',
-            'updated_at' => Carbon::now(),
-        ]);
-        //get all unread -> for admin
-        $all_unread = $this->getNotice();
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
     	//
         $tag = Tags::orderBy('created_at','DESC')->paginate(8);
         return view('admin.tag-manage',[
-            'all_unread'=>$all_unread,
             'tag' => $tag
     ]);
     }
@@ -230,26 +161,18 @@ class AdminController extends Controller
 
     //PROFILES
     public function manageProfile(){
-        //
-        DB::table('users')->where('status','Unread')->update([
-            'status' => 'Read',
-            'updated_at' => Carbon::now(),
-        ]);
-        //get all unread -> for admin
-        $all_unread = $this->getNotice();
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
     	// get users
-        $user = DB::table('users')->where('auth_level','casual')->orderBy('id','DESC')->paginate(20);
+        $user = DB::table('users')->where('auth_level','casual')->paginate(20);
 
         // get admins
-        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
+        $admin = DB::table('users')->where('auth_level','admin')->paginate(20);
 
         return view('profile.profile-index',[
             'user'=>$user, 
             'admin'=>$admin,
-            'all_unread'=>$all_unread,
         ]);
     }
 

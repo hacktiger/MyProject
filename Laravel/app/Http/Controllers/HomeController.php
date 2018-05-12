@@ -35,18 +35,4 @@ class HomeController extends Controller
     }
 	
 	
-	public function gameBase()
-	{
-		return view('allGames');
-	}
-	
-	public function devBase()
-	{
-		return view('devList');
-	}
-	
-	public function toCart()
-	{
-		return view('cart');
-	}
 }

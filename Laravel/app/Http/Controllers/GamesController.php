@@ -12,8 +12,6 @@ use App\Tags;
 use App\games_tags;
 use App\Notification;
 
-include('AdminController.php');
-
 
 class GamesController extends Controller
 {
@@ -54,8 +52,6 @@ class GamesController extends Controller
      */
     public function create()
     {
-        // $admin_controller = new AdminController();
-        // $all_unread = $admin_controller->getNotice();
 
         // ------ //
         //  MAIN  //
@@ -65,7 +61,6 @@ class GamesController extends Controller
         //return to create game
         $user = auth()->user()->name;
         return view('games.create',[
-            // 'all_unread'=>$all_unread,
             'tags'=>$tags,
             'userName'=>$user,
         ]);
@@ -209,9 +204,8 @@ class GamesController extends Controller
         }
         // return view
         if(Auth::user()->auth_level == 'admin'){
-            $admin_controller = new AdminController();
-            $all_unread = $admin_controller->getNotice();
-            return view('admin.show.show-game',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned, 'all_unread'=>$all_unread, ]);
+
+            return view('admin.show.show-game',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned ]);
         } else {
             return view('games.show',['game'=>$game,'rating'=>$rating,'favorite'=>$favorite, 'star'=>$star, 'game_tags'=>$game_tags, 'owned'=>$owned]);
         }
@@ -226,9 +220,6 @@ class GamesController extends Controller
      */
     public function edit($slug)
     {
-        // get all unread
-        // $admin_controller = new AdminController();
-        // $all_unread = $admin_controller->getNotice();
         //get game in games database
         $game = DB::table('games')->where('slug',$slug)->first();
         // get all available tags
@@ -239,8 +230,7 @@ class GamesController extends Controller
         return view('games.edit',[
             'game'=>$game,
             'tags'=>$tags,
-            'games_tags'=>$games_tags,
-            // 'all_unread'=>$all_unread,          
+            'games_tags'=>$games_tags,      
          ]);
     }
 
