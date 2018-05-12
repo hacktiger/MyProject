@@ -19,6 +19,7 @@
 				<tr>
 					<th> Item </th>
 					<th> Price</th>
+					<th> Log </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,6 +27,7 @@
 				<tr class="content" >
 					<td><b><h5>{{$results->game_title}}</h5></b></td>
 					<td><b><h5>{{$results->price}}</h5></b></td>
+					<td><button class="btn btn-default"><a href="/sales-log/{{$results->id}}">View Details</a></button></td>
 				</tr>
 				@endforeach
 			</tbody>

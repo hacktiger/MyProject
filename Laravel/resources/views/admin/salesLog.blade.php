@@ -42,7 +42,7 @@ thead {
                     <th scope="row">{{$sales->id}}</th>
                     <td>{{$sales->email}}</td>
                     <td>{{$sales->game_title}}</td>
-                    <td><button class="btn btn-primary"><a href="/admin/sales-log/{{$sales->id}}">Show Details</a></button></td>
+                    <td><button class="btn btn-primary"><a href="/sales-log/{{$sales->id}}">Show Details</a></button></td>
                 </tr>
                 @endforeach
             </tbody>

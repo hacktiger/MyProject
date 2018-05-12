@@ -190,7 +190,10 @@
 		background-color: #fff;
 		color: #7386D5;
 	}	
-
+	.profile-dropdown{
+		background-color: white;
+		color:black;
+	}
 </style>
 @yield('styles')
 </head>
@@ -217,11 +220,11 @@
                                 <li><div class="dropdown">
 									  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{Auth::user()->name}}
 									  <span class="caret"></span></button>
-									  <ul class="dropdown-menu cus-list">
-									    <li><a href="/profile/{{Auth::user()->id}}"><span class="glyphicon glyphicon-user"></span>&nbsp;MyProfile</a></li>
-									    <li><a href="/profile/{{Auth::user()->id}}/wallet"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Wallet</a></li>
-									    <li><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;Notification</a></li>
-									    <li style="padding-bottom: 3%;"><a class="download" href="{{ route('logout') }}"
+									  <ul class="dropdown-menu cus-list" >
+									    <li><a class="profile-dropdown" href="/profile/{{Auth::user()->id}}"><span class="glyphicon glyphicon-user "></span>&nbsp;MyProfile</a></li>
+									    <li><a class="profile-dropdown" href="/profile/{{Auth::user()->id}}/wallet"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Wallet</a></li>
+									    <li><a class="profile-dropdown" href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;Notification</a></li>
+									    <li style="padding-bottom: 3%;"><a class="profile-dropdown" href="{{ route('logout') }}"
 				     						onclick="event.preventDefault();
 											document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
 											{{ __('Logout') }}  </a></li>

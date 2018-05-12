@@ -55,7 +55,7 @@ Route::resource('notification','NotificationController');
 Route::get('/admin/index','AdminController@index')->name('admin.index');
 Route::get('/admin/game-manage','AdminController@manageGame')->name('games.manage');
 Route::get('/admin/sales-log','AdminController@salesLog')->name('admin.sales_log');
-Route::get('/admin/sales-log/{id}','AdminController@showSalesLog')->name('admin.show-sales_log');
+Route::get('/sales-log/{id}','AdminController@showSalesLog')->name('admin.show-sales_log');
 Route::get('/admin/wallet-history','AdminController@walletHistory')->name('admin.wallet_history');
 Route::get('/admin/profile','AdminController@manageProfile')->name('profiles.manage');
 Route::get('/admin/tags','AdminController@manageTag')->name('tags.manage');

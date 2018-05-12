@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\games;
 use App\User;
@@ -18,7 +19,8 @@ class AdminController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth')->only('showSalesLog');
+        $this->middleware('admin')->except('showSalesLog');
     }
     /**
     *   return dates and that alike
@@ -106,9 +108,17 @@ class AdminController extends Controller
                 ->select(['sales_log.id','sales_log.user_id','sales_log.game_title','sales_log.price','sales_log.created_at','sales_log.updated_at','users.email','users.name'])
                 ->where('sales_log.id',$id)->first();
         //RETURN VIEW
-        return view('admin.show.show-salesLog',[
-            'log'=>$log
-        ]);
+
+        if(Auth::user()->auth_level == 'admin'){
+            return view('admin.show.show-salesLog',[
+                'log'=>$log,
+            ]);
+        } else {
+            return view('profile.show-log',[
+                'log'=>$log,
+            ]);
+        }
+        
     }
     public function walletHistory(){
         // --------------------------------------------------------------------------------//
