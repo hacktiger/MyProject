@@ -16,9 +16,15 @@ class GamePaid extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    protected $game_title;
+    protected $price;
+
+
+    public function __construct($game_title,$price)
     {
         //
+        $this->game_title = $game_title;
+        $this->price = $price;
     }
 
     /**
@@ -40,13 +46,14 @@ class GamePaid extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $url = url('/sales-log/'.$this->log->id);
+        $url = url('/home');
 
         return (new MailMessage)
-            ->greeting('Hello!')
-            ->line('You just purchased a game!')
-            ->action('View Log', $url)
-            ->line('Thank you for buying our games!');
+            ->greeting('Greetings GameStoper !')
+            ->line('You just purchased '.$this->game_title."!!!")
+            ->line('Price of the game '.$this->price."$")
+            ->action('Come Stop By Our Website', $url)
+            ->line('Thank you for your purchase!');
     }
 
     /**

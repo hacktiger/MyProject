@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use App\Notifications\GamePaid;
 use Carbon\Carbon;
 use App\User;
 use App\games;
@@ -217,7 +218,10 @@ class MyController extends Controller
         $game= games::find($title);
         $cash = $game->price - $game->sales;
         $wallet = auth()->user()->wallet - $cash;
-        
+
+        $admin = User::find($user_id);
+        $admin->notify(new GamePaid($title,$cash));
+
         if($wallet >=0){
             $lastupdated = date('Y-m-d H:i:s');
             DB::table('sales_log')->insert([
