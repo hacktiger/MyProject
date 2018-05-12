@@ -60,6 +60,7 @@ class GamesController extends Controller
         $tags = Tags::all();
         //return to create game
         $user = auth()->user()->name;
+        
         return view('games.create',[
             'tags'=>$tags,
             'userName'=>$user,

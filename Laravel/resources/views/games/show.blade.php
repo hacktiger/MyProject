@@ -197,23 +197,8 @@ chart.render();
 								<!-- FORM -->
 								
 								{!! Form::open(['action'=> ['MyController@report', $game->title], 'method'=>'POST']) !!}
-								<div class="form-check">
-									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" name="report_1" value="Impropriate"> Impropriate contents
-									</label>	<br><br>		
-								</div>
-								<div class="form-check">
-									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" name="report_2"> Fraud
-									</label> 	<br><br>
-								</div>
-								<div class="form-check">
-									<label class="form-check-label">
-										<input class="form-check-input" type="checkbox" name="report_3"> Plagarism
-									</label>	<br><br>
-								</div>
 								<div class="form-group">
-									<textarea name="text" class="form-control" rows="5" placeholder="Add further description"></textarea>
+									<textarea name="text" class="form-control" rows="5" placeholder="Why you want to report this game..."></textarea>
 								</div>
 								<button type="submit" class="btn btn-block btn-danger">Submit Report</button>
 								{!! Form::close() !!}

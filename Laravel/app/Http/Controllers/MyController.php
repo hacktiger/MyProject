@@ -19,40 +19,20 @@ class MyController extends Controller
 
     public function report(Request $request, $title){
         //
-    	$report_1 = $request->input('report_1');
-    	$report_2 = $request->input('report_2');
-    	$report_3 = $request->input('report_3');
-
-    	if( $report_1 !== null ){
-    		$report_1 = 1;
-    	} else { $report_1 = 0; }
-    	if( $report_2 !== null ){
-    		$report_2 = 1;
-    	} else { $report_2 = 0; }
-    	if( $report_3 !== null ){
-    		$report_3 = 1;
-    	} else { $report_3 = 0; }
 
     	$report_by = auth()->user()->id;
     	$text = $request->input('text');
         //blank report check
         if (!isset($text)){
-            $text = 'None';
-        }
-        if ($text =='None' &&$report_1==0&&$report_2==0&&$report_3==0){
             return redirect()->back()->with('error', 'Blank Report');
-        }
-        else{
-    	DB::table('report')->insert([
-    		'upload_by' => $report_by,
-    		'Impropriate' => $report_1,
-    		'Fraud'	=> $report_2,
-    		'Plagarism' => $report_3,
-            'text' => $text,
-            'game_title' => $title,
-    	]);	
+        }  else{
+        	DB::table('report')->insert([
+        		'upload_by' => $report_by,
+                'text' => $text,
+                'game_title' => $title,
+        	]);	
 
-        return redirect()->back()->with('success','Game Reported');
+            return redirect()->back()->with('success','Game Reported');
         }
     }	
 
