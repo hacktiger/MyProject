@@ -104,6 +104,9 @@ $('#profile_manage').addClass('current-active');
                     <tr>
                         <th scope="col">User Name</th>
                         <th scope="col">E-mail</th>
+                        <th scope="col">Ban</th>
+                        <th scope="col">Make Dev</th>
+                        <th scope="col">Make Admin</th>
                     </tr>
                 </thead>
 
@@ -112,7 +115,17 @@ $('#profile_manage').addClass('current-active');
                     <tr class="content">
                         <th scope="row"><a href="/profile/{{$users->id}}">{{$users->name}}</a></th>
                         <th>{{$users->email}}</th>
-
+                        <th>{!! Form::open(['action'=> ['ProfileController@destroy', $users->id], 'method'=>'POST']) !!}
+                            {{Form::hidden('_method', 'DELETE')}}
+                            {{Form::submit('Ban', ['class'=>' btn  btn-danger'])}}
+                        {!! Form::close() !!}
+                        </th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@makeDev', $users->id], 'method'=>'POST']) !!}
+                            {{Form::submit('Make Dev', ['class'=>' btn  btn-warning'])}}
+                        {!! Form::close() !!}</th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@makeAdmin', $users->id], 'method'=>'POST']) !!}
+                            {{Form::submit('Make Admin', ['class'=>' btn  btn-primary'])}}
+                        {!! Form::close() !!}</th>
                     </tr>
                     @endforeach
 
@@ -132,6 +145,8 @@ $('#profile_manage').addClass('current-active');
                     <tr>
                         <th>Admin Name</th>
                         <th>E-mail</th>
+                        <th>Ban</th>
+                        <th>Turn to User</th>
                     </tr>
                 </thead>
                 @if(isset($admin))
@@ -140,6 +155,14 @@ $('#profile_manage').addClass('current-active');
                     <tr>
                         <th><a href="/profile/{{$admins->id}}">{{$admins->name}}</a></th>
                         <th>{{$admins->email}}</th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@destroy', $admins->id], 'method'=>'POST']) !!}
+                                {{Form::hidden('_method', 'DELETE')}}
+                                {{Form::submit('Ban', ['class'=>' btn  btn-danger'])}}
+                            {!! Form::close() !!}
+                        </th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@dropAdmin', $admins->id], 'method'=>'POST']) !!}
+                                {{Form::submit('Drop Admin', ['class'=>' btn  btn-primary'])}}
+                            {!! Form::close() !!}</th>
                     </tr>
                     @endforeach
                 </tbody>
@@ -157,6 +180,8 @@ $('#profile_manage').addClass('current-active');
                     <tr>
                         <th>Dev Name</th>
                         <th>E-mail</th>
+                        <th>Ban</th>
+                        <th>Turn to User</th>
                     </tr>
                 </thead>
                 @if(isset($dev))
@@ -165,6 +190,16 @@ $('#profile_manage').addClass('current-active');
                     <tr>
                         <th><a href="/profile/{{$devs->id}}">{{$devs->name}}</a></th>
                         <th>{{$devs->email}}</th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@destroy', $devs->id], 'method'=>'POST']) !!}
+                                {{Form::hidden('_method', 'DELETE')}}
+                                {{Form::submit('Ban', ['class'=>' btn  btn-danger'])}}
+                            {!! Form::close() !!}
+                        </th>
+                        <th>{!! Form::open(['action'=> ['ProfileController@dropAdmin', $devs->id], 'method'=>'POST']) !!}
+                                {{Form::submit('Drop Dev', ['class'=>' btn  btn-primary'])}}
+                            {!! Form::close() !!}</th>
+                    </tr>
+                    @endforeach
                 </tbody>
                 @endif
             </table>

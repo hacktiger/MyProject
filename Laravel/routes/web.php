@@ -65,6 +65,7 @@ Route::get('/admin/notification','AdminController@notify')->name('admin.notify')
 
 
 // Profile route make Admin
+Route::post('/profile/dev/{id}','ProfileController@makeDev')->name('profile.makeDev');
 Route::post('/profile/{id}','ProfileController@makeAdmin')->name('profile.make');
 Route::post('/profile/{id}/drop','ProfileController@dropAdmin')->name('profile.drop');
 

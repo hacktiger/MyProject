@@ -25,10 +25,17 @@
             background-color: white;
             height: 120px;
         }
+        body {
+            background-image:url('/storage/cover_images/campfire.gif');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
     </style>
 </head>
 
-<body>
+<body style="height: 760px">
     <header>
     </header>
     <div id="app">

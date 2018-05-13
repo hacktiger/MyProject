@@ -9,14 +9,13 @@ use App\games;
 use App\User;
 use App\sales_log;
 
-include('AdminController.php');
 
 
 class ProfileController extends Controller
 {   
     public function __construct(){
         $this->middleware('auth')->only( ['show','edit','update','walletHistory','purchaseHistory']);
-        $this->middleware('admin')->only(['makeAdmin','dropAdmin','destroy','index']);
+        $this->middleware('admin')->only(['makeAdmin','dropAdmin','destroy','index','show']);
     }
 
     /**
@@ -30,10 +29,11 @@ class ProfileController extends Controller
         $user = User::orderBy('created_at','DESC')->paginate(20);
 
         // get admins
-        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
+        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->paginate(20);
+        //
+        $dev = DB::table('users')->where('auth_level','developer')->orderBy('id','DESC')->paginate(20);
 
-
-        return view('profile.profile-index',['user'=>$user, 'admin'=>$admin]);
+        return view('profile.profile-index',['user'=>$user, 'admin'=>$admin,'dev'=>$dev]);
 
     }
 
@@ -161,11 +161,6 @@ class ProfileController extends Controller
     }
 
     public function makeAdmin($id){
-        //
-        // get users
-        $user = User::orderBy('created_at','DESC')->paginate(20);
-        // get admins
-        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -174,10 +169,19 @@ class ProfileController extends Controller
         ]);
         // notification
 
-        return view('profile.profile-index',[
-            'user'=>$user, 
-            'admin'=>$admin,
+        return redirect()->back();
+    }
+
+    public function makeDev($id){
+        // -------------------------------------------------------------------------------//
+        // ------------------------------   MAIN        ----------------------------------//
+        // -------------------------------------------------------------------------------//
+        DB::table('users')->where('id',$id)->update([
+            'auth_level' => 'developer',
         ]);
+        // notification
+
+        return redirect()->back();
     }
 
     public function dropAdmin($id){
@@ -186,7 +190,7 @@ class ProfileController extends Controller
             'auth_level' => 'casual',
         ]);
 
-        return redirect('/profile');
+        return redirect()->back();
     }
 
     /**

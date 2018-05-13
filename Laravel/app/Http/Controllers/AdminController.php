@@ -179,10 +179,12 @@ class AdminController extends Controller
 
         // get admins
         $admin = DB::table('users')->where('auth_level','admin')->paginate(20);
-
-        return view('profile.profile-index',[
+        //
+        $dev = DB::table('users')->where('auth_level','developer')->paginate(20);
+        return view('admin.profile-manage',[
             'user'=>$user, 
             'admin'=>$admin,
+            'dev' =>$dev,
         ]);
     }
 
