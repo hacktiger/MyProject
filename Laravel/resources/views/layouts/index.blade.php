@@ -12,14 +12,17 @@
 }
 p{
     -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
-    animation: mymove 5s infinite;
+    animation: mymove 1s infinite;
     font-size: 40px; 
 }
 @-webkit-keyframes mymove {
-    from {text-shadow: -2px -4px #ff8000;}
-    to {text-shadow: 2px -4px #ff8000;}
-    to {text-shadow: -2px -4px #ff8000;}
+    0%   {text-shadow: 1px -3px #ff8000;}
+    25%  {text-shadow: -2px -2px #ff8000;}
+    50%  {text-shadow: 3px -1px #ff8000;}
+    75%  {text-shadow: -2px 0px #ff8000;}
+    100% {text-shadow: 1px -2px #ff8000;}
 }
+
 
 </style>
 @endsection
