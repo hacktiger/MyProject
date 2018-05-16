@@ -15,7 +15,7 @@
 
         <div class="form-group">
             {{Form::label('title',"What is the title of the notice")}}
-            {{Form::textarea('title',$notification->title,['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'Title here', 'spellcheck'=>'false'])}}
+            {{Form::textarea('title',$notification->title,['class'=>'form-control','placeholder'=>'Title here', 'spellcheck'=>'false'])}}
         </div> 
         <!-- DES -->
     	<div class="form-group">

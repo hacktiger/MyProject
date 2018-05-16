@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Notification;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\games;
-use App\User;
+use App\Notification;
 
 
 
@@ -21,11 +19,10 @@ class NotificationController extends Controller
      */
     public function index()
     {
-
-        // ------ //
-        //   MAIN
-        // -------//
-        $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
+        $notification =  Notification::orderBy('created_at','DESC')->select('id','title')->paginate(12);
 
         //Return view
         return view('admin.notification.noti-index',[
@@ -40,10 +37,9 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        // ------ //
-        //   MAIN
-        // -------//
-
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
         //Return view
         return view('admin.notification.noti-create');
     }
@@ -67,16 +63,12 @@ class NotificationController extends Controller
         //CREATE INFO
         $noti = new Notification();
         $noti->admin_id = Auth::user()->id;
-        $noti->text = $request->input('text');
-        $noti->title = $request->intput('title');
-
+        $noti->title = Input::get('title');
+        $noti->text = Input::get('text');
         $noti->save();
 
         //Return view
-        $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
-        return view('admin.notification.noti-index',[
-            'notification'=>$notification,
-        ])->with('success','Notice Created');
+        return redirect('/notification')->with('success','Notification Created');
     }
 
     /**
@@ -109,7 +101,7 @@ class NotificationController extends Controller
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
-        $notification = DB::table('notification')->where('id',$id)->first();
+        $notification = Notification::find($id);
 
         //RETURN VIEW
         return view('admin.notification.noti-edit',[
@@ -136,15 +128,12 @@ class NotificationController extends Controller
         //CREATE INFO
         $noti = new Notification();
         $noti->admin_id = Auth::user()->id;
-        $noti->text = $request->input('text');
-        $noti->title = $request->intput('title');
+        $noti->title = Input::get('title');
+        $noti->text = Input::get('text');
         $noti->save();
 
         //Return view
-        $notification =  Notification::orderBy('created_at','DESC')->paginate(6);
-        return view('admin.notification.noti-index',[
-            'notification'=>$notification,
-        ])->with('success','Notice Edited');
+        return redirect('/notification')->with('success','Notice Updated');
     }
 
     /**

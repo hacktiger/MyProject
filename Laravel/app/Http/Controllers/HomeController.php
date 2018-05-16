@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\games;
+
 
 class HomeController extends Controller
 {
@@ -26,13 +24,5 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-    }
-
-    public function report()
-    {
-        
-        return Redirect::back()->with('success','Game Reported !');
-    }
-	
-	
+    }	
 }

@@ -64,12 +64,12 @@ class AdminController extends Controller
         //                                                                                        //
         //----------------------------------------------------------------------------------------//
         //USERS
-        $num_casual    =   DB::table('users')->where('auth_level','casual')->count();
-        $num_admin     =   DB::table('users')->where('auth_level','admin')->count();
-        $num_developer =   DB::table('users')->where('auth_level','developer')->count();
-        $num_ban       =   DB::table('users')->where('auth_level','banned')->count();
- 
+        $num_casual    =   User::where('auth_level','casual')->count();
+        $num_admin     =   User::where('auth_level','admin')->count();
+        $num_developer =   User::where('auth_level','developer')->count();
+        $num_ban       =   User::where('auth_level','banned')->count();
         $dt = $this->customGetDate();
+        // return view
         return view('admin.admin-index',[
             //USERS NUM
             'num_casual'=>$num_casual,
@@ -83,9 +83,9 @@ class AdminController extends Controller
 
     //GAMES
     public function manageGame(){
-        // ------ //
-        //   MAIN
-        // -------//
+        // --------------------------------------------------------------------------------//
+        //                                      MAIN                                       //
+        // --------------------------------------------------------------------------------//
         $game =  games::orderBy('created_at','DESC')->paginate(12);
         return view('admin.game-manage',[
             'game'=>$game
@@ -124,7 +124,7 @@ class AdminController extends Controller
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
-        $log = DB::table('wallet_history')->orderBy('id','DESC')->paginate(12);
+        $log = DB::table('wallet_history')->select('id','user_id','amount','created_at')->orderBy('id','DESC')->paginate(12);
         return view('admin.walletHistory',[
             'log'=>$log
         ]);
@@ -138,8 +138,7 @@ class AdminController extends Controller
         ->leftJoin('games','report.game_title','=','games.title')
         ->select(
         'report.id as id','report.upload_by as userID',
-        'report.Impropriate as Impropriate','report.Fraud as Fraud',
-        'report.Plagarism as Plagarism', 'report.text as text',
+        'report.text as text',
         'report.game_title as title',
         'games.slug as slug',
         'users.name as userName')
@@ -162,7 +161,7 @@ class AdminController extends Controller
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
     	//
-        $tag = Tags::orderBy('created_at','DESC')->paginate(8);
+        $tag = Tags::orderBy('created_at','DESC')->select('id','name')->paginate(8);
         return view('admin.tag-manage',[
             'tag' => $tag
     ]);
@@ -175,12 +174,12 @@ class AdminController extends Controller
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
     	// get users
-        $user = DB::table('users')->where('auth_level','casual')->paginate(20);
+        $user = User::where('auth_level','casual')->paginate(30);
 
         // get admins
-        $admin = DB::table('users')->where('auth_level','admin')->paginate(20);
+        $admin = User::where('auth_level','admin')->paginate(30);
         //
-        $dev = DB::table('users')->where('auth_level','developer')->paginate(20);
+        $dev = User::where('auth_level','developer')->paginate(30);
         return view('admin.profile-manage',[
             'user'=>$user, 
             'admin'=>$admin,

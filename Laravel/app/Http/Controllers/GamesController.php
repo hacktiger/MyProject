@@ -34,7 +34,9 @@ class GamesController extends Controller
     public function index()
     {   
         // get game detail
-        $game =  games::orderBy('created_at','DESC')->where('approved','Y')->paginate(9);
+        $game =  games::orderBy('created_at','DESC')
+        ->select('title','slug','description','price','sales','image','link','upload_by','avg_rating')
+        ->where('approved','Y')->paginate(9);
         // get sales num
         $sales = DB::table('games')->where('sales', '<>', 0)
                 ->orderBy('created_at','DESC')
@@ -138,9 +140,7 @@ class GamesController extends Controller
                 'updated_at'=> $lastupdated
             ]);
         //get all game
-        $game =  games::orderBy('created_at','DESC')->paginate(12);
-        $notification =  Notification::orderBy('created_at','DESC')->paginate(3);
-            return view('index',['game'=>$game,'notification'=>$notification])->with('success', 'Game Uploaded');
+        return redirect('/games')->with('success','Game Created');
         }
 
     /**
@@ -232,7 +232,7 @@ class GamesController extends Controller
             'game'=>$game,
             'tags'=>$tags,
             'games_tags'=>$games_tags,      
-         ]);
+        ]);
     }
 
     /**
@@ -327,15 +327,8 @@ class GamesController extends Controller
         //delete it
         $game->delete();
         // Session flash
-        return redirect()->back()->with('success','Game Deleted');
+        return redirect('/games')->with('success','Game Deleted');
     }
-
-    public function showReports(){
-        $reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')->leftJoin('games','report.title','=','games.title')->orderBy('report.id', 'DESC')->paginate(10);
-
-        return view('admin.reports', ['reports'=>$reports]);
-    }
-
     /**
     *   get rating of the game
     *    
@@ -397,6 +390,6 @@ class GamesController extends Controller
     {
         $game=Input::get('title');
         games::where('title', $game)->update(['approved'=>'Y']);
-        return redirect()->back()->with('success', 'Game Approved');
+        return redirect('/admin/game-manage')->with('success', 'Game Approved');
     }
 }

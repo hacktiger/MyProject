@@ -76,7 +76,7 @@ class TagController extends Controller
     public function edit($id)
     {
         //get tag in games database
-        $tag = DB::table('tags')->where('id',$id)->first();
+        $tag = Tags::find($id);
 
         return view('tags.tags-edit',[
             'tag'=>$tag,       

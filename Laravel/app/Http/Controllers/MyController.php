@@ -125,9 +125,9 @@ class MyController extends Controller
         $page_title = "All Games";
         $page_desc = "This is the list of all available games from most recent to oldest";
         // get all games in DESC order of creation
-        $game =  games::orderBy('created_at','DESC')->where('approved', 'Y')->paginate(12);
+        $game =  games::orderBy('created_at','DESC')->select('title','slug','image','avg_rating','upload_by')->where('approved', 'Y')->paginate(12);
         // get all possible tags
-        $tags = DB::table('tags')->orderBy('name','ASC')->paginate(9);
+        $tags = DB::table('tags')->select('id','name')->orderBy('name','ASC')->paginate(9);
         // return view resource.views.allGames
         return view('allGames',['game'=>$game, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
     }
@@ -137,7 +137,7 @@ class MyController extends Controller
         $page_title = "Top Games";
         $page_desc = "This is the list of the highest to lowest average rating on the site";
         // Get top rated games
-        $game =  games::orderBy('avg_rating','DESC')->where('approved', 'Y')->paginate(12);
+        $game =  games::orderBy('avg_rating','DESC')->select('title','slug','image','avg_rating','upload_by')->where('approved', 'Y')->paginate(12);
         // get all possible tags
         $tags = DB::table('tags')->orderBy('name','ASC')->get();
 
@@ -168,7 +168,7 @@ class MyController extends Controller
 
     //
     public function devList(){
-        $user  = User::where('auth_level', 'Like','developer')->get();
+        $user  = User::where('auth_level','developer')->get();
         return view('devList', ['user'=>$user]);
     }
 

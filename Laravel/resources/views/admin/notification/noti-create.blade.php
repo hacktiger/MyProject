@@ -8,22 +8,20 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-8 col-sm-12">
-       <h1>Notice to Users</h1>
+  <div class="col-md-8 col-sm-12">
+   <h1>Notice to Users</h1>
 
+   {!! Form::open(['action'=>'NotificationController@store', 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
-       {!! Form::open(['action'=>'NotificationController@store', 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
-
-    <div class="form-group">
-        {{Form::label('title',"What is the title of the notice")}}
-        {{Form::textarea('title','',['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'Title here', 'spellcheck'=>'false'])}}
-    </div> 
-    <!-- DES -->
-    <div class="form-group">
-      {{Form::label('text',"Write about the Notice")}}
-      {{Form::textarea('text','',['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'What is the notice about', 'spellcheck'=>'false'])}}
+   <div class="form-group">
+    {{Form::label('title',"What is the title of the notice")}}
+    {{Form::textarea('title','',['class'=>'form-control','placeholder'=>'Title here', 'spellcheck'=>'false'])}}
   </div> 
-
+  <!-- DES -->
+  <div class="form-group">
+    {{Form::label('text',"Write about the Notice")}}
+    {{Form::textarea('text','',['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'What is the notice about', 'spellcheck'=>'false'])}}
+  </div> 
 
 
   {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
@@ -37,6 +35,6 @@
 
 @section('scripts')
 <script type="text/javascript">
-    $('#notification').addClass('current-active');
+  $('#notification').addClass('current-active');
 </script>
 @endsection

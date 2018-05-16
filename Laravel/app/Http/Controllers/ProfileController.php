@@ -26,12 +26,11 @@ class ProfileController extends Controller
     public function index()
     {
         // get users
-        $user = User::orderBy('created_at','DESC')->paginate(20);
-
+        $user = User::where('auth_level','casual')->select('id','name','email')->orderBy('id','DESC')->paginate(20);
         // get admins
-        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->paginate(20);
-        //
-        $dev = DB::table('users')->where('auth_level','developer')->orderBy('id','DESC')->paginate(20);
+        $admin = User::where('auth_level','admin')->select('id','name','email')->orderBy('id','DESC')->paginate(20);
+        // get devs
+        $dev = User::where('auth_level','developer')->select('id','name','email')->orderBy('id','DESC')->paginate(20);
 
         return view('profile.profile-index',['user'=>$user, 'admin'=>$admin,'dev'=>$dev]);
 
@@ -81,6 +80,7 @@ class ProfileController extends Controller
     {
         //
         $user = User::find($id);
+        // return view
         return view('profile.edit-profile',['user'=>$user]);
     }
 
@@ -129,7 +129,7 @@ class ProfileController extends Controller
         }
         $profile->save();
 
-        return redirect('/games')->with('success', 'Profile Updated');
+        return redirect('/profile/'.$id)->with('success', 'Profile Updated');
     }
 
     /**
@@ -140,10 +140,6 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-         // get users
-        $user = User::orderBy('created_at','DESC')->paginate(20);
-        // get admins
-        $admin = DB::table('users')->where('auth_level','admin')->orderBy('id','DESC')->get();
         // -------------------------------------------------------------------------------//
         // ------------------------------   MAIN        ----------------------------------//
         // -------------------------------------------------------------------------------//
@@ -154,10 +150,7 @@ class ProfileController extends Controller
         //remove games
         sales_log::where('user_id', '=', $id)->delete();
         // Session flash
-        return view('profile.profile-index',[
-            'user'=>$user, 
-            'admin'=>$admin,
-        ])->with('success','User Banned');
+        return redirect('/admin/profile')->with('success','User Banned');
     }
 
     public function makeAdmin($id){
