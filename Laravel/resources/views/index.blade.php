@@ -115,7 +115,7 @@ Card - BS 4
             @if ( $games->sales != 0)
             <h5>Price : <s>{{$games->price}}$</s> <font color = 'red'><b>{{$games->price - $games->sales}}$</b></font><small>  On Sale</small></h5>
             @endif
-            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,70); echo $sub;?></p>
+            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,50)."............"; echo $sub;?></p>
           </div>
           <!-- Footer -->
           <div class="card-footer">
