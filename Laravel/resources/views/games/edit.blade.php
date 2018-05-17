@@ -1,6 +1,6 @@
 @extends('layouts.common.master')
 
-@section('style ')
+@section('style')
 
 {!! Html::style('css/select2.min.css') !!}
 
@@ -33,7 +33,7 @@
             </div>
             <div class = 'col-sm-6'>
             <p class=" btn btn-success">Add Tag</p>
-            <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+             <select class="form-control select2-multi" name="tags[]" multiple="multiple">
                 @foreach($tags as $tag)
                     <option value='{{$tag->id}}'>{{$tag->name}}</option>
                 @endforeach

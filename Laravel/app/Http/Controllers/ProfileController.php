@@ -15,7 +15,7 @@ class ProfileController extends Controller
 {   
     public function __construct(){
         $this->middleware('auth')->only( ['show','edit','update','walletHistory','purchaseHistory']);
-        $this->middleware('admin')->only(['makeAdmin','dropAdmin','destroy','index','show']);
+        $this->middleware('admin')->except(['index','show']);
     }
 
     /**
