@@ -36,7 +36,7 @@ class GamesController extends Controller
         // get game detail
         $game =  games::orderBy('created_at','DESC')
         ->select('title','slug','description','price','sales','image','link','upload_by','avg_rating')
-        ->where('approved','Y')->paginate(9);
+        ->where('approved','Y')->paginate(15);
         // get sales num
         $sales = DB::table('games')->where('sales', '<>', 0)
                 ->orderBy('created_at','DESC')
