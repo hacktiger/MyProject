@@ -56,7 +56,10 @@ class ProfileController extends Controller
             ->select(['sales_log.game_title', 'games.slug','games.avg_rating', 'games.upload_by','games.image'])
             ->where('sales_log.user_id', $id)
             ->paginate(12);
-
+        
+        if (Auth::user()->auth_level == 'developer'){
+            $owned_games = games::where('upload_by', $user->name)->paginate(12);
+        }
             if(Auth::user()->auth_level == 'admin'){
 
                 return view('admin.show.show-profile',['user'=>$user,'owned_games'=>$owned_games,'favorited'=>$favorited]);
