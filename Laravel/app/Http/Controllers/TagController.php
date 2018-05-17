@@ -24,9 +24,8 @@ class TagController extends Controller
     public function store(Request $request)
     {
         //
-        try{
         $this->validate($request, [
-            'name'=>'required|max:20'
+            'name'=>'required|max:20|unique:tags'
         ]);
         $tag = new Tags;
         $tag->name =  $request->input('name');
@@ -34,9 +33,6 @@ class TagController extends Controller
 
 
         return redirect()->back()->with('success', 'Tag created');
-        }catch (Exception $e){
-            return redirect()->back()->with('error', 'Tag already Existed');
-        }
 
     }
 
@@ -95,7 +91,7 @@ class TagController extends Controller
     {
         try {
         $this->validate($request, [
-            'name'=>'required|max:20'
+            'name'=>'required|max:20|unique:tags'
         ]);
         $tag = Tags::find($id);
         $tag->name =  $request->input('name');

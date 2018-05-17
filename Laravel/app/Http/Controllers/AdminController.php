@@ -124,7 +124,8 @@ class AdminController extends Controller
         // --------------------------------------------------------------------------------//
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
-        $log = DB::table('wallet_history')->select('id','user_id','amount','created_at')->orderBy('id','DESC')->paginate(12);
+
+        $log = DB::table('wallet_history')->leftJoin('users','wallet_history.user_id','=','users.id')->select('wallet_history.id','users.name','wallet_history.amount','wallet_history.created_at')->orderBy('id','DESC')->paginate(12);
         return view('admin.walletHistory',[
             'log'=>$log
         ]);

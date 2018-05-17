@@ -59,16 +59,16 @@ class SearchController extends Controller
 
         if($tagName == 'none'){
             $gameTitle = games::leftJoin('games_tags', 'games_tags.games_title', '=', 'title')->leftJoin('tags', 'tags.id', '=', 'games_tags.tags_id')->where([
-            ['upload_by','LIKE','%'.$upload_by.'%'], 
-            ['title', 'like', '%'.$title.'%'],
-            ['avg_rating', ">=",$avg_rating],
+                ['upload_by','LIKE','%'.$upload_by.'%'], 
+                ['title', 'like', '%'.$title.'%'],
+                ['avg_rating', ">=",$avg_rating],
             ])->get();
         } else {
             $gameTitle = games::leftJoin('games_tags', 'games_tags.games_title', '=', 'title')->leftJoin('tags', 'tags.id', '=', 'games_tags.tags_id')->where([
-            ['upload_by','LIKE','%'.$upload_by.'%'], 
-            ['title', 'like', '%'.$title.'%'],
-            ['avg_rating', ">=",$avg_rating],
-            ['tags.name', $tagName]
+                ['upload_by','LIKE','%'.$upload_by.'%'], 
+                ['title', 'like', '%'.$title.'%'],
+                ['avg_rating', ">=",$avg_rating],
+                ['tags.name', $tagName]
             ])->get();
         }
         
@@ -89,23 +89,23 @@ class SearchController extends Controller
         $id = Input::get('id');
         if($userName && !$id){
             $user= DB::table('users')->where('name','LIKE','%'.$userName."%")->paginate(8);
-        return view('profile.profile-index',[
-            
-            'user'=>$user, 
-        ]);
+            return view('profile.profile-index',[
+
+                'user'=>$user, 
+            ]);
         }elseif (!$userName && $id) {
             $user= DB::table('users')->where('id','=',$id)->paginate(8);
-        return view('profile.profile-index',[
-            
-            'user'=>$user, 
-        ]);
+            return view('profile.profile-index',[
+
+                'user'=>$user, 
+            ]);
         } 
         elseif($userName && $id){
             $user = DB::table('users')->where('name','LIKE','%'.$userName."%")->where('id','=',$id)->paginate(8);
-        return view('profile.profile-index',[
-            
-            'user'=>$user, 
-        ]);
+            return view('profile.profile-index',[
+
+                'user'=>$user, 
+            ]);
         } else {
             return redirect()->back()->with('error', 'No such User found');
         }
@@ -127,7 +127,7 @@ class SearchController extends Controller
         else
             return redirect()->back()->with('error','No tag found');
 
-    
+
     }
     public function gameManageSearch()
     {
@@ -141,6 +141,64 @@ class SearchController extends Controller
             return view('admin.game-manage', ['game'=>$gameTitle]);
         else 
             return redirect()->back()->with('error', 'No game found');
+    }
+
+    public function salesLogSearch(){
+
+
+        $title = Input::get('title');
+        $email = Input::get('email');
+
+        if(isset($title) && !isset($email)){
+            $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->select(['sales_log.id','sales_log.game_title','users.email'])->where('sales_log.game_title','LIKE','%'.$title.'%')->paginate(12);
+
+            return view('admin.salesLog', ['sales_log'=>$sales_log])->with('success','Sales Log with '.$title." found !");
+        } elseif (isset($email) && !isset($title)) {
+            $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->select(['sales_log.id','sales_log.game_title','users.email'])->where('users.email','LIKE','%'.$email.'%')->paginate(12);
+
+            return view('admin.salesLog', ['sales_log'=>$sales_log])->with('success','Sales Log with '.$email." found !");
+        } elseif (isset($email) && isset($title)){
+            $sales_log = DB::table('sales_log')->leftJoin('users','sales_log.user_id','=','users.id')->select(['sales_log.id','sales_log.game_title','users.email'])->where('users.email','LIKE','%'.$email.'%')->where('sales_log.game_title','LIKE','%'.$title.'%')->paginate(12);
+            
+            return view('admin.salesLog', ['sales_log'=>$sales_log])->with('success','Sales Log with found !');
+        } else {
+            return redirect('/admin/sales-log')->with('error', 'Please enter something to search');
+        }
+    }
+
+    public function walletHistorySearch(){
+        $name = Input::get('name');
+
+        if(isset($name)){
+            $log = DB::table('wallet_history')->leftJoin('users','wallet_history.user_id','=','users.id')->select('wallet_history.id','users.name','wallet_history.amount','wallet_history.created_at')->where('users.name','LIKE','%'.$name.'%')->paginate(12);
+            return view('admin.walletHistory',[
+                'log'=>$log
+            ])->with('success','Wallet history of '.$name.' found');
+        }else{
+            return redirect('/admin/wallet-history')->with('error','Please enter something');
+        }
+
+    }
+    public function reportSearch(){
+        $title = Input::get('title');
+
+        if(isset($title)){
+            $reports = DB::table('report')->leftJoin('users','report.upload_by','=','users.id')
+            ->leftJoin('games','report.game_title','=','games.title')
+            ->select(
+                'report.id as id','report.upload_by as userID',
+                'report.text as text',
+                'report.game_title as title',
+                'games.slug as slug',
+                'users.name as userName')
+            ->where('report.game_title','LIKE','%'.$title.'%')->paginate(12);
+
+            return view('admin.reports', [
+                'reports'=>$reports
+            ])->with('Report of '.$title.' found');
+        }else{
+            return redirect('/admin/game-reports')->with('error','Please enter something');
+        }
     }
 
 }

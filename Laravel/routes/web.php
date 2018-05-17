@@ -96,4 +96,7 @@ Route::post('/profileSearch', 'SearchController@profileSearch');
 Route::post('/tagSearch', 'SearchController@tagSearch');
 Route::post('/gameManageSearch', 'SearchController@gameManageSearch');
 Route::post('/admin/game-manage', 'GamesController@approve');
+Route::post('/sales-log-search', 'SearchController@salesLogSearch');
+Route::post('/wallet-history-search', 'SearchController@walletHistorySearch');
+Route::post('/game-reports-search', 'SearchController@reportSearch');
 ?>

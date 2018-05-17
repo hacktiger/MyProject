@@ -26,11 +26,19 @@ thead {
 @section('content')
 <div class="col">
     <div class="col-md-8 col-sm-12">
+        <div class="container">
+            <h1>Search Bar</h1>
+            {!! Form::open(['action'=>'SearchController@walletHistorySearch', 'method'=>'POST','class'=>'form-inline'])!!}
+                {{ Form::text('name', '', ['class'=>'form-control','placeholder'=>'Username...', 'spellcheck'=>'false'])}}
+            {{Form::submit('Search', ['class'=>'btn btn-primary'])}}
+            {!!Form::close()!!}
+            <br><br>
+        </div>
         <table class="table table-sm">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">User ID</th>
+                    <th scope="col">Username</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Date</th>
                 </tr>
@@ -40,7 +48,7 @@ thead {
                 @foreach($log as $logs)
                 <tr class="content">
                     <th scope="row">{{$logs->id}}</th>
-                    <td>{{$logs->user_id}}</td>
+                    <td>{{$logs->name}}</td>
                     <td>{{$logs->amount}}</td>
                     <td>{{$logs->created_at}}</td>
                 </tr>
@@ -53,8 +61,8 @@ thead {
 @endsection
 
 @section('scripts')
-    <script type="text/javascript">
-        $('#wallet_history').addClass('current-active');
-    </script>
+<script type="text/javascript">
+    $('#wallet_history').addClass('current-active');
+</script>
 @endsection
 

@@ -24,7 +24,18 @@ thead {
 @endsection
 
 @section('content')
-<div class="col">
+<div class="row">
+    <div class="col-md-8 col-sm-12">   
+        <h1>Search Bar</h1>
+        {!! Form::open(['action'=>'SearchController@salesLogSearch', 'method'=>'POST','class'=>'form-inline'])!!}
+            {{ Form::text('title', '', ['class'=>'form-control','placeholder'=>'Game Title...', 'spellcheck'=>'false'])}}
+            {{ Form::text('email', '', ['class'=>'form-control','placeholder'=>'User Email...', 'spellcheck'=>'false'])}}
+            {{Form::submit('Search', ['class'=>'btn btn-primary'])}}
+        {!!Form::close()!!}
+    </div>
+</div>
+<br><br>
+<div class="row">
     <div class="col-md-8 col-sm-12">
         <table class="table table-sm">
             <thead class="thead-dark">

@@ -24,6 +24,14 @@ thead {
 @section('content')
 <div class="row">
     <div class="col-md-8">
+        <div class="container">
+            <h1>Search Bar</h1>
+            {!! Form::open(['action'=>'SearchController@reportSearch', 'method'=>'POST','class'=>'form-inline'])!!}
+                {{ Form::text('title', '', ['class'=>'form-control','placeholder'=>'Game Title...', 'spellcheck'=>'false'])}}
+                {{Form::submit('Search', ['class'=>'btn btn-primary'])}}
+            {!!Form::close()!!}
+            <br><br>
+        </div>
         <table class = 'table table-responsive-sm table-hover table-striped'>
             <thead>
                 <tr>
@@ -35,7 +43,7 @@ thead {
                 </tr>
             </thead>
             <tbody>
-                
+
                 @foreach($reports as $report)
                 <tr class="content">
                     <th scope="row">{{$report->id}}</th>

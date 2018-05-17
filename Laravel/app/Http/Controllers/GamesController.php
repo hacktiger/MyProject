@@ -82,14 +82,13 @@ class GamesController extends Controller
     {
         //data validation
         $this->validate($request, [
-            'title'=>'required',
+            'title'=>'required|max:255|unique:games',
             'description'=>'required',
-            'link' => 'required',
+            'link' => 'required|max:255',
             'image'=>'image|nullable|max:5999',
             'price'=>'required',
-            'upload_by' => 'required',
+            'upload_by' => 'required|max:255',
             'release' => 'required'
-
         ]);
         //Handle File Upload
         if($request->hasFile('image')){
@@ -131,14 +130,14 @@ class GamesController extends Controller
             };
 
             //Add to uploader's game list
-            $user_id = auth()->user()->id;
-            $lastupdated = date('Y-m-d H:i:s');
-            DB::table('sales_log')->insert([
-                'game_title'=> $games->title,
-                'user_id'=> $user_id,
-                'created_at'=> $lastupdated,
-                'updated_at'=> $lastupdated
-            ]);
+        $user_id = auth()->user()->id;
+        $lastupdated = date('Y-m-d H:i:s');
+        DB::table('sales_log')->insert([
+            'game_title'=> $games->title,
+            'user_id'=> $user_id,
+            'created_at'=> $lastupdated,
+            'updated_at'=> $lastupdated
+        ]);
         //get all game
         return redirect('/games')->with('success','Game Created');
         }
@@ -246,12 +245,13 @@ class GamesController extends Controller
     {
         //data validation
         $this->validate($request, [
-            'title'=>'required',
+            'title'=>'required|max:255|unique:games',
             'description'=>'required',
-            'link' => 'required',
+            'link' => 'required|max:255',
             'image'=>'image|nullable|max:5999',
             'price'=>'required',
-
+            'upload_by' => 'required|max:255',
+            'release' => 'required'
         ]);
         //Handle File Upload
 
