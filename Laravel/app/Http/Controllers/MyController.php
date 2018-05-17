@@ -218,9 +218,9 @@ class MyController extends Controller
         $game= games::find($title);
         $cash = $game->price - $game->sales;
         $wallet = auth()->user()->wallet - $cash;
-
-        $admin = User::find($user_id);
-        $admin->notify(new GamePaid($title,$cash));
+        
+        // $admin = User::find($user_id);
+        // $admin->notify(new GamePaid($title,$cash));
 
         if($wallet >=0){
             $lastupdated = date('Y-m-d H:i:s');
