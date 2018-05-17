@@ -286,7 +286,7 @@ class GamesController extends Controller
         for($i = 0; $i<count($game_tag_id); $i++){
             if (DB::table('games_tags')->where([
                 ['games_title',$game->title],
-                ['tags_id', $game_tag_id]
+                ['tags_id', $game_tag_id[$i]]
             ])->exists()){
                 return redirect()->back()->with('error', 'Duplicate tag');
             
@@ -297,7 +297,18 @@ class GamesController extends Controller
             );
         }
         };
-    }
+        }
+
+        $tag_remove = $request->input('remove');
+        if (isset($tag_remove)){
+            for ($k = 0; $k<count($tag_remove);$k++){
+                games_tags::where([
+                    ['games_title', $game->title],
+                    ['tags_id', $tag_remove[$k]]
+                ])->delete();
+            }
+        }
+
         return redirect('/games')->with('success','Game Updated');
 
     }

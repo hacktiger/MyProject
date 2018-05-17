@@ -14,7 +14,7 @@ use App\sales_log;
 class ProfileController extends Controller
 {   
     public function __construct(){
-        $this->middleware('auth')->only( ['show','edit','update','walletHistory','purchaseHistory']);
+        $this->middleware('auth')->only( ['show','edit','update','walletHistory','purchaseHistory', 'wallet']);
         $this->middleware('admin')->except(['index','show']);
     }
 

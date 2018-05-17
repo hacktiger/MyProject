@@ -31,7 +31,7 @@
 
         <div class="form-group">
             {{Form::label('release',"Release Year")}}
-            {{Form::text('release','',['class'=>'form-control','placeholder'=>'Give the realease year', 'spellcheck'=>'false'])}}
+            {{Form::text('release','',['class'=>'form-control','placeholder'=>'Give the release year', 'spellcheck'=>'false'])}}
         </div>
 
         <div class="form-group">

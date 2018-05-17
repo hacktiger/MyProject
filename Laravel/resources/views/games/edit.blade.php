@@ -8,7 +8,7 @@
 
 @section('content')
 	<h1>Edit Games</h1>
-
+    {{$games_tags}}
 	{!! Form::open(['action'=>['GamesController@update',$game->title], 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
     	<div class="form-group">
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             {{Form::label('release',"Release Year")}}
-            {{Form::text('release',$game->release,['class'=>'form-control','placeholder'=>'Give the realease year', 'spellcheck'=>'false'])}}
+            {{Form::text('release',$game->release,['class'=>'form-control','placeholder'=>'Give the release year', 'spellcheck'=>'false'])}}
         </div>
         <!-- tags -->
         <div class="form-group">
