@@ -199,6 +199,7 @@
 @yield('style')
 </head>
     <body>
+		@if (Auth::user()->auth_level != 'ban')
         <div class="wrapper">
             <!-- Sidebar Holder -->
             @include('layouts.common.sidebar')
@@ -245,7 +246,10 @@
             <!-- END MAIN CONTENT -->
             </div>
         </div>
-
+		@endif
+		@if (Auth::user()->auth_level == 'ban')
+			You have been banned
+		@endif
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <!-- Bootstrap Js CDN -->
