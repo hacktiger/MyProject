@@ -297,7 +297,7 @@ class GamesController extends Controller
             );
         }
         //Remove tag
-        $tag_remove = $request->remove;
+        $tag_remove = $request->input('remove');
         var_dump($tag_remove);
         if (isset($tag_remove)){
             for ($j = 0; $j < count($tag_remove); $j++){
