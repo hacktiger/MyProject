@@ -91,7 +91,7 @@ class TagController extends Controller
     {
         try {
         $this->validate($request, [
-            'name'=>'required|max:20|unique:tags'
+            'name'=>'required|max:20'
         ]);
         $tag = Tags::find($id);
         $tag->name =  $request->input('name');
@@ -113,9 +113,8 @@ class TagController extends Controller
     public function destroy($id)
     {
         // Find is only possible with primary key
-        $tag = Tags::find($id);
+        $tag = Tags::destroy($id);
 
-        $tag->delete();
         return redirect()->back()->with('success','Tag Deleted');
     }
 }
