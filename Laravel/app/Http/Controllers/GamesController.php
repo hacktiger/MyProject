@@ -245,7 +245,7 @@ class GamesController extends Controller
     {
         //data validation
         $this->validate($request, [
-            'title'=>'required|max:255|unique:games',
+            'title'=>'required|max:255',
             'description'=>'required',
             'link' => 'required|max:255',
             'image'=>'image|nullable|max:5999',
@@ -296,19 +296,7 @@ class GamesController extends Controller
                 'tags_id' => $game_tag_id[$i]]
             );
         }
-        //Remove tag
-        $tag_remove = $request->input('remove');
-        var_dump($tag_remove);
-        if (isset($tag_remove)){
-            for ($j = 0; $j < count($tag_remove); $j++){
-                DB::table('games_tags')->where([
-                    ['games_title', $game->title],
-                    ['tags_id', $tag_remove]
-                ])->delete();
-            }
-        }
-
-        }; 
+        };
     }
         return redirect('/games')->with('success','Game Updated');
 

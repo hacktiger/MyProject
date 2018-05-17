@@ -18,7 +18,15 @@
     	<div class="form-group">
     		{{Form::label('description',"Description")}}
     		{{Form::textarea('description',$game->description,['id'=>'article-ckeditor','class'=>'form-control','placeholder'=>'Give a brief description of the game', 'spellcheck'=>'false'])}}
-    	</div>
+        </div>
+        <div class="form-group">
+            {{Form::label('upload_by',"Developer Name")}}
+            {{Form::text('upload_by',$game->upload_by,['class'=>'form-control','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('release',"Release Year")}}
+            {{Form::text('release',$game->release,['class'=>'form-control','placeholder'=>'Give the realease year', 'spellcheck'=>'false'])}}
+        </div>
         <!-- tags -->
         <div class="form-group">
             {{Form::label('tag_id', 'Tags: ') }} <br>
