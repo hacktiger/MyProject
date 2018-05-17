@@ -40,7 +40,8 @@ class DatabaseSeeder extends Seeder
                 'price' => mt_rand(1000,6000)/100,
                 'sales' => 0,
                 'created_at' => $date->subDays(rand(1,30))->format('Y-m-d H:i:s'),
-                'updated_at' => $date->addDays(rand(1,10))->format('Y-m-d H:i:s')
+                'updated_at' => $date->addDays(rand(1,10))->format('Y-m-d H:i:s'),
+                'approved'=> 'Y',
             ]);
         }
         // MAKE TAGS
@@ -85,6 +86,22 @@ class DatabaseSeeder extends Seeder
                 'user_id' => mt_rand(330,499),
                 'rating' => mt_rand(1,5),
             ]);
+
+            DB::table('report')->insert([
+                'game_title' => $game->title,
+                'upload_by' => mt_rand(330,499),
+                'text' => str_random(200),
+            ]);
+            DB::table('report')->insert([
+                'game_title' => $game->title,
+                'upload_by' => mt_rand(1,200),
+                'text' => str_random(200),
+            ]);
+            DB::table('report')->insert([
+                'game_title' => $game->title,
+                'upload_by' => mt_rand(201,320),
+                'text' => str_random(200),
+            ]);
         }    
 
         for($i=0; $i<500;$i++){
@@ -94,5 +111,5 @@ class DatabaseSeeder extends Seeder
                 'created_at'=>$date->subDays(rand(1,30))->format('Y-m-d H:i:s'),
             ]);
         }     
-   }
+    }
 }
