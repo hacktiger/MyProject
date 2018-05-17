@@ -23,7 +23,7 @@ class GamesController extends Controller
     {
         $this->middleware('auth')->only(['index','show']);
 
-        $this->middleware('admin')->except(['index','show', 'edit', 'update']);
+        $this->middleware('admin')->except(['index','show', 'edit', 'update', 'create', 'store', 'destroy']);
     }
    
     /**
@@ -139,7 +139,7 @@ class GamesController extends Controller
             'updated_at'=> $lastupdated
         ]);
         //get all game
-        return redirect('/games')->with('success','Game Created');
+        return redirect('/games')->with('success','Game Created, Pending Approval');
         }
 
     /**
