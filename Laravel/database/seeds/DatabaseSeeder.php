@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             DB::table('games')->insert([
                 'title'=> 'sample game'.$i,
                 'slug'=> 'sample-game'.$i,
-                'description' => 'none',
+                'description' => str_random(1000),
                 'release' => 1998,
                 'link' => 'none',
                 'upload_by' => 'admin',

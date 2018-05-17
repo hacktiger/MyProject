@@ -22,6 +22,15 @@ p{
     75%  {text-shadow: -2px 0px #ff8000;}
     100% {text-shadow: 1px -2px #ff8000;}
 }
+a{
+    list-style-type: none;
+    color:white;
+}
+a:hover{
+    list-style-type: none;
+    color: white;
+}
+
 
 
 </style>
@@ -29,5 +38,10 @@ p{
 @section('content')
 <div class="container-fluid cus-greeting">
     <p style=""> WELCOME TO GAMESTOP !</p>
+    @guest
+    <p>Register/Login first</p>
+    @else
+    <button class="btn btn-primary"><a href="/games">Explore GameStop</a></button>
+    @endguest
 </div>
 @endsection
