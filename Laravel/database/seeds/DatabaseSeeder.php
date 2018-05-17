@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
 
 
         // sales_log /rating /favorite
-        $games = DB::table('games')->select('title')->get();
+        $games = DB::table('games')->select('title','price')->get();
         foreach ($games as $game) {
             DB::table('sales_log')->insert([
                 'game_title' => $game->title,
@@ -64,8 +64,8 @@ class DatabaseSeeder extends Seeder
             ]);
             //games_tags
             DB::table('games_tags')->insert([
-                'games_title'=>$game_title,
-                'tags_id'=>mt_rand(1,20);
+                'games_title'=>$game->title,
+                'tags_id'=>mt_rand(1,15),
             ]);
 
             DB::table('rating')->insert([
@@ -88,9 +88,11 @@ class DatabaseSeeder extends Seeder
         }    
 
         for($i=0; $i<500;$i++){
-            'user_id'=>mt_rand(1,500),
-            'amount'=>mt_rand(1000,3000)/100,
-            'created_at'  => $date->subDays(rand(1,30))->format('Y-m-d H:i:s'),
+            DB::table('wallet_history')->insert([
+                'user_id'=>mt_rand(1,500),
+                'amount'=>mt_rand(1000,3000)/100,
+                'created_at'=>$date->subDays(rand(1,30))->format('Y-m-d H:i:s'),
+            ]);
         }     
    }
 }
