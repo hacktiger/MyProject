@@ -38,8 +38,8 @@ thead {
             @foreach($notification as $noti)
             <tbody>
                 <tr class="content">
-                    <th><a href="/notification/{{$noti->id}}">{{$noti->id}}<a></th>
-                    <th><?php $string = $noti->title; $sub = substr($string,0,25); echo $sub;?></th>
+                    <th>{{$noti->id}}</th>
+                    <th><a href="/notification/{{$noti->id}}"><?php $string = $noti->title; $sub = substr($string,0,25); echo $sub;?><a></th>
                     <th><a class="btn" style="background-color: #4CAF50; color:white;" href="/notification/{{$noti->id}}/edit">&ensp;Edit&ensp;</a></th>
                     <th>{!! Form::open(['action'=> ['NotificationController@destroy', $noti->id], 'method'=>'POST']) !!}
 					{{Form::hidden('_method', 'DELETE')}}

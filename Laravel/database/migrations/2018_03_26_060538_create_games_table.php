@@ -18,7 +18,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->string('title'); $table->primary('title');
             $table->string('slug')->nullable();
-            $table->float('avg_rating',2,2)->default(0);
+            $table->float('avg_rating',3,2)->default(0);
             $table->text('description');
             $table->smallInteger('release')->unsigned();
             $table->string('link');

@@ -129,7 +129,7 @@ class GamesController extends Controller
                 );
             };
 
-            //Add to uploader's game list
+        //Add to uploader's game list
         $user_id = auth()->user()->id;
         $lastupdated = date('Y-m-d H:i:s');
         DB::table('sales_log')->insert([

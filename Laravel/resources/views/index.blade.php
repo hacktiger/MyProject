@@ -6,10 +6,10 @@
 Card - BS 4
 **/
 .card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}
-.card>hr{margin-right:0;margin-left:0}
+.card>hr{margin-right:0;margin-left:0;}
 .card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}
 .card>.list-group:last-child .list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}
-.card-body{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}
+.card-body{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem; }
 .card-title{margin-bottom:.75rem}
 .card-subtitle{margin-top:-.375rem;margin-bottom:0}
 .card-text:last-child{margin-bottom:0}
@@ -20,11 +20,6 @@ Card - BS 4
 .card-footer:last-child{border-radius:0 0 calc(.25rem - 1px) calc(.25rem - 1px)}
 
 
-
-.carousel-caption {
-  top: 0;
-  bottom: auto;
-}
 .hover-row:hover{
   background-color: #f2f2f2;
   cursor: pointer;
@@ -41,14 +36,19 @@ Card - BS 4
 @section('content')
 
 <div style=" border: 1px solid #737373;
-    border-radius: 5px;" style="width: 90%">
+    border-radius: 4px;" style="width: 90%">
   @foreach($notification as $noti)
-    <div style="padding: 5px">
-      <h5><a href="/notification/{{$noti->id}}">{{$noti->title}}</a></h5>
-      <p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub;?></p>
+    <div style="padding: 5px" class="card">
+      <div class="card-header">
+        <h5><a href="/notification/{{$noti->id}}"><?php $string1 = $noti->title; $sub = substr($string1,0,100); echo $sub;?></a></h5>
+      </div>
+      <div class="card-body">
+        <a href="/notification/{{$noti->id}}"><p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub."<b>  &nbsp; &nbsp; Read more...</b>";?></p></a>
+      </div>
     </div> 
   @endforeach
 </div>
+{{$notification->links()}}
 <br><br>
 
 
@@ -56,8 +56,8 @@ Card - BS 4
 <div class="container content-row">
   <div class="row">
     @foreach($game as $games)
-      <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top:30px;">
-        <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd;width: 90%;">
+      <div class="col-lg-4 col-md-4 col-sm-12" >
+        <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd;width: 90%; margin-top: 30px">
           <!-- IMG -->
           <a href="/games/{{$games->slug}}">
             <div style="">
@@ -73,7 +73,7 @@ Card - BS 4
             @if ( $games->sales != 0)
             <h5>Price : <s>{{$games->price}}$</s> <font color = 'red'><b>{{$games->price - $games->sales}}$</b></font><small>  On Sale</small></h5>
             @endif
-            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,50)."............"; echo $sub;?></p>
+            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,50); echo $sub;?></p>
           </div>
           <!-- Footer -->
           <div class="card-footer">
@@ -87,14 +87,4 @@ Card - BS 4
 
   {{ $game->links() }}
 </div>
-@endsection
-
-@section('scripts')
-<script type="text/javascript">
-  $(document).ready(function(){
-    $(".clickable-row").click(function() {
-       window.location = $(this).data("href");
-    });
-  });
-</script>
 @endsection

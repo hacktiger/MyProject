@@ -69,7 +69,7 @@ class MyController extends Controller
            ]);
         }
 
-        $game = games::orderBy('created_at','DESC')->get();
+        $game = games::orderBy('title','DESC')->get();
         foreach ($game as $games) {
             $rating = DB::table('rating')
                         ->where('game_title', $games->title)
@@ -86,7 +86,7 @@ class MyController extends Controller
                 DB::table('games')->where('title', $games->title)
                     ->update([
                         'avg_rating'=> $rating_2,
-                    ]);
+                ]);
             }
         }  
        

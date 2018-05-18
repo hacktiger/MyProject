@@ -126,7 +126,7 @@ class NotificationController extends Controller
             'title'=>'required|max:255',
         ]);
         //CREATE INFO
-        $noti = new Notification();
+        $noti = Notification::find($id);
         $noti->admin_id = Auth::user()->id;
         $noti->title = Input::get('title');
         $noti->text = Input::get('text');

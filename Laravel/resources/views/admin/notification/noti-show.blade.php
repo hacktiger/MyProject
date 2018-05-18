@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h2>{{$notification->title}}</h2>
-		<p>{{$notification->text}}</p>
+		<p style="word-wrap: break-word;">{{$notification->text}}</p>
 	</div>
 </div>
 
