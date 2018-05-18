@@ -5,7 +5,14 @@
 /** 
 Card - BS 4
 **/
-.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}
+.card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem;
+  transition: transform .8s;
+}
+.container .card:hover{
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
 .card>hr{margin-right:0;margin-left:0;}
 .card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}
 .card>.list-group:last-child .list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}
@@ -35,19 +42,18 @@ Card - BS 4
 
 @section('content')
 
-<div style=" border: 1px solid #737373;
-    border-radius: 4px;" style="width: 90%">
-  @foreach($notification as $noti)
-    <div style="padding: 5px" class="card">
-      <div class="card-header">
-        <h5><a href="/notification/{{$noti->id}}"><?php $string1 = $noti->title; $sub = substr($string1,0,100); echo $sub;?></a></h5>
-      </div>
-      <div class="card-body">
-        <a href="/notification/{{$noti->id}}"><p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub."<b>  &nbsp; &nbsp; Read more...</b>";?></p></a>
-      </div>
-    </div> 
-  @endforeach
+
+@foreach($notification as $noti)
+<div style="padding: 5px; width: 80%;margin-left: 8%;" class="card" >
+  <div class="card-header">
+    <h5><a href="/notification/{{$noti->id}}"><?php $string1 = $noti->title; $sub = substr($string1,0,100); echo $sub;?></a></h5>
+  </div>
+  <div class="card-body">
+    <a href="/notification/{{$noti->id}}"><p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub."<b>  &nbsp; &nbsp; Read more...</b>";?></p></a>
+  </div>
 </div>
+
+@endforeach
 {{$notification->links()}}
 <br><br>
 
@@ -56,32 +62,33 @@ Card - BS 4
 <div class="container content-row">
   <div class="row">
     @foreach($game as $games)
-      <div class="col-lg-4 col-md-4 col-sm-12" >
-        <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd;width: 90%; margin-top: 30px">
-          <!-- IMG -->
-          <a href="/games/{{$games->slug}}">
-            <div style="">
-              <img style="border-top-left-radius: 10px; border-top-right-radius: 10px; border: 1px solid #ddd; max-height: 140px;width: 100% " src="/storage/cover_images/{{$games->image}}" class="card-img-top" alt="{{$games->title}}">
-            </div>
-          </a>
-          <!-- Body -->
-          <div class="card-body">
-            <h4 class="card-title"><a href="/games/{{$games->slug}}">{{$games->title}}</a></h4>
-            @if ( $games->sales ==0)
-            <h5>Price : <b>{{$games->price}}$</b></h5>
-            @endif
-            @if ( $games->sales != 0)
-            <h5>Price : <s>{{$games->price}}$</s> <font color = 'red'><b>{{$games->price - $games->sales}}$</b></font><small>  On Sale</small></h5>
-            @endif
-            <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,50); echo $sub;?></p>
+    <div class="col-lg-4 col-md-6" >
+      <!-- EACH GAME CARD -->
+      <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd;width: 90%; margin-top: 30px; ">
+        <!-- IMG -->
+        <a href="/games/{{$games->slug}}">
+          <div style="">
+            <img style="border-top-left-radius: 10px; border-top-right-radius: 10px; border: 1px solid #ddd; max-height: 140px;width: 100% " src="/storage/cover_images/{{$games->image}}" class="card-img-top" alt="{{$games->title}}">
           </div>
-          <!-- Footer -->
-          <div class="card-footer">
-            <i class="fa fa-star pull-right" style="color: orange; padding-top: 2px;"></i><small class="pull-right">{{$games->avg_rating}}</small>
-            <small >{{$games->upload_by}}</small>
-          </div>
+        </a>
+        <!-- Body -->
+        <div class="card-body">
+          <h4 class="card-title"><a href="/games/{{$games->slug}}">{{$games->title}}</a></h4>
+          @if ( $games->sales ==0)
+          <h5>Price : <b>{{$games->price}}$</b></h5>
+          @endif
+          @if ( $games->sales != 0)
+          <h5>Price : <s>{{$games->price}}$</s> <font color = 'red'><b>{{$games->price - $games->sales}}$</b></font><small>  On Sale</small></h5>
+          @endif
+          <p class="card-text"><?php $string = $games->description; $sub = substr($string,0,50); echo $sub;?></p>
+        </div>
+        <!-- Footer -->
+        <div class="card-footer">
+          <i class="fa fa-star pull-right" style="color: orange; padding-top: 2px;"></i><small class="pull-right">{{$games->avg_rating}}</small>
+          <small >{{$games->upload_by}}</small>
         </div>
       </div>
+    </div>
     @endforeach
   </div>
 

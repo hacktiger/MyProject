@@ -1,12 +1,22 @@
 @extends('layouts.common.master')
 @section('style')
 <style type="text/css">
+.hover-row {
+	transition: transform .4s;
+}
 .hover-row:hover{
 	background-color: #f2f2f2;
 	cursor: pointer;
+	-ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05); 
 }
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+.success td:hover {
+	color: black ;
+	font-weight: bolder;
 }
 </style>
 @endsection
@@ -15,18 +25,33 @@ tr:nth-child(even) {
 @section('content')
 
 <div class="container" style="width: 90%;">
-	<h3>Navigation</h3>
-	<!-- need to change in case there are too many tags -->
+	<h3>Tag Navigation</h3>
+	<!-- 5 example TAGS -->
 	<table class="table borderless">
 		<thead>
 		<tr class ="success">
-			@foreach($tags as $tag)
-			<td><a href="/tags/{{$tag->id}}">{{$tag->name}}</td>
+			@foreach($display_tags as $tag)
+			<td><a href="/tags/{{$tag->id}}">{{$tag->name}}</a></td>
 			@endforeach
 		</tr>
 		</thead>
 	</table>
 </div>
+<!-- DROP DOWN OF ALL TAGS -->
+<div class="container" style="margin-left: 5%;">                                          
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">All Tags
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+    	@foreach($display_tags as $tag)
+			<li><a href="/tags/{{$tag->id}}">{{$tag->name}}</a></li>
+		@endforeach
+    </ul>
+  </div>
+</div>
+
+
+<!-- games with tags -->
 <div class="container" style="width: 90%">
 	<h1>{{$page_title}}</h1>
 	<p>{{$page_desc}}</p>

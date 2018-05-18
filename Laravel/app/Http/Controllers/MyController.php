@@ -126,10 +126,13 @@ class MyController extends Controller
         $page_desc = "This is the list of all available games from most recent to oldest";
         // get all games in DESC order of creation
         $game =  games::orderBy('created_at','DESC')->select('title','slug','image','avg_rating','upload_by')->where('approved', 'Y')->paginate(12);
-        // get all possible tags
-        $tags = DB::table('tags')->select('id','name')->orderBy('name','ASC')->paginate(9);
+        // get 5 tags
+        $display_tags = DB::table('tags')->select('id','name')->take(5)->get();
+        //
+        $tags = DB::table('tags')->select('id','name')->get();
+
         // return view resource.views.allGames
-        return view('allGames',['game'=>$game, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
+        return view('allGames',['game'=>$game, 'display_tags'=>$display_tags, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
     }
 
     public function topGames(){
@@ -138,10 +141,12 @@ class MyController extends Controller
         $page_desc = "This is the list of the highest to lowest average rating on the site";
         // Get top rated games
         $game =  games::orderBy('avg_rating','DESC')->select('title','slug','image','avg_rating','upload_by')->where('approved', 'Y')->paginate(12);
-        // get all possible tags
-        $tags = DB::table('tags')->orderBy('name','ASC')->get();
+        // get 5 tags
+        $display_tags = DB::table('tags')->select('id','name')->take(5)->get();
+        //
+        $tags = DB::table('tags')->select('id','name')->get();
 
-         return view('allGames',['game'=>$game, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
+         return view('allGames',['game'=>$game, 'display_tags'=>$display_tags, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
     }
 
     public function mostDownload(){
@@ -156,12 +161,14 @@ class MyController extends Controller
                 ->groupBy(['games.title','games.slug','games.image', 'avg_rating', 'games.upload_by'])
                 ->orderBy('downloads','DESC')
                 ->paginate(12);
-        // get all possible tags
-        $tags = DB::table('tags')->orderBy('name','ASC')->get();
+        // get 5 tags
+        $display_tags = DB::table('tags')->select('id','name')->take(5)->get();
+        //
+        $tags = DB::table('tags')->select('id','name')->get();
 
 
         // return view
-        return view('allGames',['game'=>$game, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
+        return view('allGames',['game'=>$game, 'display_tags'=>$display_tags, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
     }
     // END 
 
