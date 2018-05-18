@@ -45,7 +45,7 @@
 	</div>
     <!-- Created - at -->
     <p class="card-text">Bought at :{{$log->created_at}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <a href="/my-purchase-history" class="btn btn-primary">Go back</a>
   </div>
   <div class="card-footer text-muted">
     copy right
