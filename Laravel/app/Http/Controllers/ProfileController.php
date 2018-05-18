@@ -98,7 +98,7 @@ class ProfileController extends Controller
     {
         //data validation
         $this->validate($request,[
-            'name'=> 'required|max:255|unique:users',
+            'name'=> 'required|max:255',
             'description'=> 'nullable',
             'avatar'=> 'image|nullable|max:5999'
         ]);

@@ -21,7 +21,7 @@
 			placeholder="Insert Amount..." size="40">
 		</div>
 			<button type = "submit" class= "btn btn-primary">
-				<span class = "glyphicon glyphicon-search"> Add</span>
+				<span class = "glyphicon glyphicon-plus-sign"> Add</span>
 			</button>
 
 	</form>
