@@ -109,7 +109,7 @@ thead {
                     @foreach($owned_games as $games)
                     <tr  class="content" data-href="/games/{{$games->slug}}">
                         <td class="hidden-sm hidden-xs"><img style="width:180px;height: 60px" src="/storage/cover_images/{{$games->image}}"></td>
-                        <td><a href="/games/{{$games->slug}}"> {{$games->game_title}}</a></td>
+                        <td><a href="/games/{{$games->slug}}"> {{$games->title}}</a></td>
                         <td>{{$games->avg_rating}} &ensp;<span class="fa fa-star" style="color:orange;"></span></td>
                         <td>{{$games->upload_by}}</td>
                     </tr>

@@ -8,7 +8,6 @@
 
 @section('content')
 	<h1>Edit Games</h1>
-    {{$games_tags}}
 	{!! Form::open(['action'=>['GamesController@update',$game->title], 'method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
     	<div class="form-group">
