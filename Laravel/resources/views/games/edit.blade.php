@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
             {{Form::label('upload_by',"Developer Name")}}
-            {{Form::text('upload_by',$game->upload_by,['class'=>'form-control','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
+            {{Form::text('upload_by',$game->upload_by,['class'=>'form-control hidden','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
         </div>
         <div class="form-group">
             {{Form::label('release',"Release Year")}}

@@ -26,7 +26,7 @@
     	</div> 
         <div class="form-group">
             {{Form::label('upload_by',"Developer Name")}}
-            {{Form::text('upload_by',$userName,['class'=>'form-control','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
+            {{Form::text('upload_by',$userName,['class'=>'form-control hidden','placeholder'=>'Give the developer name', 'spellcheck'=>'false'])}}
         </div>
 
         <div class="form-group">
