@@ -96,9 +96,12 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $profile = User::find($id);
         //data validation
+        if ($profile->name !== $request->input('name')){
+            $this->validate($request,['name'=> 'required|max:255|unique:users']);
+        };
         $this->validate($request,[
-            'name'=> 'required|max:255',
             'description'=> 'nullable',
             'avatar'=> 'image|nullable|max:5999'
         ]);
@@ -119,7 +122,6 @@ class ProfileController extends Controller
             $path = $request->file('avatar')->storeAs('public/avatars', $fileNameToStore);
         }
         //create user info
-        $profile = User::find($id);
         //change upload_by in 'games'
         if ($profile->auth_level =='developer'){
             games::where('upload_by', 'LIKE', $profile->name)

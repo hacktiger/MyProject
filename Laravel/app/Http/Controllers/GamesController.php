@@ -243,9 +243,15 @@ class GamesController extends Controller
      */
     public function update(Request $request, $title)
     {
+        //get game's info
+        $game = games::find($title);
+
+        if ($game->title !== $request->input('title')){ 
+            $this->validate($request,[
+                'title'=>'required|max:255|unique:games']);
+        };
         //data validation
         $this->validate($request, [
-            'title'=>'required|max:255',
             'description'=>'required',
             'link' => 'required|max:255',
             'image'=>'image|nullable|max:5999',
@@ -269,7 +275,6 @@ class GamesController extends Controller
         }
 
         //Create games info
-        $game = games::find($title);
         $game->title = $request->input('title');
         $game->description = $request->input('description');
         $game->link = $request->input('link');
