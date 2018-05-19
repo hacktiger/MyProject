@@ -67,7 +67,7 @@ class AdminController extends Controller
         $num_casual    =   User::where('auth_level','casual')->count();
         $num_admin     =   User::where('auth_level','admin')->count();
         $num_developer =   User::where('auth_level','developer')->count();
-        $num_ban       =   User::where('auth_level','banned')->count();
+        $num_ban       =   User::where('auth_level','ban')->count();
         $dt = $this->customGetDate();
         // return view
         return view('admin.admin-index',[

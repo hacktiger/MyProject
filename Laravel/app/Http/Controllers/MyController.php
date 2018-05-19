@@ -60,7 +60,8 @@ class MyController extends Controller
         } else {
             DB::table('rating')->where([
                 ['game_title',$title],
-                ['user_id', $rate_by]])->delete();
+                ['user_id', $rate_by]
+            ])->delete();
 
             DB::table('rating')->insert([
                'user_id'=> $rate_by,
@@ -69,29 +70,23 @@ class MyController extends Controller
            ]);
         }
 
-        $game = games::orderBy('title','DESC')->get();
-        foreach ($game as $games) {
-            $rating = DB::table('rating')
-                        ->where('game_title', $games->title)
-                        ->groupBy('game_title')
-                        ->avg('rating'); 
-            if($rating == null){
-                $rating_2 = 0;
-                DB::table('games')->where('title', $games->title)
-                    ->update([
-                        'avg_rating'=> 0,
-                    ]);
-            } else {
-                $rating_2 = round( $rating, 1, PHP_ROUND_HALF_UP);
-                DB::table('games')->where('title', $games->title)
-                    ->update([
-                        'avg_rating'=> $rating_2,
-                ]);
-            }
-        }  
+        // UPDATE avg_rating in games
+
+        // get the avg rating
+        $get_avg_rating = DB::table('rating')
+            ->where('game_title',$title)
+            ->groupBy('game_title')
+            ->avg('rating'); 
+        // Round the number and update avg_rating in games
+        $rating_2 = round( $get_avg_rating, 1, PHP_ROUND_HALF_UP);
+        DB::table('games')->where('title', $title)
+            ->update([
+                'avg_rating'=> $rating_2,
+            ]);
+
        
         // redirect back 
-        return redirect()->back();
+        return redirect()->back()->with('success','Game Rated !');
     }
 
     public function favorite(Request $request, $title){
@@ -111,7 +106,7 @@ class MyController extends Controller
                 ['user_id', $user_id]])->delete();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Favorite status changed');
     }
 
     /**

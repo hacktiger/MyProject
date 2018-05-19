@@ -15,9 +15,7 @@ thead {
     background-color: #7386D5;
     color:white;
 }
-.content:hover{
-    background-color: #ebeef9;
-}
+
 </style>
 @endsection
 
@@ -32,14 +30,14 @@ thead {
             {!!Form::close()!!}
             <br><br>
         </div>
-        <table class = 'table table-responsive-sm table-hover table-striped'>
+        <table class = 'table table-hover table-striped'>
             <thead>
                 <tr>
                     <th scope='col'>ID</th>
-                    <th scope='col'>Game Title</th>
-                    <th scope='col'>Reporter</th>
-                    <th scope='col'>Reason</th>
-                    <th scope='col'>Delete Report</th>
+                    <th >Title</th>
+                    <th >Reporter</th>
+                    <th >Reason</th>
+                    <th >Delete Report</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +47,7 @@ thead {
                     <th scope="row">{{$report->id}}</th>
                     <td><a href="/games/{{$report->slug}}">{{$report->title}}</a></td>
                     <td><a href="/profile/{{$report->userID}}">{{$report->userName}}</a></td>
-                    <td>{{$report->text}}</td>
+                    <td><?php $string1 = $report->text; $sub = substr($string1,0,80); echo $sub;?></td>
                     <td>{!! Form::open(['action'=> ['AdminController@removeReport', $report->id], 'method'=>'POST']) !!}
                         {{Form::hidden('_method', 'DELETE')}}
                         {{Form::submit('Delete', ['class'=>' btn  btn-danger'])}}
