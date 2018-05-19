@@ -298,9 +298,6 @@ chart.render();
 			$phpVar = $rating->rating;
 			echo "var rate = '{$phpVar}';";	
 		}
-			
-
-
 	?>
 	if (typeof rate !== 'undefined') {
 		if(rate == '1'){

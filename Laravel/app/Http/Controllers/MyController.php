@@ -31,7 +31,7 @@ class MyController extends Controller
         		'upload_by' => $report_by,
                 'text' => $text,
                 'game_title' => $title,
-        	]);	
+            ]);	
 
             return redirect()->back()->with('success','Game Reported');
         }
@@ -53,10 +53,10 @@ class MyController extends Controller
         //      delete old one + add new one
         if(!$check){
             DB::table('rating')->insert([
-               'user_id'=> $rate_by,
-               'game_title' => $title,
-               'rating' => $rating,
-           ]);
+             'user_id'=> $rate_by,
+             'game_title' => $title,
+             'rating' => $rating,
+         ]);
         } else {
             DB::table('rating')->where([
                 ['game_title',$title],
@@ -64,27 +64,27 @@ class MyController extends Controller
             ])->delete();
 
             DB::table('rating')->insert([
-               'user_id'=> $rate_by,
-               'game_title' => $title,
-               'rating' => $rating,
-           ]);
+             'user_id'=> $rate_by,
+             'game_title' => $title,
+             'rating' => $rating,
+         ]);
         }
 
         // UPDATE avg_rating in games
 
         // get the avg rating
         $get_avg_rating = DB::table('rating')
-            ->where('game_title',$title)
-            ->groupBy('game_title')
-            ->avg('rating'); 
+        ->where('game_title',$title)
+        ->groupBy('game_title')
+        ->avg('rating'); 
         // Round the number and update avg_rating in games
         $rating_2 = round( $get_avg_rating, 1, PHP_ROUND_HALF_UP);
         DB::table('games')->where('title', $title)
-            ->update([
-                'avg_rating'=> $rating_2,
-            ]);
+        ->update([
+            'avg_rating'=> $rating_2,
+        ]);
 
-       
+
         // redirect back 
         return redirect()->back()->with('success','Game Rated !');
     }
@@ -141,7 +141,7 @@ class MyController extends Controller
         //
         $tags = DB::table('tags')->select('id','name')->get();
 
-         return view('allGames',['game'=>$game, 'display_tags'=>$display_tags, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
+        return view('allGames',['game'=>$game, 'display_tags'=>$display_tags, 'tags'=>$tags, 'page_title'=>$page_title, 'page_desc'=>$page_desc]);
     }
 
     public function mostDownload(){
@@ -150,12 +150,12 @@ class MyController extends Controller
         $page_desc = "This is the list of games with the most purchases to least";
         //SELECT game_title, COUNT(user_id) FROM sales_log GROUP BY game_title
         $game = DB::table('sales_log')
-                ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
-                ->select(['games.title', 'games.slug','games.image', 'avg_rating', 'games.upload_by',DB::raw(' COUNT(sales_log.user_id) as downloads')])
-                ->where('approved', 'Y')
-                ->groupBy(['games.title','games.slug','games.image', 'avg_rating', 'games.upload_by'])
-                ->orderBy('downloads','DESC')
-                ->paginate(12);
+        ->leftJoin('games', 'sales_log.game_title', '=', 'games.title')
+        ->select(['games.title', 'games.slug','games.image', 'avg_rating', 'games.upload_by',DB::raw(' COUNT(sales_log.user_id) as downloads')])
+        ->where('approved', 'Y')
+        ->groupBy(['games.title','games.slug','games.image', 'avg_rating', 'games.upload_by'])
+        ->orderBy('downloads','DESC')
+        ->paginate(12);
         // get 5 tags
         $display_tags = DB::table('tags')->select('id','name')->take(5)->get();
         //
@@ -176,43 +176,35 @@ class MyController extends Controller
 
     public function addCash(){
         try{
-        $current = auth()->user()->wallet;
-        $userID = auth()->user()->id;
-        $get_input_amount = Input::get('Cquery');
-        $mytime = Carbon::now();
-        
-        //insert amount to wallet
-        $amount = $get_input_amount + $current;
-        if($amount <9999.99){
-        $add = DB::table('users')->where('id', 'LIKE', $userID)
-                        ->update([
-                            'wallet' =>$amount,
-                        ]);
+            $get_input_amount = Input::get('Cquery');
+            $current = auth()->user()->wallet;
+            $userID = auth()->user()->id;
+            
+            $mytime = Carbon::now();
+
+            //insert amount to wallet
+            $amount = $get_input_amount + $current;
+            if($amount <9999.99){
+                $add = DB::table('users')->where('id', 'LIKE', $userID)
+                ->update([
+                    'wallet' =>$amount,
+                ]);
                 // Log the amount added to wallet
                 DB::table('wallet_history')->insert([
                     'user_id'=> $userID,
                     'amount' => $get_input_amount,
                     'created_at' => $mytime,
                 ]);
-        //wallet size limit
-        }else{
-            $add = DB::table('users')->where('id', 'like', $userID)
-                        ->update([
-                            'wallet'=>9999.99,
-                        ]);
-                                // Log the amount added to wallet
-        DB::table('wallet_history')->insert([
-            'user_id'=> $userID,
-            'amount' => 9999.99,
-            'created_at' => $mytime,
-        ]);
-        }
+            //wallet size limit
+            }else{
+                return redirect()->back()->with('error','Told you not to add over 9999.99, do it again bro');
+            }
 
         //Return view
-        return redirect()->back()->with('success', 'Cash Added');
-    }catch(Exception $e){
-        return redirect()->back()->with('error', 'Invalid Amount');
-    }
+            return redirect()->back()->with('success', 'Cash Added');
+        }catch(Exception $e){
+            return redirect()->back()->with('error', 'Invalid Amount');
+        }
     }
 
     public function purchase( Request $request, $title){
