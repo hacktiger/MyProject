@@ -194,9 +194,7 @@
 	    }
 	    .avatar-main:hover span{
 	    	color: #737373;
-	    }
-
-	    
+	    }  
 	</style>
 	@yield('style')
 </head>

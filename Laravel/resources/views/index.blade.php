@@ -31,6 +31,18 @@ Card - BS 4
   background-color: #f2f2f2;
   cursor: pointer;
 }
+/**  Make the cards the same height + does not break formation of divs  **/
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
 </style>
 
 @endsection
@@ -59,10 +71,10 @@ Card - BS 4
 
 
 <!-- prints out every game -->
-<div class="container content-row">
-  <div class="row">
+<div class="container">
+  <div class="row ">
     @foreach($game as $games)
-    <div class="col-lg-4 col-md-6" >
+    <div class="col-lg-4 col-md-6 " >
       <!-- EACH GAME CARD -->
       <div class="card h-100" style="border-radius: 10px; border: 1px solid #ddd;width: 90%; margin-top: 30px; ">
         <!-- IMG -->
@@ -91,7 +103,6 @@ Card - BS 4
     </div>
     @endforeach
   </div>
-
   {{ $game->links() }}
 </div>
 @endsection
