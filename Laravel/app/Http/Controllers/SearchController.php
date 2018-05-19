@@ -89,20 +89,20 @@ class SearchController extends Controller
         $id = Input::get('id');
         if($userName && !$id){
             $user= DB::table('users')->where('name','LIKE','%'.$userName."%")->paginate(8);
-            return view('profile.profile-index',[
+            return view('admin.profile-manage',[
 
                 'user'=>$user, 
             ]);
         }elseif (!$userName && $id) {
             $user= DB::table('users')->where('id','=',$id)->paginate(8);
-            return view('profile.profile-index',[
+            return view('admin.profile-manage',[
 
                 'user'=>$user, 
             ]);
         } 
         elseif($userName && $id){
             $user = DB::table('users')->where('name','LIKE','%'.$userName."%")->where('id','=',$id)->paginate(8);
-            return view('profile.profile-index',[
+            return view('admin.profile-manage',[
 
                 'user'=>$user, 
             ]);

@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        /**
         $date = Carbon::create(2018, 4, 30, 0, 0, 0);
         //MAKE USERS
         for($i = 0;$i<500;$i++){
@@ -110,6 +111,22 @@ class DatabaseSeeder extends Seeder
                 'amount'=>mt_rand(1000,3000)/100,
                 'created_at'=>$date->subDays(rand(1,30))->format('Y-m-d H:i:s'),
             ]);
-        }     
-    }
-}
+        } 
+        **/
+        $game = DB::table('games')->select('title')->get();
+        foreach($game as $games){
+            DB::table('games_tags')->insert([
+                'games_title' => $games->title,
+                'tags_id' => mt_rand(1,7),
+            ]);
+                        DB::table('games_tags')->insert([
+                'games_title' => $games->title,
+                'tags_id' => mt_rand(8,15),
+            ]);
+        }
+
+        
+
+    } /** end of run() **/
+
+/** end of class **/}

@@ -326,7 +326,8 @@ class GamesController extends Controller
         //delete it
         $game->delete();
         // Session flash
-        return redirect('/games')->with('success','Game Deleted');
+
+        return redirect('/admin/game-manage')->with('success','Game Deleted');
     }
     /**
     *   get rating of the game

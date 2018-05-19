@@ -165,6 +165,8 @@ $('#profile_manage').addClass('current-active');
                     <tr>
                         <th><a href="/profile/{{$devs->id}}">{{$devs->name}}</a></th>
                         <th>{{$devs->email}}</th>
+                    </tr>
+                    @endforeach
                 </tbody>
                 @endif
             </table>

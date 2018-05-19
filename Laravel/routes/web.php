@@ -92,7 +92,7 @@ Route::post('/search/advancedResults', 'SearchController@advancedSearch');
 
 
 //Admin Search funcs
-Route::post('/profileSearch', 'SearchController@profileSearch');
+Route::post('/admin/profile', 'SearchController@profileSearch');
 Route::post('/tagSearch', 'SearchController@tagSearch');
 Route::post('/gameManageSearch', 'SearchController@gameManageSearch');
 Route::post('/admin/game-manage', 'GamesController@approve');

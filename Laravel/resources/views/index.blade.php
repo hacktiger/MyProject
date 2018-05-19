@@ -71,7 +71,7 @@ Card - BS 4
 
 
 <!-- prints out every game -->
-<div class="container">
+<div class="container" style="width: 95%;">
   <div class="row ">
     @foreach($game as $games)
     <div class="col-lg-4 col-md-6 " >

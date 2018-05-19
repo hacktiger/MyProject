@@ -175,12 +175,12 @@ class AdminController extends Controller
         //                                      MAIN                                       //
         // --------------------------------------------------------------------------------//
     	// get users
-        $user = User::where('auth_level','casual')->paginate(30);
+        $user = User::where('auth_level','casual')->orderBy('id','DESC')->paginate(30);
 
         // get admins
-        $admin = User::where('auth_level','admin')->paginate(30);
+        $admin = User::where('auth_level','admin')->orderBy('id','DESC')->paginate(30);
         //
-        $dev = User::where('auth_level','developer')->paginate(30);
+        $dev = User::where('auth_level','developer')->orderBy('id','DESC')->paginate(30);
         return view('admin.profile-manage',[
             'user'=>$user, 
             'admin'=>$admin,
