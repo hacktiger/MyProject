@@ -5,7 +5,7 @@
 
 <style type="text/css">
 .cus-greeting{
-    margin-left: 22%;
+    margin-left: 20%;
     margin-top: 10%;
     color: white;
 
@@ -39,7 +39,7 @@ a:hover{
 <div class="container-fluid cus-greeting">
     <p style=""> WELCOME TO GAMESTOP !</p>
     @guest
-    <p>Register/Login first</p>
+    <p></p>
     @else
     <button class="btn btn-primary"><a href="/games">Explore GameStop</a></button>
     @endguest
