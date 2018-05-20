@@ -56,7 +56,9 @@ Card - BS 4
 
 
 @foreach($notification as $noti)
-<div style="padding: 5px; width: 80%;margin-left: 8%;" class="card" >
+
+<div class="card"  style="padding: 5px; width: 80%;margin-left: 8%;    border-left: 6px solid red;
+    background-color: lightgrey;" >
   <div class="card-header">
     <h5><a href="/notification/{{$noti->id}}"><?php $string1 = $noti->title; $sub = substr($string1,0,100); echo $sub;?></a></h5>
   </div>
