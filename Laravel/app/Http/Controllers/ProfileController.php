@@ -110,6 +110,7 @@ class ProfileController extends Controller
         //handle file upload
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()){
             //delete old one
+            unlink(storage_path("app/public/avatars/".$profile->avatar));
             //with extension
             $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
             //get file name only

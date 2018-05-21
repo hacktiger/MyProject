@@ -70,7 +70,7 @@
         </div>
         {{Form::hidden('_method','PUT')}}
 
-    	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+    	{{Form::submit('Submit Changes', ['class'=>'btn btn-primary','style'=>'padding:20px;'])}}
         <br><br>
 
 	{!! Form::close() !!}

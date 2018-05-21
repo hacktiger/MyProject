@@ -65,7 +65,7 @@
             {{Form::text('sales','',['class'=>'form-control','placeholder'=>'Give the sales price', 'spellcheck'=>'false'])}}
         </div>
 
-    	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+    	{{Form::submit('Create Game', ['class'=>'btn btn-primary', 'style'=>'padding:20px;'])}}
         <br><br>
 
 	{!! Form::close() !!}

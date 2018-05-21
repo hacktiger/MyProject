@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use App\games;
 use App\User;
 use App\Tags;
@@ -25,7 +26,7 @@ class GamesController extends Controller
 
         $this->middleware('admin')->except(['index','show', 'edit', 'update', 'create', 'store', 'destroy']);
     }
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -39,8 +40,8 @@ class GamesController extends Controller
         ->where('approved','Y')->paginate(15);
         // get sales num
         $sales = DB::table('games')->where('sales', '<>', 0)
-                ->orderBy('created_at','DESC')
-                ->take(3)->get();
+        ->orderBy('created_at','DESC')
+        ->take(3)->get();
         //notification
         $notification = DB::table('notification')->orderBy('id','DESC')->paginate(3);
         //return
@@ -70,7 +71,7 @@ class GamesController extends Controller
         
     }
 
-  
+
 
     /**
      * Store a newly created resource in storage.
@@ -130,16 +131,16 @@ class GamesController extends Controller
             };
 
         //Add to uploader's game list
-        $user_id = auth()->user()->id;
-        $lastupdated = date('Y-m-d H:i:s');
-        DB::table('sales_log')->insert([
-            'game_title'=> $games->title,
-            'user_id'=> $user_id,
-            'created_at'=> $lastupdated,
-            'updated_at'=> $lastupdated
-        ]);
+            $user_id = auth()->user()->id;
+            $lastupdated = date('Y-m-d H:i:s');
+            DB::table('sales_log')->insert([
+                'game_title'=> $games->title,
+                'user_id'=> $user_id,
+                'created_at'=> $lastupdated,
+                'updated_at'=> $lastupdated
+            ]);
         //get all game
-        return redirect('/games')->with('success','Game Created, Pending Approval');
+            return redirect('/games')->with('success','Game Created, Pending Approval');
         }
 
     /**
@@ -262,6 +263,10 @@ class GamesController extends Controller
         //Handle File Upload
 
         if($request->hasFile('image') && $request->file('image')->isValid() ){
+            //delete old image
+            if($game->image !== 'khongCoImage_game.jpg'){
+                unlink(storage_path("app/public/cover_images/".$game->image));
+            }
             //with extension
             $fileNameWithExt = $request->file('image')->getClientOriginalName();
             //get just file name
@@ -288,20 +293,20 @@ class GamesController extends Controller
         //Storing game tags
         $game_tag_id = $request->input('tags');
         if(isset($game_tag_id)){
-        for($i = 0; $i<count($game_tag_id); $i++){
-            if (DB::table('games_tags')->where([
-                ['games_title',$game->title],
-                ['tags_id', $game_tag_id[$i]]
-            ])->exists()){
-                return redirect()->back()->with('error', 'Duplicate tag');
-            
-        }else{
-            DB::table('games_tags')->insert(
-                ['games_title' => $game->title, 
-                'tags_id' => $game_tag_id[$i]]
-            );
-        }
-        };
+            for($i = 0; $i<count($game_tag_id); $i++){
+                if (DB::table('games_tags')->where([
+                    ['games_title',$game->title],
+                    ['tags_id', $game_tag_id[$i]]
+                ])->exists()){
+                    return redirect()->back()->with('error', 'Duplicate tag');
+
+                }else{
+                    DB::table('games_tags')->insert(
+                        ['games_title' => $game->title, 
+                        'tags_id' => $game_tag_id[$i]]
+                    );
+                }
+            };
         }
 
         $tag_remove = $request->input('remove');
@@ -314,6 +319,7 @@ class GamesController extends Controller
             }
         }
 
+        //Delete OLD
         return redirect('/games')->with('success','Game Updated');
 
     }
@@ -343,25 +349,25 @@ class GamesController extends Controller
     public function getStar($game){
         //get number of stars ( using db )
         $star_1 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',1],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
+        ->where([['rating',1],['game_title',$game->title]])
+        ->groupBy('game_title')
+        ->first();
         $star_2 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',2],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
+        ->where([['rating',2],['game_title',$game->title]])
+        ->groupBy('game_title')
+        ->first();
         $star_3 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',3],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
+        ->where([['rating',3],['game_title',$game->title]])
+        ->groupBy('game_title')
+        ->first();
         $star_4 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',4],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
+        ->where([['rating',4],['game_title',$game->title]])
+        ->groupBy('game_title')
+        ->first();
         $star_5 = DB::table('rating')->select(DB::raw('count(*) as number'))
-                    ->where([['rating',5],['game_title',$game->title]])
-                    ->groupBy('game_title')
-                    ->first();
+        ->where([['rating',5],['game_title',$game->title]])
+        ->groupBy('game_title')
+        ->first();
         // set default values
         $pre_star = array(
             'star_1' => 0,
