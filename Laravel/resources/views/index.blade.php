@@ -6,12 +6,17 @@
 Card - BS 4
 **/
 .card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem;
-  transition: transform .8s;
+  transition: transform .5s;
 }
 .container .card:hover{
   -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari 3-8 */
   transform: scale(1.1); 
+}
+.card:hover{
+  -ms-transform: scale(1.02); /* IE 9 */
+  -webkit-transform: scale(1.02); /* Safari 3-8 */
+  transform: scale(1.02); 
 }
 .card>hr{margin-right:0;margin-left:0;}
 .card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}
@@ -57,14 +62,14 @@ Card - BS 4
 
 @foreach($notification as $noti)
 
-<div class="card"  style="padding: 5px; width: 80%;margin-left: 8%;    border-left: 6px solid red;
-    background-color: lightgrey;" >
-  <div class="card-header">
-    <h5><a href="/notification/{{$noti->id}}"><?php $string1 = $noti->title; $sub = substr($string1,0,100); echo $sub;?></a></h5>
-  </div>
-  <div class="card-body">
-    <a href="/notification/{{$noti->id}}"><p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub."<b>  &nbsp; &nbsp; Read more...</b>";?></p></a>
-  </div>
+<div class="card"  style="padding: 5px; width: 80%;margin-left: 8%;    border-left: 10px solid red;
+background-color: #f2f2f2;" >
+<div class="card-header">
+  <h5><a href="/notification/{{$noti->id}}"><?php $string1 = $noti->title; $sub = substr($string1,0,100); echo $sub;?></a></h5>
+</div>
+<div class="card-body">
+  <a href="/notification/{{$noti->id}}"><p style="padding: 5px; color: #4d4d4d;font-weight:600;"><?php $string = $noti->text; $sub = substr($string,0,180); echo $sub."<b>  &nbsp; &nbsp; Read more...</b>";?></p></a>
+</div>
 </div>
 
 @endforeach
